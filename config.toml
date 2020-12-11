@@ -8,6 +8,10 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]
 
+# Github Pagesでwebページを公開する用
+publishDir = "docs"
+canonifyurls = true
+
 ## Change this two to switch between different language
 languageCode = "en"  # For RSS, view https://www.rssboard.org/rss-language-codes
 defaultContentLanguage = "en"  # For HTML page, now support: en, zh-hans, zh-hant, ja, nl
