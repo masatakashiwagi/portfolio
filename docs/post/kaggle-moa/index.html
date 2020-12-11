@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.79.0" />
+<meta name="generator" content="Hugo 0.74.3" />
 
 
 
@@ -109,14 +109,15 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/">Kaggle MoAの振り返り</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;550 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/kaggle">kaggle</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1686 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/kaggle">kaggle</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="kaggle-moaにteam-90sで初参加">Kaggle MoAにTeam 90&rsquo;sで初参加</h2>
-<p>今回のコンペでは，同世代のメンバーでチームを組んで取り組みました！<br>
+<p>（コンペの詳細な内容については割愛します）</p>
+<p>今回の<a href="https://www.kaggle.com/c/lish-moa" target="_blank">MoAコンペ</a>では，同世代のメンバーでチームを組んで取り組みました！<br>
 チームでの取り組みはとにかく学びが多く，終盤までモチベーションを保つことができたのが大きかったです．<br>
 また，議論することで理解なども深まっていくので，コンペを通してより成長できたんじゃないかなと思います．</p>
 <p>僕たちのチームでの取り組み方針を簡単に挙げると<br>
@@ -126,11 +127,32 @@
 <p>といった感じです．</p>
 <p>3番目の週末のディスカッションは強制ではなく，参加可能な人が参加する形式で運用してました．
 （と言いつつもみんな真面目に毎回参加してました笑）</p>
+<p>チームでの取り組み方針の具体的な内容について少しだけ掘り下げます．</p>
+<h3 id="1-情報はslackで共有">1. 情報はSlackで共有</h3>
+<p>Slackをどうゆう感じで活用していたのかというと，
+コンペのDiscussionやNotebookの内容について疑問点などを話し合ったり，それ以外にも進め方の相談や雑談などを基本的に行っていました．
+あとはsubmitする時は一言声をかけるなどのsubmit管理もしていました．</p>
+<p>こうゆうのがあれば良かったなーというところでは，新着のDiscussionやNotebookをKaggleから連携して通知する仕組みを用意しておければ尚良かったのかなと思いました．</p>
+<h3 id="2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</h3>
+<p>Githubをどうゆう感じで活用していたのかというと，
+分析での実験毎に1つのissueを立てて，そこでどうゆう実験をしたのかsubmitした結果のスコアがどうだったのかなどを記録として残してました．
+また，共通で使える特徴量生成のコードだったり，CVの切り方のコードなどの共有も行ってました．<br>
+その他にはDiscussionの内容を整理したり，情報をまとめるために活用したりしていました．</p>
+<h3 id="3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</h3>
+<p>週末のGoogle meetでのオンラインディスカッションで何をしていたかというと，
+基本的には，今週何をしたのかを各々共有したり，わからない部分を話し合ってどうゆうふうに次進めて行くかなどをチームで考えていました．
+あとは，次の週でどうゆうことをするかの方向性を決めて終わる感じでした．<br>
+もちろん雑談や仕事での苦労を労ったりもしていました笑</p>
 <h2 id="最終順位">最終順位</h2>
 <p>最終順位は4373チーム中<strong>34位の銀メダル</strong>で、金メダルまであともう少しのところまで行ったので，とても悔しい結果となりました．<br>
 個人的にはInferenceの処理がエラーで通らない状況に最後の3日ぐらいでなって泣きそうになりました．
 チームメンバーにはweight0の状態で非常に申し訳なかったなと思ってます泣</p>
 <p>学習時に回していたノートブックでは，スコアがチーム内で作ったモデルの中でも上位5つ以内に入っていたので，アンサンブル時には効いてただろうなと思うと尚更です．</p>
+<p>個人的な成長としては，テーブルデータに対してNeuralNetが有効に作用する場面について多少理解が深まったと感じています．<br>
+今回のMoAでは，マルチラベルの予測だったので，一度に大量のクラスを予測する場合にはNNが有効でかつGBDT系と比較して計算速度も速いんだなと感じました．<br>
+また，特徴量的にも交互作用的な部分はNN内部の中間層の組み方などで実現できるので，GBDT系みたく大量に特徴量を用意しなくても対処できるのが大きいのかなと思っています．（今回のケースだとGBDTで大量のモデルを作るとなると速度的な部分で特徴量が膨大になるとかなり厳しい感じでした）</p>
+<p>あとは，NNの実装をPytorchで行ったこともあり，Pytorchの扱い方がわかるようになったのは大きいと思っています．（仕事ではTensorflowだったりするので&hellip;）<br>
+Pytorchでの実装に関してはもっと進めて行きたいので，次に参加予定の画像系のコンペでも使って使い方を理解して行きたいです．</p>
 
     </div>
 </article>
@@ -220,7 +242,13 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-moaにteam-90sで初参加">Kaggle MoAにTeam 90&rsquo;sで初参加</a></li>
+    <li><a href="#kaggle-moaにteam-90sで初参加">Kaggle MoAにTeam 90&rsquo;sで初参加</a>
+      <ul>
+        <li><a href="#1-情報はslackで共有">1. 情報はSlackで共有</a></li>
+        <li><a href="#2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</a></li>
+        <li><a href="#3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</a></li>
+      </ul>
+    </li>
     <li><a href="#最終順位">最終順位</a></li>
   </ul>
 </nav>
@@ -322,7 +350,13 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-moaにteam-90sで初参加">Kaggle MoAにTeam 90&rsquo;sで初参加</a></li>
+    <li><a href="#kaggle-moaにteam-90sで初参加">Kaggle MoAにTeam 90&rsquo;sで初参加</a>
+      <ul>
+        <li><a href="#1-情報はslackで共有">1. 情報はSlackで共有</a></li>
+        <li><a href="#2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</a></li>
+        <li><a href="#3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</a></li>
+      </ul>
+    </li>
     <li><a href="#最終順位">最終順位</a></li>
   </ul>
 </nav>

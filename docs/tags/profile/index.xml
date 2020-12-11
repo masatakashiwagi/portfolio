@@ -6,7 +6,11 @@
     <description>Recent content in profile on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Dec 2020 17:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/profile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Dec 2020 17:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://masatakashiwagi.github.io/portfolio/tags/profile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>About me</title>
       <link>https://masatakashiwagi.github.io/portfolio/about/</link>
