@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>profile on Fractal Prologue</title>
-    <link>https://github.com/masatakashiwagi/portfolio/tags/profile/</link>
+    <link>https://masatakashiwagi.github.io/portfolio/tags/profile/</link>
     <description>Recent content in profile on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 10 Dec 2020 17:00:00 +0900</lastBuildDate>
     
-	<atom:link href="https://github.com/masatakashiwagi/portfolio/tags/profile/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://masatakashiwagi.github.io/portfolio/tags/profile/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About me</title>
-      <link>https://github.com/masatakashiwagi/portfolio/about/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/about/</link>
       <pubDate>Thu, 10 Dec 2020 17:00:00 +0900</pubDate>
       
-      <guid>https://github.com/masatakashiwagi/portfolio/about/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/about/</guid>
       <description>I&amp;rsquo;m Masataka Kashiwagi. Now, I&amp;rsquo;m working as a Data Scientist / Machine Learning Engineer at Brains Technology, Inc, providing machine learning solutions for the manufacturing industry. I am involved in data analysis of improvement activities in the manufacturing industry and development of own products. I&amp;rsquo;m interested in multimodal learning, applying computer vision in manufacturing industry, and in consumer behavior model in marketing industry. I obtained a master&amp;rsquo;s degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations. After graduate school, I got a job with a major telecommunications carrier. I was working as a Solution Engineer</description>
     </item>
     

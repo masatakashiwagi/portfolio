@@ -1,4 +1,4 @@
-baseURL = "https://github.com/masatakashiwagi/portfolio/"
+baseURL = "https://masatakashiwagi.github.io/portfolio/"
 title = "Fractal Prologue"
 
 theme = "fuji"
@@ -10,7 +10,7 @@ ignoreErrors = ["error-disable-taxonomy"]
 
 # Github Pagesでwebページを公開する用
 publishDir = "docs"
-canonifyurls = true
+# canonifyurls = true
 
 ## Change this two to switch between different language
 languageCode = "en"  # For RSS, view https://www.rssboard.org/rss-language-codes
