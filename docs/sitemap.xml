@@ -3,23 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/about/</loc>
-    <lastmod>2020-12-10T17:00:00+09:00</lastmod>
+    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <lastmod>2020-12-11T23:13:30+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <loc>https://masatakashiwagi.github.io/portfolio/tags/kaggle/</loc>
+    <lastmod>2020-12-11T23:13:30+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/</loc>
+    <lastmod>2020-12-11T23:13:30+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    <lastmod>2020-12-11T23:13:30+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/about/</loc>
     <lastmod>2020-12-10T17:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/tags/profile/</loc>
     <lastmod>2020-12-10T17:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    <lastmod>2020-09-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -5,10 +5,6 @@
     <link>https://masatakashiwagi.github.io/portfolio/archives/</link>
     <description>Recent content in Archives on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	<atom:link href="https://masatakashiwagi.github.io/portfolio/archives/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en</language><atom:link href="https://masatakashiwagi.github.io/portfolio/archives/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

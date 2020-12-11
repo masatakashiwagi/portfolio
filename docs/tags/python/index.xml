@@ -6,18 +6,14 @@
     <description>Recent content in python on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://masatakashiwagi.github.io/portfolio/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ネストしたリストの更新でハマった</title>
+      <title>ネストしたリストの更新処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/list-objects/</link>
       <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
-      <description>ハマってしまった失敗 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． pythonで決まった形のリストを予め作成しておきたい場合に，以下のようにすること</description>
+      <description>リストの更新処理でハマってしまった失敗 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． pythonで決まった形のリストを予め作成しておきたい場合に，以</description>
     </item>
     
   </channel>
