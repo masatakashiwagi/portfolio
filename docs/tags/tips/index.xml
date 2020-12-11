@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tips on Fractal Prologue</title>
+    <link>https://masatakashiwagi.github.io/portfolio/tags/tips/</link>
+    <description>Recent content in tips on Fractal Prologue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://masatakashiwagi.github.io/portfolio/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ネストしたリストの更新でハマった</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/list-objects/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
+      <description>ハマってしまった失敗 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． pythonで決まった形のリストを予め作成しておきたい場合に，以下のようにすること</description>
+    </item>
+    
+    <item>
+      <title>Hugoを使ったポートフォリオ作成</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</link>
+      <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</guid>
+      <description>ポートフォリオ作成 こちらのQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました． 移植した際に少し詰まった部</description>
+    </item>
+    
+  </channel>
+</rss>

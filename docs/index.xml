@@ -21,11 +21,29 @@
     </item>
     
     <item>
+      <title>ネストしたリストの更新でハマった</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/list-objects/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
+      <description>ハマってしまった失敗 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． pythonで決まった形のリストを予め作成しておきたい場合に，以下のようにすること</description>
+    </item>
+    
+    <item>
+      <title>Hugoを使ったポートフォリオ作成</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</link>
+      <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</guid>
+      <description>ポートフォリオ作成 こちらのQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました． 移植した際に少し詰まった部</description>
+    </item>
+    
+    <item>
       <title>Markdown Syntax</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/markdown-syntax/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/markdown-syntax/</link>
       <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/markdown-syntax/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings&lt;/h2&gt;
 &lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;</description>
@@ -33,10 +51,10 @@
     
     <item>
       <title>Math Typesetting</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/math-typesetting/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/math-typesetting/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/math-typesetting/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/math-typesetting/</guid>
       <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a href=&#34;https://katex.org/&#34; target=&#34;_blank&#34;&gt;KaTeX&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -56,10 +74,10 @@
     
     <item>
       <title>Placeholder Text</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/placeholder-text/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/placeholder-text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/placeholder-text/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/placeholder-text/</guid>
       <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de
 pectora summo. Redit teque digerit hominumque toris verebor lumina non cervice
 subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc
@@ -69,10 +87,10 @@ lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;<
     
     <item>
       <title>Emoji Support</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/emoji-support/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/emoji-support/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/emoji-support/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&#34;https://gohugo.io/functions/emojify/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34; target=&#34;_blank&#34;&gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To enable emoji globally, set &lt;code&gt;enableEmoji&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in your site’s &lt;a href=&#34;https://gohugo.io/getting-started/configuration/&#34; target=&#34;_blank&#34;&gt;configuration&lt;/a&gt; and then you can type emoji shorthand codes directly in content files; e.g.&lt;/p&gt;
@@ -81,19 +99,19 @@ lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;<
     
     <item>
       <title>CJK Unicode Test</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/cjk-unicode-test/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/cjk-unicode-test/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0800</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/cjk-unicode-test/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/cjk-unicode-test/</guid>
       <description>&lt;p&gt;The following is part of the CJK text, this page is for test use only.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>纯简体中文测试文章</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/wtf-article/</link>
+      <link>https://masatakashiwagi.github.io/portfolio/old/wtf-article/</link>
       <pubDate>Sat, 01 Apr 2017 00:00:00 +0800</pubDate>
       
-      <guid>https://masatakashiwagi.github.io/portfolio/post/wtf-article/</guid>
+      <guid>https://masatakashiwagi.github.io/portfolio/old/wtf-article/</guid>
       <description>&lt;p&gt;本文内容无实际意义，由狗屁不通文章生成器自动生成，不代表作者本人观点。&lt;/p&gt;
 &lt;p&gt;可是，即使是这样，一段代码写一天的出现仍然代表了一定的意义。一段代码写一天，到底应该如何实现。马克思在不经意间这样说过，一切节省，归根到底都归结为时间的节省。这不禁令我深思。马克思曾经说过，一切节省，归根到底都归结为时间的节省。&lt;/p&gt;</description>
     </item>

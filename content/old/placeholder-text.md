@@ -2,10 +2,6 @@
 title = "Placeholder Text"
 date = "2019-03-09"
 description = "Lorem Ipsum Dolor Si Amet"
-tags = [
-    "markdown",
-    "text",
-]
 +++
 
 Lorem est tota propiore conpellat pectoribus de
