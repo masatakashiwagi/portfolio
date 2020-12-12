@@ -72,5 +72,5 @@ Department of Physical Science, Osaka Prefecture University
 ### 90's same generation community
 * Team90s - Github Private Organizations
   - Kaggle some projects
-    - Mechanisms of Action (MoA) Prediction: Silver medal (34/4373 teams)
+    - Mechanisms of Action (MoA) Prediction: Silver medal (34th/4373)
 
