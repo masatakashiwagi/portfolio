@@ -19,10 +19,7 @@ I'm interested in multimodal learning, applying computer vision in manufacturing
 I obtained a master's degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations. After graduate school, I got a job with a major telecommunications carrier. I was working as a Solution Engineer which was familiar with marketing automation tools in Digital Marketing. Now, I'm working as a Data Scientist to solve manufacturing challenges.
 
 #### In Japanese
-東京のITベンチャー企業でデータサイエンティスト&機械学習エンジニアとして働いています．  
-学生時代からでいうと，大学/大学院と物性物理の超伝導の研究をしてました．  
-新卒では，通信事業者に入ってSEとして，海外のMAツールの導入構築から開発・運用サポートなど一通りの工程を経験しました．  
-そして，学生時代から興味があったデータサイエンスで課題を解決するという仕事をしたくて現職に転職したという経緯です．  
+東京のITベンチャー企業でデータサイエンティスト&機械学習エンジニアとして働いています．   
 
 現職での仕事内容は大きく2つあり
 1. 開発: 自社製品のFW開発をしたり，製品の機械学習部分を担当しています．
