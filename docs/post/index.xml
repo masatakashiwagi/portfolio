@@ -6,10 +6,15 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 11 Dec 2020 23:13:30 +0900</lastBuildDate>
-    
-	<atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 31 Dec 2020 22:36:52 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>新卒から2年弱で大企業から転職した理由</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/first_job_change/</link>
+      <pubDate>Thu, 31 Dec 2020 22:36:52 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/first_job_change/</guid>
+      <description>はじめに 最近，新卒の方々と面談や面接をする機会が増え，その際に &amp;ldquo;どうして新卒で入った会社から今の会社に転職しようと思ったんですか？&amp;rdquo; と聞かれることが多いので，改めて自分の中で整</description>
+    </item>
     
     <item>
       <title>Kaggle MoAの振り返り</title>
