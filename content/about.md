@@ -74,3 +74,6 @@ Department of Physical Science, Osaka Prefecture University
   - Kaggle some projects
     - Mechanisms of Action (MoA) Prediction: Silver medal (34th/4373)
 
+***
+## **Blog**
+* note: https://note.com/asteriam
