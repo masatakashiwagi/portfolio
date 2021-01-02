@@ -109,49 +109,51 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/list-objects/">ネストしたリストの更新処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-09-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;607 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/python">python</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-09-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;714 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/python">python</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <h2 id="リストの更新処理でハマってしまった失敗">リストの更新処理でハマってしまった失敗</h2>
-<p>今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます．<br>
-pythonで決まった形のリストを予め作成しておきたい場合に，以下のようにすることがあると思います．</p>
-<pre><code class="language-python">shape you want: [[0, 0], [0, 0], [0, 0]] # 要素が2つあるリストが3つ
+        <h2 id="初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</h2>
+<p>今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます．
+詳しい内容は参考サイトに載っています．（かなりわかりやすいです！）</p>
+<p>pythonで決まった形のリストを予め作成しておきたい場合に，以下のようにすることがあると思います．</p>
+<pre><code class="language-python">shape you want: [[0, 0], [0, 0], [0, 0]]  # 要素が2つあるリストが3つ
 &gt;&gt;&gt; list1 = [[0] * 2] * 3
 &gt;&gt;&gt; list1
 [[0, 0], [0, 0], [0, 0]]
 </code></pre>
 <p>そして，上記リストを何かしらの値で更新したい場合を考えます．
-今回だと，[0][0]の要素を更新するとします．</p>
+今回だと，<code>[0][0]</code>の要素を更新するとします．</p>
 <pre><code class="language-python">&gt;&gt;&gt; list1[0][0] = 3.5
 &gt;&gt;&gt; list1
 [[3.5, 0], [3.5, 0], [3.5, 0]]
 </code></pre>
 <p>結果は，各リストの0番目の要素が全て更新されています．
-この原因は，list1 = [[0] * 2] * 3と書くと，要素のリストが全て同じオブジェクトになってしまうからです．</p>
-<pre><code class="language-python">&gt;&gt;&gt; id(list1[0]) == id(list1[1]) == id(list1[2])
-True
-</code></pre>
-<p>これにより，どこかの要素を変更すると全て変わってしまうということになります．</p>
-<h2 id="多次元配列の初期化時の注意">多次元配列の初期化時の注意</h2>
+この原因は，<code>list1 = [[0] * 2] * 3</code>と書くと，要素のリストが全て同じオブジェクトになってしまい，どこかの要素を変更すると全て変わってしまうからです．</p>
+<h2 id="対処法">対処法</h2>
 <p>上記の結果を回避するためにはリスト内包表記を使うと解決することができます．
 先程の例の場合，以下のように書くといいです．</p>
 <pre><code class="language-python">&gt;&gt;&gt; list2 = [[0] * 2 for i in range(3)]
 &gt;&gt;&gt; list2
 [[0, 0], [0, 0], [0, 0]]
 </code></pre>
-<p>内包表記を使うと，リストはそれぞれ異なるオブジェクトとして扱われます．</p>
-<pre><code class="language-python">&gt;&gt;&gt; id(list2[0]) == id(list2[1]) == id(list2[2])
-False
-</code></pre>
-<p>ですので，[0][0]の要素を更新すると，意図した部分だけが更新され問題ありません．</p>
+<p>内包表記を使うと，リストはそれぞれ異なるオブジェクトとして扱われます．<br>
+ですので，<code>[0][0]</code>の要素を更新すると，意図した部分だけが更新され問題ありません．</p>
 <pre><code class="language-python">&gt;&gt;&gt; list2[0][0] = 3.5
 &gt;&gt;&gt; list2
 [[3.5, 0], [0, 0], [0, 0]]
 </code></pre>
 <p>リストを初期化する際はこれらに注意しておかないと，本来の意図とは違う動きになってしまいます．</p>
+<p>こうゆうミスを気にしたくない場合には，numpyのarrayで作りたいshapeを作成し，その後にリストに変換すれば良いかもしれないです．</p>
+<pre><code class="language-python">&gt;&gt;&gt; np.zeros((2, 3)).tolist()  # 0で初期化
+[[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
+
+# 0以外の場合
+np.ones((2, 3)).tolist()  # 1で初期化
+np.full((2, 3), 5).tolist()  # 任意の値で初期化
+</code></pre>
 <h2 id="参考">参考</h2>
 <p><a href="https://note.nkmk.me/python-list-initialize/" target="_blank">Pythonのリスト（配列）を任意の値・要素数で初期化</a></p>
 
@@ -243,8 +245,8 @@ False
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#リストの更新処理でハマってしまった失敗">リストの更新処理でハマってしまった失敗</a></li>
-    <li><a href="#多次元配列の初期化時の注意">多次元配列の初期化時の注意</a></li>
+    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
+    <li><a href="#対処法">対処法</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -346,8 +348,8 @@ False
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#リストの更新処理でハマってしまった失敗">リストの更新処理でハマってしまった失敗</a></li>
-    <li><a href="#多次元配列の初期化時の注意">多次元配列の初期化時の注意</a></li>
+    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
+    <li><a href="#対処法">対処法</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>

@@ -22,7 +22,7 @@
       <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
-      <description>リストの更新処理でハマってしまった失敗 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． pythonで決まった形のリストを予め作成しておきたい場合に，以</description>
+      <description>初期化したリストの更新処理でハマってしまった 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． 詳しい内容は参考サイトに載っています．（かなりわかりやすい</description>
     </item>
     
     <item>
