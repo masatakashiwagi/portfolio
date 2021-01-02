@@ -5,6 +5,7 @@ date = 2019-10-05T15:16:44+09:00
 description = "転職した理由"
 tags = [
     "python",
+    "tips",
 ]
 showLicense = false
 +++

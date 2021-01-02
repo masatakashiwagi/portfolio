@@ -25,5 +25,14 @@
       <description>ポートフォリオ作成 こちらのQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました． 移植した際に少し詰まった部</description>
     </item>
     
+    <item>
+      <title>Excel Binary WorkbookをPythonで処理</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/</link>
+      <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/</guid>
+      <description>はじめに 今回は，先日初めて見たファイル形式のExcel Binary Workbook (xlsb)に関して，pythonでcsvにパースする話です． .xlsxはよくあるExcelファイルの形式ですが，それのバイナリー形式である.</description>
+    </item>
+    
   </channel>
 </rss>

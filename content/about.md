@@ -76,4 +76,4 @@ Department of Physical Science, Osaka Prefecture University
 
 ***
 ## **Blog**
-* note: https://note.com/asteriam
+### note - [my page](https://note.com/asteriam "my page")
