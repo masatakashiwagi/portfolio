@@ -76,4 +76,18 @@ print(wb.convert_date(41235.45578))
 もちろん簡単なデータの可視化とか表計算とかExcelが活躍する場面は多々あると思うので，使い分けていきたいとは思います．
 
 ## 参考
-https://codeday.me/jp/qa/20190619/1049403.html
+[Read XLSB File in Pandas Python](https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python)
+
+## 追記
+#### 2020-01-05
+
+pandasの`version=1.0.0`で`.xlsb`ファイルをロードできるようになったみたいです．
+
+方法は`pd.read_excel`の引数で`engine="pyxlsb"`と指定するだけです．
+
+```python
+# Returns a DataFrame
+pd.read_excel("path_to_file.xlsb", engine="pyxlsb")
+```
+
+参考: https://pandas.pydata.org/docs/user_guide/io.html#io-xlsb
