@@ -64,16 +64,17 @@ Department of Physical Science, Osaka Prefecture University
 
 ***
 ## **Projects**
-### Kaggle - [Profile](https://www.kaggle.com/masatakashiwagi "Profile")
+### Kaggle
 * IEEE-CIS Fraud Detection - 288th/6381 silver medal (solo)  
 * ASHRAE - Great Energy Predictor III - 69th/3594 silver medal (solo)
 * Mechanisms of Action (MoA) Prediction - 34th/4373 silver medal (team)
 
 ### 90's same generation community
 * Team90s - Github Private Organizations
-  - Kaggle some projects
+  - Kaggle projects
     - Mechanisms of Action (MoA) Prediction: Silver medal (34th/4373)
 
 ***
 ## **Blog**
 ### note - [my page](https://note.com/asteriam "my page")
+* I'm writting poem at note.

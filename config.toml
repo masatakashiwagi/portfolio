@@ -151,3 +151,11 @@ paginate = 10
     name = "Linkedin"
     url = "https://www.linkedin.com/in/masatakakashiwagi/"
     weight = 3
+  [[menu.link]]
+    name = "Kaggle"
+    url = "https://www.kaggle.com/masatakashiwagi"
+    weight = 4
+  [[menu.link]]
+    name = "Note"
+    url = "https://note.com/asteriam"
+    weight = 5
