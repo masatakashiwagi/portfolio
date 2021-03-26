@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "Excel Binary WorkbookをPythonで処理"
 date = 2019-10-05T15:16:44+09:00
-description = "転職した理由"
+description = "EBWを処理するために"
 tags = [
     "python",
     "tips",

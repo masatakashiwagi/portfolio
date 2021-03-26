@@ -23,30 +23,27 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Excel Binary WorkbookをPythonで処理 - Fractal Prologue</title>
+<title>vscode - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="EBWを処理するために" />
+<meta name="description" content="my biography." />
 
 
-<meta name="keywords" content="python, tips" />
-
-<meta property="og:title" content="Excel Binary WorkbookをPythonで処理" />
-<meta property="og:description" content="EBWを処理するために" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/" />
+<meta property="og:title" content="vscode" />
+<meta property="og:description" content="my biography." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/tags/vscode/" />
 <meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
-<meta property="article:published_time" content="2019-10-05T15:16:44+09:00" />
-<meta property="article:modified_time" content="2019-10-05T15:16:44+09:00" />
+<meta property="og:updated_time" content="2021-03-26T22:18:34+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Excel Binary WorkbookをPythonで処理"/>
-<meta name="twitter:description" content="EBWを処理するために"/>
+<meta name="twitter:title" content="vscode"/>
+<meta name="twitter:description" content="my biography."/>
 
 
 
@@ -103,83 +100,31 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-<article>
-    
+
+<div class="page-info">
+    <span>Posts with the tag vscode: </span>
+</div>
+
+
+
+<div class="post">
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/">Excel Binary WorkbookをPythonで処理</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/">VSCodeとgitを連携してpushできるようにするまで</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1391 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/python">python</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1204 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/python">python</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;<a href="/portfolio/tags/git">git</a>&nbsp;<a href="/portfolio/tags/vscode">vscode</a>&nbsp;</span>
 
     </div>
-    
-    
-    <div class="post-content markdown-body">
-        <h2 id="はじめに">はじめに</h2>
-<p>今回は，先日初めて見たファイル形式のExcel Binary Workbook (xlsb)に関して，pythonでcsvにパースする話です．</p>
-<p><code>.xlsx</code>はよくあるExcelファイルの形式ですが，それのバイナリー形式である<code>.xlsb</code>に関しての話です．（今まで見たことなかった拡張子です笑）</p>
-<p>Excelの闇やExcelとの格闘は色々ありますが，今回はそこをグッと堪えて進めたいと思います笑</p>
-<h2 id="xlsbとは">.xlsbとは</h2>
-<p><a href="https://www.weblio.jp/content/.xlsb" target="_blank">Weblio辞書</a>によると以下のように記載されています．</p>
-<blockquote>
-<p><code>.xlsb</code>とは，Excel 2007で作成したブックを「XML形式でないバイナリブック」として保存する際に用いられる拡張子である．<code>.xlsb</code>でブックを保存した場合はファイル全体がバイナリ形式で保存され，XMLベースである<code>.xlsx</code>などのファイル形式で保存した場合と比べて，ファイルサイズを数分の1程度に抑えることができる．</p>
-</blockquote>
-<p>受け取ったファイルは<code>.xlsb</code>形式でも100MBぐらいあったため，<code>.xlsx</code>形式だとかなり容量が大きく，ファイルを開くと処理が重たくなることが想像できるので，圧縮したのだと考えられます．</p>
-<h2 id="excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</h2>
-<h3 id="openpyxl">openpyxl</h3>
-<p>定番の<a href="https://openpyxl.readthedocs.io/en/stable/" target="_blank">openpyxl</a>です．</p>
-<p>上記ページにも記載されてますが，Excelファイルの拡張子である<code>.xlsx</code>を扱うことができます．</p>
-<blockquote>
-<p>openpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.</p>
-</blockquote>
-<p>いつものようにこのライブラリで処理しようとしたところ，下記のようなエラーが発生しました．</p>
-<pre><code class="language-bash">openpyxl.utils.exceptions.InvalidFileException: openpyxl does not support binary format .xlsb, please convert this file to .xlsx format if you want to open it with openpyxl
-</code></pre>
-<p>もう一度openpyxlの説明を見ると，確かに扱える拡張子は<code>xlsx/xlsm/xltx/xltm</code>となっているので、<code>.xlsb</code>は扱えないのが分かります．</p>
-<p>そこで，<code>.xlsb</code>の拡張子が扱えるライブラリを調べたところ，pyxlsbというのがあるみたいなので，それを使うことにしました．</p>
-<h3 id="pyxlsb">pyxlsb</h3>
-<p><a href="https://github.com/wwwiiilll/pyxlsb" target="_blank">pyxlsb</a>は公式の説明にあるように，xlsb形式を扱えるpythonライブラリになります．</p>
-<blockquote>
-<p>pyxlsb is an Excel 2007-2010 Binary Workbook (xlsb) parser for Python.</p>
-</blockquote>
-<p>インストールはpipですることができます．</p>
-<pre><code class="language-python">pip install pyxlsb
-</code></pre>
-<p>公式のサンプルコードを記載しておきます．</p>
-<pre><code class="language-python">import csv
-from pyxlsb import open_workbook
-
-with open_workbook('Book1.xlsb') as wb:
-    for name in wb.sheets:
-        with wb.get_sheet(name) as sheet, open(name + '.csv', 'w') as f:
-            writer = csv.writer(f)
-            for row in sheet.rows():
-                writer.writerow([c.v for c in row])
-</code></pre>
-<p>もしpandasのデータフレームに変換したい場合は，参考ページのコードで可能となります．</p>
-<p>ただし，時刻変換に関して少し注意が必要なので，記載しておくと公式にもある通り，日付は<code>float</code>に変換されてしまうため，<code>convert_date</code>関数を使う必要があります．</p>
-<blockquote>
-<p>Note that dates will appear as floats. You must use the <code>convert_date(date)</code> method from the corresponding Workbook instance to turn them into <code>datetime</code>.</p>
-</blockquote>
-<p>なので，元のファイルに時刻が入っている場合には上記変換をコードの中に入れて処理する必要がありますのでご注意下さい．</p>
-<pre><code class="language-python">print(wb.convert_date(41235.45578))
-&gt;&gt;&gt; datetime.datetime(2012, 11, 22, 10, 56, 19)
-</code></pre>
-<p>今回は個人的に嵌ってしまった<code>.xlsb</code>形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータをExcelファイルで扱いたくないのが本音です．</p>
-<p>もちろん簡単なデータの可視化とか表計算とかExcelが活躍する場面は多々あると思うので，使い分けていきたいとは思います．</p>
-<h2 id="参考">参考</h2>
-<p><a href="https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python" target="_blank">Stack Overflow - Read XLSB File in Pandas Python</a></p>
-<h2 id="追記">追記</h2>
-<h4 id="2020-01-05">2020-01-05</h4>
-<p>pandasの<code>version=1.0.0</code>で<code>.xlsb</code>ファイルをロードできるようになったみたいです．</p>
-<p>方法は<code>pd.read_excel</code>の引数で<code>engine=&quot;pyxlsb&quot;</code>と指定するだけです．</p>
-<pre><code class="language-python"># Returns a DataFrame
-pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
-</code></pre>
-<p>参考: <a href="https://pandas.pydata.org/docs/user_guide/io.html#io-xlsb">https://pandas.pydata.org/docs/user_guide/io.html#io-xlsb</a></p>
-
+    <div class="post-item post-summary markdown-body">
+        はじめに 今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使
     </div>
-</article>
+</div>
+
+
+
+
+
+
 
 
 
@@ -277,28 +222,6 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
     </div>
     
     
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>TOC</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#xlsbとは">.xlsbとは</a></li>
-    <li><a href="#excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</a>
-      <ul>
-        <li><a href="#openpyxl">openpyxl</a></li>
-        <li><a href="#pyxlsb">pyxlsb</a></li>
-      </ul>
-    </li>
-    <li><a href="#参考">参考</a></li>
-    <li><a href="#追記">追記</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-    </div>
     
     
 </aside>
@@ -404,30 +327,6 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
             </span>
             
         </div>
-    </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>TOC</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#xlsbとは">.xlsbとは</a></li>
-    <li><a href="#excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</a>
-      <ul>
-        <li><a href="#openpyxl">openpyxl</a></li>
-        <li><a href="#pyxlsb">pyxlsb</a></li>
-      </ul>
-    </li>
-    <li><a href="#参考">参考</a></li>
-    <li><a href="#追記">追記</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
     </div>
     
     

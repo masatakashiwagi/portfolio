@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vscode on Fractal Prologue</title>
+    <link>https://masatakashiwagi.github.io/portfolio/tags/vscode/</link>
+    <description>Recent content in vscode on Fractal Prologue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 26 Mar 2021 22:18:34 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VSCodeとgitを連携してpushできるようにするまで</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</link>
+      <pubDate>Fri, 26 Mar 2021 22:18:34 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</guid>
+      <description>はじめに 今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使</description>
+    </item>
+    
+  </channel>
+</rss>
