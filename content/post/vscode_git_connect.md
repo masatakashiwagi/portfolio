@@ -76,20 +76,20 @@ ssh -T git@github.com
 ```
 
 ## Remote設定の上書き
-ここまで来たら後一息で，最後にremoteの設定を上書きします．
+ここまで来たら後一息で，最後にremoteの設定を上書きします．  
+以下のような感じでリポジトリ名を書いて，実行すればOK．
 ```bash
-git remote set-url origin リポジトリ名
-
-# 以下のように書けばいい
-(git remote set-url origin git@github.com:<ユーザー名>/<リポジトリ名>.git
-)
+git remote set-url origin git@github.com:<ユーザー名>/<リポジトリ名>.git
 ```
 
 ## さいごに
-これでVSCodeの画面から簡単にgitにcommitやpushなどの操作を行うことができます．
+上記までの設定が完了すれば，これでVSCodeの画面から簡単にgitにcommitやpushなどの操作を行うことができます．
 
 まだまだVSCode初心者なので，使いやすいExtensionsを取り入れて開発環境をカスタマイズしていきたいと思います！
 
 
 ## 参考
-https://qiita.com/takuyanin/items/c6a097028a837052c90c
+[初めてのgitは5ステップで完了
+](https://qiita.com/takuyanin/items/c6a097028a837052c90c)
+
+[GitHubでssh接続する手順~公開鍵・秘密鍵の生成から~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)
