@@ -82,9 +82,12 @@ ssh -T git@github.com
 git remote set-url origin git@github.com:<ユーザー名>/<リポジトリ名>.git
 ```
 
-## さいごに
-上記までの設定が完了すれば，これでVSCodeの画面から簡単にgitにcommitやpushなどの操作を行うことができます．
+## VSCodeからgit push
+![VSCodeからpush](../../img/vscode_git_connect_img1.png "git push from VSCode")
 
+今までの設定が完了していれば，上記画像の手順でVSCodeの画面から簡単にgitにcommitやpushなどの操作を行うことができます．
+
+## さいごに
 まだまだVSCode初心者なので，使いやすいExtensionsを取り入れて開発環境をカスタマイズしていきたいと思います！
 
 
