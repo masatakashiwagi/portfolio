@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 26 Mar 2021 22:18:34 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 22:11:08 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kaggle-Shopeeコンペの振り返りとソリューション</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</link>
+      <pubDate>Tue, 11 May 2021 22:11:08 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</guid>
+      <description>Kaggle-Shopeeコンペの振り返り 2021/03/09~2021/05/11まで開催していたShopeeコンペの振り返りになります． 2週間程度しか手を動かせなかったですが，久しぶりに参加したの</description>
+    </item>
+    
     <item>
       <title>VSCodeとgitを連携してpushできるようにするまで</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</link>

@@ -65,14 +65,20 @@ Department of Physical Science, Osaka Prefecture University
 ***
 ## **Projects**
 ### Kaggle
-* IEEE-CIS Fraud Detection - 288th/6381 silver medal (solo)  
-* ASHRAE - Great Energy Predictor III - 69th/3594 silver medal (solo)
-* Mechanisms of Action (MoA) Prediction - 34th/4373 silver medal (team)
+* IEEE-CIS Fraud Detection - 288th/6381 Silver medal (solo)  
+* ASHRAE - Great Energy Predictor III - 69th/3594 Silver medal (solo)
+* Mechanisms of Action (MoA) Prediction - 34th/4373 Silver medal (team)
+* Shopee - Price Match Guarantee - 179th/2464 Bronze medal (solo)
 
 ### 90's same generation community
-* Team90s - Github Private Organizations
+* [Team90s](https://github.com/team90s "Team90s") - Github Private Organizations
   - Kaggle projects
     - Mechanisms of Action (MoA) Prediction: Silver medal (34th/4373)
+
+
+### Double-M2ML
+* [Double-M2.fm](https://github.com/double-m2ml/podcast.fm "Double-M2.fm")
+  - 友人とのpodcastチャンネル
 
 ***
 ## **Blog**

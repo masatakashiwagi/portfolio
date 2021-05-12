@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+
+<link rel="apple-touch-icon" sizes="120x120" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>Kaggle-Shopeeコンペの振り返りとソリューション - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="コンペの振り返りとソリューション" />
+
+
+<meta name="keywords" content="kaggle" />
+
+<meta property="og:title" content="Kaggle-Shopeeコンペの振り返りとソリューション" />
+<meta property="og:description" content="コンペの振り返りとソリューション" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/" />
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+<meta property="article:published_time" content="2021-05-11T22:11:08+09:00" />
+<meta property="article:modified_time" content="2021-05-11T22:11:08+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="Kaggle-Shopeeコンペの振り返りとソリューション"/>
+<meta name="twitter:description" content="コンペの振り返りとソリューション"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/">Kaggle-Shopeeコンペの振り返りとソリューション</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3490 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/kaggle">kaggle</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</h2>
+<p>2021/03/09~2021/05/11まで開催していた<a href="https://www.kaggle.com/c/shopee-product-matching" target="_blank">Shopeeコンペ</a>の振り返りになります．</p>
+<p>2週間程度しか手を動かせなかったですが，久しぶりに参加したので備忘録として記録を残しておきます．</p>
+<p>最終的な結果は179th/2464で銅メダルで，特に凝ったことは何もしていなかったので，妥当かなと思います．</p>
+<p>このコンペは上位10チーム中7チームが日本人チームで，日本人のレベルの高さを改めて実感できるコンペでした！</p>
+<h2 id="概要">概要</h2>
+<p>コンペの内容は簡単に言うと，画像とテキスト情報を用いて、2つの画像の類似性を比較し，どのアイテムが同じ商品であるかを予測するコンペになります．</p>
+<ul>
+<li>開催期間: 2021/03/09 ~ 2021/05/11</li>
+<li>参加チーム数: 2464</li>
+<li>予測対象: <code>posting_id</code>列にマッチする全てのposting_idを予測する．ただし，posting_idは必ずself-matchし，グループの上限は50個となっている．</li>
+<li>データ: 投稿ID，画像，商品のタイトル，画像の知覚ハッシュ(perceptual hash)，ラベルグループID</li>
+<li>評価指標: F1-Score</li>
+<li>その他: コードコンペ</li>
+</ul>
+<h2 id="my-solution">My Solution</h2>
+<p><img class="img-zoomable" src="../../img/kaggle-shopee-my_solution.png" alt="My Solution" />
+</p>
+<ul>
+<li>画像特徴量・テキスト特徴量・画像のphash値をconcatして結果をユニーク化したものを最終的な予測値としました．</li>
+<li>何も複雑なことはしていないモデルですが，結果的に銅メダルを取ることができました．</li>
+</ul>
+<h3 id="image-model">Image Model</h3>
+<ul>
+<li>eca_nfnet_l0
+<ul>
+<li>loss: ArcFace</li>
+<li>pooling: AdaptiveAvgPool2d</li>
+<li>scheduler: CosineAnnealingLR</li>
+<li>loss(criterion): CrossEntropyLoss</li>
+<li>size: 512*512</li>
+</ul>
+</li>
+<li>eca_nfnet_l1
+<ul>
+<li>loss: CurricularFace</li>
+<li>pooling: MAC</li>
+<li>scheduler: CosineAnnealingLR</li>
+<li>loss(criterion): FocalLoss</li>
+<li>size: 512*512</li>
+</ul>
+</li>
+<li>efficientnet_b3
+<ul>
+<li>loss: ArcFace</li>
+<li>pooling: GeM</li>
+<li>scheduler: CosineAnnealingLR</li>
+<li>loss(criterion): FocalLoss</li>
+<li>size: 512*512</li>
+</ul>
+</li>
+<li>swin_small_patch4_window7_224
+<ul>
+<li>loss: CurricularFace</li>
+<li>scheduler: CosineAnnealingLR</li>
+<li>loss(criterion): FocalLoss</li>
+<li>size: 224*224</li>
+</ul>
+</li>
+<li>common
+<ul>
+<li>augmentation by albumentations.
+<ul>
+<li>HorizontalFlip</li>
+<li>VerticalFlip</li>
+<li>Rotate</li>
+<li>RandomBrightness</li>
+</ul>
+</li>
+<li>optimizer
+<ul>
+<li>Adam</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="少し工夫したポイント">少し工夫したポイント</h4>
+<ul>
+<li>画像特徴量を抽出する部分で，いくつか工夫した点をあげます．
+<ul>
+<li><a href="http://cmp.felk.cvut.cz/cnnimageretrieval/" target="_blank">CNN Image Retrieval</a>を参考にしました．</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>lossに<code>ArcFace</code>と<code>CurricularFace</code>を用いた
+<ul>
+<li>ArcFaceを使っている人が多かったが，CurricularFaceも使いました．スコア的にはCurricularFaceの方がよかったです．</li>
+</ul>
+</li>
+<li>いくつかのモデルでpooling層に<code>GeM</code>と<code>MAC</code>を用いた
+<ul>
+<li>Google Landmark Retrieval Challengeで上手くいっていたGeMやMACなどのプーリング手法を用いました．</li>
+</ul>
+</li>
+<li>loss(criterion)に<code>FocalLoss</code>を用いた</li>
+<li>最終的に得られた特徴量をconcatした後，<code>ZCAWhitening</code>による次元削減を行った</li>
+</ol>
+<h4 id="有効でなかったもの">有効でなかったもの</h4>
+<ul>
+<li>一方で，上手くいかなかった内容としては以下になります．
+<ul>
+<li>ResNeXt-50 32x4d</li>
+<li>swin_small_patch4_window7_224 with ArcFace</li>
+<li>CosFace, AdaCos</li>
+<li>PCA Whitening (worse than ZCAWhitening)</li>
+</ul>
+</li>
+</ul>
+<h3 id="text-model">Text Model</h3>
+<ul>
+<li>paraphrase-xlm-r-multilingual-v1
+<ul>
+<li>loss: ArcFace</li>
+<li>scheduler: linear schedule with warmup</li>
+<li>loss(criterion): CrossEntropyLoss</li>
+<li>optimizer: AdamW</li>
+</ul>
+</li>
+<li>TF-IDF</li>
+</ul>
+<p>textの方のモデルは特に改良する時間が取れなかったので，ほとんど手を付けれてなかったです．</p>
+<ul>
+<li>transformerとTF-IDFで得られた特徴量それぞれに対して，Cosine Similarityを計算し，テキストのpredictionを作成しました．</li>
+</ul>
+<p>最終的な予測値は画像特徴量とテキスト特徴量に加えて，画像のphash値を追加して，ユニークを取った値としています．</p>
+<h3 id="反省">反省</h3>
+<ul>
+<li>post-processingが全然できていない
+<ul>
+<li>他の解法を見るに，post-processingでスコアが伸びているので，この部分は結構大事だったんだなと感じています．</li>
+</ul>
+</li>
+<li>ImageとTextをMulti-modal的にモデルに組み込んで学習することができていなかった</li>
+<li>グラフ理論全然わかってないです笑</li>
+<li>細かい部分
+<ul>
+<li>optimizerの変更（SAMとか）</li>
+<li>DBA / QE</li>
+<li>閾値の調整</li>
+<li>テキストモデルの追加</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>ここからは上位の解法を書きたいと思います．数もそれなりにあるので，載せるのは上位5つにします．最後に上位5つ以外にもDiscussionsに投稿されている解法のリンクを載せておきます．</p>
+<h2 id="1st-place-solution">1st Place Solution</h2>
+<p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238136" target="_blank">1st Place Solution - From Embeddings to Matches</a></p>
+<h3 id="model">Model</h3>
+<ul>
+<li>Image: 2つのモデル
+<ul>
+<li><code>eca_nfnet_l1s</code> * 2</li>
+</ul>
+</li>
+<li>Text: 5つのモデル
+<ul>
+<li><code>xlm-roberta-large</code></li>
+<li><code>xlm-roberta-base</code></li>
+<li><code>cahya/bert-base-indonesian-1.5G</code></li>
+<li><code>indobenchmark/indobert-large-p1</code></li>
+<li><code>bert-base-multilingual-uncased</code></li>
+</ul>
+</li>
+<li>loss: ArcFace</li>
+<li>poolingした後にbatch normalizationとfeature-wise normalizationを行った</li>
+<li>ArcFaceのチューニングを行った
+<ul>
+<li>学習段階で徐々にmarginを大きくした（埋め込み表現のqualityに影響する）
+<ul>
+<li>画像に対するmargin: 0.8~1.0</li>
+<li>テキストに対するmargin: 0.6~0.8</li>
+</ul>
+</li>
+<li>marginを大きくすると，モデルの収束に問題が出たので，以下を行った
+<ul>
+<li>warmup stepsを大きくする</li>
+<li>cosineheadに対するlearning rateをより大きくする</li>
+<li>gradient clippingを行う</li>
+</ul>
+</li>
+<li>class-size-adaptive marginも試したが，不均衡性が小さかったため，改善は少しだけだった
+<ul>
+<li>image: <code>class_size^-0.1</code></li>
+<li>text: <code>class_size^-0.2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>global average poolingの後にFC層を追加するとモデルが悪くなるが，feature-wise normalizationの前にbatch normalizationを追加するとスコアが改善した</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/kaggle-shopee-1st_solution_model.png" alt="Model" />
+</p>
+<h3 id="features">Features</h3>
+<ul>
+<li>Combining Image &amp; Text Matches
+<ul>
+<li>マッチングさせる方法をいくつかトライした</li>
+</ul>
+<ol>
+<li>画像のembeddingによるマッチングとテキストのembeddingによるマッチングを結合する</li>
+<li>画像のembeddingとテキストのembeddingをconcatしてからマッチングする</li>
+<li>1と2を組み合わせてマッチングする</li>
+</ol>
+<ul>
+<li>これは，画像のembeddingが強く示唆するアイテム・テキストのembeddingが強く示唆するアイテム・画像とテキストのembeddingがどちらも適度に示唆するアイテムを取り入れることができる</li>
+</ul>
+</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/kaggle-shopee-comb_match.png" alt="Features" />
+</p>
+<ul>
+<li>Iterative Neighborhood Blending (INB)
+<ul>
+<li>QE/DBAとは少し異なる，embeddingからマッチするプロダクトを検索するパイプラインを作った</li>
+<li>近隣探索ラリブラリ: <a href="https://github.com/facebookresearch/faiss" target="_blank">faiss</a></li>
+<li>コサイン類似度をコサイン距離(=1-コサイン類似度)に変換し，distance&lt;thresholdを満たすペアを取得した</li>
+</ul>
+</li>
+</ul>
+<h2 id="2nd-place-solution">2nd Place Solution</h2>
+<p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238022" target="_blank">2nd place solution (matching prediction by GAT &amp; LGB)</a>, <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238362" target="_blank">2nd Place Solution Code</a></p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>1st stage: 画像・テキスト・画像+テキストデータに対するコサイン類似度を得るためにMetric Learningによるモデルを学習する</li>
+<li>2nd stage: 同じlabel groupに属するアイテムのペアかどうかを識別するために&quot;メタ&quot;モデルを学習する</li>
+</ul>
+<h3 id="model-1">Model</h3>
+<ul>
+<li>image: 2つのモデル
+<ul>
+<li>backbone
+<ul>
+<li><code>nfnet-F0</code></li>
+<li><code>ViT</code></li>
+</ul>
+</li>
+<li>loss: CurricularFace</li>
+<li>optimizer: SAM</li>
+<li>embeddingの結合: <code>F.normalize(torch.cat([F.normalize(emb1), F.normalize(emb2)], axis=1))</code></li>
+</ul>
+</li>
+<li>text: 3つのモデル + TF-IDF
+<ul>
+<li><code>Indonesian-BERT</code></li>
+<li><code>Multilingual-BERT</code></li>
+<li><code>Paraphrase-XLM</code></li>
+</ul>
+</li>
+<li>image+text: <code>NFNet-F0</code>と<code>Indonesian BERT</code>のFC層のembeddingを結合したもの</li>
+<li>Training Tips:
+<ul>
+<li>label groupのサイズに基づいたSample Weighting
+<ul>
+<li>1 / (label group size) ** 0.4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="features-1">Features</h3>
+<h4 id="graph-features">Graph features</h4>
+<ul>
+<li>それぞれのアイテムのtop-Kコサイン類似度の平均と分散
+<ul>
+<li>K=5, 10, 15, 30, etc</li>
+</ul>
+</li>
+<li>標準化（mean=0, std=1）</li>
+<li>Pagerank</li>
+</ul>
+<h4 id="その他">その他</h4>
+<ul>
+<li>テキストの長さ</li>
+<li>#の記号</li>
+<li>Levenshtein距離</li>
+<li>画像ファイルのサイズ</li>
+<li>画像の高さと幅</li>
+<li>Query Extension</li>
+</ul>
+<h3 id="ensemble">Ensemble</h3>
+<h4 id="methodology">Methodology</h4>
+<ul>
+<li>ローカルデータでそれぞれのモデルのベストな閾値を計算する</li>
+<li>上記閾値でそれぞれのモデルの予測値を差し引く</li>
+<li>差し引かれた予測値を合計する</li>
+<li>合計値&gt;0の場合，アイテムペアが同じグループに属するとする</li>
+<li>お互いにエッジを持たないペアを削除する
+<ul>
+<li>A-Bはあるが，B-Aがない場合は両方を削除する</li>
+</ul>
+</li>
+</ul>
+<h3 id="post-processing">Post-processing</h3>
+<ul>
+<li>中間中心性が最も高いエッジを再帰的に削除する（Graph-Based）</li>
+</ul>
+<h3 id="その他-1">その他</h3>
+<ul>
+<li>Performance and Memory Tunings
+<ul>
+<li>CuDF, cupy, cugraph: GPUを有効に使うためには大事</li>
+<li>ForestInference: 40分かかるCPUでの推論が2分になる</li>
+</ul>
+</li>
+<li>Not worked
+<ul>
+<li>Graph-basedの特徴量</li>
+<li>固有ベクトルの中心性とjaccard</li>
+<li>End-to-end model</li>
+<li>Local feature matching</li>
+</ul>
+</li>
+</ul>
+<h2 id="4th-place-solution">4th Place Solution</h2>
+<p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238295" target="_blank">4th Place Solution</a></p>
+<h3 id="model-2">Model</h3>
+<ul>
+<li>image: backboneに<code>nfnet</code>と<code>efficientnet</code>
+<ul>
+<li>pooling: GeM＆Avg pooling</li>
+<li>embeddingが大きいほど，LBのスコアがよくなった</li>
+<li>loss: ArcFace</li>
+<li>marginの調整が大事だった</li>
+</ul>
+</li>
+<li>text: BERTベース + TF-IDF
+<ul>
+<li>TF-IDF: かなり大きいembeddingを生成し，notebook上ではメモリの制約を受けるため，Random Sparse Projectionで次元削減を行った</li>
+<li>loss: ArcFace</li>
+<li>marginの調整が大事だった</li>
+</ul>
+</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/kaggle-shopee-4th_solution_model.png" alt="Model" />
+</p>
+<h3 id="ensemble-1">Ensemble</h3>
+<ul>
+<li>画像のembedding・テキスト（BERTベース）のembedding・TF-IDFのembeddingを結合して，正規化した</li>
+<li>これらのベクトル表現のそれぞれに対して，pairwiseコサイン類似度を計算し，3つの行列を作成した
+<ul>
+<li>最初に二乗し，その後加重平均を取って行列を結合した</li>
+</ul>
+</li>
+</ul>
+<h3 id="post-processing-1">Post-processing</h3>
+<ul>
+<li>閾値の調整</li>
+<li>Rank2 matching
+<ul>
+<li>もし，AがRank2にBを持っており，BはRank2にAを持っている場合，お互いに追加する</li>
+</ul>
+</li>
+<li>Rank2とRank3の違いが大きい場合，Rank2のIDを追加する</li>
+<li>少なくとも1つの他とのマッチング（Rank2のコサイン類似度が極端に小さくなければ）</li>
+<li>Query Expansion</li>
+<li>マッチしていない行との再マッチング</li>
+</ul>
+<h2 id="5th-place-solution">5th Place Solution</h2>
+<p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238078" target="_blank">5th Place Solution</a></p>
+<h2 id="その他上位解法のリンク">その他上位解法のリンク</h2>
+<ul>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238010" target="_blank">6th place solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238174" target="_blank">7th place solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238125" target="_blank">8th Place Solution Overview</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238039" target="_blank">Public 16th / Private 10th Solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238181" target="_blank">11th Place Solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238033" target="_blank">14th Place Gold - Image Text Decision Boundary</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238029" target="_blank">15th place solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238128" target="_blank">Public 13th / Private 16th solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/237972" target="_blank">18th place solution - You really don&rsquo;t need big models</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238146" target="_blank">19 place. Voting and similarity chain</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238126" target="_blank">26th Place Solution : Effective Cluster Separation and Neighbour Search</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238322" target="_blank">[31st Place] Object Detection approach</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238110" target="_blank">Public 39th / Private 37th Solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238263" target="_blank">48th Place Silver - Simple Baseline</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238079" target="_blank">Public 56th / Private 57th Solution</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238149" target="_blank">62th Place Solution (Stacking Logistic Regression)</a></li>
+<li><a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238167" target="_blank">72nd place solution</a></li>
+</ul>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/masatakashiwagi" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/asteriam_fp" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.linkedin.com/in/masatakakashiwagi/" target="_blank"><span>Linkedin</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.kaggle.com/masatakashiwagi" target="_blank"><span>Kaggle</span></a>
+            </li>
+            
+            <li>
+                <a href="https://note.com/asteriam" target="_blank"><span>Note</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/git/">git</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/portfolio/">portfolio</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/profile/">profile</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/python/">python</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/tips/">tips</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/vscode/">vscode</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</a></li>
+    <li><a href="#概要">概要</a></li>
+    <li><a href="#my-solution">My Solution</a>
+      <ul>
+        <li><a href="#image-model">Image Model</a></li>
+        <li><a href="#text-model">Text Model</a></li>
+        <li><a href="#反省">反省</a></li>
+      </ul>
+    </li>
+    <li><a href="#1st-place-solution">1st Place Solution</a>
+      <ul>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+    </li>
+    <li><a href="#2nd-place-solution">2nd Place Solution</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#model-1">Model</a></li>
+        <li><a href="#features-1">Features</a></li>
+        <li><a href="#ensemble">Ensemble</a></li>
+        <li><a href="#post-processing">Post-processing</a></li>
+        <li><a href="#その他-1">その他</a></li>
+      </ul>
+    </li>
+    <li><a href="#4th-place-solution">4th Place Solution</a>
+      <ul>
+        <li><a href="#model-2">Model</a></li>
+        <li><a href="#ensemble-1">Ensemble</a></li>
+        <li><a href="#post-processing-1">Post-processing</a></li>
+      </ul>
+    </li>
+    <li><a href="#5th-place-solution">5th Place Solution</a></li>
+    <li><a href="#その他上位解法のリンク">その他上位解法のリンク</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/masatakashiwagi" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/asteriam_fp" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.linkedin.com/in/masatakakashiwagi/" target="_blank"><span>Linkedin</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.kaggle.com/masatakashiwagi" target="_blank"><span>Kaggle</span></a>
+            </li>
+            
+            <li>
+                <a href="https://note.com/asteriam" target="_blank"><span>Note</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/git/">git</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/portfolio/">portfolio</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/profile/">profile</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/python/">python</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/tips/">tips</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/vscode/">vscode</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</a></li>
+    <li><a href="#概要">概要</a></li>
+    <li><a href="#my-solution">My Solution</a>
+      <ul>
+        <li><a href="#image-model">Image Model</a></li>
+        <li><a href="#text-model">Text Model</a></li>
+        <li><a href="#反省">反省</a></li>
+      </ul>
+    </li>
+    <li><a href="#1st-place-solution">1st Place Solution</a>
+      <ul>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+    </li>
+    <li><a href="#2nd-place-solution">2nd Place Solution</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#model-1">Model</a></li>
+        <li><a href="#features-1">Features</a></li>
+        <li><a href="#ensemble">Ensemble</a></li>
+        <li><a href="#post-processing">Post-processing</a></li>
+        <li><a href="#その他-1">その他</a></li>
+      </ul>
+    </li>
+    <li><a href="#4th-place-solution">4th Place Solution</a>
+      <ul>
+        <li><a href="#model-2">Model</a></li>
+        <li><a href="#ensemble-1">Ensemble</a></li>
+        <li><a href="#post-processing-1">Post-processing</a></li>
+      </ul>
+    </li>
+    <li><a href="#5th-place-solution">5th Place Solution</a></li>
+    <li><a href="#その他上位解法のリンク">その他上位解法のリンク</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2021
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>
