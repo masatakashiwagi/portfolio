@@ -7,6 +7,7 @@ tags = [
     "kaggle",
 ]
 showLicense = false
+draft = true
 +++
 
 ## Kaggle-Shopeeコンペの振り返り
