@@ -4,16 +4,26 @@
   
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
-    <lastmod>2021-03-26T22:18:34+09:00</lastmod>
+    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/tags/git/</loc>
-    <lastmod>2021-03-26T22:18:34+09:00</lastmod>
+    <loc>https://masatakashiwagi.github.io/portfolio/tags/kaggle/</loc>
+    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</loc>
+    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/tags/git/</loc>
     <lastmod>2021-03-26T22:18:34+09:00</lastmod>
   </url>
   
@@ -40,11 +50,6 @@
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</loc>
     <lastmod>2021-02-01T16:14:09+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/tags/kaggle/</loc>
-    <lastmod>2020-12-11T23:13:30+09:00</lastmod>
   </url>
   
   <url>

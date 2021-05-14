@@ -1,13 +1,13 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Kaggle-Shopeeコンペの振り返りとソリューション"
-date = 2021-05-11T22:11:08+09:00
+date = 2021-05-14T15:44:00+09:00
 description = "コンペの振り返りとソリューション"
 tags = [
     "kaggle",
 ]
 showLicense = false
-draft = true
+draft = false
 +++
 
 ## Kaggle-Shopeeコンペの振り返り
@@ -80,7 +80,7 @@ draft = true
 
 #### 有効でなかったもの
 - 一方で，上手くいかなかった内容としては以下になります．
-    - ResNeXt-50 32x4d
+    - resnext50_32x4d
     - swin_small_patch4_window7_224 with ArcFace
     - CosFace, AdaCos
     - PCA Whitening (worse than ZCAWhitening)
@@ -99,13 +99,16 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 最終的な予測値は画像特徴量とテキスト特徴量に加えて，画像のphash値を追加して，ユニークを取った値としています．
 
 ### 反省
-- post-processingが全然できていない
+- post-processingが全然できていなかった
     - 他の解法を見るに，post-processingでスコアが伸びているので，この部分は結構大事だったんだなと感じています．
+    - 6位の解法にもありましたが，今回のコンペでは，label_groupの長さが2以上であることから，「予測した結果のposting_idが1つしかない場合，強制的に似たものを持ってきて，2つにする」というアイデアでLBがかなり上がるみたい
 - ImageとTextをMulti-modal的にモデルに組み込んで学習することができていなかった
 - グラフ理論全然わかってないです笑
 - 細かい部分
-    - optimizerの変更（SAMとか）
-    - DBA / QE
+    - 他のoptimizerを試す
+        - SAMとか
+    - Database-side feature augmentation (DBA) / Query Extension (QE)
+        - 全然知らなかったので，[End-to-end Learning of Deep Visual Representations for Image Retrieval](https://arxiv.org/pdf/1610.07940.pdf)を読んで勉強したい
     - 閾値の調整
     - テキストモデルの追加
 
@@ -118,7 +121,7 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 
 ### Model
 - Image: 2つのモデル
-    - `eca_nfnet_l1s` * 2
+    - `eca_nfnet_l1` * 2
 - Text: 5つのモデル
     - `xlm-roberta-large`
     - `xlm-roberta-base`
@@ -153,10 +156,42 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 ![Features](../../img/kaggle-shopee-comb_match.png "comb match")
 
 - Iterative Neighborhood Blending (INB)
-    - QE/DBAとは少し異なる，embeddingからマッチするプロダクトを検索するパイプラインを作った
-    - 近隣探索ラリブラリ: [faiss](https://github.com/facebookresearch/faiss)
-    - コサイン類似度をコサイン距離(=1-コサイン類似度)に変換し，distance<thresholdを満たすペアを取得した
+    - QE/DBAとは少し異なる，embeddingからマッチする商品を検索するパイプラインを作った
+    - k-Nearest Neighbor Search:
+        - 近隣探索ラリブラリ: [faiss](https://github.com/facebookresearch/faiss) (k=51: 50(自身以外)) + 1(自身))
+    - Threshold:
+        - コサイン類似度をコサイン距離(=1-コサイン類似度)に変換し，distance<thresholdを満たす(matches, distances)のペアを取得した
+        - 閾値処理を行う場合，1つのクエリに対して少なくとも2つ以上のマッチがあることがコンペで保証されているので，distanceがmin2-thresholdを超えた場合にのみ，二番目に近いマッチを除外する
+    - Neighborhood Blending:
+        - kNNによるサーチとmin2による閾値処理をした後，各アイテムの`(matches, similarities)`ペアを取得し，グラフを作成する
+            - 各ノードはアイテム，エッジの重みは2つのノード間の類似性を示す
+            - 近傍のみが繋がっており，閾値条件とmin2条件を満たさないノードは切断される
+        - 近傍のアイテムの情報を使いたいので，クエリアイテムのembeddingを改良し，よりクラスタを明確にする
+            - 重みとして類似性を持つ近傍のembeddingを加重合計し，それをクエリembeddingに追加する
+    ![Neighborhood Blending](../../img/kaggle-shopee-NB.png "neighborhood blending")
+        - 上図を簡単に説明すると，最初Aは[B,C,D]と繋がっているが，加重合計した結果閾値=0.5の場合，Cとの接続が切れて，Aは[B,D]のみと接続していることがわかる
+        - このNBの処理を評価指標の改善が止まるまで繰り返し実行する
+        - 最終的なNBのパイプラインは以下になる
+    ![Neighborhood Blending pipeline](../../img/kaggle-shopee-NB_pipeline.png "neighborhood blending pipeline")
+    - About Threhsold Tuning:
+        - 調整する閾値は全部で10種類ある
+            - stage1のtext, image, combinationの閾値が3つ
+            - stage2の閾値が1つ
+            - stage3の閾値が1つ
+            - 直接最終結合部分に繋がるstage1のtext, imageの閾値が2つ
+            - stage1~3のmin2閾値が3つ
+        - 最終的にはstage2,3の閾値を2つ調整するだけでよかった
+- Visualizations of Embeddings before/after INB
+    - INBの効果を可視化したノートブックが公開されている
+        - [(SHOPEE) Embedding Visualizations before/after INB](https://www.kaggle.com/harangdev/shopee-embedding-visualizations-before-after-inb)
+        - 見るからに各点が凝集されたクラスタを形成していることがわかる
 
+### Others
+- 画像に対するCutMix(p=0.1)
+- 画像のaugmentation
+    - horizontal flipのみがよかった
+- madgrad optimizer: https://github.com/facebookresearch/madgrad
+- 学習データ全体を使った学習
 
 ## 2nd Place Solution
 解法はこちらになります: [2nd place solution (matching prediction by GAT & LGB)](https://www.kaggle.com/c/shopee-product-matching/discussion/238022), [2nd Place Solution Code](https://www.kaggle.com/c/shopee-product-matching/discussion/238362)
@@ -174,10 +209,10 @@ textの方のモデルは特に改良する時間が取れなかったので，�
     - optimizer: SAM
     - embeddingの結合: `F.normalize(torch.cat([F.normalize(emb1), F.normalize(emb2)], axis=1))`
 - text: 3つのモデル + TF-IDF
-    - `Indonesian-BERT`
-    - `Multilingual-BERT`
-    - `Paraphrase-XLM`
-- image+text: `NFNet-F0`と`Indonesian BERT`のFC層のembeddingを結合したもの
+    - `indonesian-bert`
+    - `multilingual-bert`
+    - `paraphrase-xlm`
+- image+text: `nfnet-F0`と`indonesian-bert`のFC層のembeddingを結合したもの
 - Training Tips:
     - label groupのサイズに基づいたSample Weighting
         - 1 / (label group size) ** 0.4
@@ -189,7 +224,7 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 - 標準化（mean=0, std=1）
 - Pagerank
 
-#### その他
+#### Others
 - テキストの長さ
 - #の記号
 - Levenshtein距離
@@ -206,10 +241,10 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 - お互いにエッジを持たないペアを削除する
     - A-Bはあるが，B-Aがない場合は両方を削除する
 
-### Post-processing
+### Post-Processing
 - 中間中心性が最も高いエッジを再帰的に削除する（Graph-Based）
 
-### その他
+### Others
 - Performance and Memory Tunings
     - CuDF, cupy, cugraph: GPUを有効に使うためには大事
     - ForestInference: 40分かかるCPUでの推論が2分になる
@@ -218,6 +253,51 @@ textの方のモデルは特に改良する時間が取れなかったので，�
     - 固有ベクトルの中心性とjaccard
     - End-to-end model
     - Local feature matching
+
+## 3rd Place Solution
+解法はこちらになります: [3rd Place Solution (Triplet loss, Boosting, Clustering)](https://www.kaggle.com/c/shopee-product-matching/discussion/238515)
+
+### Model
+- image: 2つのモデル
+    - backbone
+        - `efficientnet_b2`
+        - `ViT (DINO)`
+- text: 2つのモデル (異なるtokenizersとCLIP)
+    - `indonesian-bert`
+    - `multilingual-bert`
+- common
+    - loss: TripletLoss (margin=0.1)
+    - 各エポック，label_groupsから重複したペアを作成し，各バッチでlabel_groupsから1ペアが挿入される．バッチサイズは128を使っていたため，バッチ毎に64の重複を取得し，ランダムな5点でそれらの各々を比較する
+    - 5fold CVで，validationスコアを計算する時は，validation-foldの中から候補を選ぶのではなく，学習サンプル全体から候補を探した
+        - この方法はCV/LBのgapを抑えて，相関を取ることが出来る
+        - oofを用意して，2nd-levelの予測に使用する
+        - CVから得られた5つのモデルで，テストデータに対して推論を行った
+        - より速く推論するためには，validationなしの1つのモデルでテストデータにfitさせること
+    - ArcFaceは上手くいかなかった
+
+### Features
+- 複数モデルを用いて，異なる表現方法を作成するのが良い
+- 全てのembeddingsから候補となる近しいものを結合し，ペアが実際に重複しているかどうかにかかわらず、binary targetを使用してペアオブジェクトのサンプルを作成する
+    - 3M点のペアがあり，重複率は4%だった
+- これらに対して，GBM(=CatBoost)を作成し，embedding毎に計算する
+    - pairwise-distances (コサイン類似度，ユークリッド距離など)
+    - 両方の点周辺の密度
+    - points ranks
+- 最終的には500個特徴量を作成し，CVやLBを使いながら，重複確率による閾値の候補を出す -> LB:0.76+
+
+### Post-Processing
+- クラスタリングを行ったが，embeddingsを使うのではなく，pairwise-distanceを使う
+- 重複推定のためにGBM(=CatBoost)の確率を使い，類似度を求める
+- 凝集クラスタリングのアイデアを採用
+    - 各単一点をクラスタとして開始し，平均的なクラスタサイズが閾値に等しくなるまでそれらをマージしていく
+    - クラスタが単一の場合，最も近傍のクラスタにマージする -> LB:0.79
+
+### Others
+- 最適化するために
+    - `half precision(torch AMP)`を使って学習と推論を行った
+    - 画像モデルの場合，画像の読み込みとリサイズに`NVIDIA DALI`を使った
+    - GBMの推論には，Rapids ForestInference Libraryを使った
+- 上記の方法を使わないと，2時間で全てのモデルを推論することは不可能だった
 
 ## 4th Place Solution
 解法はこちらになります: [4th Place Solution](https://www.kaggle.com/c/shopee-product-matching/discussion/238295)
@@ -240,7 +320,7 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 - これらのベクトル表現のそれぞれに対して，pairwiseコサイン類似度を計算し，3つの行列を作成した
     - 最初に二乗し，その後加重平均を取って行列を結合した
 
-### Post-processing
+### Post-Processing
 - 閾値の調整
 - Rank2 matching
     - もし，AがRank2にBを持っており，BはRank2にAを持っている場合，お互いに追加する
@@ -249,12 +329,9 @@ textの方のモデルは特に改良する時間が取れなかったので，�
 - Query Expansion
 - マッチしていない行との再マッチング
 
-## 5th Place Solution
-解法はこちらになります: [5th Place Solution](https://www.kaggle.com/c/shopee-product-matching/discussion/238078)
-
-
-
 ## その他上位解法のリンク
+- [Kaggle ShopeeコンペPrivate LB待機枠＆プチ反省会](https://youtu.be/vtI8P-ttPrk)
+- [5th Place Solution](https://www.kaggle.com/c/shopee-product-matching/discussion/238078)
 - [6th place solution](https://www.kaggle.com/c/shopee-product-matching/discussion/238010)
 - [7th place solution](https://www.kaggle.com/c/shopee-product-matching/discussion/238174)
 - [8th Place Solution Overview](https://www.kaggle.com/c/shopee-product-matching/discussion/238125)
