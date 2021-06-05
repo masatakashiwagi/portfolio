@@ -10,27 +10,30 @@ tags = ["profile"]
 
 I'm **_Masataka Kashiwagi_**.
 
-Now, I'm working as a Data Scientist / Machine Learning Engineer at Brains Technology, Inc, providing machine learning solutions for the manufacturing industry.
+Now, I'm working as Machine Learning Engineer at Connehito, Inc.
 
-I am involved in data analysis of improvement activities in the manufacturing industry and development of own products.
+I am involved in data analysis of improvement activities and using machine learning for own services.
 
 I'm interested in multimodal learning, applying computer vision in manufacturing industry, and in consumer behavior model in marketing industry.
 
 I obtained a master's degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations. After graduate school, I got a job with a major telecommunications carrier. I was working as a Solution Engineer which was familiar with marketing automation tools in Digital Marketing. Now, I'm working as a Data Scientist to solve manufacturing challenges.
 
 #### In Japanese
-東京のITベンチャー企業でデータサイエンティスト&機械学習エンジニアとして働いています．   
+東京のITベンチャー企業で機械学習エンジニアとして働いています．   
 
-現職での仕事内容は大きく2つあり
-1. 開発: 自社製品のFW開発をしたり，製品の機械学習部分を担当しています．
-2. 分析: PoCなどのデータ分析案件をお客さんと一緒に推進したり，機械学習に関するトレーニングなども担当しています．
+現職での仕事内容は
+- 社内にあるデータを活用して，サービスグロースすること．
+- 機械学習を活用して，より良いユーザー体験を生み出すこと．
 
 個人的に最近興味があるのは，様々な外的要因や内的要因がある場合における人間の行動モデルや行動経済学などです．  
 あとはマルチモーダル学習であったり，どうゆう場面でどうゆうモーダルがあれば一番良いのかなどに興味があります．
 
 ***
 ## **Work Experience**
-[Mar. 2018 - present]  
+[June. 2021 - present]  
+Machine Learning Engineer, Connehito, Inc.
+
+[Mar. 2018 - May. 2021]  
 Data Scientist / Machine Learning Engineer, Brains Technology, Inc.
 
 [Apr. 2016 - Feb. 2018]  
@@ -78,7 +81,8 @@ Department of Physical Science, Osaka Prefecture University
 
 ### Double-M2ML
 * [Double-M2.fm](https://github.com/double-m2ml/podcast.fm "Double-M2.fm")
-  - 友人とのpodcastチャンネル
+  - Podcast channel.
+    - One of the technological outputs.
 
 ***
 ## **Blog**
