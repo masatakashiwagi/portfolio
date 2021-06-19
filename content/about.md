@@ -14,7 +14,11 @@ Now, I'm working as Machine Learning Engineer at Connehito, Inc.
 
 I am involved in data analysis of improvement activities and using machine learning for own services.
 
-I'm interested in multimodal learning, applying computer vision in manufacturing industry, and in consumer behavior model in marketing industry.
+Development of Machine Learning Systems for service growth.
+- Utilizing internal data to grow services.
+- Utilize machine learning to create a better user experience.
+
+I'm interested in multimodal learning and in consumer behavior model in life events.
 
 I obtained a master's degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations. After graduate school, I got a job with a major telecommunications carrier. I was working as a Solution Engineer which was familiar with marketing automation tools in Digital Marketing. Now, I'm working as a Data Scientist to solve manufacturing challenges.
 
