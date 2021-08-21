@@ -29,18 +29,21 @@
                     <p>大阪府出身で現在は東京都在住です．趣味は旅行&#x1f30f;に行ったり（一人の時はバックパッカーで旅行してました），Progressive House&#x1f3a7;を聞いたり（昔はPCDJでMix作ったりしてました）です．あとコーヒー&#x2615;が好きです．</p>
 
                     <h3>Articles</h3>
-                    <dl class="entry-list">
+                    <dl class="post-content">
                         {{ range first 3 (where .Site.RegularPages "Type" "in" .Site.Params.mainSections)}}
                         <dt>
-                        <span class="date">
-                            {{ .Date.Format "2006-01-02" }}
-                        </span>
+                            <span class="date">
+                                {{ .Date.Format "2006-01-02" }}
+                            </span>
                         </dt>
                         <dd>
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </dd>
                     {{ end }}
-                    <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
+                    </dl>
+                    <p>
+                        <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
+                    </p>
                 </div>
 
             </div>
