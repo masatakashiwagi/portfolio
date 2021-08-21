@@ -5,7 +5,7 @@ date = 2021-06-01T17:00:00+09:00
 showLicense = false
 showToc = false
 author = "Masataka Kashiwagi"
-tags = ["diary"]
+tags = []
 +++
 
 I'm **_Masataka Kashiwagi_**.
