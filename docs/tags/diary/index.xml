@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>profile on Fractal Prologue</title>
-    <link>https://masatakashiwagi.github.io/portfolio/tags/profile/</link>
-    <description>Recent content in profile on Fractal Prologue</description>
+    <title>diary on Fractal Prologue</title>
+    <link>https://masatakashiwagi.github.io/portfolio/tags/diary/</link>
+    <description>Recent content in diary on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Jun 2021 17:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/profile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 17:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/diary/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About me</title>
       <link>https://masatakashiwagi.github.io/portfolio/about/</link>

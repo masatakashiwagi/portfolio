@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+<head>
+    {{ partial "head.html" . }}
+</head>
+
+<body data-theme="auto">
+    {{ partial "scripts-front.html" . }}
+    {{ partial "header.html" . }}
+
+    <main>
+        <div class="container-lg clearfix">
+            <!-- list -->
+            <div class="col-12 col-md-9 float-left content">
+                <div class="post-content markdown-body">
+                    <h3>Hello there! I'm Masataka Kashiwagi &#x1f44b;</h3>
+                    <p>今は，コネヒトで機械学習エンジニアとして，レコメンドエンジンの開発やMLOpsの仕組み作りなどを担当しています．データ分析・機械学習を活用して，より良いユーザー体験を生み出したり，サービスをグロースすることに力を入れています．</p>
+                    <p>
+                        <i class="fab fa-twitter"></i>&nbsp;&nbsp;My daily tweets < <a href="https://twitter.com/asteriam_fp" target="_blank" rel="noopener"><b>asteriam_fp@Twitter</b></a><br />
+                        <i class="fab fa-github"></i>&nbsp;&nbsp;My development history < <a href="https://github.com/masatakashiwagi" target="_blank" rel="noopener"><b>masatakashiwagi@Github</b></a><br />
+                        <i class="fab fa-linkedin"></i>&nbsp;&nbsp;My carrier summary < <a href="https://www.linkedin.com/in/masatakakashiwagi/" target="_blank" rel="noopener"><b>masatakakashiwagi@Linkedin</b></a><br />
+                        <i class="fab fa-kaggle"></i>&nbsp;&nbsp;My data science skills < <a href="https://www.kaggle.com/masatakashiwagi" target="_blank" rel="noopener"><b>masatakakashiwagi@Kaggle</b></a><br />
+                        <i class="fas fa-book"></i>&nbsp;&nbsp;My occasional poems < <a href="https://note.com/asteriam" target="_blank" rel="noopener"><b>asteriam@note</b></a><br />
+                    </p>
+
+                    <p>大阪府出身で現在は東京都在住です．趣味は旅行&#x1f30f;に行ったり（一人の時はバックパッカーで旅行してました），Progressive House&#x1f3a7;を聞いたり（昔はPCDJでMix作ったりしてました）です．あとコーヒー&#x2615;が好きです．</p>
+
+                    <h3>Articles</h3>
+                    <dl class="entry-list">
+                        {{ range first 3 (where .Site.RegularPages "Type" "in" .Site.Params.mainSections)}}
+                        <dt>
+                        <span class="date">
+                            {{ .Date.Format "2006-01-02" }}
+                        </span>
+                        </dt>
+                        <dd>
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </dd>
+                    {{ end }}
+                    <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
+                </div>
+
+            </div>
+            {{ partial "sidebar.html" . }}
+        </div>
+        {{ partial "components.html" . }}
+    </main>
+
+    {{ partial "footer.html" . }}
+    {{ partial "scripts-end.html" . }}
+</body>
+
+</html>

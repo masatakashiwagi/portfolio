@@ -3,17 +3,12 @@ author = "Masataka Kashiwagi"
 title = "VSCodeとgitを連携してpushできるようにするまで"
 date = 2021-03-26T22:18:34+09:00
 description = "VSCodeとgitの連携"
-tags = [
-    "python",
-    "tips",
-    "git",
-    "vscode"
-]
+tags = ["dev"]
 showLicense = false
 +++
 
 ## はじめに
-今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使ってみようと思って使っています．  
+今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使ってみようと思って使っています．
 そんな中で，タイトルにもあるようにVSCodeからgit pushしようとしたら，`<アカウント名>@github.com: Permission denied (publickey).`とエラーが出たので，それを解消してVSCodeでgit pushできるようにした備忘録になります．
 
 ## エラー原因（SSH接続エラー）
@@ -64,7 +59,7 @@ cd ~/.ssh
 ssh-add -K github_rsa  # 秘密鍵をssh-agentデーモンに登録
 pbcopy < github_rsa.pub  # pbcopyコマンドで公開鍵の中身をクリップボードにコピー
 ```
-この後は，コピーした公開鍵の中身をGithubに登録します．  
+この後は，コピーした公開鍵の中身をGithubに登録します．
 
 GithubのアカウントからSettingsに進み，SSH and GPG keysを選択し，New SSH keyを押して，先程コピーした中身をペーストし，名前を決めて保存します．
 
@@ -76,7 +71,7 @@ ssh -T git@github.com
 ```
 
 ## Remote設定の上書き
-ここまで来たら後一息で，最後にremoteの設定を上書きします．  
+ここまで来たら後一息で，最後にremoteの設定を上書きします．
 以下のような感じでリポジトリ名を書いて，実行すればOK．
 ```bash
 git remote set-url origin git@github.com:<ユーザー名>/<リポジトリ名>.git

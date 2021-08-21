@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.79.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 
 
@@ -32,15 +32,15 @@
 <meta name="description" content="Hugoで簡単にポートフォリオを作成したので，その備忘録" />
 
 
-<meta name="keywords" content="portfolio, tips" />
+<meta name="keywords" content="dev" />
 
 <meta property="og:title" content="Hugoを使ったポートフォリオ作成" />
 <meta property="og:description" content="Hugoで簡単にポートフォリオを作成したので，その備忘録" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/" />
-<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-07-13T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-07-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-13T00:00:00+00:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
@@ -127,21 +127,21 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/">Hugoを使ったポートフォリオ作成</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-07-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2029 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/portfolio">portfolio</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-07-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2029 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="ポートフォリオ作成">ポートフォリオ作成</h2>
-<p><a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3" target="_blank">こちら</a>のQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました．<br>
+<p><a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3" target="_blank">こちら</a>のQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました．
 移植した際に少し詰まった部分があるので，Tipsとしてこの記事で紹介します．</p>
 <p><u><strong>この記事は以前に使用していたHugo Themeの内容になります</strong></u></p>
-<p>最初は<a href="https://github.com/nodejh/hugo-theme-cactus-plus" target="_blank">Hugo Theme Cactus Plus</a>というテーマで作成していたのですが，再度作り直してます．<br>
-（再作成した理由は，少しだけ凝ったテーマを使って見たくなったためです笑）<br>
+<p>最初は<a href="https://github.com/nodejh/hugo-theme-cactus-plus" target="_blank">Hugo Theme Cactus Plus</a>というテーマで作成していたのですが，再度作り直してます．
+（再作成した理由は，少しだけ凝ったテーマを使って見たくなったためです笑）
 作り直したテーマは<a href="https://github.com/pacollins/hugo-future-imperfect-slim" target="_blank">Hugo Future Imperfect Slim</a>になります．</p>
 <p>Hugoはシンプルなデザインが多いので非常にオススメです．</p>
-<p>基本的な構築方法は上記Qiitaの記事に沿って行っています．<br>
+<p>基本的な構築方法は上記Qiitaの記事に沿って行っています．
 別途追加した要素としては，最初に作成したHugo Theme Cactus Plusと作り直したHugo Future Imperfect Slimそれぞれありますので，この際どちらも紹介します．</p>
 <ul>
 <li>
@@ -162,11 +162,11 @@
 <p>個人的には，1回目に作成したテーマより2回目の方が簡単でした．</p>
 <h3 id="hugo-theme-cactus-plus">Hugo Theme Cactus Plus:</h3>
 <h4 id="メニューの追加設定">メニューの追加設定</h4>
-<p>Hugo Theme Cactus Plusのテーマでは，デフォルトでAbout/Archive/Tagsの3つがメニューとして存在しています．<br>
-今回はそこにProjectsを新しく追加しましたので，その方法を記載します．<br>
+<p>Hugo Theme Cactus Plusのテーマでは，デフォルトでAbout/Archive/Tagsの3つがメニューとして存在しています．
+今回はそこにProjectsを新しく追加しましたので，その方法を記載します．
 実施することとしては，以下の4ステップになります．</p>
 <ol>
-<li><code>content</code>配下にprojectsディレクトリを作成し，<code>_index.md</code>ファイルを配置する．<br>
+<li><code>content</code>配下にprojectsディレクトリを作成し，<code>_index.md</code>ファイルを配置する．
 記事などのページ情報は<code>content</code>で管理します．</li>
 </ol>
 <pre><code class="language-bash">├── content
@@ -177,20 +177,20 @@
 </code></pre>
 <ol start="2">
 <li>
-<p><code>themes/layouts/partials</code>配下にある<code>nav.html</code>にProjectsのリンクを追記する．<br>
-これはTagsなどのリンクをコピーして，nameの部分はprojectsに修正すれば大丈夫です．<br>
+<p><code>themes/layouts/partials</code>配下にある<code>nav.html</code>にProjectsのリンクを追記する．
+これはTagsなどのリンクをコピーして，nameの部分はprojectsに修正すれば大丈夫です．
 メニューバーにProjectsを表示させるために，この部分を修正する必要があります．</p>
 </li>
 <li>
-<p><code>themes/layouts/section</code>配下に<code>about.html</code>をコピーして，<code>projects.html</code>にrenameする．<br>
+<p><code>themes/layouts/section</code>配下に<code>about.html</code>をコピーして，<code>projects.html</code>にrenameする．
 ここに追加することで，セクションのトップページとして扱われることになります．</p>
 </li>
 <li>
-<p>最後に，コマンドラインで<code>hugo</code>を実行する．<br>
+<p>最後に，コマンドラインで<code>hugo</code>を実行する．
 <code>hugo</code>コマンドを実行することで，必要なものが自動生成・反映されます．</p>
 </li>
 </ol>
-<p>以上でメニューを追加することができます．<br>
+<p>以上でメニューを追加することができます．
 （他のテーマでは，もう少し簡単にメニュー追加が可能なものもあります）</p>
 <h3 id="hugo-future-imperfect-slim">Hugo Future Imperfect Slim:</h3>
 <h4 id="faviconの設定">faviconの設定</h4>
@@ -212,7 +212,7 @@
 <p><code>config.toml</code>を修正したら，static配下に<code>favicon</code>ディレクトリを作成する．</p>
 </li>
 <li>
-<p><code>static/favicon</code>配下に<code>favicon.ico</code>と<code>favicon-32x32.png</code>を配置する．<br>
+<p><code>static/favicon</code>配下に<code>favicon.ico</code>と<code>favicon-32x32.png</code>を配置する．
 なぜfavicon-32x32かというと？</p>
 <ul>
 <li><code>layouts/partials/meta.html</code>の<code>rel=icon</code>に以下が記載されている
@@ -228,10 +228,10 @@
 </ol>
 <h3 id="hugo-future-imperfect-slim-1">Hugo Future Imperfect Slim:</h3>
 <h4 id="githubioでサイトをhostした場合のpath設定">github.ioでサイトをhostした場合のpath設定</h4>
-<p>今回作成したサイトをgithub.ioでhostした場合に発生した内容です．<br>
+<p>今回作成したサイトをgithub.ioでhostした場合に発生した内容です．
 各メニューのURLとして，<code>https://&lt;アカウント名&gt;.github.io/portfolio/home/</code>などとなって欲しいのですが，
 <code>https://&lt;アカウント名&gt;.github.io/portfolio/portfolio/home/</code>と<code>portfolio</code>が重なってしまうエラーが発生しました．</p>
-<p>上記エラーを回避する方法の紹介になります．<br>
+<p>上記エラーを回避する方法の紹介になります．
 <code>config.toml</code>ファイルに各メニューの設定をする箇所があります．</p>
 <pre><code class="language-yaml">[menu]
 
@@ -330,31 +330,19 @@
         <div>
             
             <span>
-                <a href="/portfolio/tags/git/">git</a>
+                <a href="/portfolio/tags/data-science/">data science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/diary/">diary</a>
             </span>
             
             <span>
                 <a href="/portfolio/tags/kaggle/">kaggle</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/portfolio/">portfolio</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/profile/">profile</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/python/">python</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/tips/">tips</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/vscode/">vscode</a>
             </span>
             
         </div>
@@ -453,31 +441,19 @@
         <div>
             
             <span>
-                <a href="/portfolio/tags/git/">git</a>
+                <a href="/portfolio/tags/data-science/">data science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/diary/">diary</a>
             </span>
             
             <span>
                 <a href="/portfolio/tags/kaggle/">kaggle</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/portfolio/">portfolio</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/profile/">profile</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/python/">python</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/tips/">tips</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/vscode/">vscode</a>
             </span>
             
         </div>

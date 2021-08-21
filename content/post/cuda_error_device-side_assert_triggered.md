@@ -3,9 +3,7 @@ author = "Masataka Kashiwagi"
 title = "CUDA error: Device-side assert triggeredの解決方法"
 date = 2021-02-01T16:14:09+09:00
 description = "CUDA error: Device-side assert triggeredの解決方法"
-tags = [
-    "tips",
-]
+tags = ["dev"]
 showLicense = false
 +++
 

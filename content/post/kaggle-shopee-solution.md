@@ -3,9 +3,7 @@ author = "Masataka Kashiwagi"
 title = "Kaggle-Shopeeコンペの振り返りとソリューション"
 date = 2021-05-14T15:44:00+09:00
 description = "コンペの振り返りとソリューション"
-tags = [
-    "kaggle",
-]
+tags = ["kaggle"]
 showLicense = false
 draft = false
 +++
@@ -69,7 +67,7 @@ draft = false
         - Adam
 
 #### 少し工夫したポイント
-- 画像特徴量を抽出する部分で，いくつか工夫した点をあげます．  
+- 画像特徴量を抽出する部分で，いくつか工夫した点をあげます．
     - [CNN Image Retrieval](http://cmp.felk.cvut.cz/cnnimageretrieval/)を参考にしました．
 1. lossに`ArcFace`と`CurricularFace`を用いた
     - ArcFaceを使っている人が多かったが，CurricularFaceも使いました．スコア的にはCurricularFaceの方がよかったです．

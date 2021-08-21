@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.79.0" />
+<meta name="generator" content="Hugo 0.87.0" />
 
 
 
@@ -32,15 +32,15 @@
 <meta name="description" content="VSCodeとgitの連携" />
 
 
-<meta name="keywords" content="python, tips, git, vscode" />
+<meta name="keywords" content="dev" />
 
 <meta property="og:title" content="VSCodeとgitを連携してpushできるようにするまで" />
 <meta property="og:description" content="VSCodeとgitの連携" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/" />
-<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-03-26T22:18:34+09:00" />
-<meta property="article:modified_time" content="2021-03-26T22:18:34+09:00" />
+<meta property="article:modified_time" content="2021-03-26T22:18:34+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
@@ -127,14 +127,14 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/">VSCodeとgitを連携してpushできるようにするまで</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1286 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/python">python</a>&nbsp;<a href="/portfolio/tags/tips">tips</a>&nbsp;<a href="/portfolio/tags/git">git</a>&nbsp;<a href="/portfolio/tags/vscode">vscode</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1286 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使ってみようと思って使っています．<br>
+<p>今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使ってみようと思って使っています．
 そんな中で，タイトルにもあるようにVSCodeからgit pushしようとしたら，<code>&lt;アカウント名&gt;@github.com: Permission denied (publickey).</code>とエラーが出たので，それを解消してVSCodeでgit pushできるようにした備忘録になります．</p>
 <h2 id="エラー原因ssh接続エラー">エラー原因（SSH接続エラー）</h2>
 <p><code>Permission denied (publickey)</code>とあり，GitHubにSSH接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．</p>
@@ -184,7 +184,7 @@ pbcopy &lt; github_rsa.pub  # pbcopyコマンドで公開鍵の中身をクリ�
 &gt;Hi &lt;ユーザー名&gt;! You've successfully authenticated, but GitHub does not provide shell access.
 </code></pre>
 <h2 id="remote設定の上書き">Remote設定の上書き</h2>
-<p>ここまで来たら後一息で，最後にremoteの設定を上書きします．<br>
+<p>ここまで来たら後一息で，最後にremoteの設定を上書きします．
 以下のような感じでリポジトリ名を書いて，実行すればOK．</p>
 <pre><code class="language-bash">git remote set-url origin git@github.com:&lt;ユーザー名&gt;/&lt;リポジトリ名&gt;.git
 </code></pre>
@@ -266,31 +266,19 @@ pbcopy &lt; github_rsa.pub  # pbcopyコマンドで公開鍵の中身をクリ�
         <div>
             
             <span>
-                <a href="/portfolio/tags/git/">git</a>
+                <a href="/portfolio/tags/data-science/">data science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/diary/">diary</a>
             </span>
             
             <span>
                 <a href="/portfolio/tags/kaggle/">kaggle</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/portfolio/">portfolio</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/profile/">profile</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/python/">python</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/tips/">tips</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/vscode/">vscode</a>
             </span>
             
         </div>
@@ -391,31 +379,19 @@ pbcopy &lt; github_rsa.pub  # pbcopyコマンドで公開鍵の中身をクリ�
         <div>
             
             <span>
-                <a href="/portfolio/tags/git/">git</a>
+                <a href="/portfolio/tags/data-science/">data science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/diary/">diary</a>
             </span>
             
             <span>
                 <a href="/portfolio/tags/kaggle/">kaggle</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/portfolio/">portfolio</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/profile/">profile</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/python/">python</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/tips/">tips</a>
-            </span>
-            
-            <span>
-                <a href="/portfolio/tags/vscode/">vscode</a>
             </span>
             
         </div>
