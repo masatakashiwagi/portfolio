@@ -5,6 +5,7 @@ date = 2021-03-26T22:18:34+09:00
 description = "VSCodeとgitの連携"
 tags = ["dev"]
 showLicense = false
+share = true
 +++
 
 ## はじめに

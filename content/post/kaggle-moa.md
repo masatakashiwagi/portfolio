@@ -5,6 +5,7 @@ date = 2020-12-11T23:13:30+09:00
 description = "Kaggle MoAに参加したので，その振り返り"
 tags = ["kaggle"]
 showLicense = false
+share = true
 +++
 
 ## Kaggle MoAにTeam 90'sで初参加

@@ -5,6 +5,7 @@ date = 2021-02-01T16:14:09+09:00
 description = "CUDA error: Device-side assert triggeredの解決方法"
 tags = ["dev"]
 showLicense = false
+share = true
 +++
 
 ## RuntimeError: CUDA error: device-side assert triggeredの解決方法

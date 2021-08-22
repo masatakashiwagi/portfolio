@@ -6,6 +6,7 @@ description = "コンペの振り返りとソリューション"
 tags = ["kaggle"]
 showLicense = false
 draft = false
+share = true
 +++
 
 ## Kaggle-Shopeeコンペの振り返り

@@ -5,7 +5,7 @@ date = "2020-09-12"
 description = "リストを複製して作成し，それを更新したい場合"
 tags = ["dev"]
 showLicense = false
-
+share = true
 +++
 
 ## 初期化したリストの更新処理でハマってしまった

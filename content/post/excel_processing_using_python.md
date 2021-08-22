@@ -5,6 +5,7 @@ date = 2019-10-05T15:16:44+09:00
 description = "EBWを処理するために"
 tags = ["data science"]
 showLicense = false
+share = true
 +++
 
 ## はじめに

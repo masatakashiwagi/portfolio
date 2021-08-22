@@ -2,7 +2,6 @@
 <html lang="{{ .Site.Language.Lang }}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-
 <head>
     {{ partial "head.html" . }}
 </head>
@@ -26,7 +25,12 @@
                         <i class="fas fa-book"></i>&nbsp;&nbsp;My occasional poems < <a href="https://note.com/asteriam" target="_blank" rel="noopener"><b>asteriam@note</b></a><br />
                     </p>
 
-                    <p>大阪府出身で現在は東京都在住です．趣味は旅行&#x1f30f;に行ったり（一人の時はバックパッカーで旅行してました），Progressive House&#x1f3a7;を聞いたり（昔はPCDJでMix作ったりしてました）です．あとコーヒー&#x2615;が好きです．</p>
+                    <p>
+                        <li>出身地: 大阪府</li>
+                        <li>趣味: 旅行&#x1f30f; & 音楽&#x1f3a7; & コーヒー&#x2615;</li>
+                    </p>
+
+                    <p>旅行は単身の時に，バックパッカーとして年に数回休暇取って海外に行ってました．他には，Progressive Houseというジャンルの曲を聞くのが好きで，大学の時から彼此10年以上メインで聞いてます．昔はPCDJでMixを作ったりして公開していました．あと最近では友人と毎週Podcastを配信したりもしています．<br>妻の影響で沖縄&#x1f33a;のことが食べ物や環境など含めて好きになり，将来は住みたいなと思ったりもしています．</p>
 
                     <h3>Articles</h3>
                     <dl class="post-content">
@@ -40,18 +44,16 @@
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </dd>
                     {{ end }}
+                        <p>
+                            <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
+                        </p>
                     </dl>
-                    <p>
-                        <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
-                    </p>
                 </div>
-
             </div>
             {{ partial "sidebar.html" . }}
         </div>
         {{ partial "components.html" . }}
     </main>
-
     {{ partial "footer.html" . }}
     {{ partial "scripts-end.html" . }}
 </body>

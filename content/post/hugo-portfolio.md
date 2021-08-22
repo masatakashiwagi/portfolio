@@ -5,6 +5,7 @@ date = "2020-07-13"
 description = "Hugoで簡単にポートフォリオを作成したので，その備忘録"
 tags = ["dev"]
 showLicense = false
+share = true
 +++
 
 ## ポートフォリオ作成
