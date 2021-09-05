@@ -39,7 +39,7 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
   title = "Fractal Prologue"
   subTitle = "徒然なるままに...データと遊ぶ"
   description = "Masataka Kashiwagi, a machine learning at Connehito, Inc."
-  keywords = "Masataka Kashiwagi,asteriam,Machine Learning,機械学習,Data Science,データサイエンス"
+  keywords = "Masataka Kashiwagi,asteriam,Machine Learning,機械学習,Data Science,データサイエンス,MLOps"
 
   # Source URL of the website, will appear in the footer
   sourceURL = "https://github.com/masatakashiwagi/portfolio/"
@@ -70,7 +70,7 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
 
   # Open Graph & Twitter Card variables
   # You can also set description and images in post front matter individually
-  description = "my biography."
+  # description = "my biography."
   images = ["img/avatar.png"] # This will use the image called og.png in static/img folder
 
   # Posts shown in homepage
