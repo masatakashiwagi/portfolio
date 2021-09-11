@@ -8,7 +8,7 @@ showLicense = false
 share = true
 +++
 
-## Kaggle MoAにTeam 90'sで初参加
+## Kaggle-MoAコンペにTeam 90'sで初参加
 このブログは2020/9/4~12/1まで開催していた[MoAコンペ](https://www.kaggle.com/c/lish-moa)での取り組みを紹介する内容です．
 （コンペの詳細な内容については割愛します）
 

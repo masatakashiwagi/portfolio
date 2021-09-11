@@ -20,17 +20,12 @@ Development of Machine Learning Systems for service growth.
 
 I'm interested in multimodal learning and in consumer behavior model in life events.
 
-I obtained a master's degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations. After graduate school, I got a job with a major telecommunications carrier. I was working as a Solution Engineer which was familiar with marketing automation tools in Digital Marketing. Now, I'm working as a Data Scientist to solve manufacturing challenges.
-
-#### In Japanese
-東京のITベンチャー企業で機械学習エンジニアとして働いています．
-
-現職での仕事内容は
-- 社内にあるデータを活用して，サービスグロースすること．
-- 機械学習を活用して，より良いユーザー体験を生み出すこと．
-
-個人的に最近興味があるのは，様々な外的要因や内的要因がある場合における人間の行動モデルや行動経済学などです．
-他にはマルチモーダル学習にも興味があり，どういった場面でどのようなモーダルがあれば一番良いのかなどに興味があります．
+<br>
+I obtained a master's degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations.<br>
+After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.<br>
+After that, I was working as Data Scientist and Machine Learning Engineer in software company.
+I have been involved in more than 20 data science projects to solve problems and provide support mainly for clients in the manufacturing industry, focusing on anomaly detection and its factor analysis. I have also been involved in the development of machine learning algorithms for our products.<br>
+Now, I'm working as Machine Learning Engineer in Web services company that focuses on families.
 
 ***
 ## **Work Experience**

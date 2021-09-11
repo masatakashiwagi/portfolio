@@ -18,19 +18,26 @@
                     <h3>Hello there! I'm Masataka Kashiwagi &#x1f44b;</h3>
                     <p>今は，コネヒトで機械学習エンジニアとして，レコメンドエンジンの開発やMLOpsの仕組み作りなどを担当しています．データ分析・機械学習を活用して，より良いユーザー体験を生み出したり，サービスをグロースすることに力を入れています．</p>
                     <p>
-                        <i class="fab fa-twitter"></i>&nbsp;&nbsp;Daily Tweet < <a href="https://twitter.com/asteriam_fp" target="_blank" rel="noopener"><b>asteriam_fp@Twitter</b></a><br />
-                        <i class="fab fa-github"></i>&nbsp;&nbsp;Development History < <a href="https://github.com/masatakashiwagi" target="_blank" rel="noopener"><b>masatakashiwagi@Github</b></a><br />
-                        <i class="fab fa-linkedin"></i>&nbsp;&nbsp;Carrier Summary < <a href="https://www.linkedin.com/in/masatakakashiwagi/" target="_blank" rel="noopener"><b>masatakakashiwagi@Linkedin</b></a><br />
-                        <i class="fab fa-kaggle"></i>&nbsp;&nbsp;Data Science Skills < <a href="https://www.kaggle.com/masatakashiwagi" target="_blank" rel="noopener"><b>masatakakashiwagi@Kaggle</b></a><br />
-                        <i class="fas fa-book"></i>&nbsp;&nbsp;Occasional Poem < <a href="https://note.com/asteriam" target="_blank" rel="noopener"><b>asteriam@note</b></a><br />
+                        <i class="fab fa-twitter"></i>&nbsp;&nbsp;Daily Tweet < <a href="https://twitter.com/asteriam_fp" target="_blank" rel="noopener" class="top-page-link"><b>asteriam_fp@Twitter</b></a><br />
+                        <i class="fab fa-github"></i>&nbsp;&nbsp;Development History < <a href="https://github.com/masatakashiwagi" target="_blank" rel="noopener" class="top-page-link"><b>masatakashiwagi@Github</b></a><br />
+                        <i class="fab fa-linkedin"></i>&nbsp;&nbsp;Carrier Summary < <a href="https://www.linkedin.com/in/masatakakashiwagi/" target="_blank" rel="noopener" class="top-page-link"><b>masatakakashiwagi@Linkedin</b></a><br />
+                        <i class="fab fa-kaggle"></i>&nbsp;&nbsp;Data Science Skills < <a href="https://www.kaggle.com/masatakashiwagi" target="_blank" rel="noopener" class="top-page-link"><b>masatakakashiwagi@Kaggle</b></a><br />
+                        <i class="fas fa-book"></i>&nbsp;&nbsp;Occasional Poem < <a href="https://note.com/asteriam" target="_blank" rel="noopener" class="top-page-link"><b>asteriam@note</b></a><br />
                     </p>
 
                     <p>
                         <li>出身地: 大阪府</li>
-                        <li>趣味: 旅行&#x1f30f; & 音楽&#x1f3a7; & コーヒー&#x2615;</li>
+                        <li>趣味: 旅行&#x1f30f; &nbsp;& 音楽&#x1f3a7; &nbsp;& コーヒー&#x2615;</li>
                     </p>
 
                     <p>旅行は単身の時に，バックパッカーとして年に数回休暇を取って海外に行ってました．近くというのもあって，アジアに行くことが多く，成長途中の国に居る人の熱気や勢い，雰囲気などが好きで行っていました．他には，Progressive Houseというジャンルの曲を聞くのが好きで，大学の時から彼此10年以上メインで聞いてます．昔はPCDJでMixを作って公開していました．また最近は友人と毎週Podcastを配信したりもしています．それ以外では，妻の影響で沖縄&#x1f33a;の食べ物や環境が好きになり，将来は住みたいなと思ったりもしています．</p>
+
+                    <h3>Work Experience Summary</h3>
+                    <p>
+                        <li>デジタルマーケティング支援を行う会社にて，マーケティングオートメーションの基盤構築を行うソリューションエンジニア</li>
+                        <li>製造業向けに異常検知ソリューションを提供する会社にて，自社製品の開発とPoCなどの受託分析を行う機械学習エンジニア</li>
+                        <li>Q&Aサービスを提供する事業会社にて，データの活用という観点から自社サービスのグロースを行う機械学習エンジニア</li>
+                    </p>
 
                     <h3>Articles</h3>
                     <dl class="post-content">
@@ -41,11 +48,12 @@
                             </span>
                         </dt>
                         <dd>
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                            <a href="{{ .Permalink }}" class="top-page-link"><b>{{ .Title }}</b></a>
                         </dd>
                     {{ end }}
                         <p>
-                            <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a>
+                            <!-- <a href="{{.Site.Params.baseURL}}post/" class="_btn"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;他の記事を読む</a> -->
+                            <a href="{{.Site.Params.baseURL}}post/" class="btn-article btn-radius-solid">他の記事を読む&nbsp;&nbsp;<i class="fas fa-angle-right fa-position-right"></i></a>
                         </p>
                     </dl>
                 </div>

@@ -106,6 +106,9 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
   # Let images display in full brightness under dark mode
   # disableDarkImage = true
 
+  # custom CSS
+  customCSS = ["css/custom.css"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
