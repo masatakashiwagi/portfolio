@@ -51,10 +51,6 @@ a.btn-radius-solid:hover {
     background: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
 }
 
-a.top-page-link {
-    color: #252525;
-}
-
 header {
     background-image: url(../img/header_image.jpg);
     background-size: cover;
@@ -76,8 +72,4 @@ body .markdown-body strong{
 
 span.date {
     color: #c1c1c1;
-}
-
-b strong{
-    color: #252525;
 }
