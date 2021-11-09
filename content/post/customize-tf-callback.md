@@ -22,7 +22,7 @@ Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．
 今回はSageMaker Experimentsで使うことを想定したものになります．Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合）
 
 ```python
-smexperiments.experiment.Estimator(
+sagemaker.estimator.Estimator(
     ...,
     metric_definitions={
         {'Name': 'Train Loss', 'Regex': 'train_loss: (.*?);'},

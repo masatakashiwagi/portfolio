@@ -143,7 +143,7 @@
 <h2 id="callback関数のカスタマイズ">Callback関数のカスタマイズ</h2>
 <p>Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code>クラスを継承した<code>CustomCallBack(tf.keras.callbacks.Callback)</code>クラスを作成します．この作成したクラスを<code>model.fit</code>時に引数のcallbacksに渡してやることで使用することができます．</p>
 <p>今回はSageMaker Experimentsで使うことを想定したものになります．Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合）</p>
-<pre><code class="language-python">smexperiments.experiment.Estimator(
+<pre><code class="language-python">sagemaker.estimator.Estimator(
     ...,
     metric_definitions={
         {'Name': 'Train Loss', 'Regex': 'train_loss: (.*?);'},
