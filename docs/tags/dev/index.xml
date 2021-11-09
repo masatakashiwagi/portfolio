@@ -6,7 +6,16 @@
     <description>Recent content in dev on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 26 Mar 2021 22:18:34 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2021 00:14:33 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TensorflowのCallback関数をカスタマイズ</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
+      <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
+      <description>はじめに AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行えるEstimatorというSageMakerのinte</description>
+    </item>
+    
     <item>
       <title>VSCodeとgitを連携してpushできるようにするまで</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</link>
@@ -17,12 +26,12 @@
     </item>
     
     <item>
-      <title>CUDA error: Device-side assert triggeredの解決方法</title>
+      <title>RuntimeError: CUDA error: Device-side assert triggeredの解決方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</link>
       <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</guid>
-      <description>RuntimeError: CUDA error: device-side assert triggeredの解決方法 Pytorchでモデルを作成していた際に，RuntimeError: CUDA error: device-side assert triggeredが発生して，原因がよくわからなかったので，調べたことをメモしておきま</description>
+      <description>はじめに Pytorchでモデルを作成していた際に，RuntimeError: CUDA error: device-side assert triggeredが発生して，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみる</description>
     </item>
     
     <item>

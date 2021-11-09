@@ -109,6 +109,9 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
   # custom CSS
   customCSS = ["css/custom.css"]
 
+  # Render LaTeX with KaTex
+  math = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

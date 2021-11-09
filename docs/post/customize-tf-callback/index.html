@@ -23,28 +23,30 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Emoji Support - Fractal Prologue</title>
+<title>TensorflowのCallback関数をカスタマイズ - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Guide to emoji usage in Hugo" />
+<meta name="description" content="TensorflowのCallback関数をカスタマイズした話" />
 
 
-<meta property="og:title" content="Emoji Support" />
-<meta property="og:description" content="Guide to emoji usage in Hugo" />
+<meta name="keywords" content="dev, machine learning" />
+
+<meta property="og:title" content="TensorflowのCallback関数をカスタマイズ" />
+<meta property="og:description" content="TensorflowのCallback関数をカスタマイズした話" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/old/emoji-support/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="old" />
-<meta property="article:published_time" content="2019-03-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-03-05T00:00:00+00:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-10T00:14:33+09:00" />
+<meta property="article:modified_time" content="2021-11-10T00:14:33+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Emoji Support"/>
-<meta name="twitter:description" content="Guide to emoji usage in Hugo"/>
+<meta name="twitter:title" content="TensorflowのCallback関数をカスタマイズ"/>
+<meta name="twitter:description" content="TensorflowのCallback関数をカスタマイズした話"/>
 
 
 
@@ -124,26 +126,115 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/old/emoji-support/">Emoji Support</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-03-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;138 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1460 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">machine learning</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <p>Emoji can be enabled in a Hugo project in a number of ways.</p>
-<p>The <a href="https://gohugo.io/functions/emojify/" target="_blank"><code>emojify</code></a> function can be called directly in templates or <a href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes" target="_blank">Inline Shortcodes</a>.</p>
-<p>To enable emoji globally, set <code>enableEmoji</code> to <code>true</code> in your site’s <a href="https://gohugo.io/getting-started/configuration/" target="_blank">configuration</a> and then you can type emoji shorthand codes directly in content files; e.g.</p>
-<p><code>:s ee_no_evil:[Remove the space]</code> 🙈 <code>:h ear_no_evil:[Remove the space]</code> 🙉 <code>:s peak_no_evil:[Remove the space]</code> 🙊</p>
-<p>The <a href="http://www.emoji-cheat-sheet.com/" target="_blank">Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
-<hr>
-<p><strong>N.B.</strong> The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.</p>
-<pre><code class="language-css">.emoji {
-    font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
-}
+        <h2 id="はじめに">はじめに</h2>
+<p>AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える<strong>Estimator</strong>というSageMakerのinterfaceがあります．<br>
+一方で，SageMaker Experimentsで実験管理を行いたい場合には，このEstimatorに色々と渡してあげる必要があります．</p>
+<p>その中でも学習時に出力されるlossの値や評価メトリクスを記録するためには，Estimatorのmetric_definitionsに正規表現を記述してログから上手く取得する必要があります．<br>
+これをより簡単にするために，CustomCallback関数を作成した話になります．</p>
+<h2 id="callback関数のカスタマイズ">Callback関数のカスタマイズ</h2>
+<p>Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code>クラスを継承した<code>CustomCallBack(tf.keras.callbacks.Callback)</code>クラスを作成します．この作成したクラスを<code>model.fit</code>時に引数のcallbacksに渡してやることで使用することができます．</p>
+<p>今回はSageMaker Experimentsで使うことを想定したものになります．Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合）</p>
+<pre><code class="language-python">smexperiments.experiment.Estimator(
+    ...,
+    metric_definitions={
+        {'Name': 'Train Loss', 'Regex': 'train_loss: (.*?);'},
+        {'Name': 'Validation Loss', 'Regex': 'val_loss: (.*?);'},
+        {'Name': 'Train Metrics', 'Regex': 'train_root_mean_squared_error: (.*?);'},
+        {'Name': 'Validation Metrics', 'Regex': 'val_root_mean_squared_error: (.*?);'},
+    }
+)
 </code></pre>
+<p>しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは<code>loss</code>，メトリクスは<code>root_mean_squared_error</code>でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに<code>train_</code>を付けて，Regexで簡単に取得したいという気持ちです．</p>
+<p>Tensorflowの公式ドキュメント<a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a>や<a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a>を参考に作成しました．</p>
+<pre><code class="language-python">import tensorflow as tf
+
+class CustomCallback(tf.keras.callbacks.Callback):
+    def on_train_begin(self, logs=None):
+        &quot;&quot;&quot;Called at the beginning of training.
+        &quot;&quot;&quot;
+
+    def on_train_end(self, logs=None):
+        &quot;&quot;&quot;Called at the end of training.
+        &quot;&quot;&quot;
+
+    def on_epoch_begin(self, epoch, logs=None):
+        &quot;&quot;&quot;Called at the start of an epoch.
+        &quot;&quot;&quot;
+
+    def on_epoch_end(self, epoch, logs=None):
+        &quot;&quot;&quot;Called at the end of an epoch.
+        &quot;&quot;&quot;
+
+    def on_train_batch_begin(self, batch, logs=None):
+        &quot;&quot;&quot;Called at the beginning of a training batch in fit methods.
+        &quot;&quot;&quot;
+
+    def on_train_batch_end(self, batch, logs=None):
+        &quot;&quot;&quot;Called at the end of a training batch in fit methods.
+        &quot;&quot;&quot;
+</code></pre>
+<p>上記コードの中で必要なものを修正すれば大丈夫です．今回は学習の開始終了とエポックの終了時に呼ぶように修正しました．</p>
+<pre><code class="language-python">import tensorflow as tf
+import datetime
+
+class CustomCallBack(tf.keras.callbacks.Callback):
+    def on_train_begin(self, logs=None):
+        &quot;&quot;&quot;Called at the beginning of training.
+        &quot;&quot;&quot;
+        print(f&quot;Start training - {str(datetime.datetime.now())}&quot;)
+
+        # get parameters
+        self.epochs = self.params['epochs']
+
+    def on_train_end(self, logs=None):
+        &quot;&quot;&quot;Called at the end of training.
+        &quot;&quot;&quot;
+        print(f&quot;Finish training - {str(datetime.datetime.now())}&quot;)
+
+    def on_epoch_end(self, epoch, logs=None):
+        &quot;&quot;&quot;Called at the end of an epoch.
+        &quot;&quot;&quot;
+        keys = list(logs.keys())
+        metrics_values_list = []
+
+        for key in keys:
+            if key.startswith('val_'):
+                metrics_values_list.append(f&quot;{key}: {logs.get(key):.4f};&quot;)
+            else:
+                metrics_values_list.append(f&quot;train_{key}: {logs.get(key):.4f};&quot;)
+        values = ' - '.join(metrics_values_list)
+
+        print(f&quot;Epoch {epoch+1}/{self.epochs} - {values}&quot;)
+
+# fit時にcallbacksに作成したカスタマイズクラスをインスタンス化したものを渡す
+model.fit(
+    ...,
+    callbacks=[CustomCallBack()],
+)
+</code></pre>
+<p>出力は以下のような感じになります．</p>
+<pre><code class="language-python">Start training - 2021-11-09 23:48:12.787257
+Epoch 1/10 - train_loss: 4.6889; - train_root_mean_squared_error: 2.1654; - val_loss: 11.1416; - val_root_mean_squared_error: 3.3379;
+...
+Finish training - 2021-11-09 23:48:15.095133
+</code></pre>
+<h2 id="おわりに">おわりに</h2>
+<p>今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a></li>
+</ul>
+
         <div id="share-buttons">
             
 
@@ -170,13 +261,6 @@
     </div>
 </article>
 
-
-<div class="license markdown-body">
-    <blockquote>
-        <p>Unless otherwise noted, the content of this site is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-               target="_blank">CC BY-NC-SA 4.0</a>.</p>
-    </blockquote>
-</div>
 
 
 
@@ -236,6 +320,18 @@
     </div>
     
     
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
     
     
 </aside>
@@ -304,6 +400,20 @@
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
     </div>
     
     

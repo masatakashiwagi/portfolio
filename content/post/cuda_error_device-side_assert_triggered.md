@@ -1,21 +1,21 @@
 +++
 author = "Masataka Kashiwagi"
-title = "CUDA error: Device-side assert triggeredの解決方法"
+title = "RuntimeError: CUDA error: Device-side assert triggeredの解決方法"
 date = 2021-02-01T16:14:09+09:00
-description = "CUDA error: Device-side assert triggeredの解決方法"
+description = "RuntimeError: CUDA error: Device-side assert triggeredの解決方法"
 tags = ["dev"]
 showLicense = false
 share = true
 +++
 
-## RuntimeError: CUDA error: device-side assert triggeredの解決方法
+## はじめに
 Pytorchでモデルを作成していた際に，`RuntimeError: CUDA error: device-side assert triggered`が発生して，原因がよくわからなかったので，調べたことをメモしておきます．
 
 ## エラー発生の原因
 調べてみると，原因としては
 - ライブラリのVersionが違う
 - ラベル/クラスの数とネットワークの入出力のshapeが異なる
-- loss関数の入力が正確でない
+- Loss関数の入力が正確でない
 
 などなど...
 
@@ -24,7 +24,7 @@ Pytorchでモデルを作成していた際に，`RuntimeError: CUDA error: devi
 ### ラベル/クラスの数とネットワークの入出力のshapeが異なる
 想定しているラベルもしくはクラス数とネットワークの出力のクラス数が異なる場合，この場合は`nn.Linear(input, num_class)`で合わせてやる必要がある．
 
-### loss関数の入力が正確でない
+### Loss関数の入力が正確でない
 僕が遭遇したのはこちらのパターンになります．
 
 例えば，BCELossを考えた場合，計算するためには値としては0~1を取る必要があります．そのため普通は最終出力に`Sigmoid, Softmax関数`を入れるかと思います．
@@ -54,6 +54,9 @@ class BCELoss(nn.Module):
 CUDA_LAUNCH_BLOCKING=1
 ```
 
+## おわりに
+今回は，Pytorchでのモデル作成時に発生したエラーについて整理しました，モデル作成時にはモデルのIn/OutやLoss関数の定義をきちんと理解し把握しておく必要があると改めて感じました．<br>
+同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．
 
 ## 参考
 https://towardsdatascience.com/cuda-error-device-side-assert-triggered-c6ae1c8fa4c3

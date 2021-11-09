@@ -2,23 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/about/</loc>
-    <lastmod>2021-06-01T17:00:00+09:00</lastmod>
+    <loc>https://masatakashiwagi.github.io/portfolio/tags/dev/</loc>
+    <lastmod>2021-11-10T00:14:33+09:00</lastmod>
   </url><url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
-    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
+    <lastmod>2021-11-10T00:14:33+09:00</lastmod>
+  </url><url>
+    <loc>https://masatakashiwagi.github.io/portfolio/tags/machine-learning/</loc>
+    <lastmod>2021-11-10T00:14:33+09:00</lastmod>
+  </url><url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    <lastmod>2021-11-10T00:14:33+09:00</lastmod>
+  </url><url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</loc>
+    <lastmod>2021-11-10T00:14:33+09:00</lastmod>
+  </url><url>
+    <loc>https://masatakashiwagi.github.io/portfolio/about/</loc>
+    <lastmod>2021-06-01T17:00:00+09:00</lastmod>
   </url><url>
     <loc>https://masatakashiwagi.github.io/portfolio/tags/kaggle/</loc>
     <lastmod>2021-05-14T15:44:00+09:00</lastmod>
   </url><url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</loc>
     <lastmod>2021-05-14T15:44:00+09:00</lastmod>
-  </url><url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    <lastmod>2021-05-14T15:44:00+09:00</lastmod>
-  </url><url>
-    <loc>https://masatakashiwagi.github.io/portfolio/tags/dev/</loc>
-    <lastmod>2021-03-26T22:18:34+09:00</lastmod>
   </url><url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</loc>
     <lastmod>2021-03-26T22:18:34+09:00</lastmod>
