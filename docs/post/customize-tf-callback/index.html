@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1460 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">machine learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1551 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">machine learning</a>&nbsp;</span>
 
     </div>
     
@@ -142,7 +142,8 @@
 これをより簡単にするために，CustomCallback関数を作成した話になります．</p>
 <h2 id="callback関数のカスタマイズ">Callback関数のカスタマイズ</h2>
 <p>Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code>クラスを継承した<code>CustomCallBack(tf.keras.callbacks.Callback)</code>クラスを作成します．この作成したクラスを<code>model.fit</code>時に引数のcallbacksに渡してやることで使用することができます．</p>
-<p>今回はSageMaker Experimentsで使うことを想定したものになります．Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合）</p>
+<p>今回はSageMaker Experimentsで使うことを想定したもので，Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合を想定）
+MetricDefinitionsはこちらが参考になります→<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html" target="_blank">Define Metrics</a></p>
 <pre><code class="language-python">sagemaker.estimator.Estimator(
     ...,
     metric_definitions={
@@ -154,7 +155,7 @@
 )
 </code></pre>
 <p>しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは<code>loss</code>，メトリクスは<code>root_mean_squared_error</code>でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに<code>train_</code>を付けて，Regexで簡単に取得したいという気持ちです．</p>
-<p>Tensorflowの公式ドキュメント<a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a>や<a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a>を参考に作成しました．</p>
+<p>Tensorflow公式ドキュメントの<a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a>や<a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a>を参考に作成しました．</p>
 <pre><code class="language-python">import tensorflow as tf
 
 class CustomCallback(tf.keras.callbacks.Callback):
@@ -221,7 +222,7 @@ model.fit(
     callbacks=[CustomCallBack()],
 )
 </code></pre>
-<p>出力は以下のような感じになります．</p>
+<p>出力は以下のような感じになります．今回は<code>print</code>文で出力していますが，loggerを用意して<code>logger.info</code>を使うのも良いかと思います．</p>
 <pre><code class="language-python">Start training - 2021-11-09 23:48:12.787257
 Epoch 1/10 - train_loss: 4.6889; - train_root_mean_squared_error: 2.1654; - val_loss: 11.1416; - val_root_mean_squared_error: 3.3379;
 ...
