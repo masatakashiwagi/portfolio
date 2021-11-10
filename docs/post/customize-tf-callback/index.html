@@ -129,14 +129,14 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1551 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">machine learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1560 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">machine learning</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える<strong>Estimator</strong>というSageMakerのinterfaceがあります．<br>
+<p>AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える**<a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Estimator</a>**というSageMakerのinterfaceがあります．<br>
 一方で，SageMaker Experimentsで実験管理を行いたい場合には，このEstimatorに色々と渡してあげる必要があります．</p>
 <p>その中でも学習時に出力されるlossの値や評価メトリクスを記録するためには，Estimatorのmetric_definitionsに正規表現を記述してログから上手く取得する必要があります．<br>
 これをより簡単にするために，CustomCallback関数を作成した話になります．</p>
@@ -232,6 +232,7 @@ Finish training - 2021-11-09 23:48:15.095133
 <p>今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
 <h2 id="参考">参考</h2>
 <ul>
+<li><a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Sagemaker Training APIs - Estimator</a></li>
 <li><a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a></li>
 <li><a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a></li>
 </ul>

@@ -13,7 +13,7 @@
       <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
-      <description>はじめに AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行えるEstimatorというSageMakerのinte</description>
+      <description>はじめに AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える**Estimator**というSageMakerの</description>
     </item>
     
     <item>

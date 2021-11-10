@@ -10,7 +10,7 @@ tags = ["dev", "machine learning"]
 +++
 
 ## はじめに
-AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える**Estimator**というSageMakerのinterfaceがあります．<br>
+AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える**[Estimator](https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html)**というSageMakerのinterfaceがあります．<br>
 一方で，SageMaker Experimentsで実験管理を行いたい場合には，このEstimatorに色々と渡してあげる必要があります．
 
 その中でも学習時に出力されるlossの値や評価メトリクスを記録するためには，Estimatorのmetric_definitionsに正規表現を記述してログから上手く取得する必要があります．<br>
@@ -122,5 +122,6 @@ Finish training - 2021-11-09 23:48:15.095133
 
 
 ## 参考
+- [Sagemaker Training APIs - Estimator](https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html)
 - [Writing your own callbacks](https://www.tensorflow.org/guide/keras/custom_callback?hl=en)
 - [tf.keras.callbacks.Callback](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback)
