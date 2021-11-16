@@ -6,7 +6,16 @@
     <description>Recent content on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 10 Nov 2021 00:14:33 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Nov 2021 16:08:32 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>スプレッドシートで行うMann-WhitneyのU検定</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/</link>
+      <pubDate>Tue, 16 Nov 2021 16:08:32 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/</guid>
+      <description>はじめに 普段はPythonのSciPyというライブラリを用いて，ABテスト実施後の2群間における有意差を調べるために検定を行っていますが，Pythonを使っていないorこのようなライブラリに触れたこと</description>
+    </item>
+    
     <item>
       <title>TensorflowのCallback関数をカスタマイズ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
