@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/">スプレッドシートで行うMann-WhitneyのU検定</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2252 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/data-science">data science</a>&nbsp;<a href="/portfolio/tags/statistics">statistics</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2269 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/data-science">data science</a>&nbsp;<a href="/portfolio/tags/statistics">statistics</a>&nbsp;</span>
 
     </div>
     
@@ -187,8 +187,8 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
 <p>※ 補足:<br>
 サンプルデータのデータ順序は意識しないで問題ありません，順序並び替えで自動的に昇順で並び変わります．ただし，順位については，スプレッドシートのマウスオーバーでセルの右下に表示される黒い部分をデータが存在している部分まで下にズラして貰う必要があります．（スプレッドシートを完璧に使いこなしているわけではないので，特に順位をつけてる部分が自動化できていないです．もしご存知の方は，方法を教えて貰えると大変助かります🙏）</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，スプレッドシートを使ってMann-WhitneyのU検定を試してみた内容になります．Pythonを使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．ABテストを実施して検定するまでを誰でも簡単にできるようにしていきたいと思っていて，今回はその取り組みの1つになります．スプレッドシートで実装してて意外と組み込みの関数が用意されていることを知ることができました😄</p>
-<p>また，普段ライブラリを何気なく使っていますが，内部の計算方法やどうゆう手続きで出力されるのか，またその値をちゃんと理解して使っていかないとなーということを改めて感じました．例えば，scipy.stats.mannwhitneyuはp値を出すだけであれば良いが，U値を使いたい場合には少し使いづらいと感じました．</p>
+<p>今回は，スプレッドシートを使ってMann-WhitneyのU検定を試してみた内容になります．Pythonを使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．ABテストを実施して検定するまでを誰でも簡単にできるようになれば良いなと思ってます．実装していて，スプレッドシートって意外と組み込みの関数が用意されていることを改めて知ることができました😄</p>
+<p>また，普段ライブラリを何気なく使っていますが，内部の計算方法やどうゆう手続きで出力されるのか，またその値をちゃんと理解して使っていかないとなーということを改めて感じました．例えば，<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html" target="_blank">scipy.stats.mannwhitneyu</a>はp値を出すだけであれば良いが，U値を使いたい場合には少し使いづらいと感じました．</p>
 <p>P.S. t検定についてもスプレッドシートで実施できるようにしているので，また紹介したいと思います．</p>
 <h2 id="参考">参考</h2>
 <ul>
@@ -196,6 +196,7 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
 <li><a href="https://www.real-statistics.com/statistics-tables/mann-whitney-table/" target="_blank">Mann-Whitney Table</a></li>
 <li><a href="https://staff.aist.go.jp/t.ihara/normsdist.html" target="_blank">標準正規分布表</a></li>
 <li><a href="https://support.google.com/docs/answer/3094089" target="_blank">スプレッドシート - NORMSDIST</a></li>
+<li><a href="https://elsur.jpn.org/mt/2018/09/002684.html" target="_blank">Divine, et al. (2018) Mann-Whitney検定は中央値の検定ではない</a></li>
 </ul>
 
         <div id="share-buttons">
