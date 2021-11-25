@@ -4,7 +4,7 @@ title = "Fractal Prologue"
 theme = "fuji"
 hasCJKLanguage = true
 enableEmoji = true
-enableRobotsTXT = true
+enableRobotsTXT = false
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]
 
