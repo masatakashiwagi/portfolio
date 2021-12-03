@@ -61,17 +61,29 @@ body header a {
     white-space: normal;
 }
 
-body header .title-sub{
+body header .title-sub {
     color: #ffffff;
     white-space: normal;
 }
 
-body .markdown-body strong{
+body .markdown-body strong {
     color: #8aa2d3;
 }
 
 span.date {
     color: #c1c1c1;
+}
+
+.main_marker {
+    color: #544c4c;
+}
+
+.marker_pink {
+    background: linear-gradient(transparent 80%, #FFC0CB 80%);
+}
+
+.marker_yellow {
+    background: linear-gradient(transparent 80%, #fff352 80%);
 }
 
 /* .col-md-9 {width:100%} */

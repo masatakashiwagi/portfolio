@@ -31,13 +31,16 @@ Now, I'm working as Machine Learning Engineer in Web services company that focus
 ## **Work Experience**
 [June. 2021 - present]
 Machine Learning Engineer, Connehito, Inc.
+- Develop recommendation system and promote MLOps at a company that provides Questions & Answers service to mothers.
 
 [Mar. 2018 - May. 2021]
 Data Scientist / Machine Learning Engineer, Brains Technology, Inc.
+- Develop of our own products which provides anomaly detection solutions for the manufacturing industry.
 
 [Apr. 2016 - Feb. 2018]
 Solution Engineer, NTT Communications Corporation
-I was on loan to one of the subsidiary companies, NTTCom Online Marketing Solutions Corporation.
+- I was on loan to one of the subsidiary companies, NTTCom Online Marketing Solutions Corporation.
+- Implement and build marketing automation platform.
 
 ***
 ## **Education**
