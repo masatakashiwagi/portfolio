@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "Hugoを使ったポートフォリオ作成"
 date = "2020-07-13"
 description = "Hugoで簡単にポートフォリオを作成したので，その備忘録"
-tags = ["dev"]
+tags = ["Dev"]
 showLicense = false
 share = true
 +++

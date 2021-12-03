@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "Excel Binary WorkbookをPythonで処理"
 date = 2019-10-05T15:16:44+09:00
 description = "EBWを処理するために"
-tags = ["data science"]
+tags = ["DataScience"]
 showLicense = false
 share = true
 +++

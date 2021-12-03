@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "RuntimeError: CUDA error: Device-side assert triggeredの解決方法"
 date = 2021-02-01T16:14:09+09:00
 description = "RuntimeError: CUDA error: Device-side assert triggeredの解決方法"
-tags = ["dev"]
+tags = ["Dev"]
 showLicense = false
 share = true
 +++

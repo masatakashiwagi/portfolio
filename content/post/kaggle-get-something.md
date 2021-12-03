@@ -6,7 +6,7 @@ date = 2019-12-20T12:41:03+09:00
 draft = false
 share = true
 showLicense = false
-tags = ["poem", "kaggle"]
+tags = ["Poem", "Kaggle"]
 +++
 
 ## はじめに

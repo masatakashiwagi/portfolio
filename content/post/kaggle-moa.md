@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "Kaggle-MoAの振り返り"
 date = 2020-12-11T23:13:30+09:00
 description = "Kaggle MoAに参加したので，その振り返り"
-tags = ["kaggle"]
+tags = ["Kaggle"]
 showLicense = false
 share = true
 +++

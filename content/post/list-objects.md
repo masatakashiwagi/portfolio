@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "ネストしたリストの更新処理"
 date = "2020-09-12"
 description = "リストを複製して作成し，それを更新したい場合"
-tags = ["dev"]
+tags = ["Dev"]
 showLicense = false
 share = true
 +++

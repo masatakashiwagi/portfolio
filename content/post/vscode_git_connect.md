@@ -3,7 +3,7 @@ author = "Masataka Kashiwagi"
 title = "VSCodeとgitを連携してpushできるようにするまで"
 date = 2021-03-26T22:18:34+09:00
 description = "VSCodeとgitの連携"
-tags = ["dev"]
+tags = ["Dev"]
 showLicense = false
 share = true
 +++
