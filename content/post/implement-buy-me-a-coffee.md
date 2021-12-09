@@ -1,0 +1,37 @@
++++
+author = "Masataka Kashiwagi"
+title = "Buy Me a Coffeeをブログに追加したお話"
+description = "Buy Me a Coffeeの機能をブログに追加"
+date = 2021-12-07T12:58:47+09:00
+draft = false
+share = true
+showLicense = false
+tags = ["Poem"]
++++
+
+## はじめに
+[Buy Me a Coffee](https://www.buymeacoffee.com/)というコーヒー1杯をクリエイター活動をサポートするという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，[@hurutoriya](https://twitter.com/hurutoriya)さんが投稿された[こちらの記事](https://shunyaueta.com/posts/2021-12-04/)を見て，僕も同意することが多かったので，自分の個人ブログでも導入してみたというお話です．
+
+## クリエイターの活動をサポートするサービス
+Buy Me a Coffee以外にも最近はいくつかのクリエイターの活動をサポートする寄付サービスがあリ，いくつか見つけたので紹介します．
+- [Buy Me a Coffee](https://www.buymeacoffee.com/): コーヒー1杯（実際には$5）をクリエイター活動のためにサポートするサービス
+- [Ko-fi](https://ko-fi.com/): 名前の通り，サポートしたい人に対してコーヒー代を送るというサービス
+- [OFUSE](https://ofuse.me/): 1文字2円でOFUSEレターやOFUSEコメントを書いてサポートするというサービス
+
+## Buy Me a Coffeeを導入しようと思った理由
+@hurutoriyaさんが書かれた内容と概ね一緒ですが，お金が欲しいからというわけではなく（お金が欲しいなら広告を貼ると思います），感謝を伝える1つの手段として，コーヒーを1杯プレゼントするよーという表現が良いなと感じています．
+
+いいね！なども記事を書いた側からすると読んでくれた人からの嬉しいリアクションの1つだと思います．ただ，いいね！以上に読んだ人にとって価値がある技術記事などに対しては，このようなサポートで感謝を伝える方法があってもいいのかなと思います．サポートして貰った側からすると，誰かのためになってるという感覚をより感じることができますし，何よりもっと有益な内容を届けていこうというモチベーションにも繋がるなと思います．
+
+これらの理由と僕もより良い記事を届けていきたいという想いから，今回Buy Me a Coffeeを導入してみようと思いました．
+
+## おわりに
+実装については，[こちらのサイト](https://www.buymeacoffee.com/brand)からロゴやグラフィックがダウンロードすることができます．また，挿入する文字やそのフォント・色など自由にカスタマイズできるGenerateページがあり，そこからGenerateを実行すると，HTMLに使用できるimage codeが出来上がるので，それをコピーして簡単にサイトに導入することができます．
+
+今回は，Buy Me a Coffeeのサポートセクションをページ最下部に導入して，その導入したお気持ちを書いたポエムになります．
+
+## 参考
+- [投げ銭サービスのBuy me a cofee をBlog に導入してみた](https://shunyaueta.com/posts/2021-12-04/)
+- [コーヒー1杯で支援するサービス「ko-fi」と、開発者がコーヒーを奢られる仕組みの話&#x2615;](https://note.com/bissybissy/n/ncc99bf0d6379)
+- [さまざまな収益化機能をひとつに。クリエイター応援プラットフォーム「OFUSE（オフセ）」誕生。](https://note.com/sozi_inc/n/na9d9753263a7)
+- [Brand Kit - Logo, Buttons and Widget](https://www.buymeacoffee.com/brand)
