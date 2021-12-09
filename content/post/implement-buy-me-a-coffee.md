@@ -10,10 +10,10 @@ tags = ["Poem"]
 +++
 
 ## はじめに
-[Buy Me a Coffee](https://www.buymeacoffee.com/)というコーヒー1杯をクリエイター活動をサポートするという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，[@hurutoriya](https://twitter.com/hurutoriya)さんが投稿された[こちらの記事](https://shunyaueta.com/posts/2021-12-04/)を見て，僕も同意することが多かったので，自分の個人ブログでも導入してみたというお話です．
+[Buy Me a Coffee](https://www.buymeacoffee.com/)というコーヒー1杯をクリエイター活動のサポートという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，[@hurutoriya](https://twitter.com/hurutoriya)さんが投稿された[こちらの記事](https://shunyaueta.com/posts/2021-12-04/)を見て，僕も同意することが多かったので，自分の個人ブログでも導入してみたというお話です．
 
 ## クリエイターの活動をサポートするサービス
-Buy Me a Coffee以外にも最近はいくつかのクリエイターの活動をサポートする寄付サービスがあリ，いくつか見つけたので紹介します．
+Buy Me a Coffee以外にも最近は色々とクリエイターの活動をサポートする寄付サービスがあるので紹介しておきます．
 - [Buy Me a Coffee](https://www.buymeacoffee.com/): コーヒー1杯（実際には$5）をクリエイター活動のためにサポートするサービス
 - [Ko-fi](https://ko-fi.com/): 名前の通り，サポートしたい人に対してコーヒー代を送るというサービス
 - [OFUSE](https://ofuse.me/): 1文字2円でOFUSEレターやOFUSEコメントを書いてサポートするというサービス
