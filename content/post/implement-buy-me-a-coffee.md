@@ -34,4 +34,3 @@ Buy Me a Coffee以外にも最近は色々とクリエイターの活動をサ�
 - [投げ銭サービスのBuy me a cofee をBlog に導入してみた](https://shunyaueta.com/posts/2021-12-04/)
 - [コーヒー1杯で支援するサービス「ko-fi」と、開発者がコーヒーを奢られる仕組みの話&#x2615;](https://note.com/bissybissy/n/ncc99bf0d6379)
 - [さまざまな収益化機能をひとつに。クリエイター応援プラットフォーム「OFUSE（オフセ）」誕生。](https://note.com/sozi_inc/n/na9d9753263a7)
-- [Brand Kit - Logo, Buttons and Widget](https://www.buymeacoffee.com/brand)
