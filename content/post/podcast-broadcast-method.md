@@ -14,11 +14,11 @@ tags = ["Poem"]
 
 Anchorという無料で配信できるプラットフォームを使用しており，チャンネル名は「<span class="marker_yellow">**Double-M2.fm**</span>」になります．
 
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://anchor.fm/double-m2" data-iframely-url="//cdn.iframe.ly/dykqwEN?card=small"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script><br>
+<iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="Double-M2 • A podcast on Anchor" src="https://hatenablog-parts.com/embed?url=https://anchor.fm/double-m2" frameborder="0" scrolling="no"></iframe>
 
 各Episodeの要約もありますので，興味を持って頂いた方はこちらから見ることができます．<br>
 
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/double-m2ml/podcast.fm" data-iframely-url="//cdn.iframe.ly/WpjLrzB?card=small"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script><br>
+<iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="double-m2ml/podcast.fm: podcast用のレポジトリ" src="https://hatenablog-parts.com/embed?url=https://github.com/double-m2ml/podcast.fm" frameborder="0" scrolling="no"></iframe>
 
 この記事では，naviさんと始めたキッカケと実際の配信方法をまとめています．配信方法はあまり検索しても記事が無かったりしたので，これから始めようとしている人の参考になればと，そしてPodcast配信者が一人でも多く増えればなーと思います．
 
@@ -76,7 +76,7 @@ WHERE TO LISTENの部分ですが，新しいPodcastが配信されたら，RSS�
 ### 3. 録音
 録音はAnchor上では行わず，Zencastrというツールを使いました．またZencastrは複数人の録音も行うことができ，非常に便利です！
 
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://zencastr.com/" data-iframely-url="//cdn.iframe.ly/8CEqbS"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script><br>
+<iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="Podcasting recording made easy! Start your podcast today" src="https://hatenablog-parts.com/embed?url=https://zencastr.com/" frameborder="0" scrolling="no"></iframe>
 
 プランは無料のHobbyistと有料のProfessionalがあります．僕たちは無料プランを使っていますが，制限としては以下になります．
 - 無料プランの制限：
