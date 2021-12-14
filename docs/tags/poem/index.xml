@@ -6,7 +6,16 @@
     <description>Recent content in Poem on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 07 Dec 2021 12:58:47 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 16:55:14 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>teamayaという個人プロジェクトをはじめてみた</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>
+      <pubDate>Sun, 12 Dec 2021 16:55:14 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</guid>
+      <description>はじめに 最近，データエンジニアリングとMLOpsの領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，デー</description>
+    </item>
+    
     <item>
       <title>Buy Me a Coffeeをブログに追加したお話</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee/</link>
