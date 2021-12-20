@@ -1,6 +1,6 @@
 +++
 author = "Masataka Kashiwagi"
-title = "Buy Me a Coffeeをブログに追加したお話"
+title = "Buy Me a Coffeeをブログに追加した話"
 description = "Buy Me a Coffeeの機能をブログに追加"
 date = 2021-12-07T12:58:47+09:00
 draft = false
