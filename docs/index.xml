@@ -6,7 +6,16 @@
     <description>Recent content on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 12 Dec 2021 16:55:14 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Dec 2021 18:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>スプレッドシートからBigQueryへDigdagを使ったデータ連携</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</link>
+      <pubDate>Wed, 22 Dec 2021 18:00:00 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</guid>
+      <description>はじめに 今回は，teamayaという個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
+    </item>
+    
     <item>
       <title>teamayaという個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>

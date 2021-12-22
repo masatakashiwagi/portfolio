@@ -59,4 +59,4 @@ CUDA_LAUNCH_BLOCKING=1
 同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．
 
 ## 参考
-https://towardsdatascience.com/cuda-error-device-side-assert-triggered-c6ae1c8fa4c3
+- [CUDA error 59: Device-side assert triggered](https://towardsdatascience.com/cuda-error-device-side-assert-triggered-c6ae1c8fa4c3)

@@ -74,7 +74,7 @@ print(wb.convert_date(41235.45578))
 もちろん簡単なデータの可視化とか表計算とかExcelが活躍する場面は多々あると思うので，使い分けていきたいとは思います．
 
 ## 参考
-[Stack Overflow - Read XLSB File in Pandas Python](https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python)
+- [Stack Overflow - Read XLSB File in Pandas Python](https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python)
 
 ## 追記
 #### 2020-01-05

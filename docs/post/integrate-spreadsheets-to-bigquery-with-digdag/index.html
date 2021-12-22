@@ -38,8 +38,8 @@
 <meta property="og:description" content="teamayaプロジェクトのデータ連携をした話" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-19T18:00:00+09:00" />
-<meta property="article:modified_time" content="2021-12-19T18:00:00+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="article:published_time" content="2021-12-22T18:00:00+09:00" />
+<meta property="article:modified_time" content="2021-12-22T18:00:00+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/">スプレッドシートからBigQueryへDigdagを使ったデータ連携</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-19</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1340 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/data">Data</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-22</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;5983 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/data">Data</a>&nbsp;</span>
 
     </div>
     
@@ -137,14 +137,15 @@
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
 <p>今回は，teamayaという個人プロジェクトで進めている<span class="marker_yellow">データ連携</span>の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！</p>
-<p>具体的には，手元にあるスプレッドシートのデータをBigQueryの特定のテーブルに連携するまでの話になります．余談ですが，連携したデータはData Studioで可視化したりもしています．</p>
-<p>データ連携をするだけであれば，Embulkを単体実行するのでこと足りますが，今回はサーバーモードで立ち上げたDigdag UIを使ってワークフローを実行しています．スケジュール実行，ワークフロー管理や履歴管理などがUIからだとしやすく，使い心地などを知るためにも使用しました．</p>
 <iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="masatakashiwagi/teamaya: This is a repository for Data integration and Machine Learning Pipeline." src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya" frameborder="0" scrolling="no"></iframe>
+<p>具体的には，手元にあるスプレッドシートのデータをBigQueryの特定のテーブルに連携するまでの話になります．</p>
+<p>普段家計簿のデータをスプレッドシートに手入力で管理してるんですが，そのデータをBigQueryに集めて色々と検証できると良いなーという思いから，データ連携を始めました．加えて，可視化も良くしたい思いもあり，Data Studioでダッシュボードを作ったりもしています．</p>
+<p>データ連携をするだけであれば，Embulkを単体実行するのでこと足りますが，今回はサーバーモードで立ち上げたDigdag UIを使ってワークフローを実行しています．スケジュール実行，ワークフロー管理や履歴管理などがUIからだとしやすく，使い心地などを知るためにも使用しました．</p>
 <p>また，Docker環境で実行できるように構成しています．Docker化することで，簡単に別環境に持っていくことができますし，スクラップ&amp;ビルドがしやすいのもあります．</p>
 <p>今回は以下の2種類の方法でデータを連携する方法を紹介します．内容的には既に技術記事に書かれているものが多いと思いますが，今回はDockerコンテナで各タスクが実行できるようにしているので，その辺りを参考頂けたらと思います．</p>
 <ol>
-<li><span class="marker_yellow"><strong>Dockerコンテナ内からEmbulkを実行して，データを転送</strong></span></li>
-<li><span class="marker_yellow"><strong>Digdag UIからワークフローを実行して，データを転送</strong></span>
+<li><span class="marker_yellow"><strong>Dockerコンテナ内からEmbulkを直接実行して，データを転送する方法</strong></span></li>
+<li><span class="marker_yellow"><strong>Digdag UIからワークフローを実行して，データを転送する方法</strong></span>
 <ul>
 <li>こちらも裏側では，Embulkが実行されます．</li>
 </ul>
@@ -153,32 +154,326 @@
 <p>今回のデータ連携フローのアーキテクチャーは以下のような感じです．</p>
 <p><img class="img-zoomable" src="../../img/teamaya-data-workflow.png" alt="データ連携フローのアーキテクチャー" />
 </p>
+<p>アンドリュー・カーネギーの以下の名言にもあるように，機械学習エコシステムを自分で作っていくために，一歩一歩進めています！</p>
+<blockquote>
+<p><span class="marker_yellow"><strong>最も高い目標を達成するには、一歩一歩進むしかないという事実を、頭に入れておかなければならない。</strong></span></p>
+</blockquote>
 <h2 id="bigqueryとスプレッドシートの設定">BigQueryとスプレッドシートの設定</h2>
 <p>GCPのアカウント登録方法は割愛しますが，gmailがあれば簡単に登録できます．登録が完了したら，適当な<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects" target="_blank">プロジェクトを作成</a>して下さい．</p>
-<ul>
-<li><span class="marker_yellow"><strong>Google Sheets APIの有効化を行う</strong></span></li>
-</ul>
-<p>「APIとサービス」 → 「ライブラリ」と画面遷移し，検索窓に<strong>Google Sheets API</strong>と入力して検索すると，スプレッドシートのAPIを有効化できる画面に遷移するので，有効化を行います．ここで有効化しておかないと，この後スプレッドシートを使用したデータ連携が出来ないので注意下さい！</p>
-<p><img class="img-zoomable" src="../../img/google-sheets-api.png" alt="Google Sheets API" />
+<h3 id="google-sheets-apiの有効化を行う">Google Sheets APIの有効化を行う</h3>
+<p>「APIとサービス」 → 「ライブラリ」と画面遷移し，検索窓に「<strong>Google Sheets API</strong>」と入力して検索すると，スプレッドシートのAPIを有効化できる画面に遷移するので，有効化を行います．ここで有効化しておかないと，この後スプレッドシートを使用したデータ連携が出来ないので注意下さい！</p>
+<p><img class="img-zoomable" src="../../img/teamaya-google-sheets-api.png" alt="Google Sheets API" />
 </p>
-<ul>
-<li><span class="marker_yellow"><strong>サービスアカウントの作成</strong></span></li>
-</ul>
+<h3 id="サービスアカウントの作成">サービスアカウントの作成</h3>
 <p>それが終わったら，サービスアカウントを作成します．「IAMと管理」 → 「サービスアカウント」へアクセスした後，必要な情報を入力し，キーの作成からJSONを選択してキーの作成を行います．そうすると，サービスアカウントのJSONファイルがダウンロードされるので，これを<code>~/.gcp</code>配下に置いておきます．</p>
-<ul>
-<li><span class="marker_yellow"><strong>サービスアカウントのメールアドレスをスプレッドシートに登録</strong></span></li>
-</ul>
+<h3 id="サービスアカウントのメールアドレスをスプレッドシートに登録">サービスアカウントのメールアドレスをスプレッドシートに登録</h3>
 <p>データ連携したいスプレッドシートを開き，右上の共有ボタンから「ユーザーやグループを追加」の枠にダウンロードしたサービスアカウントのメールアドレスをコピー&amp;ペーストして，送信をクリックします．そうすることで，このスプレッドシートのデータを登録したサービスアカウントで転送することができます．</p>
-<ul>
-<li><span class="marker_yellow"><strong>BigQueryにデータセットを作成</strong></span></li>
-</ul>
-<p>データセットIDを適当に決めて，データセットの作成を行っておきます．</p>
-<h2 id="1-embulkを直接実行した場合のデータ転送">1. Embulkを直接実行した場合のデータ転送</h2>
+<p>ここで，メールアドレスの許可をしていない場合，Embulk実行時に以下のエラーが発生します．</p>
+<blockquote>
+<p>Error: (ClientError) forbidden: The caller does not have permission</p>
+</blockquote>
+<h3 id="bigqueryにデータセットを作成">BigQueryにデータセットを作成</h3>
+<p>データを格納するために，事前にデータセットを作成しておく必要があるので，データセットIDを適当に決めて，データセットの作成を行っておきます．</p>
+<h2 id="1-embulkを直接実行してデータ転送を行う場合">1. Embulkを直接実行してデータ転送を行う場合</h2>
 <p>この方法は，Dockerコンテナ内からEmbulkを直接実行して，スプレッドシートのデータをBigQueryのテーブルに転送する方法になります．</p>
+<p><a href="https://www.embulk.org/" target="_blank">Embulk</a>の細かい説明は割愛しますが，簡単に言えば，バルクデータローダーの役割としてBigQueryなどのデータレイク/データウェアハウスにデータ転送を行うことができます．</p>
+<p>データ転送を行うために用意するものとしては，以下になります．</p>
+<ol>
+<li><span class="marker_yellow"><strong>Gemfile</strong></span></li>
+<li><span class="marker_yellow"><strong>Liquidファイル</strong></span></li>
+<li><span class="marker_yellow"><strong>Dockerfile &amp; docker-compose.ymlファイル</strong></span></li>
+</ol>
+<h3 id="gemfileを用意する">Gemfileを用意する</h3>
+<p>EmbulkのプラグインをGemfile/Gemfile.lockでバージョン管理するために用意します．Embulkには，データのInput/Outputのプラグインがあリ，これを使うことで様々なデータソースからターゲットにデータを連携することができます．</p>
+<ul>
+<li>Input: <a href="https://github.com/medjed/embulk-input-google_spreadsheets" target="_blank">embulk-input-google_spreadsheets</a></li>
+<li>Output: <a href="https://github.com/embulk/embulk-output-bigquery" target="_blank">embulk-output-bigquery</a></li>
+</ul>
+<pre><code class="language-ruby">source 'https://rubygems.org/'
+
+# No versions are specified for 'embulk' to use the gem embedded in embulk.jar.
+# Note that prerelease versions (e.g. &quot;0.9.0.beta&quot;) do not match the statement.
+# Specify the exact prerelease version (like '= 0.9.0.beta') for prereleases.
+gem 'embulk'
+
+# input spreadsheets plugin
+gem 'embulk-input-google_spreadsheets'
+# ouput bigquery plugin
+gem 'embulk-output-bigquery'
+gem 'tzinfo-data'
+</code></pre>
+<h3 id="liquidファイルを作成する">Liquidファイルを作成する</h3>
+<p>Embulkの設定ファイルとしてLiquidファイルを作成します．YAMLファイルに設定を記述することもできますが，以下のメリットでLiquidファイルを使用しています．</p>
+<ul>
+<li>変数を設定することができる</li>
+<li>同じ設定内容を共通ファイルとして使うことができる</li>
+<li>etc&hellip;</li>
+</ul>
+<p>BigQueryとスプレッドシートの情報は，<code>.env</code>ファイルを作成して，環境変数として管理しています．これらの変数をLiquidファイルで使用しています．</p>
+<pre><code class="language-yaml">in:
+  type: google_spreadsheets
+  auth_method: service_account
+  {% comment %} GCPのサービスアカウントのJSONファイルパス {% endcomment %}
+  json_keyfile: {{ env.GCP_SERVICE_JSON }}
+  {% comment %} スプレッドシートのURL {% endcomment %}
+  spreadsheets_url: {{ env.SPREADSHEETS_TABLE }}
+  default_timezone: 'Asia/Tokyo'
+  {% comment %} スプレッドシートのワークシートタイトル {% endcomment %}
+  worksheet_title: year_purchase_amount_2019
+  {% comment %} headerを指定している場合は2行目からとなる {% endcomment %}
+  start_row: 2
+  {% comment %} カラム名と型を指定する {% endcomment %}
+  columns:
+    - {name: id, type: long}
+    - {name: date, type: timestamp, format: '%Y/%m/%d', timezone: 'Asia/Tokyo'}
+    - {name: category, type: string}
+    - {name: purchaser, type: string}
+    - {name: purchase_amount, type: long}
+    - {name: memo, type: string}
+
+out:
+  type: bigquery
+  mode: replace
+  auth_method: service_account
+  json_keyfile: {{ env.GCP_SERVICE_JSON }}
+  {% comment %} BigQueryのプロジェクト名 {% endcomment %}
+  project: {{ env.BIGQUERY_PROJECT }}
+  {% comment %} BigQueryのデータセット名 {% endcomment %}
+  dataset: {{ env.BIGQUERY_PURCHASE_AMOUNT_DATASET }}
+  {% comment %} BigQueryのテーブル名 {% endcomment %}
+  table: daily_purchase_amount
+  auto_create_table: true
+  source_format: NEWLINE_DELIMITED_JSON
+  default_timezone: 'Asia/Tokyo'
+  default_timestamp_format: '%Y-%m-%d'
+  formatter: {type: jsonl}
+  encoders:
+    - {type: gzip}
+  retries: 3
+</code></pre>
+<p>envファイルの説明も補足でしておきます．適宜設定している環境に合わせて修正します．</p>
+<pre><code class="language-bash">SPREADSHEETS_TABLE=&lt;該当するスプレッドシートのURL: https://docs.google.com/spreadsheets/d/hogehoge&gt;
+BIGQUERY_PROJECT=&lt;BigQueryのプロジェクト名&gt;
+BIGQUERY_PURCHASE_AMOUNT_DATASET=&lt;BigQueryのデータセット名&gt;
+GCP_SERVICE_JSON=/root/.gcp/hoge.json
+</code></pre>
+<h3 id="dockerfile--docker-composeymlファイルを作成する">Dockerfile &amp; docker-compose.ymlファイルを作成する</h3>
+<p>今回はdocker環境から実行するので，Dockerfileとdocker-compose.ymlファイルを作成します．（後ほど使うDigdagの内容も記載されています）</p>
+<pre><code class="language-dockerfile">FROM openjdk:8-alpine
+LABEL MAINTAINER=masatakashiwagi
+
+ENV DIGDAG_VERSION=&quot;0.9.42&quot;
+ENV EMBULK_VERSION=&quot;0.9.23&quot;
+
+RUN apk --update add --virtual build-dependencies \
+    curl \
+    tzdata \
+    coreutils \
+    bash \
+    &amp;&amp; curl --create-dirs -o /bin/digdag -L &quot;https://dl.digdag.io/digdag-${DIGDAG_VERSION}&quot; \
+    &amp;&amp; curl --create-dirs -o /bin/embulk -L &quot;https://dl.embulk.org/embulk-$EMBULK_VERSION.jar&quot; \
+    &amp;&amp; chmod +x /bin/digdag \
+    &amp;&amp; chmod +x /bin/embulk \
+    &amp;&amp; cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    &amp;&amp; apk del build-dependencies --purge
+
+ENV PATH=&quot;$PATH:/bin&quot;
+
+# Install libc6-compat for Embulk Plugins to use JNI
+# cf: https://github.com/jruby/jruby/wiki/JRuby-on-Alpine-Linux
+# https://github.com/classmethod/docker-embulk
+RUN apk --update add libc6-compat
+
+# Copy Embulk configuration
+COPY ./embulk/task /opt/workflow/embulk/task
+
+# Make bundle
+WORKDIR /opt/workflow/embulk
+RUN embulk mkbundle bundle
+
+# Copy Gemfile file
+# This is the workaround, because jruby directory is not created
+COPY ./embulk/bundle/Gemfile /opt/workflow/embulk/bundle
+COPY ./embulk/bundle/Gemfile.lock /opt/workflow/embulk/bundle
+WORKDIR /opt/workflow/embulk/bundle
+
+# Install Embulk Plugins
+RUN embulk bundle
+
+# Set up Digdag Server
+COPY ./digdag /opt/workflow/digdag
+# ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /bin/wait
+# RUN chmod +x /bin/wait
+WORKDIR /opt/workflow
+
+CMD [&quot;tail&quot;, &quot;-f&quot;, &quot;/dev/null&quot;]
+</code></pre>
+<p>bundle辺りでまわりくどいやり方をしていますが，<code>RUN embulk bundle</code>を実行した際に上手くインストールできなかったため，ワークアラウンドとして，<code>mkbundle</code>した後にGemfile/Gemfile.lockをdockerコンテナ内に<code>COPY</code>した上で，<code>RUN embulk bundle</code>を行っています．</p>
+<h3 id="embulkをdockerコンテナで実行する方法">Embulkをdockerコンテナで実行する方法</h3>
+<p>では，実際にEmbulkの実行を行うために，まずはEmbulkのコンテナサービスを立ち上げます．</p>
+<pre><code class="language-bash"># コンテナの立ち上げ
+docker compose up -d embulk
+</code></pre>
+<p>バックグラウンドでコンテナを起動しておきます．その後，dry-runを行うためにpreviewコマンドを実行します．</p>
+<pre><code class="language-bash"># dry-run
+docker exec embulk sh /bin/embulk preview -b embulk/bundle embulk/task/spreadsheet/export_hab_purchase_amount.yml.liquid
+</code></pre>
+<p>dry-run実行後の結果を載せておきます．</p>
+<p><img class="img-zoomable" src="../../img/teamaya-exec-img1.png" alt="Embulk dry-run" />
+</p>
+<p>dry-runが大丈夫だった場合，本番実行を行います．本番はrunコマンドを実行します．</p>
+<pre><code class="language-bash"># production-run
+docker exec embulk sh /bin/embulk run -b embulk/bundle embulk/task/spreadsheet/export_hab_purchase_amount.yml.liquid
+</code></pre>
+<p>本番実行が上手くいくとBigQueryにデータが入っていることを確認できます．</p>
+<p><img class="img-zoomable" src="../../img/teamaya-bigquery-img1.png" alt="Embulk production-run" />
+</p>
+<h2 id="2-digdag-uiからワークフローを実行してデータ転送を行う場合">2. Digdag UIからワークフローを実行してデータ転送を行う場合</h2>
+<p>次に説明するこちらの方法は，digdag serverを立ち上げて，UI上からワークフローを実行して，スプレッドシートのデータをBigQueryのテーブルに転送する方法になります．（裏でEmbulkが動いています）</p>
+<p><a href="https://www.digdag.io/" target="_blank">Digdag</a>の細かい説明は割愛しますが，簡単に言えば，設定ファイルでバッチのワークフロー実行を定義・管理できるワークフローエンジンになります．スケジュール実行や失敗時の通知などを行うことができます．</p>
+<p>Digdagのワークフローからデータ転送を行うために用意するものとしては，以下になります．</p>
+<ol>
+<li><span class="marker_yellow"><strong>digファイル</strong></span></li>
+<li><span class="marker_yellow"><strong>serverのpropertiesファイル</strong></span></li>
+<li><span class="marker_yellow"><strong>docker-compose.ymlファイル</strong></span></li>
+</ol>
+<p>上記に加えて，1で説明したEmbulk実行に必要なファイルも用意します．</p>
+<h3 id="digファイルを用意する">digファイルを用意する</h3>
+<p>個別のワークフローを単発実行する場合は，<code>digdag run hoge.dig</code>で良いのですが，今回はUIから実行したいので，厳密にはdigファイルの中身が要ります．記述する内容としては，ワークフローで実行していくタスクをコードに落としていきます．</p>
+<p>Digdagでは，エラーの場合や成功した場合に，どういった処理をするのかを書くことができるので，例えば，それぞれの場合でslackに通知を行えたりもできます（今回はslack通知は実装できていませんが，今後実装していきたいです！）．リトライ回数の設定やスケジュール実行の設定もここでできます．</p>
+<pre><code class="language-bash">+task:
+    _retry: 1
+    sh&gt;: /bin/embulk run -b /opt/workflow/embulk/bundle /opt/workflow/embulk/task/spreadsheet/export_hab_purchase_amount.yml.liquid
+    _error:
+        echo&gt;: workflow error...
++success:
+    echo&gt;: workflow success!
+</code></pre>
+<p>今回は以下のワークフローになっています．</p>
+<ul>
+<li>task:
+<ul>
+<li>リトライ回数: 1回</li>
+<li>Embulkの実行</li>
+<li>エラーの場合は<code>workflow error...</code>をechoする</li>
+</ul>
+</li>
+<li>success:
+<ul>
+<li><code>workflow success!</code>をechoする</li>
+</ul>
+</li>
+</ul>
+<p>successはtaskが正常に終了した場合に，実行されることになります．</p>
+<h3 id="serverのpropertiesファイルを用意する">serverのpropertiesファイルを用意する</h3>
+<p>サーバーモードで起動するために，引数にオプションを指定する必要があるのですが，それらの設定を<code>server.properties</code>ファイルに集約しています．設定内容は色々とあるので詳しくは<a href="https://docs.digdag.io/command_reference.html#server-mode-commands" target="_blank">公式ドキュメント: server-mode-commands</a>を参照下さい．</p>
+<p>このファイルには，サーバーの情報やデータベースの情報を記載しています．</p>
+<pre><code class="language-bash">server.bind = 0.0.0.0
+server.port = 65432
+server.admin.bind = 0.0.0.0
+server.admin.port = 65433
+server.access-log.pattern = json
+server.access-log.path = /var/log/digdag/access_logs
+log-server.type = local
+
+# database情報
+# database.type = memory
+database.type = postgresql
+database.user = digdag
+database.password = digdag
+database.host = postgres
+database.port = 5432
+database.database = digdag
+database.maximumPoolSize = 32
+</code></pre>
+<p>サーバーモードで起動すると，ワークフローの情報を保存するために，データベースの設定が必要になってきます．今回はPostgreSQLを別コンテナで立てて，Digdagコンテナと接続することにしています．ちなみに，これらの情報をインメモリで保存することもできます（この場合は，<code>database.type = memory</code>として下さい）．</p>
+<h3 id="docker-composeymlファイルを作成する">docker-compose.ymlファイルを作成する</h3>
+<p>色々と試して上手くいかなかったのですが，最終的には以下の内容で落ち着きました．service共通の定義は<code>x-template</code>にまとめています．serviceは3つありますが，Digdagを使う場合はdigdagとpostgresのみを立ち上げて使います．</p>
+<p>dockerの<code>depends_on</code>は依存関係（起動順序）を指定できますが，DB起動後のアプリ起動までを制御できるわけではないので，postgresの起動完了前にdigdagがアクセスしてしまい起動失敗する事があります．</p>
+<ul>
+<li><a href="https://docs.docker.com/compose/startup-order/" target="_blank">Control startup and shutdown order in Compose</a></li>
+</ul>
+<p>このため，<code>condition: service_started</code>と設定することで，postgresが起動後にdigdagが立ち上がるようにしています．</p>
+<pre><code class="language-yaml">depends_on:
+  postgres:
+    condition: service_started
+</code></pre>
+<p>また，<code>tty</code>をtrueに設定しているのは，コンテナが正常終了して止まらないようにするためになります．</p>
+<pre><code class="language-yaml">version: '3.8'
+
+# Common definition
+x-template: &amp;template
+  volumes:
+      - ~/.gcp:/root/.gcp:cached
+      - /tmp:/tmp
+  env_file:
+      - .env
+
+services:
+  digdag:
+    container_name: digdag
+    build: .
+    tty: true
+    ports:
+      - 65432:65432
+      - 65433:65433
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    command: [&quot;java&quot;, &quot;-jar&quot;, &quot;/bin/digdag&quot;, &quot;server&quot;, &quot;-c&quot;, &quot;digdag/server.properties&quot;, &quot;--log&quot;, &quot;/var/log/digdag/digdag_server.log&quot;, &quot;--task-log&quot;, &quot;/var/log/digdag/task_logs&quot;]
+    depends_on:
+      postgres:
+        condition: service_started
+    &lt;&lt;: *template
+
+  postgres:
+    image: postgres:13.1-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: digdag
+      POSTGRES_USER: digdag
+      POSTGRES_PASSWORD: digdag
+    volumes:
+      - /tmp/data:/var/lib/postgresql/data
+    tty: true
+    &lt;&lt;: *template
+
+  embulk:
+    container_name: embulk
+    build: .
+    &lt;&lt;: *template
+
+networks:
+  default:
+    external:
+      name: teamaya
+</code></pre>
+<h3 id="digdagをdockerコンテナで実行する方法">Digdagをdockerコンテナで実行する方法</h3>
+<p>では，Digdag UIを使うためにDigdagをサーバーモードで起動します．</p>
+<pre><code class="language-bash"># コンテナの立ち上げ
+docker compose up -d digdag
+</code></pre>
+<p>バックグラウンドでコンテナを起動しておきます．<code>docker ps</code>コマンドでコンテナが立ち上がっていることを確認したら，<code>http://localhost:65432/</code>でUIにアクセスします．以下の画面が表示されたらOKです．</p>
+<p><img class="img-zoomable" src="../../img/teamaya-digdag-ui-img1.png" alt="Digdag UI" />
+</p>
+<p>New projectからNameを設定したら，Add fileをクリックして，digファイルのコードをコピー&amp;ペーストします．貼り付けたら，Saveで内容を保存します．そしたら，Workflowsのタブを選択し，先ほど追加したワークフローが表示されているのでクリックします．右上のRunボタンを押して実行が完了すると，下図のような結果になります．</p>
+<p><img class="img-zoomable" src="../../img/teamaya-digdag-ui-img2.png" alt="Digdag UI" />
+</p>
+<p>StatusがSuccessになっていれば，正常終了でBigQueryにデータが入っていると思うので，確認してみて下さい．</p>
 <h2 id="おわりに">おわりに</h2>
+<p>今回は，手元にあるスプレッドシートのデータをDigdag/Embulkを用いてBigQueryに連携するを紹介しました．</p>
+<p>やっぱり，UIで直感的に状況や情報がわかるのはメリットだなと思います．複数のワークフローが動作したりする環境だとそれらも管理できるので良いと思います．スケジュール実行やエラーや成功時の通知設定なども出来るので活用したいと思います．</p>
+<p>また今回は，データ連携にDigdagを用いましたが，他にもApache AirflowやそのマネージドサービスであるCloud Composerを使っても同等のことができると思います．この辺りも別途試していきたいと思います．</p>
+<p>個人的な次のステップとしては，Dataformやdbtを使った「<span class="marker_yellow"><strong>データの品質管理</strong></span>」に興味があるので，データをTransformしたり，テストしたりして考えていきたいです．また，データレイク/データウェアハウス/データマートの設計などを併せて学習していきたいと思います！</p>
+<p>これとは別軸で機械学習パイプラインの設計もしていこうかなと考えています！</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://recruit.gmo.jp/engineer/jisedai/blog/introduction-to-digdag/" target="_blank">Digdag 入門</a></li>
+<li><a href="https://www.slideshare.net/ToruTakahashi4/embulkdigdag" target="_blank">EmbulkとDigdagとデータ分析基盤と</a></li>
+<li><a href="https://yukiyan.hatenablog.jp/entry/2017/01/23/102411" target="_blank">digdagをDockerizeしてECS上で運用することにしました - 雑なメモ</a></li>
+<li><a href="https://gotohayato.com/content/533/" target="_blank">Docker Compose の depends_on の使い方まとめ</a></li>
+<li><a href="https://zenn.dev/hohner/articles/43a0da20181d34" target="_blank">DockerのTTYって何?</a></li>
 </ul>
 
         <div id="share-buttons">
@@ -289,8 +584,30 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#bigqueryとスプレッドシートの設定">BigQueryとスプレッドシートの設定</a></li>
-    <li><a href="#1-embulkを直接実行した場合のデータ転送">1. Embulkを直接実行した場合のデータ転送</a></li>
+    <li><a href="#bigqueryとスプレッドシートの設定">BigQueryとスプレッドシートの設定</a>
+      <ul>
+        <li><a href="#google-sheets-apiの有効化を行う">Google Sheets APIの有効化を行う</a></li>
+        <li><a href="#サービスアカウントの作成">サービスアカウントの作成</a></li>
+        <li><a href="#サービスアカウントのメールアドレスをスプレッドシートに登録">サービスアカウントのメールアドレスをスプレッドシートに登録</a></li>
+        <li><a href="#bigqueryにデータセットを作成">BigQueryにデータセットを作成</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-embulkを直接実行してデータ転送を行う場合">1. Embulkを直接実行してデータ転送を行う場合</a>
+      <ul>
+        <li><a href="#gemfileを用意する">Gemfileを用意する</a></li>
+        <li><a href="#liquidファイルを作成する">Liquidファイルを作成する</a></li>
+        <li><a href="#dockerfile--docker-composeymlファイルを作成する">Dockerfile &amp; docker-compose.ymlファイルを作成する</a></li>
+        <li><a href="#embulkをdockerコンテナで実行する方法">Embulkをdockerコンテナで実行する方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-digdag-uiからワークフローを実行してデータ転送を行う場合">2. Digdag UIからワークフローを実行してデータ転送を行う場合</a>
+      <ul>
+        <li><a href="#digファイルを用意する">digファイルを用意する</a></li>
+        <li><a href="#serverのpropertiesファイルを用意する">serverのpropertiesファイルを用意する</a></li>
+        <li><a href="#docker-composeymlファイルを作成する">docker-compose.ymlファイルを作成する</a></li>
+        <li><a href="#digdagをdockerコンテナで実行する方法">Digdagをdockerコンテナで実行する方法</a></li>
+      </ul>
+    </li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -385,8 +702,30 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#bigqueryとスプレッドシートの設定">BigQueryとスプレッドシートの設定</a></li>
-    <li><a href="#1-embulkを直接実行した場合のデータ転送">1. Embulkを直接実行した場合のデータ転送</a></li>
+    <li><a href="#bigqueryとスプレッドシートの設定">BigQueryとスプレッドシートの設定</a>
+      <ul>
+        <li><a href="#google-sheets-apiの有効化を行う">Google Sheets APIの有効化を行う</a></li>
+        <li><a href="#サービスアカウントの作成">サービスアカウントの作成</a></li>
+        <li><a href="#サービスアカウントのメールアドレスをスプレッドシートに登録">サービスアカウントのメールアドレスをスプレッドシートに登録</a></li>
+        <li><a href="#bigqueryにデータセットを作成">BigQueryにデータセットを作成</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-embulkを直接実行してデータ転送を行う場合">1. Embulkを直接実行してデータ転送を行う場合</a>
+      <ul>
+        <li><a href="#gemfileを用意する">Gemfileを用意する</a></li>
+        <li><a href="#liquidファイルを作成する">Liquidファイルを作成する</a></li>
+        <li><a href="#dockerfile--docker-composeymlファイルを作成する">Dockerfile &amp; docker-compose.ymlファイルを作成する</a></li>
+        <li><a href="#embulkをdockerコンテナで実行する方法">Embulkをdockerコンテナで実行する方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-digdag-uiからワークフローを実行してデータ転送を行う場合">2. Digdag UIからワークフローを実行してデータ転送を行う場合</a>
+      <ul>
+        <li><a href="#digファイルを用意する">digファイルを用意する</a></li>
+        <li><a href="#serverのpropertiesファイルを用意する">serverのpropertiesファイルを用意する</a></li>
+        <li><a href="#docker-composeymlファイルを作成する">docker-compose.ymlファイルを作成する</a></li>
+        <li><a href="#digdagをdockerコンテナで実行する方法">Digdagをdockerコンテナで実行する方法</a></li>
+      </ul>
+    </li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
