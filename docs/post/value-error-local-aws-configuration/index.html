@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/">ValueError: Must setup local AWS configurationの対処方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1959 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2080 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
 
     </div>
     
@@ -177,7 +177,7 @@ trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
 # データフレーム化
 analytics_tables = trial_component_analytics.dataframe()
 </code></pre>
-<p>boto_sessionとsagemaker_clientを作って，<code>sagemaker.session.Session</code>に渡してできたsessionをさらに，<code>ExperimentAnalytics</code>のsagemaker_sessionの引数に渡すことで実験結果を取得できます．</p>
+<p><code>boto3.session.Session</code>のregion_nameとこのsessionを使ったclientのregion_nameにそれぞれ該当するregionを指定します．boto_sessionとsagemaker_clientを作ったら，それを<code>sagemaker.session.Session</code>の対応する引数に渡し，出来上がったsessionをさらに，<code>sagemaker.analytics.ExperimentAnalytics</code>のsagemaker_sessionの引数に渡すことで実験結果を取得できます．</p>
 <p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
 <h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
 <p>この方法は，Step Functionsのワークフローを定義するjsonファイルの&quot;Environment&quot;変数に<code>AWS_DEFAULT_REGION</code>を設定するだけになります．</p>

@@ -59,7 +59,7 @@ trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
 analytics_tables = trial_component_analytics.dataframe()
 ```
 
-boto_sessionとsagemaker_clientを作って，`sagemaker.session.Session`に渡してできたsessionをさらに，`ExperimentAnalytics`のsagemaker_sessionの引数に渡すことで実験結果を取得できます．
+`boto3.session.Session`のregion_nameとこのsessionを使ったclientのregion_nameにそれぞれ該当するregionを指定します．boto_sessionとsagemaker_clientを作ったら，それを`sagemaker.session.Session`の対応する引数に渡し，出来上がったsessionをさらに，`sagemaker.analytics.ExperimentAnalytics`のsagemaker_sessionの引数に渡すことで実験結果を取得できます．
 
 この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．
 
