@@ -23,28 +23,30 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Math Typesetting - Fractal Prologue</title>
+<title>ValueError: Must setup local AWS configurationの対処方法 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="A brief guide to setup KaTeX" />
+<meta name="description" content="Masataka Kashiwagi, a machine learning engineer" />
 
 
-<meta property="og:title" content="Math Typesetting" />
-<meta property="og:description" content="A brief guide to setup KaTeX" />
+<meta name="keywords" content="Dev, AWS" />
+
+<meta property="og:title" content="ValueError: Must setup local AWS configurationの対処方法" />
+<meta property="og:description" content="はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/old/math-typesetting/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="old" />
-<meta property="article:published_time" content="2020-03-08T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-03-08T00:00:00+00:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-26T17:16:07+09:00" />
+<meta property="article:modified_time" content="2021-12-26T17:16:07+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Math Typesetting"/>
-<meta name="twitter:description" content="A brief guide to setup KaTeX"/>
+<meta name="twitter:title" content="ValueError: Must setup local AWS configurationの対処方法"/>
+<meta name="twitter:description" content="はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと"/>
 
 
 
@@ -124,38 +126,95 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/old/math-typesetting/">Math Typesetting</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/">ValueError: Must setup local AWS configurationの対処方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-08</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;122 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1959 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.</p>
-<p>In this example we will be using <a href="https://katex.org/" target="_blank">KaTeX</a></p>
+        <h2 id="はじめに">はじめに</h2>
+<p>Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，<code>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</code>というエラーが発生したので，その対処方法をメモしておきます．</p>
+<p>結論から言うと，エラー内容にある通り<code>region</code>の指定を行うことで解決できます．</p>
+<p>方法としては2つあり，1つは<code>boto_session</code>と<code>sagemaker_client</code>の<code>region_name</code>を指定する．もう1つは環境変数に<code>AWS_DEFAULT_REGION</code>を設定する．</p>
+<p>方法は2種類ありますが，Step Functionsの設定ファイルに環境変数<code>AWS_DEFAULT_REGION</code>を1行追記するのが簡単かと思います．あと，個人的には実行するStep Functionsの実行regionを設定して欲しい気持ちもあります．</p>
+<h2 id="configuration-error">Configuration Error</h2>
+<p>SageMaker Experimentsに保存されている実験結果は<code>sagemaker.analytics.ExperimentAnalytics</code>のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．</p>
+<blockquote>
+<p><code>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</code></p>
+</blockquote>
+<p>Configurationは公式ドキュメントを見ると以下のことが書かれています．</p>
+<blockquote>
+<p>Configuration - Overview <br>
+Boto3 looks at various configuration locations until it finds configuration values. Boto3 adheres to the following lookup order when searching through sources for configuration values:</p>
 <ul>
-<li>Create a partial under <code>/layouts/partials/math.html</code></li>
-<li>Within this partial reference the <a href="https://katex.org/docs/autorender.html" target="_blank">Auto-render Extension</a> or host these scripts locally.</li>
-<li>Include the partial in your templates like so:</li>
+<li>A Config object that&rsquo;s created and passed as the config parameter when creating a client</li>
+<li>Environment variables</li>
+<li>The ~/.aws/config file</li>
 </ul>
-<pre><code>{{ if or .Params.math .Site.Params.math }}
-{{ partial &quot;math.html&quot; . }}
-{{ end }}
+</blockquote>
+<p>上から順番に優先度が高いものになっていて，下位で設定している内容よりも上位で設定した内容が反映されます．</p>
+<p>今回の場合は，1番目と2番目は特段設定していないので，3番目が採用されて問題ないかなと思っていましたが，上述のエラーが発生しました．AWSのクレデンシャル情報（config, credentials）はローカルの<code>~/.aws/</code>配下に置かれており，build時にローカルにあるファイルをvolumesマウントしてコンテナ内と同期しています．</p>
+<p>この設定では上手くいかなかったので，1番目or2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！</p>
+<h2 id="config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</h2>
+<p>公式ドキュメントに記載されている優先度が1番高い方法になります．<code>botocore.config.Config</code>をインスタンス化して使うことで解決する方法になりますが，今回はわざわざConfig objectを使わずに<code>region_name</code>を指定する方法を説明します．</p>
+<pre><code class="language-python">import boto3
+import sagemaker
+
+# sessionとclientの設定を行う
+boto_session = boto3.session.Session(region_name=&quot;ap-northeast-1&quot;)
+sagemaker_client = boto_session.client(service_name='sagemaker', region_name=&quot;ap-northeast-1&quot;)
+sess = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
+
+# ExperimentAnalyticsをインスタンス化する
+trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
+    experiment_name='sample-experiments01',
+    sagemaker_session=sess
+)
+
+# データフレーム化
+analytics_tables = trial_component_analytics.dataframe()
 </code></pre>
+<p>boto_sessionとsagemaker_clientを作って，<code>sagemaker.session.Session</code>に渡してできたsessionをさらに，<code>ExperimentAnalytics</code>のsagemaker_sessionの引数に渡すことで実験結果を取得できます．</p>
+<p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
+<h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
+<p>この方法は，Step Functionsのワークフローを定義するjsonファイルの&quot;Environment&quot;変数に<code>AWS_DEFAULT_REGION</code>を設定するだけになります．</p>
+<p>Step Functionsの定義ファイルのパラメータ部分は下記のような感じです．（今回はSageMakerのProcessingJobを使って実行しています）</p>
+<pre><code class="language-json">&quot;Parameters&quot;: {
+  &quot;AppSpecification&quot;: {
+    &quot;ImageUri&quot;: &quot;hogehoge.dkr.ecr.ap-northeast-1.amazonaws.com/mlops-experiments:latest&quot;,
+    &quot;ContainerEntrypoint&quot;: [
+    &quot;python3&quot;,
+    &quot;/opt/ml/code/get_experiments.py&quot;
+    ]
+  },
+  &quot;Environment&quot;: {
+    &quot;AWS_DEFAULT_REGION&quot;: &quot;ap-northeast-1&quot;
+  }
+}
+</code></pre>
+<p>スクリプトの中身は以下になります．sessionの設定が必要なくなります．</p>
+<pre><code class="language-python">import sagemaker
+
+# ExperimentAnalyticsをインスタンス化する
+trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
+    experiment_name='sample-experiments01'
+)
+
+# データフレーム化
+analytics_tables = trial_component_analytics.dataframe()
+</code></pre>
+<h2 id="おわりに">おわりに</h2>
+<p>今回は，Step FunctionsでSageMakerのProceesingJobを使った際に発生したエラーの対処方法を備忘録として残したものになります．</p>
+<p>Configurationの設定に優先順位があることを知ったので，この辺りは今回に限らず注意が必要だなと思いました．今回のエラーに対する対処方法は複数あるので，開発している状況に合わせて使い分けていければと思います．</p>
+<h2 id="参考">参考</h2>
 <ul>
-<li>To enable KaTex globally set the parameter <code>math</code> to <code>true</code> in a project&rsquo;s configuration</li>
-<li>To enable KaTex on a per page basis include the parameter <code>math: true</code> in content files.</li>
+<li><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html" target="_blank">Boto3 Docs - Configuration</a></li>
+<li><a href="https://stackoverflow.com/questions/55869651/how-to-fix-aws-region-error-valueerror-must-setup-local-aws-configuration-with" target="_blank">How to fix aws region error &ldquo;ValueError: Must setup local AWS configuration with a region supported by SageMaker&rdquo;</a></li>
 </ul>
-<p><strong>Note:</strong> Use the online reference of <a href="https://katex.org/docs/supported.html" target="_blank">Supported TeX Functions</a>
-</p>
-<h2 id="examples">Examples</h2>
-<p>Inline math: $$ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $$</p>
-<p>Block math:</p>
-<p>$$
-\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
-$$</p>
+
         <div id="share-buttons">
             
 
@@ -187,13 +246,6 @@ $$</p>
     </div>
 </article>
 
-
-<div class="license markdown-body">
-    <blockquote>
-        <p>Unless otherwise noted, the content of this site is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-               target="_blank">CC BY-NC-SA 4.0</a>.</p>
-    </blockquote>
-</div>
 
 
 
@@ -274,7 +326,12 @@ $$</p>
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#examples">Examples</a></li>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#configuration-error">Configuration Error</a></li>
+    <li><a href="#config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</a></li>
+    <li><a href="#環境変数を設定する方法">環境変数を設定する方法</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -362,6 +419,22 @@ $$</p>
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#configuration-error">Configuration Error</a></li>
+    <li><a href="#config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</a></li>
+    <li><a href="#環境変数を設定する方法">環境変数を設定する方法</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
     </div>
     
     
