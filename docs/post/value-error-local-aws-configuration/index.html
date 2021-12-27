@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/">ValueError: Must setup local AWS configurationの対処方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2080 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2186 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
 
     </div>
     
@@ -138,8 +138,12 @@
         <h2 id="はじめに">はじめに</h2>
 <p>Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，<code>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</code>というエラーが発生したので，その対処方法をメモしておきます．</p>
 <p>結論から言うと，エラー内容にある通り<code>region</code>の指定を行うことで解決できます．</p>
-<p>方法としては2つあり，1つは<code>boto_session</code>と<code>sagemaker_client</code>の<code>region_name</code>を指定する．もう1つは環境変数に<code>AWS_DEFAULT_REGION</code>を設定する．</p>
-<p>方法は2種類ありますが，Step Functionsの設定ファイルに環境変数<code>AWS_DEFAULT_REGION</code>を1行追記するのが簡単かと思います．あと，個人的には実行するStep Functionsの実行regionを設定して欲しい気持ちもあります．</p>
+<p>方法としては2つあります．</p>
+<ul>
+<li><code>boto_session</code>と<code>sagemaker_client</code>の<code>region_name</code>を指定する</li>
+<li>環境変数に<code>AWS_DEFAULT_REGION</code>を設定する</li>
+</ul>
+<p>2つ目の方法のStep Functionsの定義ファイルに環境変数<code>AWS_DEFAULT_REGION</code>を1行追記するのが簡単かと思います．</p>
 <h2 id="configuration-error">Configuration Error</h2>
 <p>SageMaker Experimentsに保存されている実験結果は<code>sagemaker.analytics.ExperimentAnalytics</code>のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．</p>
 <blockquote>
@@ -166,18 +170,25 @@ import sagemaker
 # sessionとclientの設定を行う
 boto_session = boto3.session.Session(region_name=&quot;ap-northeast-1&quot;)
 sagemaker_client = boto_session.client(service_name='sagemaker', region_name=&quot;ap-northeast-1&quot;)
-sess = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
+sagemaker_session = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
 
 # ExperimentAnalyticsをインスタンス化する
 trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
     experiment_name='sample-experiments01',
-    sagemaker_session=sess
+    sagemaker_session=sagemaker_session
 )
 
 # データフレーム化
 analytics_tables = trial_component_analytics.dataframe()
 </code></pre>
-<p><code>boto3.session.Session</code>のregion_nameとこのsessionを使ったclientのregion_nameにそれぞれ該当するregionを指定します．boto_sessionとsagemaker_clientを作ったら，それを<code>sagemaker.session.Session</code>の対応する引数に渡し，出来上がったsessionをさらに，<code>sagemaker.analytics.ExperimentAnalytics</code>のsagemaker_sessionの引数に渡すことで実験結果を取得できます．</p>
+<p>コードの流れは以下になります．</p>
+<ul>
+<li>boto_sessionとsagemaker_clientを作成する</li>
+<li><code>sagemaker.session.Session</code>の引数にそれぞれを渡す</li>
+<li>sagemaker_sessionを<code>sagemaker.analytics.ExperimentAnalytics</code>の引数に渡す</li>
+<li>取得した実験結果をデータフレーム化する</li>
+</ul>
+<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，<code>boto3.session.Session</code>の<strong>region_name</strong>とこのsessionを使ったclientの<strong>region_name</strong>に使用するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
 <p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
 <h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
 <p>この方法は，Step Functionsのワークフローを定義するjsonファイルの&quot;Environment&quot;変数に<code>AWS_DEFAULT_REGION</code>を設定するだけになります．</p>
@@ -209,6 +220,7 @@ analytics_tables = trial_component_analytics.dataframe()
 <h2 id="おわりに">おわりに</h2>
 <p>今回は，Step FunctionsでSageMakerのProceesingJobを使った際に発生したエラーの対処方法を備忘録として残したものになります．</p>
 <p>Configurationの設定に優先順位があることを知ったので，この辺りは今回に限らず注意が必要だなと思いました．今回のエラーに対する対処方法は複数あるので，開発している状況に合わせて使い分けていければと思います．</p>
+<p>あと，個人的には実行しているStep Functionsのregionをセットして欲しい気持ちもあります．まーこれは状況次第なので，なんとも言えない気もします&hellip;</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html" target="_blank">Boto3 Docs - Configuration</a></li>

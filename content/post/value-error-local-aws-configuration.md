@@ -14,9 +14,11 @@ Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナ�
 
 結論から言うと，エラー内容にある通り`region`の指定を行うことで解決できます．
 
-方法としては2つあり，1つは`boto_session`と`sagemaker_client`の`region_name`を指定する．もう1つは環境変数に`AWS_DEFAULT_REGION`を設定する．
+方法としては2つあります．
+- `boto_session`と`sagemaker_client`の`region_name`を指定する
+- 環境変数に`AWS_DEFAULT_REGION`を設定する
 
-方法は2種類ありますが，Step Functionsの設定ファイルに環境変数`AWS_DEFAULT_REGION`を1行追記するのが簡単かと思います．あと，個人的には実行するStep Functionsの実行regionを設定して欲しい気持ちもあります．
+2つ目の方法のStep Functionsの定義ファイルに環境変数`AWS_DEFAULT_REGION`を1行追記するのが簡単かと思います．
 
 ## Configuration Error
 SageMaker Experimentsに保存されている実験結果は`sagemaker.analytics.ExperimentAnalytics`のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．
@@ -47,19 +49,25 @@ import sagemaker
 # sessionとclientの設定を行う
 boto_session = boto3.session.Session(region_name="ap-northeast-1")
 sagemaker_client = boto_session.client(service_name='sagemaker', region_name="ap-northeast-1")
-sess = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
+sagemaker_session = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
 
 # ExperimentAnalyticsをインスタンス化する
 trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
     experiment_name='sample-experiments01',
-    sagemaker_session=sess
+    sagemaker_session=sagemaker_session
 )
 
 # データフレーム化
 analytics_tables = trial_component_analytics.dataframe()
 ```
 
-`boto3.session.Session`のregion_nameとこのsessionを使ったclientのregion_nameにそれぞれ該当するregionを指定します．boto_sessionとsagemaker_clientを作ったら，それを`sagemaker.session.Session`の対応する引数に渡し，出来上がったsessionをさらに，`sagemaker.analytics.ExperimentAnalytics`のsagemaker_sessionの引数に渡すことで実験結果を取得できます．
+コードの流れは以下になります．
+- boto_sessionとsagemaker_clientを作成する
+- `sagemaker.session.Session`の引数にそれぞれを渡す
+- sagemaker_sessionを`sagemaker.analytics.ExperimentAnalytics`の引数に渡す
+- 取得した実験結果をデータフレーム化する
+
+ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，`boto3.session.Session`の**region_name**とこのsessionを使ったclientの**region_name**に使用するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．
 
 この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．
 
@@ -102,6 +110,7 @@ analytics_tables = trial_component_analytics.dataframe()
 
 Configurationの設定に優先順位があることを知ったので，この辺りは今回に限らず注意が必要だなと思いました．今回のエラーに対する対処方法は複数あるので，開発している状況に合わせて使い分けていければと思います．
 
+あと，個人的には実行しているStep Functionsのregionをセットして欲しい気持ちもあります．まーこれは状況次第なので，なんとも言えない気もします...
 
 ## 参考
 - [Boto3 Docs - Configuration](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html)
