@@ -110,7 +110,7 @@ analytics_tables = trial_component_analytics.dataframe()
 
 Configurationの設定に優先順位があることを知ったので，この辺りは今回に限らず注意が必要だなと思いました．今回のエラーに対する対処方法は複数あるので，開発している状況に合わせて使い分けていければと思います．
 
-あと，個人的には実行しているStep Functionsのregionをセットして欲しい気持ちもあります．まーこれは状況次第なので，なんとも言えない気もします...
+あと，個人的には実行しているStep Functionsのregionをセットして欲しい気持ちもありますが，まーこれは状況次第なので，なんとも言えない気もします...
 
 ## 参考
 - [Boto3 Docs - Configuration](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html)
