@@ -10,20 +10,20 @@ tags = ["Dev", "AWS"]
 +++
 
 ## はじめに
-Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，`ValueError: Must setup local AWS configuration with a region supported by SageMaker.`というエラーが発生したので，その対処方法をメモしておきます．
+Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，「**ValueError: Must setup local AWS configuration with a region supported by SageMaker.**」というエラーが発生したので，その対処方法をメモしておきます．
 
-結論から言うと，エラー内容にある通り`region`の指定を行うことで解決できます．
+結論から言うと，エラー内容にある通り「**region**」の指定を行うことで解決できます．
 
 方法としては2つあります．
-- `boto_session`と`sagemaker_client`の`region_name`を指定する
-- 環境変数に`AWS_DEFAULT_REGION`を設定する
+- 「**boto_session**，**sagemaker_client**」の「**region_name**」を指定する
+- 環境変数に「**AWS_DEFAULT_REGION**」を設定する
 
-2つ目の方法のStep Functionsの定義ファイルに環境変数`AWS_DEFAULT_REGION`を1行追記するのが簡単かと思います．
+2つ目の方法のStep Functionsの定義ファイルに環境変数: AWS_DEFAULT_REGIONを1行追記するのが簡単かと思います．
 
 ## Configuration Error
 SageMaker Experimentsに保存されている実験結果は`sagemaker.analytics.ExperimentAnalytics`のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．
 
-> `ValueError: Must setup local AWS configuration with a region supported by SageMaker.`
+> ValueError: Must setup local AWS configuration with a region supported by SageMaker.
 
 Configurationは公式ドキュメントを見ると以下のことが書かれています．
 
@@ -67,12 +67,12 @@ analytics_tables = trial_component_analytics.dataframe()
 - sagemaker_sessionを`sagemaker.analytics.ExperimentAnalytics`の引数に渡す
 - 取得した実験結果をデータフレーム化する
 
-ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，`boto3.session.Session`の**region_name**とこのsessionを使ったclientの**region_name**に使用するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．
+ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「`boto3.session.Session`のregion_name」とこのsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．
 
 この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．
 
 ## 環境変数を設定する方法
-この方法は，Step Functionsのワークフローを定義するjsonファイルの"Environment"変数に`AWS_DEFAULT_REGION`を設定するだけになります．
+Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「**AWS_DEFAULT_REGION**」を設定する方法になります．
 
 Step Functionsの定義ファイルのパラメータ部分は下記のような感じです．（今回はSageMakerのProcessingJobを使って実行しています）
 

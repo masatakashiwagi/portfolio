@@ -129,25 +129,25 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/">ValueError: Must setup local AWS configurationの対処方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2187 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2183 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，<code>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</code>というエラーが発生したので，その対処方法をメモしておきます．</p>
-<p>結論から言うと，エラー内容にある通り<code>region</code>の指定を行うことで解決できます．</p>
+<p>Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，「<strong>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</strong>」というエラーが発生したので，その対処方法をメモしておきます．</p>
+<p>結論から言うと，エラー内容にある通り「<strong>region</strong>」の指定を行うことで解決できます．</p>
 <p>方法としては2つあります．</p>
 <ul>
-<li><code>boto_session</code>と<code>sagemaker_client</code>の<code>region_name</code>を指定する</li>
-<li>環境変数に<code>AWS_DEFAULT_REGION</code>を設定する</li>
+<li>「<strong>boto_session</strong>，<strong>sagemaker_client</strong>」の「<strong>region_name</strong>」を指定する</li>
+<li>環境変数に「<strong>AWS_DEFAULT_REGION</strong>」を設定する</li>
 </ul>
-<p>2つ目の方法のStep Functionsの定義ファイルに環境変数<code>AWS_DEFAULT_REGION</code>を1行追記するのが簡単かと思います．</p>
+<p>2つ目の方法のStep Functionsの定義ファイルに環境変数: AWS_DEFAULT_REGIONを1行追記するのが簡単かと思います．</p>
 <h2 id="configuration-error">Configuration Error</h2>
 <p>SageMaker Experimentsに保存されている実験結果は<code>sagemaker.analytics.ExperimentAnalytics</code>のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．</p>
 <blockquote>
-<p><code>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</code></p>
+<p>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</p>
 </blockquote>
 <p>Configurationは公式ドキュメントを見ると以下のことが書かれています．</p>
 <blockquote>
@@ -188,10 +188,10 @@ analytics_tables = trial_component_analytics.dataframe()
 <li>sagemaker_sessionを<code>sagemaker.analytics.ExperimentAnalytics</code>の引数に渡す</li>
 <li>取得した実験結果をデータフレーム化する</li>
 </ul>
-<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，<code>boto3.session.Session</code>の<strong>region_name</strong>とこのsessionを使ったclientの<strong>region_name</strong>に使用するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
+<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「<code>boto3.session.Session</code>のregion_name」とこのsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
 <p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
 <h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
-<p>この方法は，Step Functionsのワークフローを定義するjsonファイルの&quot;Environment&quot;変数に<code>AWS_DEFAULT_REGION</code>を設定するだけになります．</p>
+<p>Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「<strong>AWS_DEFAULT_REGION</strong>」を設定する方法になります．</p>
 <p>Step Functionsの定義ファイルのパラメータ部分は下記のような感じです．（今回はSageMakerのProcessingJobを使って実行しています）</p>
 <pre><code class="language-json">&quot;Parameters&quot;: {
   &quot;AppSpecification&quot;: {
