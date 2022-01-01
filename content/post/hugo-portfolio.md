@@ -96,8 +96,6 @@ faviconを設定する方法は，下記の3ステップになります．
 
     なので，これに合わせて名前を変更するかwebmanifestを新しく作成し，その中に諸々の内容を記載する必要がある．
 
-### Hugo Future Imperfect Slim:
-
 #### github.ioでサイトをhostした場合のpath設定
 
 今回作成したサイトをgithub.ioでhostした場合に発生した内容です．

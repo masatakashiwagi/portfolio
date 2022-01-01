@@ -10,7 +10,7 @@ tags = ["Dev", "Data"]
 +++
 
 ## はじめに
-今回は，teamayaという個人プロジェクトで進めている<span class="marker_yellow">データ連携</span>の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！
+今回は，teamayaという個人プロジェクトで進めている<span class="marker_yellow">**データ連携**</span>の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！
 
 <iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="masatakashiwagi/teamaya: This is a repository for Data integration and Machine Learning Pipeline." src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya" frameborder="0" scrolling="no"></iframe>
 
@@ -33,7 +33,7 @@ tags = ["Dev", "Data"]
 ![データ連携フローのアーキテクチャー](../../img/teamaya-data-workflow.png "データ連携フローのアーキテクチャー")
 
 アンドリュー・カーネギーの以下の名言にもあるように，機械学習エコシステムを自分で作っていくために，一歩一歩進めています！
-> <span class="marker_yellow">**最も高い目標を達成するには、一歩一歩進むしかないという事実を、頭に入れておかなければならない。**</span>
+> **最も高い目標を達成するには、一歩一歩進むしかないという事実を、頭に入れておかなければならない。**
 
 ## BigQueryとスプレッドシートの設定
 GCPのアカウント登録方法は割愛しますが，gmailがあれば簡単に登録できます．登録が完了したら，適当な[プロジェクトを作成](https://cloud.google.com/resource-manager/docs/creating-managing-projects)して下さい．

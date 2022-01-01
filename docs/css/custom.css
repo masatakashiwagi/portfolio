@@ -19,7 +19,7 @@ button.btn-article {
     line-height: 1.5;
     position: relative;
     display: inline-block;
-    padding: 8px 15px;
+    padding: 7px 14px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -49,6 +49,7 @@ a.btn-radius-solid:hover {
     background: -webkit-gradient(linear, left bottom, left top, from(#fdfbfb), to(#ebedee));
     background: -webkit-linear-gradient(bottom, #fdfbfb 0%, #ebedee 100%);
     background: linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
+    color: #3b469b;
 }
 
 header {
@@ -79,11 +80,11 @@ span.date {
 }
 
 .marker_pink {
-    background: linear-gradient(transparent 80%, #FFC0CB 80%);
+    background: linear-gradient(transparent 85%, #FFC0CB 85%);
 }
 
 .marker_yellow {
-    background: linear-gradient(transparent 80%, #fff352 80%);
+    background: linear-gradient(transparent 85%, #fff352 85%);
 }
 
 /* .col-md-9 {width:100%} */
