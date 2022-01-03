@@ -3,4 +3,4 @@ Disallow: /archives/
 Disallow: /tags/
 Disallow: /old/
 Disallow: /search/
-Sitemap: https://masatakashiwagi.github.io/sitemap.xml
+Sitemap: https://masatakashiwagi.github.io/portfolio/sitemap.xml
