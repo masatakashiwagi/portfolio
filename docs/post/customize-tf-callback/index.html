@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1548 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machinelearning">MachineLearning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1549 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machinelearning">MachineLearning</a>&nbsp;</span>
 
     </div>
     
@@ -143,7 +143,7 @@
 <h2 id="callback関数のカスタマイズ">Callback関数のカスタマイズ</h2>
 <p>Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code>クラスを継承した<code>CustomCallBack(tf.keras.callbacks.Callback)</code>クラスを作成します．この作成したクラスを<code>model.fit</code>時に引数のcallbacksに渡してやることで使用することができます．</p>
 <p>今回はSageMaker Experimentsで使うことを想定したもので，Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合を想定）
-MetricDefinitionsはこちらが参考になります→<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html" target="_blank">Define Metrics</a></p>
+MetricDefinitionsはこちらが参考になります → <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html" target="_blank">Define Metrics</a></p>
 <pre><code class="language-python">sagemaker.estimator.Estimator(
     ...,
     metric_definitions={
@@ -154,7 +154,7 @@ MetricDefinitionsはこちらが参考になります→<a href="https://docs.aw
     }
 )
 </code></pre>
-<p>しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは<code>loss</code>，メトリクスは<code>root_mean_squared_error</code>でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに<code>train_</code>を付けて，Regexで簡単に取得したいという気持ちです．</p>
+<p>しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは「<strong>loss</strong>」，メトリクスは「<strong>root_mean_squared_error</strong>」でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに「<strong>train_</strong>」を付けて，Regexで簡単に取得したいという気持ちです．</p>
 <p>Tensorflow公式ドキュメントの<a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a>や<a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a>を参考に作成しました．</p>
 <pre><code class="language-python">import tensorflow as tf
 

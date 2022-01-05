@@ -20,7 +20,7 @@ AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モ
 Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．`tf.keras.callbacks.Callback`クラスを継承した`CustomCallBack(tf.keras.callbacks.Callback)`クラスを作成します．この作成したクラスを`model.fit`時に引数のcallbacksに渡してやることで使用することができます．
 
 今回はSageMaker Experimentsで使うことを想定したもので，Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合を想定）
-MetricDefinitionsはこちらが参考になります→[Define Metrics](https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
+MetricDefinitionsはこちらが参考になります → [Define Metrics](https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
 
 ```python
 sagemaker.estimator.Estimator(
@@ -34,7 +34,7 @@ sagemaker.estimator.Estimator(
 )
 ```
 
-しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは`loss`，メトリクスは`root_mean_squared_error`でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに`train_`を付けて，Regexで簡単に取得したいという気持ちです．
+しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは「**loss**」，メトリクスは「**root_mean_squared_error**」でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに「**train_**」を付けて，Regexで簡単に取得したいという気持ちです．
 
 Tensorflow公式ドキュメントの[Writing your own callbacks](https://www.tensorflow.org/guide/keras/custom_callback?hl=en)や[tf.keras.callbacks.Callback](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback)を参考に作成しました．
 

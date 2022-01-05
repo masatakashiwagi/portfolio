@@ -129,16 +129,16 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/">RuntimeError: CUDA error: Device-side assert triggeredの解決方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;727 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;754 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Pytorchでモデルを作成していた際に，<code>RuntimeError: CUDA error: device-side assert triggered</code>が発生して，原因がよくわからなかったので，調べたことをメモしておきます．</p>
+<p>Pytorchでモデルを作成していた際に，「<strong>RuntimeError: CUDA error: device-side assert triggered</strong>」が発生し，原因がよくわからなかったので，調べたことをメモしておきます．</p>
 <h2 id="エラー発生の原因">エラー発生の原因</h2>
-<p>調べてみると，原因としては</p>
+<p>調べてみると，原因としては以下のようなものがあります．</p>
 <ul>
 <li>ライブラリのVersionが違う</li>
 <li>ラベル/クラスの数とネットワークの入出力のshapeが異なる</li>
@@ -147,10 +147,10 @@
 <p>などなど&hellip;</p>
 <p>よくあるのが，下2つかなと思います．</p>
 <h3 id="ラベルクラスの数とネットワークの入出力のshapeが異なる">ラベル/クラスの数とネットワークの入出力のshapeが異なる</h3>
-<p>想定しているラベルもしくはクラス数とネットワークの出力のクラス数が異なる場合，この場合は<code>nn.Linear(input, num_class)</code>で合わせてやる必要がある．</p>
+<p>想定しているラベルもしくはクラス数とネットワークの出力のクラス数が異なる場合，この場合はFC層の最後に<code>nn.Linear(input, num_class)</code>を入れて調整する必要があります．</p>
 <h3 id="loss関数の入力が正確でない">Loss関数の入力が正確でない</h3>
 <p>僕が遭遇したのはこちらのパターンになります．</p>
-<p>例えば，BCELossを考えた場合，計算するためには値としては0~1を取る必要があります．そのため普通は最終出力に<code>Sigmoid, Softmax関数</code>を入れるかと思います．</p>
+<p>例えば，BCELossを考えた場合，計算するためには値としては0~1を取る必要があります．そのため普通は最終出力に<strong>Sigmoid関数</strong> or <strong>Softmax関数</strong>を入れるかと思います．</p>
 <p>それ以外にもLossの設計で以下のようにしておくと良いかと思います．</p>
 <pre><code class="language-python">class BCELoss(nn.Module):
     def __init__(self):
@@ -171,8 +171,7 @@
 <pre><code class="language-bash">CUDA_LAUNCH_BLOCKING=1
 </code></pre>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，Pytorchでのモデル作成時に発生したエラーについて整理しました，モデル作成時にはモデルのIn/OutやLoss関数の定義をきちんと理解し把握しておく必要があると改めて感じました．<br>
-同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．</p>
+<p>今回は，Pytorchでのモデル作成時に発生したエラーについて整理しました，モデル作成時にはモデルのIn/OutやLoss関数の定義をきちんと理解し把握しておく必要があると改めて感じました．同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://towardsdatascience.com/cuda-error-device-side-assert-triggered-c6ae1c8fa4c3" target="_blank">CUDA error 59: Device-side assert triggered</a></li>

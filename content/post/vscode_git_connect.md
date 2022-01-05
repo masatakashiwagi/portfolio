@@ -13,7 +13,7 @@ share = true
 そんな中で，タイトルにもあるようにVSCodeからgit pushしようとしたら，`<アカウント名>@github.com: Permission denied (publickey).`とエラーが出たので，それを解消してVSCodeでgit pushできるようにした備忘録になります．
 
 ## エラー原因（SSH接続エラー）
-`Permission denied (publickey)`とあり，GitHubにSSH接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．
+「**Permission denied (publickey)**」とあり，GitHubにSSH接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．
 
 以下のコマンドを打つことで接続を確認することができます．
 ```bash

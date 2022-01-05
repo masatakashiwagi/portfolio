@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/">VSCodeとgitを連携してpushできるようにするまで</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1286 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1297 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
@@ -139,7 +139,7 @@
 <p>今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使ってみようと思って使っています．
 そんな中で，タイトルにもあるようにVSCodeからgit pushしようとしたら，<code>&lt;アカウント名&gt;@github.com: Permission denied (publickey).</code>とエラーが出たので，それを解消してVSCodeでgit pushできるようにした備忘録になります．</p>
 <h2 id="エラー原因ssh接続エラー">エラー原因（SSH接続エラー）</h2>
-<p><code>Permission denied (publickey)</code>とあり，GitHubにSSH接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．</p>
+<p>「<strong>Permission denied (publickey)</strong>」とあり，GitHubにSSH接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．</p>
 <p>以下のコマンドを打つことで接続を確認することができます．</p>
 <pre><code class="language-bash">ssh -T git@github.com
 &gt; git@github.com: Permission denied (publickey).

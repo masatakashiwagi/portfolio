@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/">Excel Binary WorkbookをPythonで処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1391 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/datascience">DataScience</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1393 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/datascience">DataScience</a>&nbsp;</span>
 
     </div>
     
@@ -142,7 +142,7 @@
 <h2 id="xlsbとは">.xlsbとは</h2>
 <p><a href="https://www.weblio.jp/content/.xlsb" target="_blank">Weblio辞書</a>によると以下のように記載されています．</p>
 <blockquote>
-<p><code>.xlsb</code>とは，Excel 2007で作成したブックを「XML形式でないバイナリブック」として保存する際に用いられる拡張子である．<code>.xlsb</code>でブックを保存した場合はファイル全体がバイナリ形式で保存され，XMLベースである<code>.xlsx</code>などのファイル形式で保存した場合と比べて，ファイルサイズを数分の1程度に抑えることができる．</p>
+<p>.xlsbとは，Excel 2007で作成したブックを「XML形式でないバイナリブック」として保存する際に用いられる拡張子である．.xlsbでブックを保存した場合はファイル全体がバイナリ形式で保存され，XMLベースである.xlsxなどのファイル形式で保存した場合と比べて，ファイルサイズを数分の1程度に抑えることができる．</p>
 </blockquote>
 <p>受け取ったファイルは<code>.xlsb</code>形式でも100MBぐらいあったため，<code>.xlsx</code>形式だとかなり容量が大きく，ファイルを開くと処理が重たくなることが想像できるので，圧縮したのだと考えられます．</p>
 <h2 id="excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</h2>
@@ -177,9 +177,9 @@ with open_workbook('Book1.xlsb') as wb:
                 writer.writerow([c.v for c in row])
 </code></pre>
 <p>もしpandasのデータフレームに変換したい場合は，参考ページのコードで可能となります．</p>
-<p>ただし，時刻変換に関して少し注意が必要なので，記載しておくと公式にもある通り，日付は<code>float</code>に変換されてしまうため，<code>convert_date</code>関数を使う必要があります．</p>
+<p>ただし，時刻変換に関して少し注意が必要なので，記載しておくと公式にもある通り，日付は<strong>float</strong>に変換されてしまうため，<strong>convert_date関数</strong>を使う必要があります．</p>
 <blockquote>
-<p>Note that dates will appear as floats. You must use the <code>convert_date(date)</code> method from the corresponding Workbook instance to turn them into <code>datetime</code>.</p>
+<p>Note that dates will appear as floats. You must use the convert_date(date) method from the corresponding Workbook instance to turn them into datetime.</p>
 </blockquote>
 <p>なので，元のファイルに時刻が入っている場合には上記変換をコードの中に入れて処理する必要がありますのでご注意下さい．</p>
 <pre><code class="language-python">print(wb.convert_date(41235.45578))
@@ -193,7 +193,7 @@ with open_workbook('Book1.xlsb') as wb:
 </ul>
 <h2 id="追記">追記</h2>
 <h4 id="2020-01-05">2020-01-05</h4>
-<p>pandasの<code>version=1.0.0</code>で<code>.xlsb</code>ファイルをロードできるようになったみたいです．</p>
+<p>pandasの「<strong>version=1.0.0</strong>」で<code>.xlsb</code>ファイルをロードできるようになったみたいです．</p>
 <p>方法は<code>pd.read_excel</code>の引数で<code>engine=&quot;pyxlsb&quot;</code>と指定するだけです．</p>
 <pre><code class="language-python"># Returns a DataFrame
 pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
