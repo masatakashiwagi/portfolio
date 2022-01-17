@@ -150,21 +150,13 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
 
 # [[menu.link]]
 #   name = "GitHub"
-#   url = "https://github.com/masatakashiwagi"
+#   url = ""
 #   weight = 1
 # [[menu.link]]
 #   name = "Twitter"
-#   url = "https://twitter.com/asteriam_fp"
+#   url = ""
 #   weight = 2
 # [[menu.link]]
 #   name = "Linkedin"
-#   url = "https://www.linkedin.com/in/masatakakashiwagi/"
+#   url = ""
 #   weight = 3
-# [[menu.link]]
-#   name = "Kaggle"
-#   url = "https://www.kaggle.com/masatakashiwagi"
-#   weight = 4
-# [[menu.link]]
-#   name = "Note"
-#   url = "https://note.com/asteriam"
-#   weight = 5
