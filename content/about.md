@@ -82,7 +82,3 @@ Department of Physical Science, Osaka Prefecture University
 
 ### 90's same generation community
 * [Team90s](https://github.com/team90s "Team90s") - Kaggle team projects
-
-
-### Double-M2ML
-* [Double-M2.fm](https://github.com/double-m2ml/podcast.fm "Double-M2.fm") - Podcast channel.
