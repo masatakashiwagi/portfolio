@@ -72,13 +72,13 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# ここが今回のポイントで，nvidia-dockerをインストールします．
+# ここが今回のポイントで，nvidia-dockerをインストールします
 RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
     && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
     && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 RUN sudo apt-get update && sudo apt-get install -y nvidia-docker2
 
-# 必要なライブラリーをrequirements.lockを使ってインストールする
+# 必要なライブラリーをrequirements.lockを使ってインストールします
 COPY requirements.lock /tmp/requirements.lock
 RUN python3 -m pip install -U pip \
     && python3 -m pip install -r /tmp/requirements.lock \
@@ -171,6 +171,14 @@ Step Functionsとは，AWSが提供する各種サービスを組み合わせた
 ```
 
 細かい設定内容に関しては，[CreateTrainingJob](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html) というドキュメントを参考下さい．
+
+ここで，Environment（環境変数）の「**SAGEMAKER_PROGRAM**」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．
+
+元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），パスを指定することで任意のプログラムを実行することができます．
+
+> docker run <イメージ> train
+
+ただし，実行権限を与えておく必要があるので，Dockerfile内で`RUN chmod +x $PROGRAM_DIR/hello_gpu.py`としています．
 
 あとは，実行結果をCloudWatch Logsで確認して，以下の内容がログに出力されていればOKです．
 
