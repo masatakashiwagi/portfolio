@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
-title = "Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法"
-description = "AWSのStep Functionsを使ってGPU環境のSageMakerを動かすためのTips"
+title = "Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法"
+description = "AWSのStep Functionsを使ってSageMakerのGPU環境を動かすためのTips"
 date = 2022-01-30T13:16:43+09:00
 draft = false
 share = true

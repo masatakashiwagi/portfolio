@@ -8,7 +8,7 @@
     <language>en</language>
     <lastBuildDate>Sun, 30 Jan 2022 13:16:43 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法</title>
+      <title>Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</link>
       <pubDate>Sun, 30 Jan 2022 13:16:43 +0900</pubDate>
       
