@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.91.0" />
+
+
+
+<link rel="apple-touch-icon" sizes="120x120" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="AWSのStep Functionsを使ってGPU環境のSageMakerを動かすためのTips" />
+
+
+<meta name="keywords" content="AWS, Dev" />
+
+<meta property="og:title" content="Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法" />
+<meta property="og:description" content="AWSのStep Functionsを使ってGPU環境のSageMakerを動かすためのTips" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-30T13:16:43+09:00" />
+<meta property="article:modified_time" content="2022-01-30T13:16:43+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法"/>
+<meta name="twitter:description" content="AWSのStep Functionsを使ってGPU環境のSageMakerを動かすためのTips"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-199882807-1');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-199882807-1"></script>
+
+
+<script>
+    window.ga_tid = 'UA-199882807-1';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/">Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-01-30</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2254 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>Step FunctionsでSageMakerのリソースを特にカスタムコンテナイメージで使う場合，単純にInstanceTypeとして&quot;ml.g4dn.xlarge&quot;などのGPUマシンを設定するだけではGPUを使った学習はできなくて，使いたいDockerfileに少し手を加える必要があります．</p>
+<p>今回は備忘録も兼ねてDockerfileの中身を紹介しながら，GPU環境での動作確認をしたいと思います．</p>
+<p>以下の手順で動作確認を行っています．</p>
+<ol>
+<li>ローカルでDockerfileと動作確認用のPythonスクリプトを作成する</li>
+<li>ローカルでbuildし，AWS ECRにbuildしたイメージをpushする</li>
+<li>pushしたイメージのURIをSageMaker Training JobのTrainingImageに指定する</li>
+<li>Step Functionsを実行する</li>
+<li>CloudWatch Logsを確認する</li>
+</ol>
+<p>今回の動作確認フローは以下の図のようなイメージです．</p>
+<p><img class="img-zoomable" src="../../img/aws-gpu-img1.png" alt="動作確認フロー" />
+</p>
+<h2 id="自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</h2>
+<p>今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「<strong>nvidia-docker</strong>」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．</p>
+<p><a href="https://hub.docker.com/r/tensorflow/tensorflow/" target="_blank">TensorFlow Docker Images</a>から好きなgpu用のイメージを選択して下さい．今回は「tensorflow/tensorflow:2.6.1-gpu」を使用することにします．<strong>Optional Features</strong>にも記載されていますが，nvidia-dockerが必要だよとのことなので，この通りにします．</p>
+<blockquote>
+<p><code>-gpu</code> tags are based on Nvidia CUDA. You need nvidia-docker to run them. NOTE: GPU versions of TensorFlow 1.13 and above (this includes the <code>latest-</code> tags) require an NVidia driver that supports CUDA 10. See NVidia&rsquo;s support matrix.</p>
+</blockquote>
+<p>大事な部分は以下の4行になります．以前は<a href="https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44" target="_blank">こちらの記事</a>にも書かれていますが，<code>nvidia-container-toolkit</code>をインストールする必要があったみたいですが，今は<code>nvidia-docker2</code>をインストールすることで，<code>nvidia-container-toolkit</code>も一緒にインストールされるみたいで，よりシンプルになっています．</p>
+<pre><code class="language-dockerfile">RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+    &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+    &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+RUN sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-docker2
+</code></pre>
+<p>今回使用したDockerfile全体は以下になります．</p>
+<pre><code class="language-dockerfile"># Dockerfile.gpu
+FROM tensorflow/tensorflow:2.6.1-gpu
+
+# Set some environment variables.
+# PYTHONUNBUFFERED keeps Python from buffering our standard
+# output stream, which means that logs can be delivered to the user quickly.
+
+ENV PYTHONUNBUFFERED=TRUE
+
+# PYTHONDONTWRITEBYTECODE keeps Python from writing the .pyc files which
+# are unnecessary in this case.
+ENV PYTHONDONTWRITEBYTECODE=TRUE
+
+# DEBIAN_FRONTEND prevent from stoping docker build with tzdata
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get -y update &amp;&amp; apt-get install -y --no-install-recommends \
+        curl \
+        sudo \
+        libmecab-dev \
+        python3.8 \
+        python3-distutils \
+        python3-six \
+        git \
+        file \
+        wget \
+    &amp;&amp; apt-get clean \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# ここが今回のポイントで，nvidia-dockerをインストールします．
+RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+    &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+    &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+RUN sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-docker2
+
+# 必要なライブラリーをrequirements.lockを使ってインストールする
+COPY requirements.lock /tmp/requirements.lock
+RUN python3 -m pip install -U pip \
+    &amp;&amp; python3 -m pip install -r /tmp/requirements.lock \
+    &amp;&amp; python3 -m pip install sagemaker \
+    &amp;&amp; python3 -m pip install sagemaker-training \
+    &amp;&amp; rm /tmp/requirements.lock \
+    &amp;&amp; rm -rf /root/.cache
+
+# Timezone jst
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# Locale Japanese
+ENV LC_ALL=ja_JP.UTF-8
+
+# Set up the program in the image
+ENV PROGRAM_DIR=/opt/program
+COPY app $PROGRAM_DIR
+WORKDIR $PROGRAM_DIR
+ENV PATH=&quot;/opt/program:${PATH}&quot;
+
+RUN chmod +x $PROGRAM_DIR/hello_gpu.py
+
+CMD [&quot;python3&quot;]
+</code></pre>
+<p>また，SageMakerでGPUを認識しているかを確認するためのPythonスクリプトは以下になります．</p>
+<pre><code class="language-python"># hello_gpu.py
+import tensorflow as tf
+from tensorflow.python.client import device_lib
+
+
+def main():
+    # TensorflowのGPU確認
+    print(f'GPUs Available: {tf.test.is_gpu_available()}')
+    print(f&quot;Num GPUs Available: {len(tf.config.list_physical_devices('GPU'))}&quot;)
+    print(f'{device_lib.list_local_devices()}')
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>これらのファイルを用意して，ローカルでbuildを行います，buildした後はそのイメージをECRにpushすることで，Step Functionsで使用することができます．</p>
+<p>※ ECRへのpush方法や設定は今回割愛します．</p>
+<h2 id="step-functionsの設定">Step Functionsの設定</h2>
+<p>Step Functionsとは，AWSが提供する各種サービスを組み合わせたパイプラインを構築するためのワークフローサービスになります．機械学習向けのアクションも用意されていて，今回使用するSageMaker Training Jobもその一つになります．</p>
+<p>設定はyamlファイルのような形式でAWSのコンソール画面上で打ち込んでいきます．今回実施する内容の記述は以下の通りになります．</p>
+<pre><code class="language-yml">{
+  &quot;Comment&quot;: &quot;Check GPU env&quot;,
+  &quot;StartAt&quot;: &quot;Hello-GPU&quot;,
+  &quot;States&quot;: {
+    &quot;Hello-GPU&quot;: {
+      &quot;Comment&quot;: &quot;GPUの動作確認&quot;,
+      &quot;Type&quot;: &quot;Task&quot;,
+      &quot;Resource&quot;: &quot;arn:aws:states:::sagemaker:createTrainingJob.sync&quot;,
+      &quot;Parameters&quot;: {
+        &quot;RoleArn&quot;: &quot;&lt;SageMaker Training Jobの実行権限がアタッチされているロール&gt;&quot;,
+        &quot;TrainingJobName&quot;: &quot;sample-training-job&quot;,
+        &quot;AlgorithmSpecification&quot;: {
+          &quot;EnableSageMakerMetricsTimeSeries&quot;: true,
+          &quot;TrainingImage&quot;: &quot;&lt;アカウントID&gt;.dkr.ecr.ap-northeast-1.amazonaws.com/sample:latest-gpu&quot;,
+          &quot;TrainingInputMode&quot;: &quot;File&quot;
+        },
+        &quot;EnableInterContainerTrafficEncryption&quot;: true,
+        &quot;EnableManagedSpotTraining&quot;: true,
+        &quot;Environment&quot;: {
+          &quot;SAGEMAKER_PROGRAM&quot;: &quot;/opt/program/hello_gpu.py&quot;
+        },
+        &quot;ResourceConfig&quot;: {
+          &quot;InstanceCount&quot;: 1,
+          &quot;InstanceType&quot;: &quot;ml.g4dn.xlarge&quot;,
+          &quot;VolumeSizeInGB&quot;: 20
+        },
+        &quot;StoppingCondition&quot;: {
+          &quot;MaxRuntimeInSeconds&quot;: 12345,
+          &quot;MaxWaitTimeInSeconds&quot;: 12345
+        }
+      },
+      &quot;End&quot;: true
+    }
+  }
+}
+</code></pre>
+<p>細かい設定内容に関しては，<a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html" target="_blank">CreateTrainingJob</a> というドキュメントを参考下さい．</p>
+<p>あとは，実行結果をCloudWatch Logsで確認して，以下の内容がログに出力されていればOKです．</p>
+<blockquote>
+<p>GPUs Available: True <br>
+Num GPUs Available: 1</p>
+</blockquote>
+<h2 id="おわりに">おわりに</h2>
+<p>今回は，Step FunctionsでSageMakerのTraining Jobをカスタムコンテナイメージを使ってGPU環境で動かす方法を紹介しました．この方法を使えば，深層学習などのGPU環境を必要とした学習もパイプラインに組み込むことが可能になります．また，Training Jobを使った学習ができれば，実験結果はSageMaker Experimentsに保存されるので，再現性を担保することもできます．</p>
+<p>Step Functionsでカスタムコンテナイメージを使ってGPU環境で学習させたい場合には，参考にして頂ければと思います．</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://github.com/awsdocs/amazon-sagemaker-developer-guide/blob/master/doc_source/notebooks-available-instance-types.md" target="_blank">Available SageMaker Studio Instance Types</a></li>
+<li><a href="https://aws.amazon.com/jp/sagemaker/pricing/" target="_blank">Amazon SageMakerの料金</a></li>
+<li><a href="https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44" target="_blank">NVIDIA Docker って今どうなってるの？ (20.09 版)</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html" target="_blank">What is AWS Step Functions?</a></li>
+</ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/datascience/">DataScience</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machinelearning/">MachineLearning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</a></li>
+    <li><a href="#step-functionsの設定">Step Functionsの設定</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/datascience/">DataScience</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machinelearning/">MachineLearning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</a></li>
+    <li><a href="#step-functionsの設定">Step Functionsの設定</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2022
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

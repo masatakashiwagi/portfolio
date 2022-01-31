@@ -12,7 +12,7 @@
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
     
-    <lastmod>2021-12-26T17:16:07+09:00</lastmod>
+    <lastmod>2022-01-30T13:16:43+09:00</lastmod>
     
     
     
@@ -23,7 +23,18 @@
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
     
-    <lastmod>2021-12-26T17:16:07+09:00</lastmod>
+    <lastmod>2022-01-30T13:16:43+09:00</lastmod>
+    
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</loc>
+    
+    <lastmod>2022-01-30T13:16:43+09:00</lastmod>
     
     
     

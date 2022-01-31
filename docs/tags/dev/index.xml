@@ -6,7 +6,16 @@
     <description>Recent content in Dev on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 26 Dec 2021 17:16:07 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jan 2022 13:16:43 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Step Functionsで自作Dockerfileを使ってGPUマシンのSageMakerを動かす方法</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</link>
+      <pubDate>Sun, 30 Jan 2022 13:16:43 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</guid>
+      <description>はじめに Step FunctionsでSageMakerのリソースを特にカスタムコンテナイメージで使う場合，単純にInstanceTypeとして&amp;quot;ml.g4dn.xlarge&amp;quot;などのGPU</description>
+    </item>
+    
     <item>
       <title>ValueError: Must setup local AWS configurationの対処方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</link>
