@@ -129,7 +129,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/">Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-01-30</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2515 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-01-30</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2526 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
@@ -281,7 +281,7 @@ if __name__ == &quot;__main__&quot;:
 </code></pre>
 <p>細かい設定内容に関しては，<a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html" target="_blank">CreateTrainingJob</a> というドキュメントを参考下さい．</p>
 <p>ここで，Environment（環境変数）の「<strong>SAGEMAKER_PROGRAM</strong>」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．</p>
-<p>元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），パスを指定することで任意のプログラムを実行することができます．</p>
+<p>元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），実行したいプログラムのパスを指定することで任意のプログラムを実行することができます．</p>
 <blockquote>
 <p>docker run &lt;イメージ&gt; train</p>
 </blockquote>
