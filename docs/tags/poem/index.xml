@@ -6,7 +6,16 @@
     <description>Recent content in Poem on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 12 Dec 2021 16:55:14 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Feb 2022 16:08:29 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>各社のMLOps事例を集めたMLOps Practicesというサイトを公開しました</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
+      <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
+      <description>はじめに 最近個人的にMLOpsという領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例やMLOpsの各領域で使用されている技術やツールなど個別のTipsが点在</description>
+    </item>
+    
     <item>
       <title>teamayaという個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>

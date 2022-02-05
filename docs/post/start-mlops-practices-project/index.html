@@ -24,30 +24,30 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>ValueError: Must setup local AWS configurationの対処方法 - Fractal Prologue</title>
+<title>各社のMLOps事例を集めたMLOps Practicesというサイトを公開しました - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Masataka Kashiwagi, a machine learning engineer" />
+<meta name="description" content="MLOpsの事例を収集したサイトを公開" />
 
 
-<meta name="keywords" content="Dev, AWS" />
+<meta name="keywords" content="Poem, MLOps" />
 
-<meta property="og:title" content="ValueError: Must setup local AWS configurationの対処方法" />
-<meta property="og:description" content="はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと" />
+<meta property="og:title" content="各社のMLOps事例を集めたMLOps Practicesというサイトを公開しました" />
+<meta property="og:description" content="MLOpsの事例を収集したサイトを公開" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-26T17:16:07+09:00" />
-<meta property="article:modified_time" content="2021-12-26T17:16:07+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-05T16:08:29+09:00" />
+<meta property="article:modified_time" content="2022-02-05T16:08:29+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="ValueError: Must setup local AWS configurationの対処方法"/>
-<meta name="twitter:description" content="はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと"/>
+<meta name="twitter:title" content="各社のMLOps事例を集めたMLOps Practicesというサイトを公開しました"/>
+<meta name="twitter:description" content="MLOpsの事例を収集したサイトを公開"/>
 
 
 
@@ -127,105 +127,34 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/">ValueError: Must setup local AWS configurationの対処方法</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/">各社のMLOps事例を集めたMLOps Practicesというサイトを公開しました</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2183 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-02-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;914 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/poem">Poem</a>&nbsp;<a href="/portfolio/tags/mlops">MLOps</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，「<strong>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</strong>」というエラーが発生したので，その対処方法をメモしておきます．</p>
-<p>結論から言うと，エラー内容にある通り「<strong>region</strong>」の指定を行うことで解決できます．</p>
-<p>方法としては2つあります．</p>
-<ul>
-<li>「<strong>boto_session</strong>，<strong>sagemaker_client</strong>」の「<strong>region_name</strong>」を指定する</li>
-<li>環境変数に「<strong>AWS_DEFAULT_REGION</strong>」を設定する</li>
-</ul>
-<p>2つ目の方法のStep Functionsの定義ファイルに環境変数: AWS_DEFAULT_REGIONを1行追記するのが簡単かと思います．</p>
-<h2 id="configuration-error">Configuration Error</h2>
-<p>SageMaker Experimentsに保存されている実験結果は<code>sagemaker.analytics.ExperimentAnalytics</code>のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．</p>
-<blockquote>
-<p>ValueError: Must setup local AWS configuration with a region supported by SageMaker.</p>
-</blockquote>
-<p>Configurationは公式ドキュメントを見ると以下のことが書かれています．</p>
-<blockquote>
-<p>Configuration - Overview <br>
-Boto3 looks at various configuration locations until it finds configuration values. Boto3 adheres to the following lookup order when searching through sources for configuration values:</p>
-<ul>
-<li>A Config object that&rsquo;s created and passed as the config parameter when creating a client</li>
-<li>Environment variables</li>
-<li>The ~/.aws/config file</li>
-</ul>
-</blockquote>
-<p>上から順番に優先度が高いものになっていて，下位で設定している内容よりも上位で設定した内容が反映されます．</p>
-<p>今回の場合は，1番目と2番目は特段設定していないので，3番目が採用されて問題ないかなと思っていましたが，上述のエラーが発生しました．AWSのクレデンシャル情報（config, credentials）はローカルの<code>~/.aws/</code>配下に置かれており，build時にローカルにあるファイルをvolumesマウントしてコンテナ内と同期しています．</p>
-<p>この設定では上手くいかなかったので，1番目or2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！</p>
-<h2 id="config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</h2>
-<p>公式ドキュメントに記載されている優先度が1番高い方法になります．<code>botocore.config.Config</code>をインスタンス化して使うことで解決する方法になりますが，今回はわざわざConfig objectを使わずに<code>region_name</code>を指定する方法を説明します．</p>
-<pre><code class="language-python">import boto3
-import sagemaker
-
-# sessionとclientの設定を行う
-boto_session = boto3.session.Session(region_name=&quot;ap-northeast-1&quot;)
-sagemaker_client = boto_session.client(service_name='sagemaker', region_name=&quot;ap-northeast-1&quot;)
-sagemaker_session = sagemaker.session.Session(boto_session=boto_session, sagemaker_client=sagemaker_client)
-
-# ExperimentAnalyticsをインスタンス化する
-trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
-    experiment_name='sample-experiments01',
-    sagemaker_session=sagemaker_session
-)
-
-# データフレーム化
-analytics_tables = trial_component_analytics.dataframe()
-</code></pre>
-<p>コードの流れは以下になります．</p>
-<ul>
-<li>boto_sessionとsagemaker_clientを作成する</li>
-<li><code>sagemaker.session.Session</code>の引数にそれぞれを渡す</li>
-<li>sagemaker_sessionを<code>sagemaker.analytics.ExperimentAnalytics</code>の引数に渡す</li>
-<li>取得した実験結果をデータフレーム化する</li>
-</ul>
-<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「<code>boto3.session.Session</code>のregion_name」とこのsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
-<p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
-<h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
-<p>Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「<strong>AWS_DEFAULT_REGION</strong>」を設定する方法になります．</p>
-<p>Step Functionsの定義ファイルのパラメータ部分は下記のような感じです．（今回はSageMakerのProcessingJobを使って実行しています）</p>
-<pre><code class="language-json">&quot;Parameters&quot;: {
-  &quot;AppSpecification&quot;: {
-    &quot;ImageUri&quot;: &quot;hogehoge.dkr.ecr.ap-northeast-1.amazonaws.com/mlops-experiments:latest&quot;,
-    &quot;ContainerEntrypoint&quot;: [
-    &quot;python3&quot;,
-    &quot;/opt/ml/code/get_experiments.py&quot;
-    ]
-  },
-  &quot;Environment&quot;: {
-    &quot;AWS_DEFAULT_REGION&quot;: &quot;ap-northeast-1&quot;
-  }
-}
-</code></pre>
-<p>スクリプトの中身は以下になります．sessionの設定が必要なくなります．</p>
-<pre><code class="language-python">import sagemaker
-
-# ExperimentAnalyticsをインスタンス化する
-trial_component_analytics = sagemaker.analytics.ExperimentAnalytics(
-    experiment_name='sample-experiments01'
-)
-
-# データフレーム化
-analytics_tables = trial_component_analytics.dataframe()
-</code></pre>
+<p>最近個人的にMLOpsという領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例やMLOpsの各領域で使用されている技術やツールなど個別のTipsが点在していて見つけるのが大変だなという印象があります．</p>
+<p>特に実際のユースケースが整理されていると嬉しいなーという気持ちから，じゃあ自分で整理すればいいのでは？と思い「<strong><a href="https://masatakashiwagi.github.io/mlops-practices/" target="_blank">MLOps Practices</a></strong>」というサイトを作って公開することにしました．</p>
+<h2 id="mlops-practicesとは">MLOps Practicesとは？</h2>
+<p>海外には，<strong><a href="https://applyingml.com/" target="_blank">ApplyingML</a></strong> というサイトがありトピック毎に各社の事例が載っていたり，色々と網羅的に整理されておりサーベイの参考になるものがあります．</p>
+<p>これと似たものがあったらいいなーと思って軽く探したところ，見当たらなかったので，それだったら自分のリファレンス用も兼ねて作ってみようかなという気持ちから <strong><a href="https://masatakashiwagi.github.io/mlops-practices/" target="_blank">MLOps Practices</a></strong> というサイトを作成し，公開しました．</p>
+<p>Knowledgeには，各社で実際に導入されていた or されている事例を整理しています．特に会社のテックブログやイベントでの登壇資料を紹介するようにしています．これは実運用されているケースを大事にしたいと思ったので，その部分にフォーカスを当てています．</p>
+<p>Tips（こちらは未整備）には，各ツールの使い方など個人ブログなどからも収集しようと考えてますが，数が膨大になるので要検討という感じです．</p>
+<p>まだまだ始めたばかりで十分に整理網羅出来ていないですが，細々と続けていきたいと思います．もし，「手伝ってもいいよー！」という方が居ましたら是非お声がけ下さい！一緒に進めて行けたらと思います．</p>
+<p>それ以外にも追加の事例などありましたら，Issueを作成後にPRを出して貰えたら大変嬉しいです！</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，Step FunctionsでSageMakerのProceesingJobを使った際に発生したエラーの対処方法を備忘録として残したものになります．</p>
-<p>Configurationの設定に優先順位があることを知ったので，この辺りは今回に限らず注意が必要だなと思いました．今回のエラーに対する対処方法は複数あるので，開発している状況に合わせて使い分けていければと思います．</p>
-<p>あと，個人的には実行しているStep Functionsのregionをセットして欲しい気持ちもありますが，まーこれは状況次第なので，なんとも言えない気もします&hellip;</p>
+<p>徐々に内容を充実させて行ければと思うので，今後も定期的に更新していきたいと思います！リポジトリにスター追加して貰えると励みになりますので，よろしくお願いします🙇</p>
+<iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="masatakashiwagi/mlops-practices: This repository is a collection of MLOps case studies." src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/mlops-practices" frameborder="0" scrolling="no"></iframe>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">各社のMLOpsに対する実践事例を収集して整理するリポジトリを作ってサイトに公開したので，良ければご利用くださいー！<a href="https://t.co/JMOQGuDtf0">https://t.co/JMOQGuDtf0</a></p>&mdash; asteriam (@asteriam_fp) <a href="https://twitter.com/asteriam_fp/status/1484892084012449795?ref_src=twsrc%5Etfw">January 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <h2 id="参考">参考</h2>
 <ul>
-<li><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html" target="_blank">Boto3 Docs - Configuration</a></li>
-<li><a href="https://stackoverflow.com/questions/55869651/how-to-fix-aws-region-error-valueerror-must-setup-local-aws-configuration-with" target="_blank">How to fix aws region error &ldquo;ValueError: Must setup local AWS configuration with a region supported by SageMaker&rdquo;</a></li>
+<li><a href="https://applyingml.com/" target="_blank">ApplyingML</a></li>
+<li><a href="https://masatakashiwagi.github.io/mlops-practices/" target="_blank">MLOps Practices</a></li>
+<li><a href="https://github.com/masatakashiwagi/mlops-practices" target="_blank">masatakashiwagi/mlops-practices</a></li>
 </ul>
 
         <div id="share-buttons">
@@ -344,9 +273,7 @@ analytics_tables = trial_component_analytics.dataframe()
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#configuration-error">Configuration Error</a></li>
-    <li><a href="#config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</a></li>
-    <li><a href="#環境変数を設定する方法">環境変数を設定する方法</a></li>
+    <li><a href="#mlops-practicesとは">MLOps Practicesとは？</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -449,9 +376,7 @@ analytics_tables = trial_component_analytics.dataframe()
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#configuration-error">Configuration Error</a></li>
-    <li><a href="#config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</a></li>
-    <li><a href="#環境変数を設定する方法">環境変数を設定する方法</a></li>
+    <li><a href="#mlops-practicesとは">MLOps Practicesとは？</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
