@@ -10,9 +10,9 @@ tags = ["Dev", "AWS"]
 +++
 
 ## はじめに
-Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，「**ValueError: Must setup local AWS configuration with a region supported by SageMaker.**」というエラーが発生したので，その対処方法をメモしておきます．
+Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたところ，「<span class="marker_yellow">**ValueError: Must setup local AWS configuration with a region supported by SageMaker.**</span>」というエラーが発生したので，その対処方法をメモしておきます．
 
-結論から言うと，エラー内容にある通り「**region**」の指定を行うことで解決できます．
+結論から言うと，エラー内容にある通り「<span class="marker_yellow">**region**</span>」の指定を行うことで解決できます．
 
 方法としては2つあります．
 - 「**boto_session**，**sagemaker_client**」の「**region_name**」を指定する
@@ -72,7 +72,7 @@ analytics_tables = trial_component_analytics.dataframe()
 この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．
 
 ## 環境変数を設定する方法
-Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「**AWS_DEFAULT_REGION**」を設定する方法になります．
+Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「<span class="marker_yellow">**AWS_DEFAULT_REGION**</span>」を設定する方法になります．
 
 Step Functionsの定義ファイルのパラメータ部分は下記のような感じです．（今回はSageMakerのProcessingJobを使って実行しています）
 

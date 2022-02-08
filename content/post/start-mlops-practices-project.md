@@ -12,7 +12,7 @@ tags = ["Poem", "MLOps"]
 ## はじめに
 最近個人的にMLOpsという領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例やMLOpsの各領域で使用されている技術やツールなど個別のTipsが点在していて見つけるのが大変だなという印象があります．
 
-特に実際のユースケースが整理されていると嬉しいなーという気持ちから，じゃあ自分で整理すればいいのでは？と思い「**[MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/)**」というサイトを作って公開することにしました．
+特に実際のユースケースが整理されていると嬉しいなーという気持ちから，じゃあ自分で整理すればいいのでは？と思い「<span class="marker_yellow">**[MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/)**</span>」というサイトを作って公開することにしました．
 
 ## MLOps Practicesとは？
 
@@ -31,8 +31,7 @@ Tips（こちらは未整備）には，各ツールの使い方など個人ブ�
 ## おわりに
 徐々に内容を充実させて行ければと思うので，今後も定期的に更新していきたいと思います！リポジトリにスター追加して貰えると励みになりますので，よろしくお願いします&#x1f647;
 
-<iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="masatakashiwagi/mlops-practices: This repository is a collection of MLOps case studies." src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/mlops-practices" frameborder="0" scrolling="no"></iframe>
-
+<a href="https://github.com/masatakashiwagi/mlops-practices"><img src="https://gh-card.dev/repos/masatakashiwagi/mlops-practices.svg?fullname="></a>
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">各社のMLOpsに対する実践事例を収集して整理するリポジトリを作ってサイトに公開したので，良ければご利用くださいー！<a href="https://t.co/JMOQGuDtf0">https://t.co/JMOQGuDtf0</a></p>&mdash; asteriam (@asteriam_fp) <a href="https://twitter.com/asteriam_fp/status/1484892084012449795?ref_src=twsrc%5Etfw">January 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

@@ -68,10 +68,6 @@ Department of Physical Science, Osaka Prefecture University
 * **Masataka Kashiwagi**, Masaru Kato
 "Spatial Dependence of Odd-frequency Spin-triplet Superconducting Order Parameter in Nano-sized s-wave Superconductors Under a Magnetic Field", Physics Procedia, 65 (2015) 33-36
 
-<!-- ***
-## **Others**
-* Blog - [hatenablog (in Japanese)](https://asteriam-fp.hatenablog.com/about) -->
-
 ***
 ## **Projects**
 ### Kaggle

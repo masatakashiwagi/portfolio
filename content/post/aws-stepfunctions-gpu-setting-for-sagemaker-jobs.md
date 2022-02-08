@@ -26,7 +26,7 @@ Step FunctionsでSageMakerのリソースを特にカスタムコンテナイメ
 ![動作確認フロー](../../img/aws-gpu-img1.png "aws-gpu")
 
 ## 自作の「Dockerfile.gpu」ファイル
-今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「**nvidia-docker**」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．
+今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「<span class="marker_yellow">**nvidia-docker**</span>」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．
 
 [TensorFlow Docker Images](https://hub.docker.com/r/tensorflow/tensorflow/)から好きなgpu用のイメージを選択して下さい．今回は「tensorflow/tensorflow:2.6.1-gpu」を使用することにします．**Optional Features**にも記載されていますが，nvidia-dockerが必要だよとのことなので，この通りにします．
 
@@ -172,7 +172,7 @@ Step Functionsとは，AWSが提供する各種サービスを組み合わせた
 
 細かい設定内容に関しては，[CreateTrainingJob](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html) というドキュメントを参考下さい．
 
-ここで，Environment（環境変数）の「**SAGEMAKER_PROGRAM**」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．
+ここで，Environment（環境変数）の「<span class="marker_yellow">**SAGEMAKER_PROGRAM**</span>」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．
 
 元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），実行したいプログラムのパスを指定することで任意のプログラムを実行することができます．
 

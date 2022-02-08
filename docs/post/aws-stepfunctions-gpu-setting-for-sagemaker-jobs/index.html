@@ -151,7 +151,7 @@
 <p><img class="img-zoomable" src="../../img/aws-gpu-img1.png" alt="動作確認フロー" />
 </p>
 <h2 id="自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</h2>
-<p>今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「<strong>nvidia-docker</strong>」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．</p>
+<p>今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「<span class="marker_yellow"><strong>nvidia-docker</strong></span>」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．</p>
 <p><a href="https://hub.docker.com/r/tensorflow/tensorflow/" target="_blank">TensorFlow Docker Images</a>から好きなgpu用のイメージを選択して下さい．今回は「tensorflow/tensorflow:2.6.1-gpu」を使用することにします．<strong>Optional Features</strong>にも記載されていますが，nvidia-dockerが必要だよとのことなので，この通りにします．</p>
 <blockquote>
 <p><code>-gpu</code> tags are based on Nvidia CUDA. You need nvidia-docker to run them. NOTE: GPU versions of TensorFlow 1.13 and above (this includes the <code>latest-</code> tags) require an NVidia driver that supports CUDA 10. See NVidia&rsquo;s support matrix.</p>
@@ -281,7 +281,7 @@ if __name__ == &quot;__main__&quot;:
 }
 </code></pre>
 <p>細かい設定内容に関しては，<a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html" target="_blank">CreateTrainingJob</a> というドキュメントを参考下さい．</p>
-<p>ここで，Environment（環境変数）の「<strong>SAGEMAKER_PROGRAM</strong>」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．</p>
+<p>ここで，Environment（環境変数）の「<span class="marker_yellow"><strong>SAGEMAKER_PROGRAM</strong></span>」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．</p>
 <p>元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），実行したいプログラムのパスを指定することで任意のプログラムを実行することができます．</p>
 <blockquote>
 <p>docker run &lt;イメージ&gt; train</p>
