@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1549 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machinelearning">MachineLearning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1771 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machinelearning">MachineLearning</a>&nbsp;</span>
 
     </div>
     
@@ -196,11 +196,22 @@ class CustomCallBack(tf.keras.callbacks.Callback):
 
         # get parameters
         self.epochs = self.params['epochs']
+        # the epoch when training is stopped
+        self.stopped_epoch = 0
+        # initialize the best loss as infinity
+        self.best_loss = np.Inf
+        # list of best metrics values
+        self.best_metrics_values_list = []
 
     def on_train_end(self, logs=None):
         &quot;&quot;&quot;Called at the end of training.
         &quot;&quot;&quot;
-        print(f&quot;Finish training - {str(datetime.datetime.now())}&quot;)
+        if self.stopped_epoch &gt; 0:
+            best_values = ' - '.join(self.best_metrics_values_list)
+            print(f&quot;Epoch {self.stopped_epoch + 1}: early stopping&quot;)
+            print(f'Final results: {best_values}')
+
+        print(f'Finish training - {str(datetime.datetime.now())}')
 
     def on_epoch_end(self, epoch, logs=None):
         &quot;&quot;&quot;Called at the end of an epoch.
@@ -217,6 +228,13 @@ class CustomCallBack(tf.keras.callbacks.Callback):
 
         print(f&quot;Epoch {epoch+1}/{self.epochs} - {values}&quot;)
 
+        current_loss = logs.get('val_loss')
+        if np.less(current_loss, self.best_loss):
+            self.best_loss = current_loss
+            self.best_metrics_values_list = metrics_values_list
+        else:
+            self.stopped_epoch = epoch
+
 # fit時にcallbacksに作成したカスタマイズクラスをインスタンス化したものを渡す
 model.fit(
     ...,
@@ -231,6 +249,11 @@ Finish training - 2021-11-09 23:48:15.095133
 </code></pre>
 <h2 id="おわりに">おわりに</h2>
 <p>今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
+<h2 id="ps">P.S.</h2>
+<ul>
+<li>2022/02/24: 加筆</li>
+</ul>
+<p>earlystoppingに対応する形式にCallBack関数を修正しました．<code>current_loss = logs.get('val_loss')</code>でlogsからgetするvalueは<code>callbacks.EarlyStopping(monitor='val_loss')</code>で<code>monitor</code>に指定している値になります．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Sagemaker Training APIs - Estimator</a></li>
@@ -356,6 +379,7 @@ Finish training - 2021-11-09 23:48:15.095133
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#ps">P.S.</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -459,6 +483,7 @@ Finish training - 2021-11-09 23:48:15.095133
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#ps">P.S.</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
