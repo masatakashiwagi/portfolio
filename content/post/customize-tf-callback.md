@@ -81,11 +81,22 @@ class CustomCallBack(tf.keras.callbacks.Callback):
 
         # get parameters
         self.epochs = self.params['epochs']
+        # the epoch when training is stopped
+        self.stopped_epoch = 0
+        # initialize the best loss as infinity
+        self.best_loss = np.Inf
+        # list of best metrics values
+        self.best_metrics_values_list = []
 
     def on_train_end(self, logs=None):
         """Called at the end of training.
         """
-        print(f"Finish training - {str(datetime.datetime.now())}")
+        if self.stopped_epoch > 0:
+            best_values = ' - '.join(self.best_metrics_values_list)
+            print(f"Epoch {self.stopped_epoch + 1}: early stopping")
+            print(f'Final results: {best_values}')
+
+        print(f'Finish training - {str(datetime.datetime.now())}')
 
     def on_epoch_end(self, epoch, logs=None):
         """Called at the end of an epoch.
@@ -101,6 +112,13 @@ class CustomCallBack(tf.keras.callbacks.Callback):
         values = ' - '.join(metrics_values_list)
 
         print(f"Epoch {epoch+1}/{self.epochs} - {values}")
+
+        current_loss = logs.get('val_loss')
+        if np.less(current_loss, self.best_loss):
+            self.best_loss = current_loss
+            self.best_metrics_values_list = metrics_values_list
+        else:
+            self.stopped_epoch = epoch
 
 # fit時にcallbacksに作成したカスタマイズクラスをインスタンス化したものを渡す
 model.fit(
@@ -120,6 +138,10 @@ Finish training - 2021-11-09 23:48:15.095133
 ## おわりに
 今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．
 
+## P.S.
+- 2022/02/24: 加筆
+
+earlystoppingに対応する形式にCallBack関数を修正しました．`current_loss = logs.get('val_loss')`でlogsからgetするvalueは`callbacks.EarlyStopping(monitor='val_loss')`で`monitor`に指定している値になります．
 
 ## 参考
 - [Sagemaker Training APIs - Estimator](https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html)
