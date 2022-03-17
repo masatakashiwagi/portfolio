@@ -29,7 +29,9 @@ Tips（こちらは未整備）には，各ツールの使い方など個人ブ�
 それ以外にも追加の事例などありましたら，Issueを作成後にPRを出して貰えたら大変嬉しいです！
 
 ## おわりに
-徐々に内容を充実させて行ければと思うので，今後も定期的に更新していきたいと思います！リポジトリにスター追加して貰えると励みになりますので，よろしくお願いします&#x1f647;
+徐々に内容を充実させて行ければと思うので，今後も定期的に更新していきたいと思います！また，一緒に更新 & 運用していってくれる人も募集中ですので，興味があればご連絡下さい！
+
+リポジトリにスター追加して貰えると励みになりますので，よろしくお願いします&#x1f647;
 
 <a href="https://github.com/masatakashiwagi/mlops-practices"><img src="https://gh-card.dev/repos/masatakashiwagi/mlops-practices.svg?fullname="></a>
 
@@ -38,5 +40,7 @@ Tips（こちらは未整備）には，各ツールの使い方など個人ブ�
 
 ## 参考
 - [ApplyingML](https://applyingml.com/)
-- [MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/)
-- [masatakashiwagi/mlops-practices](https://github.com/masatakashiwagi/mlops-practices)
+- [Awesome MLOps](https://github.com/visenger/awesome-mlops)
+- MLOps Practices
+    - サイト: https://masatakashiwagi.github.io/mlops-practices/
+    - リポジトリ: https://github.com/masatakashiwagi/mlops-practices
