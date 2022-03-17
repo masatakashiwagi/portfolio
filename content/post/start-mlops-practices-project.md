@@ -16,7 +16,7 @@ tags = ["Poem", "MLOps"]
 
 ## MLOps Practicesとは？
 
-海外には，**[ApplyingML](https://applyingml.com/)** や **[Awesome MLOps](https://github.com/visenger/awesome-mlops)**というサイト/リポジトリがありトピック毎に各社の事例が載っていたり，色々と網羅的に整理されておりサーベイの参考になるものがあります．
+海外には，**[ApplyingML](https://applyingml.com/)** や **[Awesome MLOps](https://github.com/visenger/awesome-mlops)** というサイト/リポジトリがありトピック毎に各社の事例が載っていたり，色々と網羅的に整理されておりサーベイの参考になるものがあります．
 
 これと似たものがあったらいいなーと思って軽く探したところ，見当たらなかったので，それだったら自分のリファレンス用も兼ねて作ってみようかなという気持ちから **[MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/)** というサイトを作成し，公開しました．
 
