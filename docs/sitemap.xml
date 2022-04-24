@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  
+  
+  
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</loc>
     
-    <lastmod>2022-02-05T16:08:29+09:00</lastmod>
+    <lastmod>2022-04-24T02:10:25+09:00</lastmod>
     
     
     
@@ -14,6 +17,14 @@
   
   
   
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    
+    <lastmod>2022-04-24T02:10:25+09:00</lastmod>
+    
+    
+    
+  </url>
   
   
   
@@ -23,11 +34,17 @@
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
     
-    <lastmod>2022-02-05T16:08:29+09:00</lastmod>
+    <lastmod>2022-04-24T02:10:25+09:00</lastmod>
     
     
     
   </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -39,9 +56,6 @@
     
     
   </url>
-  
-  
-  
   
   
   
@@ -120,9 +134,6 @@
     
     
   </url>
-  
-  
-  
   
   
   

@@ -6,7 +6,7 @@ date = 2021-11-16T16:08:32+09:00
 draft = false
 share = true
 showLicense = false
-tags = ["DataScience", "Statistics"]
+tags = ["Data Science", "Statistics"]
 math = true
 +++
 

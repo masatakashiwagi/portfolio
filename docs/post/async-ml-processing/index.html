@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.91.0" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>FastAPIとRabbitMQを用いた機械学習処理の非同期化 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="FastAPIとRabbitMQを用いて機械学習のモデル学習処理を非同期化する話" />
+
+
+<meta name="keywords" content="Dev, Machine Learning" />
+
+<meta property="og:title" content="FastAPIとRabbitMQを用いた機械学習処理の非同期化" />
+<meta property="og:description" content="FastAPIとRabbitMQを用いて機械学習のモデル学習処理を非同期化する話" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-24T02:10:25+09:00" />
+<meta property="article:modified_time" content="2022-04-24T02:10:25+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="FastAPIとRabbitMQを用いた機械学習処理の非同期化"/>
+<meta name="twitter:description" content="FastAPIとRabbitMQを用いて機械学習のモデル学習処理を非同期化する話"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-199882807-1');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-199882807-1"></script>
+
+
+<script>
+    window.ga_tid = 'UA-199882807-1';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/">FastAPIとRabbitMQを用いた機械学習処理の非同期化</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-04-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;6236 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理をFastAPIとRabbitMQを用いて検証したお話になります．</p>
+<p>機械学習のようなモデル作成に時間がかかる場合，モデル作成を行うリクエストに対して，その情報を受け取ったというレスポンスだけを先に返し，実際の処理は非同期で行われることが多いと思います．この処理をRabbitMQというOSSのmessage queuing serviceを用いて実施した紹介になります．</p>
+<p>あと個人的にRPC (Remote Procedure Call) やPublish/Subscribeの仕組みを理解したいという気持ちもありました．</p>
+<p>以下のリポジトリにソースコードなどを置いてあります．</p>
+<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="teamaya/async-processing at main · masatakashiwagi/teamaya" src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya/tree/main/async-processing" width="300" height="150" frameborder="0" scrolling="no"></iframe>
+<p>概要として，以下のような流れで処理を見ていきました．</p>
+<ol>
+<li>FastAPIにjson形式でリクエストをPOSTする（モデル作成するためのメッセージ情報）</li>
+<li><code>/train</code>というエンドポイントにまずはデータをPOSTする</li>
+<li>モデルの学習が行われモデルをS3に保存する</li>
+<li>モデルの作成が完了したら，次に<code>/predict</code>というエンドポイントにデータをPOSTする</li>
+<li>学習済みのモデルをS3からロードし，POSTされたデータに対して予測確率を返す</li>
+</ol>
+<h2 id="message-queuing-serviceとは">Message Queuing Serviceとは？</h2>
+<p>メッセージキューはProducerと呼ばれるクライアントアプリケーションが作成したメッセージを受け取り，メッセージが溜まっていく仕組みです．Producer側から見ると，メッセージキューにメッセージを配信します．このメッセージを処理する役割として，Consumer (Worker) と呼ばれる別のアプリケーションがあり，ConsumerはQueueに接続し，処理するメッセージを受信します．処理し終わったら，返信用のメッセージをクライアント側に送信することもできます．（Queueに入れられたメッセージは，Consumerが取り出すまで保存されます．）</p>
+<p>また，メッセージキューにはExchangeと呼ばれる機能があり，どのメッセージをどのように送るかを設定する機能もあります．（厳密には，Producerは直接Queueに送信するのではなく，Exchangeに送信することになります）</p>
+<p>実際にこのメッセージキューの役割を担うものをBrokerと呼んだりします．サービスとして<a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ</a>や<a href="https://redis.io/" target="_blank">Redis</a>などがあり，マネージドサービスでは<a href="https://aws.amazon.com/sqs/" target="_blank">Amazon Simple Queue Service (SQS) </a>があります．</p>
+<p>参考: <a href="https://www.cloudamqp.com/blog/what-is-message-queuing.html" target="_blank">What is message queuing?</a></p>
+<h3 id="rabbitmqを使った実装">RabbitMQを使った実装</h3>
+<p>今回はRabbitMQを使って実装しました．RabbitMQはOSSのMessage Brokerで動作が速く軽量で，複数のメッセージングプロトコルをサポートしています．いくつかの言語で実装可能ですが，pythonで扱う場合には，<code>pika</code>というライブラリを使うことになります．</p>
+<p>例えば，<a href="https://docs.celeryq.dev/en/stable/" target="_blank">Celery</a>のような分散タスクキューツールを使うことで非同期処理をより簡単に実装できますが，Celery自体はメッセージキューを構築することはできないため，RabbitMQやRedisのようなBrokerが必要になります．今回はこのあたりのpub/subの仕組みを理解するためにCeleryは使わずにRabbitMQのpythonライブラリであるpikaを使って実装することにしました．</p>
+<p>RabbitMQはdockerコンテナで立ち上げていて，definitions.jsonという定義ファイルを事前に用意することでそのスキーマに基づいてRabbitMQを立ち上げることができます．このファイルはコンテナ起動時に読み込まれることになります．</p>
+<details>
+<summary>definitions.json</summary>
+<pre><code class="language-json">{
+  &quot;rabbit_version&quot;: &quot;3.9.14&quot;,
+  &quot;rabbitmq_version&quot;: &quot;3.9.14&quot;,
+  &quot;product_name&quot;: &quot;RabbitMQ&quot;,
+  &quot;product_version&quot;: &quot;3.9.14&quot;,
+  &quot;users&quot;: [
+    {
+      &quot;name&quot;: &quot;guest&quot;,
+      &quot;password&quot;: &quot;guest&quot;,
+      &quot;hashing_algorithm&quot;: &quot;rabbit_password_hashing_sha256&quot;,
+      &quot;tags&quot;: &quot;administrator&quot;,
+      &quot;limits&quot;: {}
+    }
+  ],
+  &quot;vhosts&quot;: [{ &quot;name&quot;: &quot;/&quot; }],
+  &quot;permissions&quot;: [
+    {
+      &quot;user&quot;: &quot;guest&quot;,
+      &quot;vhost&quot;: &quot;/&quot;,
+      &quot;configure&quot;: &quot;.*&quot;,
+      &quot;write&quot;: &quot;.*&quot;,
+      &quot;read&quot;: &quot;.*&quot;
+    }
+  ],
+  &quot;topic_permissions&quot;: [],
+  &quot;parameters&quot;: [],
+  &quot;global_parameters&quot;: [],
+  &quot;policies&quot;: [],
+  &quot;queues&quot;: [
+    {
+      &quot;name&quot;: &quot;queue.model.train&quot;,
+      &quot;vhost&quot;: &quot;/&quot;,
+      &quot;durable&quot;: true,
+      &quot;auto_delete&quot;: false,
+      &quot;arguments&quot;: { &quot;x-queue-type&quot;: &quot;classic&quot; }
+    },
+    {
+      &quot;name&quot;: &quot;queue.model.predict&quot;,
+      &quot;vhost&quot;: &quot;/&quot;,
+      &quot;durable&quot;: true,
+      &quot;auto_delete&quot;: false,
+      &quot;arguments&quot;: { &quot;x-queue-type&quot;: &quot;classic&quot; }
+    }
+  ],
+  &quot;exchanges&quot;: [],
+  &quot;bindings&quot;: []
+}
+</code></pre>
+</details>
+<p>RabbitMQには丁寧なTutorialsがあるので，それを読むと理解が進むと思います！</p>
+<h2 id="システム構成">システム構成</h2>
+<p>非同期処理を行うシステムの構成は図のようになります．Producer/Broker/Consumerとコンテナを3つ用意しています．</p>
+<p>図の右下にあるResult Storesはタスクの処理結果を保存するためのものになります．Result StoresにはPostgreSQLやMySQLなどのDBを使用することもできますし，Redisも使用することができます．RedisはBrokerとしても使用することができるので，両方を1つで担うことが可能です．今回はモデルをS3に保存するだけとして，処理結果をDBに保存したりはしていないです．</p>
+<ul>
+<li>Producer: 機械学習タスクを行うためにメッセージをポストするコンテナ（=FastAPI）</li>
+<li>Broker: メッセージキューの役割を担うコンテナ（=RabbitMQ）</li>
+<li>Consumer: タスクを実際に実行するコンテナ</li>
+<li>Storage: モデルを保存するストレージ（=S3）</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/teamaya-async-img1.png" alt="アーキテクチャー" />
+</p>
+<p>docker-compose.ymlは以下のような構成になります．</p>
+<details>
+<summary>docker-compose.yml</summary>
+<pre><code class="language-dockerfile">version: '3.8'
+
+# Common definition
+x-template: &amp;template
+  volumes:
+      - ~/.gcp:/root/.gcp:cached
+      - ~/.aws:/root/.aws:cached
+      - ./app:/opt/program:cached
+  env_file:
+      - .env
+  environment:
+      TZ: Asia/Tokyo
+      LANG: 'ja_JP.UTF-8'
+  restart: always
+  tty: true
+
+services:
+  producer:
+    # FastAPI for producer
+    container_name: producer
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    command: [&quot;uvicorn&quot;, &quot;main:app&quot;, &quot;--reload&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;5000&quot;, &quot;--access-log&quot;]
+    depends_on:
+      - rabbitmq
+    &lt;&lt;: *template
+
+  consumer:
+    container_name: consumer
+    hostname: consumer
+    build:
+      context: .
+    command: python3 consumer/consumer.py
+    depends_on:
+      - rabbitmq
+    &lt;&lt;: *template
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    restart: always
+    volumes:
+      # - ./app/rabbitmq/etc:/etc/rabbitmq/rabbitmq
+      - ./app/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./app/rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./app/rabbitmq/data:/var/lib/rabbitmq
+      - ./app/rabbitmq/logs:/var/log/rabbitmq
+      - ~/.aws:/root/.aws:cached
+    ports:
+      # AMQP protocol port
+      - 5672:5672
+      # HTTP management UI
+      - 15672:15672
+    environment:
+      TZ: Asia/Tokyo
+      LANG: 'ja_JP.UTF-8'
+    env_file:
+      - .env
+
+# networks:
+#   default:
+#     external:
+#       name: teamaya-network-async
+</code></pre>
+</details>
+<p>今回のシステムのディレクトリ構成は以下になります．少し冗長な構成になっていますが，<code>./app/producer</code>と<code>./app/consumer</code>配下にProducerとConsumerの処理を行うスクリプトがあります．</p>
+<pre><code>.
+├── Dockerfile
+├── README.md
+├── app
+│   ├── consumer
+│   │   ├── base.py
+│   │   ├── consumer.py
+│   │   └── tasks.py
+│   ├── data
+│   │   ├── diabetes.csv
+│   │   └── model.pkl
+│   ├── logger.py
+│   ├── main.py
+│   ├── producer
+│   │   ├── base.py
+│   │   ├── producer.py
+│   │   └── schema.py
+│   ├── rabbitmq
+│   │   └── etc
+│   │       ├── definitions.json
+│   │       └── rabbitmq.conf
+│   └── test
+│       └── test_diabetes.csv
+├── docker-compose.yml
+├── requirements.lock
+└── requirements.txt
+</code></pre>
+<h2 id="producerの実装">Producerの実装</h2>
+<p>それぞれのファイルの説明をしておくと，</p>
+<ul>
+<li><code>base.py</code>: RabbitMQに接続するための初期化やConsumerにメッセージを送信するための処理を実装したファイル</li>
+<li><code>producer.py</code>: <code>base.py</code>のクラスを継承して，個別のタスクに合わせて送信するメッセージの実行するAPIを実装したファイル</li>
+<li><code>schema.py</code>: データの入出力のスキーマを定義したファイル
+<ul>
+<li>FastAPIでは入出力を<code>Pydantic</code>というライブラリを用いてData validationを行います．型ヒントを利用するためのスキーマ定義になります</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>producer.py</summary>
+<pre><code class="language-python">import ast
+import uuid
+
+from fastapi import APIRouter
+from logger import get_logger
+
+from producer.base import BaseProducer, QueueNames, RepQueueNames
+from producer.schema import ApiSchemaPredict, ApiSchemaTrain, ProducerResult
+
+LOGGER = get_logger()
+
+router = APIRouter(prefix='', tags=[&quot;producers&quot;])
+
+
+class ProducerTrain(BaseProducer):
+    def __init__(self, queue_name: QueueNames, rep_queue_name: RepQueueNames):
+        BaseProducer.__init__(self, queue_name, rep_queue_name)
+
+    def run(self, params: ApiSchemaTrain):
+        &quot;&quot;&quot;Run to send message to train consumer
+
+        Args:
+            params (ApiSchemaTrain): schema for train
+        &quot;&quot;&quot;
+        model_id = str(uuid.uuid4())
+        message = {
+            &quot;model_id&quot;: model_id,
+            &quot;dataset_id&quot;: params.dataset_id,
+            &quot;features&quot;: params.features,
+            &quot;target&quot;: params.target
+        }
+
+        # self.send_message_to_consumer(message)
+        LOGGER.info(&quot;Produce message for train.&quot;)
+        response = self.send_message_to_consumer(message)
+        response = ast.literal_eval(response.decode())
+        LOGGER.info(f&quot;Reply Response from consumer: {response}&quot;)
+
+        return ProducerResult(message=response)
+
+
+class ProducerPredict(BaseProducer):
+    def __init__(self, queue_name: QueueNames, rep_queue_name: RepQueueNames):
+        BaseProducer.__init__(self, queue_name, rep_queue_name)
+
+    def run(self, params: ApiSchemaPredict):
+        &quot;&quot;&quot;Run to send message to predict consumer
+
+        Args:
+            params (ApiSchemaPredict): schema for predict
+        &quot;&quot;&quot;
+        message = {
+            &quot;model_id&quot;: params.model_id,
+            &quot;dataset_id&quot;: params.dataset_id,
+            &quot;input_data&quot;: params.input_data
+        }
+
+        LOGGER.info(&quot;Produce message for predict.&quot;)
+        response = self.send_message_to_consumer(message)
+        response = ast.literal_eval(response.decode())
+        LOGGER.info(f&quot;Reply Response from consumer: {response}&quot;)
+
+        return ProducerResult(message=response)
+
+
+@router.post(&quot;/train&quot;, response_model=ProducerResult, name=&quot;train&quot;)
+async def train(params: ApiSchemaTrain) -&gt; ProducerResult:
+    &quot;&quot;&quot;Train model&quot;&quot;&quot;
+    return ProducerTrain(queue_name='queue.model.train', rep_queue_name='queue.reply.train').run(params)
+
+
+@router.post(&quot;/predict&quot;, response_model=ProducerResult, name=&quot;predict&quot;)
+async def predict(params: ApiSchemaPredict) -&gt; ProducerResult:
+    &quot;&quot;&quot;Predict model&quot;&quot;&quot;
+    return ProducerPredict(queue_name='queue.model.predict', rep_queue_name='queue.reply.predict').run(params)
+</code></pre>
+</details>
+<p><code>ProducerTrain</code>と<code>ProducerPredict</code>はタスク実行用のメッセージを送るキューの<code>queue_name</code>とConsumer側からの返信用のキューである<code>rep_queue_name</code>の2つを引数に取ります．実際の学習や予測処理を行う部分はConsumer側で実装しています．</p>
+<details>
+<summary>base.py</summary>
+<pre><code class="language-python">import json
+import os
+import uuid
+from typing import Literal
+
+import pika
+from logger import get_logger
+
+LOGGER = get_logger()
+
+# Possible values as queue name
+QueueNames = Literal['queue.model.train', 'queue.model.predict']
+RepQueueNames = Literal['queue.reply.train', 'queue.reply.predict']
+
+
+class BaseProducer:
+    def __init__(self, queue_name: QueueNames, rep_queue_name: RepQueueNames):
+        self.queue_name = queue_name
+        self.rep_queue_name = rep_queue_name
+        self.pika_params = pika.ConnectionParameters(
+            host=&quot;rabbitmq&quot;,
+            port=os.getenv('RABBITMQ_PORT', 5672),
+            connection_attempts=10,
+            heartbeat=0
+        )
+        self.connection = pika.BlockingConnection(self.pika_params)
+        self.channel = self.connection.channel()
+        LOGGER.info('Pika connection initialized.')
+
+        result = self.channel.queue_declare(queue=self.rep_queue_name, exclusive=True)
+        self.callback_queue = result.method.queue
+        self.channel.basic_consume(queue=self.callback_queue, on_message_callback=self.on_response, auto_ack=True)
+
+    def on_response(self, ch, method, props, body):
+        if self.corr_id == props.correlation_id:
+            self.response = body
+
+    def run(self):
+        raise NotImplementedError()
+
+    def send_message_to_consumer(self, message: dict):
+        &quot;&quot;&quot;Send message
+
+        Args:
+            message (dict): message info
+        &quot;&quot;&quot;
+        self.response = None
+        self.corr_id = str(uuid.uuid4())
+        message_json = json.dumps(message)
+
+        self.channel.basic_publish(
+            exchange=&quot;&quot;,
+            routing_key=self.queue_name,
+            body=message_json,
+            properties=pika.BasicProperties(
+                content_type='application/json',
+                delivery_mode=2,  # make message persistent
+                reply_to=self.callback_queue,
+                correlation_id=self.corr_id
+            )
+        )
+
+        LOGGER.info(f&quot;Sent message. [q] '{self.queue_name}' [x] Body: {message_json=}&quot;)
+
+        while self.response is None:
+            self.connection.process_data_events()
+
+        self.close()
+        return self.response
+
+    def close(self):
+        self.channel.close()
+        self.connection.close()
+</code></pre>
+</details>
+<ul>
+<li>
+<p><code>__init__</code>関数:</p>
+<ul>
+<li>RabbitMQのサーバーと接続するために<code>pika.BlockingConnection()</code>で<code>host</code>, <code>port</code>などのパラメータを渡してインスタンス化を行う</li>
+<li>ConsumerからのReply用にrep_queue_nameに指定したキュー名でcallback_queueを作成</li>
+<li>basic_consumeではsubscribeするキューが存在すればそれを実行</li>
+</ul>
+</li>
+<li>
+<p><code>send_message_to_consumer</code>関数:</p>
+<ul>
+<li>メッセージをjson.dumpし，basic_publishのbodyにつめてExchangeに送る</li>
+</ul>
+</li>
+</ul>
+<h2 id="consumerの実装">Consumerの実装</h2>
+<p>それぞれのファイルの説明をしておくと，</p>
+<ul>
+<li><code>base.py</code>: RabbitMQに接続してキューにあるメッセージを受信し，処理を実行するベースファイル
+<ul>
+<li>callback部分は<code>tasks.py</code>で実装しています</li>
+</ul>
+</li>
+<li><code>consumer.py</code>: スレッド数を決める<code>num_threads</code>をコマンドライン引数に取り，コンテナ上ではこのファイルが実行されます</li>
+<li><code>tasks.py</code>: 機械学習によるモデル作成や学習済みモデルをロードして予測を行う処理を実装したファイル
+<ul>
+<li>callbackメソッドに実行したい処理を実装します</li>
+<li><code>if __name__ == &quot;__main__&quot;:</code>以下には<a href="https://cml.dev/" target="_blank">Continuous Machine Learning (CML)</a> で利用するCT用の処理を実装しています．（CMLに関しては別でブログを書こうと思います）</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>tasks.py</summary>
+<pre><code class="language-python">import json
+import os
+import sys
+import traceback
+from typing import Any, Dict
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pika
+from logger import get_logger
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+
+from base import BaseConsumer, EvalMetrics, QueueNames
+
+LOGGER = get_logger()
+S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+S3_PATH_NAME = os.environ['S3_PATH_NAME']
+S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+
+
+class TrainConsumer(BaseConsumer):
+    def __init__(self, queue_name: QueueNames):
+        BaseConsumer.__init__(self, queue_name)
+
+    def callback(self, ch, method, props, body):
+        params = self.body2dict(body)
+
+        payload = {
+            'status': 'TASK_RECEIVED',
+            'model_id': params['model_id']
+        }
+        response = json.dumps(payload)
+
+        ch.basic_publish(
+            exchange='',
+            routing_key=props.reply_to,
+            properties=pika.BasicProperties(correlation_id=props.correlation_id),
+            body=response
+        )
+        # ch.basic_ack(delivery_tag=method.delivery_tag)
+
+        self.download_from_s3(S3_BUCKET_NAME, S3_PATH_NAME, 'data/', params['dataset_id'] + '.csv')
+        LOGGER.info(&quot;Download dataset from S3.&quot;)
+
+        dataset_path = 'data/' + params['dataset_id'] + '.csv'
+        df = pd.read_csv(dataset_path)
+        LOGGER.info(&quot;Read csv file and transform to dataframe.&quot;)
+
+        try:
+            result = train(df, params)
+
+            # save model
+            model_path = 'data/model.pkl'
+            self.save_model(result['model'], model_path)
+            LOGGER.info(&quot;Save trained model to local.&quot;)
+
+            # upload model to cloud storage
+            model_id = params['model_id']
+            self.upload_to_s3(S3_BUCKET_NAME, S3_MODEL_PATH_NAME + f'{model_id}/', 'data/', 'model.pkl')
+            LOGGER.info(&quot;Upload trained model to S3.&quot;)
+            LOGGER.info(&quot;TASK_COMPLETED&quot;)
+        except Exception as e:
+            _, _, tb = sys.exc_info()
+            LOGGER.error(
+                f&quot;Exception Error: {e} || Type: {str(type(e))} || Traceback Message: {traceback.format_tb(tb)}&quot;)
+            LOGGER.error(&quot;TASK_ERROR&quot;)
+
+
+class PredictConsumer(BaseConsumer):
+    def __init__(self, queue_name: QueueNames):
+        BaseConsumer.__init__(self, queue_name)
+
+    def callback(self, ch, method, props, body):
+        params = self.body2dict(body)
+        model_id = params['model_id']
+        self.download_from_s3(S3_BUCKET_NAME, S3_MODEL_PATH_NAME + f'{model_id}/', 'data/', 'model.pkl')
+        LOGGER.info(&quot;Download model file from S3.&quot;)
+
+        model_path = 'data/model.pkl'
+        model = self.load_model(model_path)
+        LOGGER.info(&quot;Load model for prediction.&quot;)
+
+        try:
+            result = predict(model, params)
+
+            payload = {
+                'status': 'TASK_COMPLETED',
+                'pred_proba': result['pred_proba']
+            }
+            response = json.dumps(payload)
+        except Exception as e:
+            _, _, tb = sys.exc_info()
+            LOGGER.error(
+                f&quot;Exception Error: {e} || Type: {str(type(e))} || Traceback Message: {traceback.format_tb(tb)}&quot;)
+
+            payload = {
+                'status': 'TASK_ERROR',
+                'pred_proba': None
+            }
+            response = json.dumps(payload)
+
+        ch.basic_publish(
+            exchange='',
+            routing_key=props.reply_to,
+            properties=pika.BasicProperties(correlation_id=props.correlation_id),
+            body=response
+        )
+        # ch.basic_ack(delivery_tag=method.delivery_tag)
+
+
+def train(df: pd.DataFrame, params: dict) -&gt; Dict[str, Any]:
+    &quot;&quot;&quot;Train machine learning model (RandomForestRegressor)
+
+    Args:
+        df (pd.DataFrame): dataset for training model
+        params (dict): parameters for training
+    &quot;&quot;&quot;
+    features = params['features']
+    target = params['target']
+    X, y = df[features], df[target].values
+
+    # train/test split
+    X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    LOGGER.info(&quot;Start model training.&quot;)
+    # machine learning model: RandomForestRegressor
+    reg_model = RandomForestRegressor(max_depth=3, random_state=42, n_estimators=100)
+    reg_model.fit(X_train, y_train)
+    LOGGER.info(&quot;Model fit for training.&quot;)
+
+    # evaluate model
+    pred = reg_model.predict(X_valid)
+
+    # evaluate metrics
+    eval_metrics = EvalMetrics()
+    rmse = eval_metrics.rmse_score(y_valid, pred)
+    LOGGER.info(&quot;Evaluate metrics=RMSE for valid dataset : %.3f&quot; % rmse)
+    LOGGER.info(&quot;Finish model training.&quot;)
+
+    result = {
+        'y_pred': pred,
+        'y_true': y_valid,
+        'metrics': {'rmse': rmse},
+        'model': reg_model
+    }
+
+    return result
+
+
+def predict(model: object, params: dict) -&gt; Dict[str, Any]:
+    &quot;&quot;&quot;Prediction for dataset using trained model
+
+    Args:
+        model (object): trained model
+        params (dict): parameters for prediction
+
+    Returns:
+        float: predict probability
+    &quot;&quot;&quot;
+    input_data = params['input_data']
+    pred_proba = model.predict(pd.DataFrame([input_data]))
+    result = {
+        'pred_proba': pred_proba[0]
+    }
+
+    return result
+</code></pre>
+</details>
+<ul>
+<li>学習パート
+<ul>
+<li>今回，機械学習モデルは何でもよかったので，RandomForestで回帰を行う処理にしています</li>
+<li>学習済みモデルはS3に保存しているので，この処理を実行する場合は<code>.env</code>ファイルに自身で利用しているAWSのバケット情報などを載せて下さい</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+S3_PATH_NAME = os.environ['S3_PATH_NAME']
+S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+</code></pre>
+<p>モデル学習時のメタ情報もDBに残しておくのが良いと思いますが，今回はその部分は実装していないです🙏</p>
+<ul>
+<li>予測パート
+<ul>
+<li>S3に保存したモデルをロードして，与えらたデータに対して予測を行います</li>
+<li>モデルIDは学習時に発行されたUUIDをコピーして貼り付ける必要があるのですが，出力されたログから拾うのでちょっといけてないですがモックなのでご勘弁を&hellip;</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>consumer.py</summary>
+<pre><code class="language-python">import threading
+
+import click
+
+import tasks
+
+
+@click.command()
+@click.option(&quot;--num_threads&quot;, type=int, help='the number of threads', required=True, default=2)
+def main(num_threads):
+    # Consumer execution
+    threads = []
+    for _ in range(num_threads):
+        for task in [
+            tasks.TrainConsumer(queue_name='queue.model.train'),
+            tasks.PredictConsumer(queue_name='queue.model.predict')
+        ]:
+            t = threading.Thread(target=task.run, daemon=True)
+            t.start()
+            threads.append(t)
+
+    for t in threads:
+        t.join()
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+</details>
+<p>引数に指定したスレッド数に応じてConsumerが複数立ち上がります．</p>
+<h2 id="実行結果">実行結果</h2>
+<p><code>docker compose up</code>でコンテナを起動して，<code>http://localhost:5000/docs</code>にアクセスするとSwaggerによる表示がされます．FastAPIはデフォルトでOpenAPIを自動生成してくれ，SwaggerやReDocで表示することができます．</p>
+<p>この辺は個人的にとても便利だなと思っていて，データを簡単にGET/POSTすることで動作を確認することできます．</p>
+<ul>
+<li>Swaggerの画面</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/teamaya-async-img2.png" alt="Swaggerの画面" />
+</p>
+<ul>
+<li>ReDocの画面</li>
+</ul>
+<p><img class="img-zoomable" src="../../img/teamaya-async-img3.png" alt="ReDocの画面" />
+</p>
+<h3 id="学習編">学習編</h3>
+<p><code>/train</code>にリクエストをPOSTします．事前にS3に保存したデータセット名を<code>dataset_id</code>に，使用する特徴量（説明変数）を<code>features</code>に，目的変数を<code>target</code>に指定します．</p>
+<pre><code class="language-bash">curl -X 'POST' \
+  'http://localhost:5000/train' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  &quot;dataset_id&quot;: &quot;diabetes&quot;,
+  &quot;features&quot;: [&quot;age&quot;, &quot;bmi&quot;, &quot;bp&quot;, &quot;s1&quot;, &quot;s2&quot;, &quot;s3&quot;, &quot;s4&quot;, &quot;s5&quot;, &quot;s6&quot;],
+  &quot;target&quot;: &quot;target&quot;
+}'
+</code></pre>
+<p>出力されるログは以下のような感じになります．</p>
+<ul>
+<li>4行目はProducerがキューに対して送信したメッセージ（Consumerに渡したい情報）</li>
+<li>7行目（中略後1行目）はConsumerからのReplyメッセージ</li>
+<li>最後のConsumerからのログは学習処理を実行中に出力されるログ</li>
+</ul>
+<pre><code>producer  | [2022-04-24 15:49:09] [ INFO] Created channel=1
+producer  | [2022-04-24 15:49:09] [ INFO] Pika connection initialized.
+producer  | [2022-04-24 15:49:09] [ INFO] Produce message for train.
+producer  | [2022-04-24 15:49:09] [ INFO] Sent message. [q] 'queue.model.train' [x] Body: message_json='{&quot;model_id&quot;: &quot;c7632288-442d-44c5-9102-31ccda2af6b7&quot;, &quot;dataset_id&quot;: &quot;diabetes&quot;, &quot;features&quot;: [&quot;age&quot;, &quot;bmi&quot;, &quot;bp&quot;, &quot;s1&quot;, &quot;s2&quot;, &quot;s3&quot;, &quot;s4&quot;, &quot;s5&quot;, &quot;s6&quot;], &quot;target&quot;: &quot;target&quot;}'
+consumer  | [2022-04-24 15:49:09] [ INFO] Convert message to dict type.
+~中略~
+producer  | [2022-04-24 15:49:09] [ INFO] Reply Response from consumer: {'status': 'TASK_RECEIVED', 'model_id': 'c7632288-442d-44c5-9102-31ccda2af6b7'}
+producer  | INFO:     172.24.0.1:57222 - &quot;POST /train HTTP/1.1&quot; 200 OK
+rabbitmq  | 2022-04-24 06:49:09.367236+00:00 [info] &lt;0.5900.0&gt; closing AMQP connection &lt;0.5900.0&gt; (172.24.0.4:46266 -&gt; 172.24.0.2:5672, vhost: '/', user: 'guest')
+consumer  | [2022-04-24 15:49:09] [ INFO] Found credentials in shared credentials file: ~/.aws/credentials
+consumer  | [2022-04-24 15:49:09] [ INFO] Download dataset from S3.
+consumer  | [2022-04-24 15:49:09] [ INFO] Read csv file and transform to dataframe.
+consumer  | [2022-04-24 15:49:09] [ INFO] Start model training.
+consumer  | [2022-04-24 15:49:09] [ INFO] Model fit for training.
+consumer  | [2022-04-24 15:49:09] [ INFO] Evaluate metrics=RMSE for valid dataset : 53.039
+consumer  | [2022-04-24 15:49:09] [ INFO] Finish model training.
+consumer  | [2022-04-24 15:49:09] [ INFO] Save trained model to local.
+consumer  | [2022-04-24 15:49:10] [ INFO] Upload trained model to S3.
+consumer  | [2022-04-24 15:49:10] [ INFO] TASK_COMPLETED
+</code></pre>
+<h3 id="予測編">予測編</h3>
+<p><code>/predict</code>にリクエストをPOSTします．<code>model_id</code>を元に学習済みモデルをS3からロードします．<code>input_data</code>には，モデルに入力するデータをdict形式で特徴量とその値という組で渡します．<br>
+※ <code>model_id</code>は学習編のログ出力にある<code>model_id</code>を使用する必要があります．</p>
+<pre><code class="language-bash">curl -X 'POST' \
+  'http://localhost:5000/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  &quot;model_id&quot;: &quot;c7632288-442d-44c5-9102-31ccda2af6b7&quot;,
+  &quot;dataset_id&quot;: &quot;diabetes&quot;,
+  &quot;input_data&quot;: {
+    &quot;age&quot;: 0.038076,
+    &quot;bmi&quot;: 0.061696,
+    &quot;bp&quot;: 0.021872,
+    &quot;s1&quot;: -0.044223,
+    &quot;s2&quot;: -0.034821,
+    &quot;s3&quot;: -0.043401,
+    &quot;s4&quot;: -0.002592,
+    &quot;s5&quot;: 0.019908,
+    &quot;s6&quot;: -0.017646
+  }
+}'
+</code></pre>
+<p>出力されるログは以下のような感じになります．</p>
+<ul>
+<li>4行目はProducerがキューに対して送信したメッセージ（Consumerに渡したい情報）</li>
+<li>5行目のConsumerからのログは予測処理を実行中に出力されるログ</li>
+<li>（中略後1行目）はConsumerからのReplyメッセージで，予測結果が入っています</li>
+</ul>
+<pre><code>producer  | [2022-04-24 18:00:16] [ INFO] Created channel=1
+producer  | [2022-04-24 18:00:16] [ INFO] Pika connection initialized.
+producer  | [2022-04-24 18:00:16] [ INFO] Produce message for predict.
+producer  | [2022-04-24 18:00:16] [ INFO] Sent message. [q] 'queue.model.predict' [x] Body: message_json='{&quot;model_id&quot;: &quot;c7632288-442d-44c5-9102-31ccda2af6b7&quot;, &quot;dataset_id&quot;: &quot;diabetes&quot;, &quot;input_data&quot;: {&quot;age&quot;: 0.038076, &quot;bmi&quot;: 0.061696, &quot;bp&quot;: 0.021872, &quot;s1&quot;: -0.044223, &quot;s2&quot;: -0.034821, &quot;s3&quot;: -0.043401, &quot;s4&quot;: -0.002592, &quot;s5&quot;: 0.019908, &quot;s6&quot;: -0.017646}}'
+consumer  | [2022-04-24 18:00:16] [ INFO] Convert message to dict type.
+consumer  | [2022-04-24 18:00:16] [ INFO] Download model file from S3.
+consumer  | [2022-04-24 18:00:16] [ INFO] Load model for prediction.
+~中略~
+producer  | [2022-04-24 18:00:16] [ INFO] Reply Response from consumer: {'status': 'TASK_COMPLETED', 'pred_proba': 208.6445780005619}
+rabbitmq  | 2022-04-24 09:00:16.565636+00:00 [info] &lt;0.8348.0&gt; closing AMQP connection &lt;0.8348.0&gt; (172.24.0.4:46664 -&gt; 172.24.0.2:5672, vhost: '/', user: 'guest')
+producer  | INFO:     172.24.0.1:57624 - &quot;POST /predict HTTP/1.1&quot; 200 OK
+</code></pre>
+<h2 id="おわりに">おわりに</h2>
+<p>FastAPIとRabbitMQを用いてWebAPI形式で，機械学習タスクの非同期処理を行う検証をしました．非同期処理だったり，RPCやPub/Subの仕組みを少しは理解できたかなと思います．</p>
+<p>今回はDBにメタデータを保存したりDB周りの処理は実装していないので，この辺も時間があれば実装できればと思います&hellip;</p>
+<p>非同期処理を行う上でメインの役割を果たしたRabbitMQについてもコメントすると，OSSで簡単に非同期処理を行える便利な技術だと思います．Producer/Exchange/Queue/Consumerの関係性もTutorialsの図などでイメージしやすくなるので，サンプルコードを見ながら比較的容易に実装することができました．<br>
+一方で，ConsumerからProducerにReplyメッセージを送る場合に，どのように実装すればいいかが分かりづらく，個人的にはハマりポイントでした．</p>
+<p>あと，なにげにFastAPIもほとんど使ったことなかったので良い勉強になりました！</p>
+<p>最後に今後やりたいことについて列挙しておくと&hellip;</p>
+<ul>
+<li>AWS SQSを使った非同期処理の実装</li>
+<li>Celeryを使った非同期処理の実装</li>
+<li>BrokerとしてRedisを用いた実装</li>
+<li>DBを使ったメタデータの保存</li>
+<li>etc&hellip;</li>
+</ul>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a></li>
+<li><a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ</a>
+<ul>
+<li><a href="https://www.rabbitmq.com/getstarted.html" target="_blank">RabbitMQ Tutorials</a></li>
+</ul>
+</li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/asynchronous-message-based-communication" target="_blank">Asynchronous message-based communication</a></li>
+<li><a href="https://medium.com/@si.allen/part-1-deep-learning-scaling-your-neural-networks-with-containerization-and-a-message-broker-d9c872a8345b" target="_blank">Deep Learning: Scaling your neural networks with containerization and a message broker</a></li>
+<li><a href="https://github.com/katanaml/katana-skipper" target="_blank">katanaml/katana-skipper</a></li>
+</ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#message-queuing-serviceとは">Message Queuing Serviceとは？</a>
+      <ul>
+        <li><a href="#rabbitmqを使った実装">RabbitMQを使った実装</a></li>
+      </ul>
+    </li>
+    <li><a href="#システム構成">システム構成</a></li>
+    <li><a href="#producerの実装">Producerの実装</a></li>
+    <li><a href="#consumerの実装">Consumerの実装</a></li>
+    <li><a href="#実行結果">実行結果</a>
+      <ul>
+        <li><a href="#学習編">学習編</a></li>
+        <li><a href="#予測編">予測編</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#message-queuing-serviceとは">Message Queuing Serviceとは？</a>
+      <ul>
+        <li><a href="#rabbitmqを使った実装">RabbitMQを使った実装</a></li>
+      </ul>
+    </li>
+    <li><a href="#システム構成">システム構成</a></li>
+    <li><a href="#producerの実装">Producerの実装</a></li>
+    <li><a href="#consumerの実装">Consumerの実装</a></li>
+    <li><a href="#実行結果">実行結果</a>
+      <ul>
+        <li><a href="#学習編">学習編</a></li>
+        <li><a href="#予測編">予測編</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2022
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
