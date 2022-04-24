@@ -1,6 +1,6 @@
 +++
 author = "Masataka Kashiwagi"
-title = "FastAPIとRabbitMQを用いた機械学習処理の非同期化"
+title = "FastAPIとRabbitMQを用いた機械学習タスクの非同期処理"
 description = "FastAPIとRabbitMQを用いて機械学習のモデル学習処理を非同期化する話"
 date = 2022-04-24T02:10:25+09:00
 draft = false
