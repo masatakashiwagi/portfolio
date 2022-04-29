@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/">FastAPIとRabbitMQを用いた機械学習タスクの非同期処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-04-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;6236 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-04-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;6239 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
@@ -716,7 +716,7 @@ S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
 </ul>
 <details>
 <summary>consumer.py</summary>
-<pre><code class="language-python">import threading
+<pre><code class="language-python">from concurrent.futures import ThreadPoolExecutor
 
 import click
 
@@ -724,21 +724,17 @@ import tasks
 
 
 @click.command()
-@click.option(&quot;--num_threads&quot;, type=int, help='the number of threads', required=True, default=2)
-def main(num_threads):
+@click.option(&quot;--num_threads&quot;, type=int, help='the number of threads', default=1)
+@click.option(&quot;--max_workers&quot;, type=int, help='the number of max workers', default=None)
+def main(num_threads: int, max_workers: int):
     # Consumer execution
-    threads = []
-    for _ in range(num_threads):
-        for task in [
-            tasks.TrainConsumer(queue_name='queue.model.train'),
-            tasks.PredictConsumer(queue_name='queue.model.predict')
-        ]:
-            t = threading.Thread(target=task.run, daemon=True)
-            t.start()
-            threads.append(t)
-
-    for t in threads:
-        t.join()
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        for _ in range(num_threads):
+            for task in [
+                tasks.TrainConsumer(queue_name='queue.model.train'),
+                tasks.PredictConsumer(queue_name='queue.model.predict')
+            ]:
+                executor.submit(task.run)
 
 
 if __name__ == &quot;__main__&quot;:
