@@ -152,7 +152,7 @@ services:
     hostname: consumer
     build:
       context: .
-    command: python3 consumer/consumer.py
+    command: ["python3", "consumer/consumer.py", "--num_threads", "2"]
     depends_on:
       - rabbitmq
     <<: *template
@@ -199,9 +199,6 @@ services:
 │   │   ├── base.py
 │   │   ├── consumer.py
 │   │   └── tasks.py
-│   ├── data
-│   │   ├── diabetes.csv
-│   │   └── model.pkl
 │   ├── logger.py
 │   ├── main.py
 │   ├── producer
@@ -213,7 +210,13 @@ services:
 │   │       ├── definitions.json
 │   │       └── rabbitmq.conf
 │   └── test
-│       └── test_diabetes.csv
+│       ├── __init__.py
+│       ├── conftest.py
+│       ├── data
+│       │   └── test_diabetes.csv
+│       └── unit
+│           ├── __init__.py
+│           └── test_tasks.py
 ├── docker-compose.yml
 ├── requirements.lock
 └── requirements.txt
@@ -430,9 +433,9 @@ from sklearn.model_selection import train_test_split
 from base import BaseConsumer, EvalMetrics, QueueNames
 
 LOGGER = get_logger()
-S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-S3_PATH_NAME = os.environ['S3_PATH_NAME']
-S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+S3_PATH_NAME = os.getenv('S3_PATH_NAME')
+S3_MODEL_PATH_NAME = os.getenv('S3_MODEL_PATH_NAME')
 
 
 class TrainConsumer(BaseConsumer):
@@ -589,9 +592,9 @@ def predict(model: object, params: dict) -> Dict[str, Any]:
     - 今回，機械学習モデルは何でもよかったので，RandomForestで回帰を行う処理にしています
     - 学習済みモデルはS3に保存しているので，この処理を実行する場合は`.env`ファイルに自身で利用しているAWSのバケット情報などを載せて下さい
 ```bash
-S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-S3_PATH_NAME = os.environ['S3_PATH_NAME']
-S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+S3_PATH_NAME = os.getenv('S3_PATH_NAME')
+S3_MODEL_PATH_NAME = os.getenv('S3_MODEL_PATH_NAME')
 ```
 
 モデル学習時のメタ情報もDBに残しておくのが良いと思いますが，今回はその部分は実装していないです🙏

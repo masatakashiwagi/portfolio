@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/">FastAPIとRabbitMQを用いた機械学習タスクの非同期処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-04-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;6239 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-04-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;6255 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
@@ -259,7 +259,7 @@ services:
     hostname: consumer
     build:
       context: .
-    command: python3 consumer/consumer.py
+    command: [&quot;python3&quot;, &quot;consumer/consumer.py&quot;, &quot;--num_threads&quot;, &quot;2&quot;]
     depends_on:
       - rabbitmq
     &lt;&lt;: *template
@@ -302,9 +302,6 @@ services:
 │   │   ├── base.py
 │   │   ├── consumer.py
 │   │   └── tasks.py
-│   ├── data
-│   │   ├── diabetes.csv
-│   │   └── model.pkl
 │   ├── logger.py
 │   ├── main.py
 │   ├── producer
@@ -316,7 +313,13 @@ services:
 │   │       ├── definitions.json
 │   │       └── rabbitmq.conf
 │   └── test
-│       └── test_diabetes.csv
+│       ├── __init__.py
+│       ├── conftest.py
+│       ├── data
+│       │   └── test_diabetes.csv
+│       └── unit
+│           ├── __init__.py
+│           └── test_tasks.py
 ├── docker-compose.yml
 ├── requirements.lock
 └── requirements.txt
@@ -540,9 +543,9 @@ from sklearn.model_selection import train_test_split
 from base import BaseConsumer, EvalMetrics, QueueNames
 
 LOGGER = get_logger()
-S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-S3_PATH_NAME = os.environ['S3_PATH_NAME']
-S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+S3_PATH_NAME = os.getenv('S3_PATH_NAME')
+S3_MODEL_PATH_NAME = os.getenv('S3_MODEL_PATH_NAME')
 
 
 class TrainConsumer(BaseConsumer):
@@ -701,9 +704,9 @@ def predict(model: object, params: dict) -&gt; Dict[str, Any]:
 </ul>
 </li>
 </ul>
-<pre><code class="language-bash">S3_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-S3_PATH_NAME = os.environ['S3_PATH_NAME']
-S3_MODEL_PATH_NAME = os.environ['S3_MODEL_PATH_NAME']
+<pre><code class="language-bash">S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+S3_PATH_NAME = os.getenv('S3_PATH_NAME')
+S3_MODEL_PATH_NAME = os.getenv('S3_MODEL_PATH_NAME')
 </code></pre>
 <p>モデル学習時のメタ情報もDBに残しておくのが良いと思いますが，今回はその部分は実装していないです🙏</p>
 <ul>
