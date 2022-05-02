@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "CMLを使ったMLモデルのCI/CD"
 description = "Continuous Machine LearningによるCI/CD"
-date = 2022-05-02T01:28:05+09:00
+date = 2022-05-01T01:28:05+09:00
 draft = false
 share = true
 showLicense = false
