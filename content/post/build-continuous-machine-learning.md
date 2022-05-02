@@ -231,6 +231,13 @@ CMLが実行されるタイミングとして，`tasks.py`が変更された時�
 
 また，今回は使っていないですが，DVCという同じIterative.aiが開発しているデータのバージョン管理を行うツールをCMLと組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow">**CI/CD for ML**</span>」が実現できるかなと思います．
 
+P.S. Twitterでコメント頂いたので，追記しておきます．
+
+確かに，モデルの学習をPush時やPR時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれるGitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
+
 ## 参考
 - [Continuous Machine Learning (CML)](https://cml.dev/)
 - [Data Version Control (DVC)](https://dvc.org/)
+- [masatakashiwagi/teamaya/async-processing](https://github.com/masatakashiwagi/teamaya/tree/main/async-processing)

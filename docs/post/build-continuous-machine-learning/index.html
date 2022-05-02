@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/">CMLを使ったMLモデルのCI/CD</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-05-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2768 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/mlops">MLOps</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-05-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2997 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/mlops">MLOps</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
@@ -359,10 +359,14 @@ jobs:
 <h2 id="おわりに">おわりに</h2>
 <p>今回は，機械学習モデルのためのテストとして，CMLという機械学習プロジェクトでCI/CDを行うツールを使ってみたのでその紹介になります．</p>
 <p>また，今回は使っていないですが，DVCという同じIterative.aiが開発しているデータのバージョン管理を行うツールをCMLと組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow"><strong>CI/CD for ML</strong></span>」が実現できるかなと思います．</p>
+<p>P.S. Twitterでコメント頂いたので，追記しておきます．</p>
+<p>確かに，モデルの学習をPush時やPR時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．</p>
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれるGitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://cml.dev/" target="_blank">Continuous Machine Learning (CML)</a></li>
 <li><a href="https://dvc.org/" target="_blank">Data Version Control (DVC)</a></li>
+<li><a href="https://github.com/masatakashiwagi/teamaya/tree/main/async-processing" target="_blank">masatakashiwagi/teamaya/async-processing</a></li>
 </ul>
 
         <div id="share-buttons">
