@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/">Excel Binary WorkbookをPythonで処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1393 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1395 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
@@ -193,9 +193,10 @@ with open_workbook('Book1.xlsb') as wb:
 <li><a href="https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python" target="_blank">Stack Overflow - Read XLSB File in Pandas Python</a></li>
 </ul>
 <h2 id="追記">追記</h2>
-<h4 id="2020-01-05">2020-01-05</h4>
-<p>pandasの「<strong>version=1.0.0</strong>」で<code>.xlsb</code>ファイルをロードできるようになったみたいです．</p>
-<p>方法は<code>pd.read_excel</code>の引数で<code>engine=&quot;pyxlsb&quot;</code>と指定するだけです．</p>
+<ul>
+<li>2020/01/05: 更新</li>
+</ul>
+<p>pandasの「<strong>version=1.0.0</strong>」で<code>.xlsb</code>ファイルをロードできるようになったみたいです．方法は<code>pd.read_excel</code>の引数で<code>engine=&quot;pyxlsb&quot;</code>と指定するだけです．</p>
 <pre><code class="language-python"># Returns a DataFrame
 pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
 </code></pre>
@@ -325,11 +326,7 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
-    <li><a href="#追記">追記</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#追記">追記</a></li>
   </ul>
 </nav>
     </div>
@@ -438,11 +435,7 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
-    <li><a href="#追記">追記</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#追記">追記</a></li>
   </ul>
 </nav>
     </div>

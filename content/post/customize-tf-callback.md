@@ -138,8 +138,8 @@ Finish training - 2021-11-09 23:48:15.095133
 ## おわりに
 今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．
 
-## P.S.
-- 2022/02/24: 加筆
+## 追記
+- 2022/02/24: 更新
 
 earlystoppingに対応する形式にCallBack関数を修正しました．`current_loss = logs.get('val_loss')`でlogsからgetするvalueは`callbacks.EarlyStopping(monitor='val_loss')`で`monitor`に指定している値になります．
 

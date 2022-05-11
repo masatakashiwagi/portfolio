@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1771 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1772 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
@@ -249,9 +249,9 @@ Finish training - 2021-11-09 23:48:15.095133
 </code></pre>
 <h2 id="おわりに">おわりに</h2>
 <p>今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
-<h2 id="ps">P.S.</h2>
+<h2 id="追記">追記</h2>
 <ul>
-<li>2022/02/24: 加筆</li>
+<li>2022/02/24: 更新</li>
 </ul>
 <p>earlystoppingに対応する形式にCallBack関数を修正しました．<code>current_loss = logs.get('val_loss')</code>でlogsからgetするvalueは<code>callbacks.EarlyStopping(monitor='val_loss')</code>で<code>monitor</code>に指定している値になります．</p>
 <h2 id="参考">参考</h2>
@@ -379,7 +379,7 @@ Finish training - 2021-11-09 23:48:15.095133
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
-    <li><a href="#ps">P.S.</a></li>
+    <li><a href="#追記">追記</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -483,7 +483,7 @@ Finish training - 2021-11-09 23:48:15.095133
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
-    <li><a href="#ps">P.S.</a></li>
+    <li><a href="#追記">追記</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>

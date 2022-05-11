@@ -49,14 +49,14 @@ Podcastで話すために，何かしらの話題を探したり，書籍・論�
 以下が僕たちが配信している各種構成になります．<br>
 ※ 全て無料で行うために，これらの構成になっています，有料でもいい場合はここで紹介したような複数ツールを使わなくて済むと思います．
 
-- <span class="marker_yellow">メール: Gmail</span>
-- <span class="marker_yellow">配信プラットフォーム: Anchor</span>
-- <span class="marker_yellow">録音: Zencastr</span>
-- <span class="marker_yellow">画面共有: Google Meet</span>
-- <span class="marker_yellow">スクリプト: Scrapbox + GitHub</span>
-- <span class="marker_yellow">編集: Audacity</span>
-- <span class="marker_yellow">音楽 (BGM): Evoke Music</span>
-- <span class="marker_yellow">アイコン: Canva</span>
+- <span class="marker_yellow">**メール: Gmail**</span>
+- <span class="marker_yellow">**配信プラットフォーム: Anchor**</span>
+- <span class="marker_yellow">**録音: Zencastr**</span>
+- <span class="marker_yellow">**画面共有: Google Meet**</span>
+- <span class="marker_yellow">**スクリプト: Scrapbox + GitHub**</span>
+- <span class="marker_yellow">**編集: Audacity**</span>
+- <span class="marker_yellow">**音楽 (BGM): Evoke Music**</span>
+- <span class="marker_yellow">**アイコン: Canva**</span>
 
 ### 1. メール
 - 各種サイトにアカウント登録する際にはメールアドレスが必須なので，まず共通で利用するメールアドレスを取得しました．

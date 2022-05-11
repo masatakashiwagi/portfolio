@@ -77,11 +77,9 @@ print(wb.convert_date(41235.45578))
 - [Stack Overflow - Read XLSB File in Pandas Python](https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python)
 
 ## 追記
-#### 2020-01-05
+- 2020/01/05: 更新
 
-pandasの「**version=1.0.0**」で`.xlsb`ファイルをロードできるようになったみたいです．
-
-方法は`pd.read_excel`の引数で`engine="pyxlsb"`と指定するだけです．
+pandasの「**version=1.0.0**」で`.xlsb`ファイルをロードできるようになったみたいです．方法は`pd.read_excel`の引数で`engine="pyxlsb"`と指定するだけです．
 
 ```python
 # Returns a DataFrame
