@@ -3,10 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
     
-    <lastmod>2022-05-04T01:21:41+09:00</lastmod>
+    <lastmod>2022-07-18T09:58:08+09:00</lastmod>
+    
+    
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</loc>
+    
+    <lastmod>2022-07-18T09:58:08+09:00</lastmod>
+    
+    
+    
+  </url>
+  
+  
+  
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    
+    <lastmod>2022-07-18T09:58:08+09:00</lastmod>
     
     
     
@@ -29,17 +60,6 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    
-    <lastmod>2022-05-04T01:21:41+09:00</lastmod>
-    
-    
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</loc>
     
     <lastmod>2022-05-01T01:28:05+09:00</lastmod>
@@ -47,12 +67,6 @@
     
     
   </url>
-  
-  
-  
-  
-  
-  
   
   
   
@@ -78,9 +92,6 @@
     
     
   </url>
-  
-  
-  
   
   
   
