@@ -388,3 +388,5 @@ Step Functionsの中身をMLモデル学習のパイプラインとすれば，G
 ## 参考
 - [CodeBuild・CodePipelineを使ってデリバリーパイプラインを導入（AWSでWebアプリ構築 part3）](https://rinoguchi.net/2021/08/aws-fullstack-sample-application-part3.html)
 - [Solve - Policy has Prohibited field Principal AWS Error](https://bobbyhadz.com/blog/aws-policy-has-prohibited-field-principal)
+- [Troubleshooting AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/troubleshooting.html)
+- [Troubleshooting CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/troubleshooting.html)
