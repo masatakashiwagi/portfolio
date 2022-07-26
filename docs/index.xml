@@ -6,7 +6,16 @@
     <description>Recent content on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Jul 2022 09:58:08 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jul 2022 11:01:27 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>初めての育児休業（休暇）を取得した感想</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/first-childcare-leave/</link>
+      <pubDate>Tue, 26 Jul 2022 11:01:27 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/first-childcare-leave/</guid>
+      <description>はじめに 少し時間が空いてしまいましたが，初めての育休（今は育業というみたいですがw）を2月末〜5月のGW明けまで2ヶ月ちょい取得した感想とオススメしたいものを紹介していきたいと思います！ 育児休業とは？</description>
+    </item>
+    
     <item>
       <title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>

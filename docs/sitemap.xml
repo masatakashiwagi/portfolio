@@ -3,6 +3,14 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    
+    <lastmod>2022-07-26T11:01:27+09:00</lastmod>
+    
+    
+    
+  </url>
   
   
   
@@ -10,13 +18,30 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
     
-    <lastmod>2022-07-18T09:58:08+09:00</lastmod>
+    <lastmod>2022-07-26T11:01:27+09:00</lastmod>
     
     
     
   </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/first-childcare-leave/</loc>
+    
+    <lastmod>2022-07-26T11:01:27+09:00</lastmod>
+    
+    
+    
+  </url>
+  
+  
+  
+  
+  
+  
   
   
   
@@ -35,17 +60,6 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    
-    <lastmod>2022-07-18T09:58:08+09:00</lastmod>
-    
-    
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-the-mlops-study/</loc>
     
     <lastmod>2022-05-04T01:21:41+09:00</lastmod>
@@ -53,9 +67,6 @@
     
     
   </url>
-  
-  
-  
   
   
   
