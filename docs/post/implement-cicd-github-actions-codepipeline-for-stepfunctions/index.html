@@ -130,7 +130,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/">Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-07-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4691 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/mlops">MLOps</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-07-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4734 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/mlops">MLOps</a>&nbsp;</span>
 
     </div>
     
@@ -161,31 +161,36 @@
 <p>ディレクトリ構成は以下になります．</p>
 <pre><code>.
 ├── .github
-│   └── workflows
-│       └── sam-codepipeline.yaml
+│   └── workflows
+│       └── sam-codepipeline.yaml
+├── .gitignore
 ├── README.md
-├── config
-│   ├── buildspec.yml
-│   └── codepipeline-ver1.json
-├── container
-│   ├── Dockerfile
-│   ├── app
-│   │   └── src
-│   │       ├── hello.py
-│   │       └── logger.py
-│   ├── docker-compose.yml
-│   ├── requirements.lock
-│   └── requirements.txt
-└── sam
-    ├── env
-    │   ├── dev
-    │   │   ├── samconfig.toml
-    │   │   └── template.yaml
-    │   └── prod
-    │       ├── samconfig.toml
-    │       └── template.yaml
-    └── statemachine
-        └── sample-ml-pipelines-ver1.asl.json
+├── async-processing
+├── cicd-pipeline
+│   ├── README.md
+│   ├── config
+│   │   ├── buildspec.yml
+│   │   └── dev-codepipeline-ver1.json
+│   ├── container
+│   │   ├── Dockerfile
+│   │   ├── app
+│   │   │   └── src
+│   │   │       ├── hello.py
+│   │   │       └── logger.py
+│   │   ├── docker-compose.yml
+│   │   ├── requirements.lock
+│   │   └── requirements.txt
+│   └── sam
+│       ├── env
+│       │   ├── dev
+│       │   │   ├── samconfig.toml
+│       │   │   └── template.yaml
+│       │   └── prod
+│       │       ├── samconfig.toml
+│       │       └── template.yaml
+│       └── statemachine
+│           └── sample-ml-pipelines-ver1.asl.json
+└── teamaya
 </code></pre>
 <p>流れを説明していくと，</p>
 <ul>

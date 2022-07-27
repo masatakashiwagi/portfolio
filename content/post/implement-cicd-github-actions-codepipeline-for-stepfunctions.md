@@ -39,31 +39,36 @@ ML系プロジェクトにおいて，CI/CD整備の優先度が低かったり�
 ```
 .
 ├── .github
-│   └── workflows
-│       └── sam-codepipeline.yaml
+│   └── workflows
+│       └── sam-codepipeline.yaml
+├── .gitignore
 ├── README.md
-├── config
-│   ├── buildspec.yml
-│   └── codepipeline-ver1.json
-├── container
-│   ├── Dockerfile
-│   ├── app
-│   │   └── src
-│   │       ├── hello.py
-│   │       └── logger.py
-│   ├── docker-compose.yml
-│   ├── requirements.lock
-│   └── requirements.txt
-└── sam
-    ├── env
-    │   ├── dev
-    │   │   ├── samconfig.toml
-    │   │   └── template.yaml
-    │   └── prod
-    │       ├── samconfig.toml
-    │       └── template.yaml
-    └── statemachine
-        └── sample-ml-pipelines-ver1.asl.json
+├── async-processing
+├── cicd-pipeline
+│   ├── README.md
+│   ├── config
+│   │   ├── buildspec.yml
+│   │   └── dev-codepipeline-ver1.json
+│   ├── container
+│   │   ├── Dockerfile
+│   │   ├── app
+│   │   │   └── src
+│   │   │       ├── hello.py
+│   │   │       └── logger.py
+│   │   ├── docker-compose.yml
+│   │   ├── requirements.lock
+│   │   └── requirements.txt
+│   └── sam
+│       ├── env
+│       │   ├── dev
+│       │   │   ├── samconfig.toml
+│       │   │   └── template.yaml
+│       │   └── prod
+│       │       ├── samconfig.toml
+│       │       └── template.yaml
+│       └── statemachine
+│           └── sample-ml-pipelines-ver1.asl.json
+└── teamaya
 ```
 
 
