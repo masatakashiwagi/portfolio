@@ -87,7 +87,7 @@ ML系プロジェクトにおいて，CI/CD整備の優先度が低かったり�
           - main
         types: [opened]
         # paths:
-        #   - 'config/codepipeline-ver1.json'
+        #   - 'cicd-pipeline/config/dev-codepipeline-ver1.json'
         #   - './github/workflows/sam-codepipeline.yaml'
       workflow_dispatch:
 
