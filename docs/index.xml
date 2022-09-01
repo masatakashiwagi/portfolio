@@ -6,7 +6,16 @@
     <description>Recent content on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Jul 2022 11:01:27 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 02:15:12 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022年夏休みのテック備忘録日記</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</link>
+      <pubDate>Fri, 02 Sep 2022 02:15:12 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</guid>
+      <description>はじめに きっかけは@kaggle_araisanさんのこちらのTweetを見かけて，面白そうな取り組みだなーと感じたので，この機会に僕もやってみようと思ったのが始まりです！ こういうのは，誰かと一緒にや</description>
+    </item>
+    
     <item>
       <title>初めての育児休業（休暇）を取得した感想</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/first-childcare-leave/</link>
