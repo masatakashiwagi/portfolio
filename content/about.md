@@ -39,11 +39,11 @@ Machine Learning Engineer / MLOps Engineer, Connehito, Inc.
 - Develop recommendation system, fraud detection system, search engine infrastructure and promote MLOps at a company that provides Questions & Answers service to mothers.
 
 [Jul. 2022 - present]
-Machine Learning Engineer, High Link, Inc.
+Machine Learning Engineer, High Link, Inc. (contracting job)
 - Develop recommendation system for AB testing & Analysis of our own products.
 
 [Dec. 2021 - Sep. 2022]
-Data Scientist / Machine Learning Engineer, SUPWAT, Inc.
+Data Scientist / Machine Learning Engineer, SUPWAT, Inc. (contracting job)
 - Develop of our own products which provides parameters optimization solutions for the manufacturing industry.
 
 [Mar. 2018 - May. 2021]
