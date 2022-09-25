@@ -35,8 +35,16 @@ Now, I'm working as Machine Learning Engineer in Web services company that focus
 ***
 ## **Work Experience**
 [June. 2021 - present]
-Machine Learning Engineer, Connehito, Inc.
+Machine Learning Engineer / MLOps Engineer, Connehito, Inc.
 - Develop recommendation system, fraud detection system, search engine infrastructure and promote MLOps at a company that provides Questions & Answers service to mothers.
+
+[Jul. 2022 - present]
+Machine Learning Engineer, High Link, Inc.
+- Develop recommendation system for AB testing & Analysis of our own products.
+
+[Dec. 2021 - Sep. 2022]
+Data Scientist / Machine Learning Engineer, SUPWAT, Inc.
+- Develop of our own products which provides parameters optimization solutions for the manufacturing industry.
 
 [Mar. 2018 - May. 2021]
 Data Scientist / Machine Learning Engineer, Brains Technology, Inc.
@@ -76,5 +84,8 @@ Department of Physical Science, Osaka Prefecture University
 * Mechanisms of Action (MoA) Prediction - 34th/4373 Silver medal (team)
 * Shopee - Price Match Guarantee - 179th/2464 Bronze medal (solo)
 
-### 90's same generation community
-* [Team90s](https://github.com/team90s "Team90s") - Kaggle team projects
+<!-- ### 90's same generation community
+* [Team90s](https://github.com/team90s "Team90s") - Kaggle team projects -->
+
+### MLOps Practices
+* [MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/) - Documentation of each company's MLOps practices
