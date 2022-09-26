@@ -34,6 +34,9 @@
 
 body[data-theme='auto'] {
   @include light();
+  h3 {
+    color: #8aa2d3;
+  }
 
   @media (prefers-color-scheme: dark) {
     @include dark();
