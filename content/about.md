@@ -4,6 +4,8 @@ description = "This is personal information about me."
 date = 2021-06-01T17:00:00+09:00
 showLicense = false
 showToc = false
+share = false
+support = false
 author = "Masataka Kashiwagi"
 tags = []
 +++
@@ -34,24 +36,19 @@ Now, I'm working as Machine Learning Engineer in Web services company that focus
 
 ***
 ## **Work Experience**
-[June. 2021 - present]
-Machine Learning Engineer / MLOps Engineer, Connehito, Inc.
+[June. 2021 - present] <u>Machine Learning Engineer / MLOps Engineer, Connehito, Inc.</u>
 - Develop recommendation system, fraud detection system, search engine infrastructure and promote MLOps at a company that provides Questions & Answers service to mothers.
 
-[Jul. 2022 - present]
-Machine Learning Engineer, High Link, Inc. (contracting job)
+<!-- [Jul. 2022 - present] <u>Machine Learning Engineer, High Link, Inc. (contracting job)</u>
 - Develop recommendation system for AB testing & Analysis of our own products.
 
-[Dec. 2021 - Sep. 2022]
-Data Scientist / Machine Learning Engineer, SUPWAT, Inc. (contracting job)
-- Develop of our own products which provides parameters optimization solutions for the manufacturing industry.
+[Dec. 2021 - Sep. 2022] <u>Data Scientist / Machine Learning Engineer, SUPWAT, Inc. (contracting job)</u>
+- Develop of our own products which provides parameters optimization solutions for the manufacturing industry. -->
 
-[Mar. 2018 - May. 2021]
-Data Scientist / Machine Learning Engineer, Brains Technology, Inc.
+[Mar. 2018 - May. 2021] <u>Data Scientist / Machine Learning Engineer, Brains Technology, Inc.</u>
 - Develop of our own products which provides anomaly detection solutions for the manufacturing industry.
 
-[Apr. 2016 - Feb. 2018]
-Solution Engineer, NTT Communications Corporation
+[Apr. 2016 - Feb. 2018] <u>Solution Engineer, NTT Communications Corporation</u>
 - I was on loan to one of the subsidiary companies, NTTCom Online Marketing Solutions Corporation.
 - Implement and design Marketing Automation tools and technical support for them.
 
