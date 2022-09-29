@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.91.0" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>AirbyteでスプレッドシートのデータをBigQueryに連携 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="OSSのELツールであるAirbyteでデータ連携" />
+
+
+<meta name="keywords" content="Dev, Data" />
+
+<meta property="og:title" content="AirbyteでスプレッドシートのデータをBigQueryに連携" />
+<meta property="og:description" content="OSSのELツールであるAirbyteでデータ連携" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-29T15:37:53+09:00" />
+<meta property="article:modified_time" content="2022-09-29T15:37:53+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="AirbyteでスプレッドシートのデータをBigQueryに連携"/>
+<meta name="twitter:description" content="OSSのELツールであるAirbyteでデータ連携"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-199882807-1');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-199882807-1"></script>
+
+
+<script>
+    window.ga_tid = 'UA-199882807-1';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/">AirbyteでスプレッドシートのデータをBigQueryに連携</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-09-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2158 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;<a href="/portfolio/tags/data">Data</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>以前から気になっていたOSSの <span class="marker_yellow"><strong><a href="https://airbyte.com/" target="_blank">Airbyte</a></strong></span> というELに特化したData Integrationツールを使ってみたかったので，今回はこれを使って以前Embulkで実装していたスプレッドシートからBigQueryへのデータ同期処理と同じことができるか試してみた話になります．</p>
+<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="スプレッドシートからBigQueryへDigdagを使ったデータ連携" src="https://hatenablog-parts.com/embed?url=https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/" width="300" height="150" frameborder="0" scrolling="no"></iframe>
+<p>Airbyteは良い感じのUIがあるので，UIをポチポチしながら設定していきます．</p>
+<h2 id="airbyteとは">Airbyteとは？</h2>
+<p><img class="img-zoomable" src="../../img/airbyte-img1.png" alt="Airbyte" />
+</p>
+<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="airbytehq/airbyte" src="https://hatenablog-parts.com/embed?url=https://github.com/airbytehq/airbyte" width="300" height="150" frameborder="0" scrolling="no"></iframe>
+<p>AirbyteはOSSのETLツールですが，特にExtractとLoadに注力しているツールになります．豊富なデータソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/sources" target="_blank">Source</a>）とターゲットソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/destinations" target="_blank">Destination</a>）に対応していて，これらを設定することでデータを簡単に連携することができます．Transform部分は内部的にはdbtを使ってハンドリングしているみたいです．（<a href="https://airbyte.gitbook.io/airbyte/operator-guides/transformation-and-normalization/transformations-with-sql" target="_blank">Transformations with SQL (Part 1/3)</a>）</p>
+<p>提供形態としては，OSSとマネージドサービス（クラウド版: 有料）があり，ローカルをはじめ，AWS/GCP/Azureと各種クラウドサービスでデプロイすることができます（参考: <a href="https://airbyte.gitbook.io/airbyte/deploying-airbyte" target="_blank">Deploying Airbyte Open Source</a>）．</p>
+<p>Connectorは既に用意されているもの（<a href="https://github.com/airbytehq/airbyte/tree/master/airbyte-integrations/connectors" target="_blank">airbyte/airbyte-integrations/connectors/</a>）もあれば，独自で作成することもできます．</p>
+<h2 id="スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</h2>
+<p>基本的には，Tutorialに沿って進めていきます．まずは<code>git clone</code>してUIを立ち上げます．</p>
+<pre><code class="language-bash">git clone https://github.com/airbytehq/airbyte.git
+cd airbyte
+docker compose up
+</code></pre>
+<p><code>docker compose</code>を実行したら，<a href="http://localhost:8000" target="_blank">http://localhost:8000</a> でUIにアクセスすることができます．</p>
+<p>ここからはUIの世界で全て完結することができます！</p>
+<h3 id="source">Source</h3>
+<p>案内に従って進めると，まずプルダウンから今回のデータソースであるGoogle SheetsをSource typeとして選択します．右側にSetup Guideがあるので，見ながら設定できて親切設計だなと感じました．</p>
+<p><img class="img-zoomable" src="../../img/airbyte-img2.png" alt="Google Sheets" />
+</p>
+<p>以下の設定を埋めていきます．</p>
+<ul>
+<li><strong>Source name</strong>
+<ul>
+<li>「Google Sheets」としています</li>
+</ul>
+</li>
+<li><strong>Authentication</strong>
+<ul>
+<li>GCPのサービスアカウントを設定します．JSONファイルの中身をコピーして貼り付けます</li>
+<li><code>cat ~/.gcp/hoge_service_account.json | pbcopy</code>でクリップボードにコピーするとやりやすいです</li>
+</ul>
+</li>
+<li><strong>Row Batch Size</strong>
+<ul>
+<li>デフォルトの200にしています</li>
+</ul>
+</li>
+<li><strong>Spreadsheet Link</strong>
+<ul>
+<li>対象となるスプレッドシートのURLを設定します</li>
+<li>事前にサービスアカウントでのアクセスを許可しておく必要があります</li>
+</ul>
+</li>
+</ul>
+<h3 id="destination">Destination</h3>
+<p>次に，プルダウンからターゲットソースであるBigQueryをDestination typeとして選択します．</p>
+<p><img class="img-zoomable" src="../../img/airbyte-img3.png" alt="BigQuery" />
+</p>
+<p>以下の設定を埋めていきます．</p>
+<ul>
+<li><strong>Destination name</strong>
+<ul>
+<li>「BigQuery」としています</li>
+</ul>
+</li>
+<li><strong>Project ID</strong>
+<ul>
+<li>GCPにアクセスして現在使っているプロジェクトIDを設定します</li>
+</ul>
+</li>
+<li><strong>Dataset Location</strong>
+<ul>
+<li>「US」で良さそう？</li>
+</ul>
+</li>
+<li><strong>Default Dataset ID</strong>
+<ul>
+<li>BigQueryのデータセットとして作成されるIDになります</li>
+</ul>
+</li>
+<li><strong>Loading Method</strong>
+<ul>
+<li>Standard InsertsとGCS Stagingの2種類あります</li>
+<li>Standard Inserts
+<ul>
+<li>SQL INSERTで直接アップロードする方法で，非効率的なためGCS Stagingを推奨しています（今回はこちらを選択）</li>
+</ul>
+</li>
+<li>GCS Staging
+<ul>
+<li>ファイルにレコードを書き込み，そのファイルをGCSにアップロードし，その後COPY INTOテーブルを使用してファイルをアップロードする方法（GCSのバケットなどの情報が必要になります）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Service Account Key JSON (Required for cloud, optional for open-source)</strong>
+<ul>
+<li>GCPのサービスアカウントを設定します．JSONファイルの中身をコピーして貼り付けます</li>
+</ul>
+</li>
+<li><strong>Transformation Query Run Type (Optional)</strong>
+<ul>
+<li>interactiveとbatchの2種類あります</li>
+</ul>
+</li>
+<li><strong>Google BigQuery Client Chunk Size (Optional)</strong>
+<ul>
+<li>デフォルトの15にしています</li>
+</ul>
+</li>
+</ul>
+<h3 id="connection">Connection</h3>
+<p>最後に，Connectionのセットアップを行います．設定したSourceとDestinationをセットし，Replication frequency（同期頻度）, Destination NamespaceやPrefixなどを決めていきます．</p>
+<ul>
+<li><strong>Transfer</strong>
+<ul>
+<li>Replication frequency
+<ul>
+<li>手動実行やスケジュール実行を選択できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Streams</strong>
+<ul>
+<li>Destination Namespace
+<ul>
+<li>Mirror source structure, Destination default, Custom formatの3種類あります</li>
+</ul>
+</li>
+<li>Destination Stream Prefix (Optional)
+<ul>
+<li>必要に応じて付与します</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Normalization &amp; Transformation</strong>
+<ul>
+<li>Raw data (JSON)</li>
+<li>Normalized tabular data</li>
+<li>上記どちらかを選択しますが，Raw dataだとJSONのままデータが格納されるので，Normalized tabular dataで良いと思います</li>
+</ul>
+</li>
+</ul>
+<p>個人的に同期するスプレッドシートの各シートがそれぞれ表示されて，どれを同期するか選択して決められるというのが感動しました 🎉</p>
+<p>今回は1シートだけ連携することにし，Custom Transformの処理はせずに単純にデータをそのまま連携していきます．</p>
+<p><img class="img-zoomable" src="../../img/airbyte-img4.png" alt="Connection" />
+</p>
+<p>実行結果のログは以下のような感じ<code>Sync Succeeded</code>となっています．</p>
+<p><img class="img-zoomable" src="../../img/airbyte-img5.png" alt="Execution Logs" />
+</p>
+<p>Airbyte側は大丈夫そうなので，BigQueryの方も確認してみると，ちゃんと入ってるので問題なさそうです！</p>
+<p><img class="img-zoomable" src="../../img/airbyte-img6.png" alt="BigQuery Logs" />
+</p>
+<h2 id="おわりに">おわりに</h2>
+<p>今回は，OSSのAirbyteを使ったスプレッドシートからBigQueryへのデータ同期を行ってみました．AirbyteはUIが用意されていて，直感的に操作できる+設定も簡単でデータ同期の体験としてとても良かったです！データソースが豊富なのもメリットとして大きいと思います．</p>
+<p>Extract &amp; Loadのみしか使えていないので，次はdbtを理解してTransformも追加して処理を実行してみたいと思います．あとは他のデータパイプラインツールとの比較とかも出来たら楽しそうかなと思いました．</p>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#airbyteとは">Airbyteとは？</a></li>
+    <li><a href="#スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</a>
+      <ul>
+        <li><a href="#source">Source</a></li>
+        <li><a href="#destination">Destination</a></li>
+        <li><a href="#connection">Connection</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#airbyteとは">Airbyteとは？</a></li>
+    <li><a href="#スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</a>
+      <ul>
+        <li><a href="#source">Source</a></li>
+        <li><a href="#destination">Destination</a></li>
+        <li><a href="#connection">Connection</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2022
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

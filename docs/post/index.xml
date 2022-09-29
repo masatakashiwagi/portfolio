@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 02 Sep 2022 02:15:12 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Sep 2022 15:37:53 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AirbyteでスプレッドシートのデータをBigQueryに連携</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</link>
+      <pubDate>Thu, 29 Sep 2022 15:37:53 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</guid>
+      <description>はじめに 以前から気になっていたOSSの Airbyte というELに特化したData Integrationツールを使ってみたかったので，今回はこれを使って以前Embulkで実装していたスプレッドシートからBigQue</description>
+    </item>
+    
     <item>
       <title>2022年夏休みのテック備忘録日記</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</link>
