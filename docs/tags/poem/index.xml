@@ -6,7 +6,16 @@
     <description>Recent content in Poem on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 02 Sep 2022 02:15:12 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Oct 2022 00:16:24 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JAWS DAYS 2022で登壇した感想</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/jawsdays2022-presentation/</link>
+      <pubDate>Sun, 09 Oct 2022 00:16:24 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/jawsdays2022-presentation/</guid>
+      <description>はじめに 今回初めてAWSのユーザーイベントである &amp;ldquo;JAWS DAYS 2022&amp;rdquo; で登壇させて貰ったので，その感想でも書こうと思います． JAWS DAYSは毎年行われていて，今年は2022年10月8日（土）に行われました．AWSユーザに</description>
+    </item>
+    
     <item>
       <title>2022年夏休みのテック備忘録日記</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</link>
