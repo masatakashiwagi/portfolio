@@ -72,17 +72,3 @@ Department of Physical Science, Osaka Prefecture University
 
 * **Masataka Kashiwagi**, Masaru Kato
 "Spatial Dependence of Odd-frequency Spin-triplet Superconducting Order Parameter in Nano-sized s-wave Superconductors Under a Magnetic Field", Physics Procedia, 65 (2015) 33-36
-
-***
-## **Projects**
-### Kaggle
-* IEEE-CIS Fraud Detection - 288th/6381 Silver medal (solo)
-* ASHRAE - Great Energy Predictor III - 69th/3594 Silver medal (solo)
-* Mechanisms of Action (MoA) Prediction - 34th/4373 Silver medal (team)
-* Shopee - Price Match Guarantee - 179th/2464 Bronze medal (solo)
-
-<!-- ### 90's same generation community
-* [Team90s](https://github.com/team90s "Team90s") - Kaggle team projects -->
-
-### MLOps Practices
-* [MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/) - Documentation of each company's MLOps practices

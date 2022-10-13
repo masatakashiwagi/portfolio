@@ -131,21 +131,25 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
     url = "/"
     weight = 1
   [[menu.nav]]
-    name = "Archives"
-    url = "/archives/"
-    weight = 2
-  [[menu.nav]]
     name = "About"
     url = "/about/"
+    weight = 2
+  [[menu.nav]]
+    name = "Activity"
+    url = "/activity/"
     weight = 3
+  [[menu.nav]]
+    name = "Posts"
+    url = "/archives/"
+    weight = 4
   [[menu.nav]]
     name = "Search"
     url = "/search/"
-    weight = 4
+    weight = 5
   [[menu.nav]]
     name = "RSS"
     url = "/index.xml"
-    weight = 5
+    weight = 6
 
 # [[menu.link]]
 #   name = "GitHub"
