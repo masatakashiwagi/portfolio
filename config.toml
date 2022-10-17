@@ -38,8 +38,8 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
   author = "Masataka Kashiwagi" # You can also set author in post front matter individually
   title = "Fractal Prologue"
   subTitle = "徒然なるままに...データと遊ぶ"
-  description = "Masataka Kashiwagi, a machine learning engineer"
-  keywords = "Masataka Kashiwagi,asteriam,Machine Learning,機械学習,Data Science,データサイエンス,MLOps,Recommendation,Anomaly Detection"
+  description = "Masataka Kashiwagi, Machine Learning Engineer, MLOps Engineer"
+  keywords = ["Masataka Kashiwagi", "asteriam", "Machine Learning", "MLOps", "RecSys", "Information Retrieval", "機械学習", "データサイエンス"]
 
   # Source URL of the website, will appear in the footer
   sourceURL = "https://github.com/masatakashiwagi/portfolio/"
@@ -124,6 +124,11 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
 
 [taxonomies]
   tag = "tags"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
 
 [menu]
   [[menu.nav]]
