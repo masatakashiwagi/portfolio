@@ -134,7 +134,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/">Excel Binary WorkbookをPythonで処理</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1395 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1401 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
@@ -167,7 +167,7 @@
 <blockquote>
 <p>pyxlsb is an Excel 2007-2010 Binary Workbook (xlsb) parser for Python.</p>
 </blockquote>
-<p>インストールはpipですることができます．</p>
+<p>pipでインストールすることができます．</p>
 <pre><code class="language-python">pip install pyxlsb
 </code></pre>
 <p>公式のサンプルコードを記載しておきます．</p>
@@ -190,8 +190,9 @@ with open_workbook('Book1.xlsb') as wb:
 <pre><code class="language-python">print(wb.convert_date(41235.45578))
 &gt;&gt;&gt; datetime.datetime(2012, 11, 22, 10, 56, 19)
 </code></pre>
-<p>今回は個人的に嵌ってしまった<code>.xlsb</code>形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータをExcelファイルで扱いたくないのが本音です．</p>
-<p>もちろん簡単なデータの可視化とか表計算とかExcelが活躍する場面は多々あると思うので，使い分けていきたいとは思います．</p>
+<h2 id="おわりに">おわりに</h2>
+<p>今回は個人的に嵌ってしまった<code>.xlsb</code>形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータをExcelファイルで扱いたくないのが本音です😅</p>
+<p>もちろん簡単なデータの可視化とか表計算でExcelが活躍する場面は多々あると思うので，使い分けて行くのが良いのではと思います．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python" target="_blank">Stack Overflow - Read XLSB File in Pandas Python</a></li>
@@ -335,6 +336,7 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
         <li><a href="#pyxlsb">pyxlsb</a></li>
       </ul>
     </li>
+    <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
     <li><a href="#追記">追記</a></li>
   </ul>
@@ -448,6 +450,7 @@ pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
         <li><a href="#pyxlsb">pyxlsb</a></li>
       </ul>
     </li>
+    <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
     <li><a href="#追記">追記</a></li>
   </ul>

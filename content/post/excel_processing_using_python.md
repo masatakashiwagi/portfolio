@@ -40,7 +40,7 @@ openpyxl.utils.exceptions.InvalidFileException: openpyxl does not support binary
 [pyxlsb](https://github.com/wwwiiilll/pyxlsb)は公式の説明にあるように，xlsb形式を扱えるpythonライブラリになります．
 > pyxlsb is an Excel 2007-2010 Binary Workbook (xlsb) parser for Python.
 
-インストールはpipですることができます．
+pipでインストールすることができます．
 ```python
 pip install pyxlsb
 ```
@@ -69,9 +69,10 @@ print(wb.convert_date(41235.45578))
 >>> datetime.datetime(2012, 11, 22, 10, 56, 19)
 ```
 
-今回は個人的に嵌ってしまった`.xlsb`形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータをExcelファイルで扱いたくないのが本音です．
+## おわりに
+今回は個人的に嵌ってしまった`.xlsb`形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータをExcelファイルで扱いたくないのが本音です😅
 
-もちろん簡単なデータの可視化とか表計算とかExcelが活躍する場面は多々あると思うので，使い分けていきたいとは思います．
+もちろん簡単なデータの可視化とか表計算でExcelが活躍する場面は多々あると思うので，使い分けて行くのが良いのではと思います．
 
 ## 参考
 - [Stack Overflow - Read XLSB File in Pandas Python](https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python)
