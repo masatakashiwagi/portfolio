@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Step FunctionsでのOpensearch Packageの更新は直列or並列？"
-description = "複数の辞書更新を直列で行うか並列で行うか"
+description = "複数の辞書更新を直列パイプラインで行うか並列パイプラインで行うか"
 date = 2022-10-29T10:38:31+09:00
 draft = false
 share = true
