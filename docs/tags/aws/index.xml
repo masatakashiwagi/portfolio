@@ -6,7 +6,16 @@
     <description>Recent content in AWS on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Jul 2022 09:58:08 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Oct 2022 10:38:31 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Step FunctionsでのOpensearch Packageの更新は直列or並列？</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
+      <pubDate>Sat, 29 Oct 2022 10:38:31 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</guid>
+      <description>はじめに OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残してお</description>
+    </item>
+    
     <item>
       <title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>

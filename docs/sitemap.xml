@@ -2,9 +2,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  
+  
+  
+  
+  
+  
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
-    <lastmod>2022-10-10T07:28:10+09:00</lastmod>
+    <lastmod>2022-10-29T10:38:31+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    <lastmod>2022-10-29T10:38:31+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</loc>
+    <lastmod>2022-10-29T10:38:31+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,23 +48,11 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    <lastmod>2022-10-10T07:28:10+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  
-  
-  <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</loc>
     <lastmod>2022-09-29T15:37:53+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  
-  
   
   
   
@@ -62,9 +74,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  
-  
   
   
   

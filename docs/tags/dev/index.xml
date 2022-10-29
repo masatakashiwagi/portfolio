@@ -6,7 +6,16 @@
     <description>Recent content in Dev on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Sep 2022 15:37:53 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Oct 2022 10:38:31 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Step FunctionsでのOpensearch Packageの更新は直列or並列？</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
+      <pubDate>Sat, 29 Oct 2022 10:38:31 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</guid>
+      <description>はじめに OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残してお</description>
+    </item>
+    
     <item>
       <title>AirbyteでスプレッドシートのデータをBigQueryに連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</link>
