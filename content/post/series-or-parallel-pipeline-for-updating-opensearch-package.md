@@ -294,7 +294,7 @@ OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の
 
 </details>
 
-![直列パイプライン](../../img/stepfunctions-graph-img2.png "直列パイプライン")
+![直列パイプライン](../../img/stepfunctions-series-img1.png "直列パイプライン")
 
 ### 並列でパイプラインを組んだ場合
 ユーザー辞書とシノニム辞書の更新を同時に実行するパイプラインになります．
@@ -583,7 +583,7 @@ OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の
 
 </details>
 
-![並列パイプライン](../../img/stepfunctions-graph-img1.png "並列パイプライン")
+![並列パイプライン](../../img/stepfunctions-parallel-img2.png "並列パイプライン")
 
 パイプライン内では`OpenSearch: ListDomainsForPackage`でパッケージの状況を確認し，ACTIVE状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．
 

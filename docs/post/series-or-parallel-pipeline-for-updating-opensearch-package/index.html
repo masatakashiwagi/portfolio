@@ -419,7 +419,7 @@
 }
 </code></pre>
 </details>
-<p><img class="img-zoomable" src="../../img/stepfunctions-graph-img2.png" alt="直列パイプライン" />
+<p><img class="img-zoomable" src="../../img/stepfunctions-series-img1.png" alt="直列パイプライン" />
 </p>
 <h3 id="並列でパイプラインを組んだ場合">並列でパイプラインを組んだ場合</h3>
 <p>ユーザー辞書とシノニム辞書の更新を同時に実行するパイプラインになります．</p>
@@ -703,7 +703,7 @@
 }
 </code></pre>
 </details>
-<p><img class="img-zoomable" src="../../img/stepfunctions-graph-img1.png" alt="並列パイプライン" />
+<p><img class="img-zoomable" src="../../img/stepfunctions-parallel-img2.png" alt="並列パイプライン" />
 </p>
 <p>パイプライン内では<code>OpenSearch: ListDomainsForPackage</code>でパッケージの状況を確認し，ACTIVE状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．</p>
 <p>辞書更新にかかる処理時間は5分以内ぐらいなので，より安全に実施できる直列で更新する方法に落ち着きました．</p>
