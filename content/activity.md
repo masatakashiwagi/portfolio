@@ -28,6 +28,9 @@ tags = []
 - データ連携と機械学習パイプラインなどsandboxとして検証する個人プロジェクト
 
 ## **Presentations**
+[17th Jan. 2023] **<u>[JAWS-UG AI/ML #15](https://jawsug-ai.connpass.com/event/263957/)</u>**
+- TBD
+
 [8th Oct. 2022] **<u>[JAWS DAYS 2022 - Satellites](https://jawsdays2022.jaws-ug.jp/sessions/A11/)</u>**
 - [AWSのマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
 
