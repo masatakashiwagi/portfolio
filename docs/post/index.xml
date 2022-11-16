@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Oct 2022 10:38:31 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Nov 2022 18:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Step FunctionsからGlueのジョブパラメータを指定して実行する方法</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</link>
+      <pubDate>Wed, 16 Nov 2022 18:00:00 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</guid>
+      <description>はじめに Glueを使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由でGlueを実行する場合</description>
+    </item>
+    
     <item>
       <title>Step FunctionsでのOpensearch Packageの更新は直列or並列？</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
