@@ -36,6 +36,7 @@ tags = []
 
 ## **Company's Tech Blog**
 所属している or していた会社で書いたテックブログ
+- [Character filterを用いたアルファベットの大文字小文字対応によるゼロ件ヒット改善](https://tech.connehito.com/entry/2022/11/15/180104)
 - [ニアリアルタイムで同期される検索基盤 ~パイプライン構築編~](https://tech.connehito.com/entry/2022/09/16/165655)
 - [ニアリアルタイムで同期される検索基盤を構築 ~AWS Glueによるデータ同期編~](https://tech.connehito.com/entry/2022/08/24/184911)
 - [SageMakerとStep Functionsを用いた機械学習パイプラインで構築した検閲システム（後編）](https://tech.connehito.com/entry/2022/03/28/190436)
