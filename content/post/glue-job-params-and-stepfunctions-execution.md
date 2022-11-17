@@ -18,7 +18,7 @@ Glueを使ってデータ連携する際に，例えばデータ連携したい�
 ## Glueのジョブパラメータ設定
 ジョブパラメータはGlue実行時に渡すことができるパラメータで，デフォルトでもいくつか用意されています（参考：[Job parameters used by AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)）．
 
-これに自前で用意したパラメータを渡す場合，`getResolvedOptions`の第二引数にリストで送りたいパラメータを定義します．
+これに自前で用意したパラメータを受け取りたい場合，`getResolvedOptions`の第二引数にリストに渡されてくるパラメータを定義します．これは後ほどのSFnのインプットに与えてGlueで受け取るものです．
 
 ```python
 # JobName: sample_glue_job
@@ -26,7 +26,7 @@ import sys
 from awsglue.utils import getResolvedOptions
 
 
-# 動的に切り替えたいor環境により変化する部分をパラメータ化
+# 動的に切り替えたい or 環境により変化する部分をパラメータとして受け取る
 args = getResolvedOptions(
     sys.argv,
     ["period_date", "index_name"]
@@ -45,7 +45,7 @@ index_name = args["index_name"]
 ## Step Functionsのinputにデータを渡してGlueで使う方法
 Glueジョブが作成できたら，それをStep Functionsで動かしていきます．
 
-以下にStep FunctionsのState Machineのサンプルコードを載せていますが，ポイントは`glue:startJobRun.sync`のアクションのParametersにあるArgumentsの設定です．inputパラメータを渡す場合は，`$`をkeyの末尾とvalueの先頭に付与する必要があります（参考：[Pass Parameters to a Service API](https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html)）．
+以下にStep FunctionsのState Machineのサンプルコードを載せていますが，ポイントは`glue:startJobRun.sync`アクションのParametersにあるArgumentsの設定です．inputパラメータを渡す場合は，`$`をkeyの末尾とvalueの先頭に付与する必要があります（参考：[Pass Parameters to a Service API](https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html)）．
 
 また，keyの先頭に`--`を付与しないとパラメータと認識されずにエラーになるので，注意が必要です．
 
@@ -88,6 +88,8 @@ Glueジョブが作成できたら，それをStep Functionsで動かしてい�
 ```
 
 SFnのコンソールから実行する場合，下図のように実行前の画面でJSON形式で必要なパラメータを渡すことで，SFnで定義したGlueのジョブパラメータに値がセットされます．
+
+今回の場合だと，`period_date`と`index_name`をパラメータとしてSFnのinputから渡して，Glueでそれらを受け取りETL処理を実行していきます．
 
 ![SFnのコンソール実行画面](../../img/glue-job-params-sfn-img1.png "SFnのコンソール実行画面")
 

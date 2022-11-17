@@ -134,7 +134,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/">Step FunctionsからGlueのジョブパラメータを指定して実行する方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1250 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1376 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/aws">AWS</a>&nbsp;<a href="/portfolio/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
@@ -145,13 +145,13 @@
 <p>今回の内容は，実務で発生した検索エンジンのインデックスに簡単にデータを流せるように，SFnのパイプラインのインプットにパラメータを渡すだけで実行できるようにしたかったので，その時に実施したお話です．</p>
 <h2 id="glueのジョブパラメータ設定">Glueのジョブパラメータ設定</h2>
 <p>ジョブパラメータはGlue実行時に渡すことができるパラメータで，デフォルトでもいくつか用意されています（参考：<a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html" target="_blank">Job parameters used by AWS Glue</a>）．</p>
-<p>これに自前で用意したパラメータを渡す場合，<code>getResolvedOptions</code>の第二引数にリストで送りたいパラメータを定義します．</p>
+<p>これに自前で用意したパラメータを受け取りたい場合，<code>getResolvedOptions</code>の第二引数にリストに渡されてくるパラメータを定義します．これは後ほどのSFnのインプットに与えてGlueで受け取るものです．</p>
 <pre><code class="language-python"># JobName: sample_glue_job
 import sys
 from awsglue.utils import getResolvedOptions
 
 
-# 動的に切り替えたいor環境により変化する部分をパラメータ化
+# 動的に切り替えたい or 環境により変化する部分をパラメータとして受け取る
 args = getResolvedOptions(
     sys.argv,
     [&quot;period_date&quot;, &quot;index_name&quot;]
@@ -167,7 +167,7 @@ index_name = args[&quot;index_name&quot;]
 <p><strong>パラメータは文字列のみ</strong>しか受け付けないので，期間を数値で使いたい場合は，上記コードのように数値型に変換する必要があります．</p>
 <h2 id="step-functionsのinputにデータを渡してglueで使う方法">Step Functionsのinputにデータを渡してGlueで使う方法</h2>
 <p>Glueジョブが作成できたら，それをStep Functionsで動かしていきます．</p>
-<p>以下にStep FunctionsのState Machineのサンプルコードを載せていますが，ポイントは<code>glue:startJobRun.sync</code>のアクションのParametersにあるArgumentsの設定です．inputパラメータを渡す場合は，<code>$</code>をkeyの末尾とvalueの先頭に付与する必要があります（参考：<a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html" target="_blank">Pass Parameters to a Service API</a>）．</p>
+<p>以下にStep FunctionsのState Machineのサンプルコードを載せていますが，ポイントは<code>glue:startJobRun.sync</code>アクションのParametersにあるArgumentsの設定です．inputパラメータを渡す場合は，<code>$</code>をkeyの末尾とvalueの先頭に付与する必要があります（参考：<a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html" target="_blank">Pass Parameters to a Service API</a>）．</p>
 <p>また，keyの先頭に<code>--</code>を付与しないとパラメータと認識されずにエラーになるので，注意が必要です．</p>
 <pre><code class="language-json">{
   &quot;Comment&quot;: &quot;Glueでデータ連携を行うステートマシン&quot;,
@@ -206,6 +206,7 @@ index_name = args[&quot;index_name&quot;]
 }
 </code></pre>
 <p>SFnのコンソールから実行する場合，下図のように実行前の画面でJSON形式で必要なパラメータを渡すことで，SFnで定義したGlueのジョブパラメータに値がセットされます．</p>
+<p>今回の場合だと，<code>period_date</code>と<code>index_name</code>をパラメータとしてSFnのinputから渡して，Glueでそれらを受け取りETL処理を実行していきます．</p>
 <p><img class="img-zoomable" src="../../img/glue-job-params-sfn-img1.png" alt="SFnのコンソール実行画面" />
 </p>
 <h2 id="おわりに">おわりに</h2>
