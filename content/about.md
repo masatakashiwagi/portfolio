@@ -54,14 +54,14 @@ Now, I'm working as Machine Learning Engineer in Web services company that focus
 
 ***
 ## **Education**
-* **Master of Engineering**
+* **Master of Engineering**<br>
 [Apr. 2014 - Mar. 2016]
 Department of Mathematical Sciences, Osaka Prefecture University
 
-  **<Master's thesis>**
+  **<Master's thesis>**<br>
   "Theory of odd-frequency spin-triplet Superconductivity in a nano-sized superconductor under a magnetic field"
 
-* **Bachelor of Science**
+* **Bachelor of Science**<br>
 [Apr. 2010 - Mar. 2014]
 Department of Physical Science, Osaka Prefecture University
 
