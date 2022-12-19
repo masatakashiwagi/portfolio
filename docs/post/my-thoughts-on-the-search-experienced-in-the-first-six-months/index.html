@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/favicon/mstile-150x150.png?raw=true">
+<meta name="generator" content="Hugo 0.91.0" />
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="初めて検索という領域に触れたので，その感想を認める" />
+
+
+<meta name="keywords" content="Poem" />
+
+<meta property="og:title" content="検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て" />
+<meta property="og:description" content="初めて検索という領域に触れたので，その感想を認める" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-20T00:01:02+09:00" />
+<meta property="article:modified_time" content="2022-12-20T00:01:02+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て"/>
+<meta name="twitter:description" content="初めて検索という領域に触れたので，その感想を認める"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-199882807-1');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-199882807-1"></script>
+
+
+<script>
+    window.ga_tid = 'UA-199882807-1';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/">検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-12-20</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3859 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/portfolio/tags/poem">Poem</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>最近，スタバで期間限定で販売しているの冬の新作「<a href="https://menu.starbucks.co.jp/4524785522695" target="_blank">バターキャラメルミルフィーユ ラテ</a>」のミルクをアーモンドミルクに変更して飲んだら激ウマでハマってしまいました笑．皆さんも是非飲んでみて下さい！（ちなみに寒いので，ホットで注文しました😋）</p>
+<p>今回のポストは <span class="marker_yellow"><strong><a href="https://adventar.org/calendars/7389" target="_blank">情報検索・検索技術 Advent Calendar 2022</a></strong></span> の20日目の記事になります．</p>
+<p>どんな内容の記事を書こうか悩みましたが，今回は技術的なものではなく，僕が今年の5月半ばぐらいから関わり出した「<strong>検索</strong>」に関しての取り組みやその感想を書こうと思います．具体的には，検索基盤の整備〜検索エンジンのチューニング〜輪読会などを通して感じたことを書きたいと思います．</p>
+<p>モチベーション的には，後から見返した時に当時の検索に対する初々しい気持ちはどんなものだったのかを残しておきたい気持ちです笑</p>
+<h2 id="検索する上で欠かせない検索基盤">検索する上で欠かせない検索基盤</h2>
+<p>何と言っても検索エンジンにデータを連携し供給しないと検索は何もできないので，まずは検索基盤を整備するのが必要です．検索という行為は普段からGoogle先生に聞いたり，各種Webサイト内で検索をしたりと何気なしに使っていますが，新しいデータを追加して検索できるようにするためには，検索エンジンのインデックスにデータを追加する必要があるというのを正直この時初めて知りました笑（最初はインデックスという単語をよく理解していなかったです笑）．</p>
+<p>※ 検索エンジンを使わずに，データベースに検索クエリを投げているケースもあると思いますが，ここでは，検索エンジンを使っているとします．</p>
+<p>検索エンジンにデータを定常的に連携するために検索基盤を用意するわけですが，検索基盤の具体的な構成とかの話は，僕が以前登壇したこちらの資料「<strong><a href="https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan" target="_blank">JAWS DAYS 2022 - AWSのマネージドサービスで実現するニアリアルタイムな検索基盤</a></strong>」を見て頂けるとありがたいです．</p>
+<p>構築段階よりはどう日々の運用と上手く付き合っていくか，「日々運用をしていく上で，何に気をつけるべきなのか？どういったことを意識すると良いのか？」を考えると，そういった話は調べてもなかなか出てこないし，環境によって違うしという感じで悩ましいなという気持ちです．が，僕は以下の2つを意識しながら，設計して作るようにしました．</p>
+<ul>
+<li><strong>ユーザーへの影響を考える</strong>
+<ul>
+<li>ユーザー視点で見ると，検索機能が使えなくなることは，そのサービスへの期待値を下げてしまうことになりますし，欲しい・知りたい情報を見つけられなくなるため，影響が大きいです．そのため，アラートの粒度やエラー時のリカバリーをどうするか，今回の検索基盤だと2つのインデックスを運用していたので，切り替え時にエラーが出てもそのまま動き続けれるように，削除タイミングやどのタイミングで切り替えるのが良いのか，などは考慮しながら作るようにしていました．</li>
+</ul>
+</li>
+<li><strong>システムを運用していくチームメンバーのことも考える</strong>
+<ul>
+<li>基盤を作った僕以外の人が触る時に，簡単に処理を修正できるか？エラーが起きた場合のリカバリーが簡単にできるか？といった部分は，構築後の運用において属人化を避けるためにも意識したいところでした．</li>
+<li>ドキュメントをきちんと用意することもそうですし，処理をモジュール単位で作る（Step Functionsだとこの辺りは整理しやすいです）とかは意識していました．</li>
+</ul>
+</li>
+</ul>
+<p>より大きなシステムを運用するとなると，また違った要素も必要なのかも知れないです．</p>
+<p><strong>システムは作った後の日々の運用をどうしやすくするかが大事</strong>だと思うので，この点は今後も意識したいと思っています．（なんか，検索システムに限った話ではない感じになってしまいましたね😅）</p>
+<p>検索基盤の構築で個人的にこれは良かったなと思った取り組みは，インデックスの切り替えで，Blue/Green deploymentをパイプライン（AWS Step Functions）の中で行うようにすることで，安全に切り替わる方式を作れたのは，ユーザーへの影響を考えると良い取り組みだったかなと思います．他の会社さんはどういった感じで運用されているのかとても気になっているので，是非教えて下さい笑</p>
+<p>なので，検索基盤が安定&amp;信頼できるものでないと，ユーザー影響もそうですし，検索エンジンの精度改善だったりもおぼつかなくなるので，検索基盤大事ですね！</p>
+<h2 id="みんなで検索の書籍を読んでワイワイ話す">みんなで検索の書籍を読んでワイワイ話す</h2>
+<p>チーム内の検索システムに対する共通認識や目線を合わせるために，「<a href="https://www.lambdanote.com/products/ir-system" target="_blank">検索システム - 実務者のための開発改善ガイドブック（通称ペンギン本）</a>」の輪読会を僕が主催したりもしました．（チーム内でも個々人で検索システムに対しての理解のバラツキがあったので，理解を深めて議論が活発になると良いなと思い始めました．あとは，単純にこの書籍がとても面白そうだったので，みんなで読みたいと思い始めた感じです笑）</p>
+<p>この書籍は名の通りで，実務向けに書かれていてとても参考になることが多かったです．特に後半の第II部にその要素が詰め込まれていて，</p>
+<ul>
+<li>検索システムの運用の話
+<ul>
+<li>上で話したBlue/Green deploymentの話やオフライン評価，障害検知など実務的に考えていく必要があることが載っていて，どういったことを運用時には考えて用意しておく必要があるのかなど参考になります</li>
+</ul>
+</li>
+<li>分析の観点の話
+<ul>
+<li>検索クエリだけでなく，その結果がどうだったかなどを考えるべきといったことが書かれています</li>
+</ul>
+</li>
+<li>改善箇所の発見プロセス
+<ul>
+<li>Why-What-Whoを定めないと意味のない改善になってしまういった心に刺さることが書かれています</li>
+</ul>
+</li>
+<li>機械学習を使ったランキングの話
+<ul>
+<li>あまり体系的に整理されたものはないと思うので，非常にありがたいことが書かれています</li>
+</ul>
+</li>
+<li>etc&hellip;</li>
+</ul>
+<p>これ以外にも色々とありすぎて全部はここに書けないですが，検索をする人は一度は目を通しておくべき内容だなと思いました！（定期的に読み直したいです）</p>
+<p>輪読会を通して，検索システムに対する理解やそれが及ぶ範囲などを知ることができたのと，それをチームメンバーでうちのサービスだとどうか？など自分達の状況に置き換えながら議論して，内容を共有しながら進めることができたので，とても学びがある会になったと思います．</p>
+<p>ただ，準備に時間がかかったり，読み込みの時間が十分でなく議論がそこまで活発化しなかった会もあったので，そういった場合は会の最初に黙々と読む時間を用意しても良かったのかもと思ったりもしました．</p>
+<p>検索システムは奥が深くて知れば知るほど関わる人も多く一筋縄ではいかないなと思う一方で，取り組み甲斐のある面白い領域だなと感じてます😊</p>
+<h2 id="検索エンジンのチューニングって難しいな">検索エンジンのチューニングって難しいな</h2>
+<p>メインは検索基盤周りを扱っていて，今の所チューニング部分は少しだけ関わっていますが，</p>
+<ul>
+<li>Analyzerの定義</li>
+<li>Query DSLの定義</li>
+<li>辞書整備</li>
+<li>etc&hellip;</li>
+</ul>
+<p>上に挙げたあたりで難しいなと日々感じてます&hellip;</p>
+<p>最初の方はゼロ件ヒットの結果や検索ログに基づいたユーザー辞書・同義語辞書の整備は色々とやっていて，特に同義語辞書は何を同義語と設定するか，双方向なのか一方向の辞書展開なのかは答えがないので，言葉の意味や定義を調べたり，ユーザーの一人である妻に聞いたりしながら設定していました．（同義語の収集自動化したい&hellip;）</p>
+<p>また，検索ログを眺めていると，ユーザーが何を調べているか，ワードもそうですし全体でのそのワード回数などを感覚的に掴めるので，一度やったのは正解でした！</p>
+<p>他には，こんな感じで検索ワード入れると検索にヒットするのになーと思ったりして，ユーザー全員が検索の仕方が上手いわけではないので，サジェストで「これのことですか？」とか，意味は同じで「こちらの方がヒット数が多いですよ」とか，もう少しガイドがあったりすると改善できるのかな？と感じたり．</p>
+<p>あとは内部的に表記揺れを吸収して直したりとかはありそうだなと感じたりはしています．すぐに技術的に解決が難しくても，UIでもそういったガイドはできると思っていて，この辺りはエンジニアリングとデザインが上手く混ざり合うと良い体験をユーザーに提供できるのかなと感じています．</p>
+<p>機械学習の導入に関しては，検索結果のパーソナライズ化できる利点もありますが，それを動かす環境だったりレイテンシーを抑えて計算して結果を表示する工夫が必要だと思うので，そんなに簡単には導入でき無さそうかなと思ったりしてます🤔</p>
+<h2 id="おわりに">おわりに</h2>
+<p>半年程度検索という領域に携わって，手探りながら進めて感じたのは，</p>
+<ul>
+<li>検索ログを泥臭く見て改善ポイントを見つけたり，ユーザーの行動に思いを馳せる</li>
+<li>ゼロ件ヒットワードや検索利用率などの各種メトリクスを取って可視化できるようにする</li>
+<li>ロジック変更したら，定性チェックして検索結果に違和感がないか見る</li>
+<li>エラー検知はもちろんだけど，エラー時のRunbookを用意する</li>
+<li>リカバリーする手順はなるべく自動化して手動によるオペミスを減らす（インデックスの再作成）</li>
+</ul>
+<p>などが大事だなと思ったり（他にもいっぱいあると思います笑），あとは検索で良い体験を提供するためには，単純にアルゴリズムの話だけでなく，</p>
+<ul>
+<li>UI/UX</li>
+<li>信頼できる検索基盤</li>
+<li>検索エンジンのチューニング</li>
+<li>辞書の整備</li>
+<li>検索のパフォーマンス</li>
+<li>etc&hellip;</li>
+</ul>
+<p>本当に総合格闘技で取り組まないと成功しないなというの実感しているのと，そもそもユーザーにどういった検索体験を提供したいかを考えないと目指す方向性がブレてしまうので，言語化が必要だなというお気持ちです😅</p>
+<p>これからもいっぱい悩んでいこうと思います！</p>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#検索する上で欠かせない検索基盤">検索する上で欠かせない検索基盤</a></li>
+    <li><a href="#みんなで検索の書籍を読んでワイワイ話す">みんなで検索の書籍を読んでワイワイ話す</a></li>
+    <li><a href="#検索エンジンのチューニングって難しいな">検索エンジンのチューニングって難しいな</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">Data</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data-science/">Data Science</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">Dev</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">Kaggle</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/machine-learning/">Machine Learning</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOps</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">Poem</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/statistics/">Statistics</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#検索する上で欠かせない検索基盤">検索する上で欠かせない検索基盤</a></li>
+    <li><a href="#みんなで検索の書籍を読んでワイワイ話す">みんなで検索の書籍を読んでワイワイ話す</a></li>
+    <li><a href="#検索エンジンのチューニングって難しいな">検索エンジンのチューニングって難しいな</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2022
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
