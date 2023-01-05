@@ -28,11 +28,10 @@ I obtained a master's degree in physics. My research is to reveal novel supercon
 
 After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.
 
-After that, I was working as Data Scientist and Machine Learning Engineer in software company.
-
+After that, I was working as Data Scientist and Machine Learning Engineer in software company. <br>
 I have been involved in more than 20 data science projects to solve problems and provide support mainly for clients in the manufacturing industry, focusing on anomaly detection and its factor analysis. I have also been involved in the development of machine learning algorithms for our products.
 
-Now, I'm working as Machine Learning Engineer in Web services company that focuses on families.
+Now, I'm working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families.
 
 ***
 ## **Work Experience**
