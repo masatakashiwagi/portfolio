@@ -46,7 +46,7 @@ Now, I'm working as Machine Learning Engineer in Web services company that focus
 - Develop of our own products which provides parameters optimization solutions for the manufacturing industry. -->
 
 [Mar. 2018 - May. 2021] <u>Data Scientist / Machine Learning Engineer, Brains Technology, Inc.</u>
-- Develop of our own products which provides anomaly detection solutions for the manufacturing industry.
+- Develop of our own products which provides anomaly detection solutions using Machine Learning for the manufacturing industry.
 
 [Apr. 2016 - Feb. 2018] <u>Solution Engineer, NTT Communications Corporation</u>
 - I was on loan to one of the subsidiary companies, NTTCom Online Marketing Solutions Corporation.
