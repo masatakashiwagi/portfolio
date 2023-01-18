@@ -32,7 +32,7 @@ tags = []
 - TBD
 
 [17th Jan. 2023] **<u>[JAWS-UG AI/ML #15](https://jawsug-ai.connpass.com/event/263957/)</u>**
-- SageMaker Experimentsで始める機械学習モデルの実験管理
+- [SageMaker Experimentsで始める機械学習モデルの実験管理](https://speakerdeck.com/masatakashiwagi/ml-number-15-sagemaker-experimentsdeshi-meruji-jie-xue-xi-moderunoshi-yan-guan-li)
 
 [8th Oct. 2022] **<u>[JAWS DAYS 2022 - Satellites](https://jawsdays2022.jaws-ug.jp/sessions/A11/)</u>**
 - [AWSのマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
