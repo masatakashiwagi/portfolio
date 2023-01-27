@@ -29,7 +29,7 @@ tags = []
 
 ## **Presentations**
 [26th Jan. 2023] **<u>[MoT/コネヒト/Kanmu が語るプロダクト開発xデータ分析](https://kanmu.connpass.com/event/270440/)</u>**
-- TBD
+- [分析から機械学習システムの開発まで一人で複数ロールを担う大変さ](https://speakerdeck.com/masatakashiwagi/kanmu-gayu-rupurodakutokai-fa-xdetafen-xi-fen-xi-karaji-jie-xue-xi-sisutemunokai-fa-made-ren-defu-shu-roruwodan-uda-bian-sa)
 
 [17th Jan. 2023] **<u>[JAWS-UG AI/ML #15](https://jawsug-ai.connpass.com/event/263957/)</u>**
 - [SageMaker Experimentsで始める機械学習モデルの実験管理](https://speakerdeck.com/masatakashiwagi/ml-number-15-sagemaker-experimentsdeshi-meruji-jie-xue-xi-moderunoshi-yan-guan-li)
