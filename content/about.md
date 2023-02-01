@@ -35,7 +35,7 @@ Now, I'm working as Machine Learning Engineer and MLOps Engineer in web services
 
 ***
 ## **Work Experience**
-[June. 2021 - present] <u>Machine Learning Engineer / MLOps Engineer, Connehito, Inc.</u>
+[June. 2021 - present] <u>Machine Learning Engineer, Connehito, Inc.</u>
 - Develop recommendation system, fraud detection system, search engine infrastructure and promote MLOps at a company that provides Questions & Answers service to mothers.
 
 <!-- [Jul. 2022 - present] <u>Machine Learning Engineer, High Link, Inc. (contracting job)</u>
@@ -53,16 +53,14 @@ Now, I'm working as Machine Learning Engineer and MLOps Engineer in web services
 
 ***
 ## **Education**
-* **Master of Engineering**<br>
-[Apr. 2014 - Mar. 2016]
-Department of Mathematical Sciences, Osaka Prefecture University
+<u>**Master of Engineering**</u><br>
+- [Apr. 2014 - Mar. 2016] Department of Mathematical Sciences, Osaka Prefecture University
 
   **<Master's thesis>**<br>
   "Theory of odd-frequency spin-triplet Superconductivity in a nano-sized superconductor under a magnetic field"
 
-* **Bachelor of Science**<br>
-[Apr. 2010 - Mar. 2014]
-Department of Physical Science, Osaka Prefecture University
+<u>**Bachelor of Science**</u><br>
+- [Apr. 2010 - Mar. 2014] Department of Physical Science, Osaka Prefecture University
 
 ***
 ## **Publications**
