@@ -24,9 +24,6 @@ tags = []
 ### [MLOps community JP](https://mlops.connpass.com/)
 - 運営スタッフとして，イベントの企画とコミュニティーの運営をしています
 
-### [teamaya](https://github.com/masatakashiwagi/teamaya/)
-- データ連携と機械学習パイプラインなどsandboxとして検証する個人プロジェクト
-
 ## **Presentations**
 [26th Jan. 2023] **<u>[MoT/コネヒト/Kanmu が語るプロダクト開発xデータ分析](https://kanmu.connpass.com/event/270440/)</u>**
 - [分析から機械学習システムの開発まで一人で複数ロールを担う大変さ](https://speakerdeck.com/masatakashiwagi/kanmu-gayu-rupurodakutokai-fa-xdetafen-xi-fen-xi-karaji-jie-xue-xi-sisutemunokai-fa-made-ren-defu-shu-roruwodan-uda-bian-sa)
@@ -54,5 +51,5 @@ tags = []
 
 ## **Podcast**
 ### [Double-M2.fm](https://anchor.fm/double-m2)
-- episode note: [double-m2ml/podcast.fm](https://github.com/double-m2ml/podcast.fm)
 - 友人と二人で運営しているPodcastチャンネルです
+- episode note: [double-m2ml/podcast.fm](https://github.com/double-m2ml/podcast.fm)
