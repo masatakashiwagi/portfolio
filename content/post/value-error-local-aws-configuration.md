@@ -15,10 +15,10 @@ Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナ�
 結論から言うと，エラー内容にある通り「<span class="marker_yellow">**region**</span>」の指定を行うことで解決できます．
 
 方法としては2つあります．
-- 「**boto_session**，**sagemaker_client**」の「**region_name**」を指定する
+- 「**boto_session** と **sagemaker_client**」の「**region_name**」を指定する
 - 環境変数に「**AWS_DEFAULT_REGION**」を設定する
 
-2つ目の方法のStep Functionsの定義ファイルに環境変数: AWS_DEFAULT_REGIONを1行追記するのが簡単かと思います．
+2つ目の方法のStep Functionsの定義ファイルに環境変数: `AWS_DEFAULT_REGION`を1行追記するのが簡単かと思います．
 
 ## Configuration Error
 SageMaker Experimentsに保存されている実験結果は`sagemaker.analytics.ExperimentAnalytics`のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．
@@ -37,7 +37,7 @@ Configurationは公式ドキュメントを見ると以下のことが書かれ�
 
 今回の場合は，1番目と2番目は特段設定していないので，3番目が採用されて問題ないかなと思っていましたが，上述のエラーが発生しました．AWSのクレデンシャル情報（config, credentials）はローカルの`~/.aws/`配下に置かれており，build時にローカルにあるファイルをvolumesマウントしてコンテナ内と同期しています．
 
-この設定では上手くいかなかったので，1番目or2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！
+この設定では上手くいかなかったので，1番目 or 2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！
 
 ## Config objectをboto3 clientに渡す方法
 公式ドキュメントに記載されている優先度が1番高い方法になります．`botocore.config.Config`をインスタンス化して使うことで解決する方法になりますが，今回はわざわざConfig objectを使わずに`region_name`を指定する方法を説明します．
@@ -67,7 +67,7 @@ analytics_tables = trial_component_analytics.dataframe()
 - sagemaker_sessionを`sagemaker.analytics.ExperimentAnalytics`の引数に渡す
 - 取得した実験結果をデータフレーム化する
 
-ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「`boto3.session.Session`のregion_name」とこのsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．
+ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「`boto3.session.Session`のregion_name」と，このsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．
 
 この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．
 

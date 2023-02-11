@@ -155,10 +155,10 @@
 <p>結論から言うと，エラー内容にある通り「<span class="marker_yellow"><strong>region</strong></span>」の指定を行うことで解決できます．</p>
 <p>方法としては2つあります．</p>
 <ul>
-<li>「<strong>boto_session</strong>，<strong>sagemaker_client</strong>」の「<strong>region_name</strong>」を指定する</li>
+<li>「<strong>boto_session</strong> と <strong>sagemaker_client</strong>」の「<strong>region_name</strong>」を指定する</li>
 <li>環境変数に「<strong>AWS_DEFAULT_REGION</strong>」を設定する</li>
 </ul>
-<p>2つ目の方法のStep Functionsの定義ファイルに環境変数: AWS_DEFAULT_REGIONを1行追記するのが簡単かと思います．</p>
+<p>2つ目の方法のStep Functionsの定義ファイルに環境変数: <code>AWS_DEFAULT_REGION</code>を1行追記するのが簡単かと思います．</p>
 <h2 id="configuration-error">Configuration Error</h2>
 <p>SageMaker Experimentsに保存されている実験結果は<code>sagemaker.analytics.ExperimentAnalytics</code>のAPI使うことで取得することができます．今回，Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，以下のエラーが発生しました．</p>
 <blockquote>
@@ -176,7 +176,7 @@ Boto3 looks at various configuration locations until it finds configuration valu
 </blockquote>
 <p>上から順番に優先度が高いものになっていて，下位で設定している内容よりも上位で設定した内容が反映されます．</p>
 <p>今回の場合は，1番目と2番目は特段設定していないので，3番目が採用されて問題ないかなと思っていましたが，上述のエラーが発生しました．AWSのクレデンシャル情報（config, credentials）はローカルの<code>~/.aws/</code>配下に置かれており，build時にローカルにあるファイルをvolumesマウントしてコンテナ内と同期しています．</p>
-<p>この設定では上手くいかなかったので，1番目or2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！</p>
+<p>この設定では上手くいかなかったので，1番目 or 2番目の設定を行ったところ正常に動作したので，こちらの方法を記載しておきます．もし，volumesマウントの方法で上手くいく方法があれば教えて下さい！</p>
 <h2 id="config-objectをboto3-clientに渡す方法">Config objectをboto3 clientに渡す方法</h2>
 <p>公式ドキュメントに記載されている優先度が1番高い方法になります．<code>botocore.config.Config</code>をインスタンス化して使うことで解決する方法になりますが，今回はわざわざConfig objectを使わずに<code>region_name</code>を指定する方法を説明します．</p>
 <pre><code class="language-python">import boto3
@@ -203,7 +203,7 @@ analytics_tables = trial_component_analytics.dataframe()
 <li>sagemaker_sessionを<code>sagemaker.analytics.ExperimentAnalytics</code>の引数に渡す</li>
 <li>取得した実験結果をデータフレーム化する</li>
 </ul>
-<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「<code>boto3.session.Session</code>のregion_name」とこのsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
+<p>ここで，最初の「boto_sessionとsagemaker_clientを作成する」部分で，「<code>boto3.session.Session</code>のregion_name」と，このsessionを使った「clientのregion_name」に該当するregionを指定する必要があります．この2つをセットしておくことで，今回発生したエラーを回避することができます．</p>
 <p>この場合はカスタムコンテナで実行するスクリプトの修正変更が必要になってきますが，次に説明する環境変数に渡す方法はこの辺りの修正は必要ないので，簡単かなと思います．</p>
 <h2 id="環境変数を設定する方法">環境変数を設定する方法</h2>
 <p>Step Functionsのワークフローを定義するjsonファイルのEnvironment変数に「<span class="marker_yellow"><strong>AWS_DEFAULT_REGION</strong></span>」を設定する方法になります．</p>
