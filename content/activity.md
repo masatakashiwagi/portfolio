@@ -37,6 +37,8 @@ tags = []
 [4th Apr. 2022] **<u>[第18回 MLOps 勉強会 (Online)](https://mlops.connpass.com/event/242652/)</u>**
 - [MLOpsに関する事例を集めたMLOps Practicesを公開した話](https://speakerdeck.com/masatakashiwagi/di-18hui-mlops-mian-qiang-hui-mlops-practicesfalseshao-jie)
 
+[Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかったIT業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
+
 ## **Company's Tech Blog**
 所属している or していた会社で書いたテックブログ
 - [BigQueryのシャーディングされたテーブルをOpenSearchへ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
