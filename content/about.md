@@ -12,12 +12,12 @@ tags = []
 
 I'm **_Masataka Kashiwagi_**.
 
-Now, I'm working as Machine Learning Engineer at Connehito, Inc.
+Now, I'm working as Machine Learning Engineer at Commmune, Inc.
 
-I am involved in data analysis of improvement activities and using machine learning for own services.
+I am responsible for using machine learning to grow our products!
 
 Development of Machine Learning Systems for service growth.
-- Utilizing internal data to grow services.
+- Utilizing multimodal data to grow services.
 - Utilize machine learning to create a better user experience.
 
 I'm interested in multimodal learning and in consumer behavior model in life events.
@@ -28,14 +28,20 @@ I obtained a master's degree in physics. My research is to reveal novel supercon
 
 After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.
 
-After that, I was working as Data Scientist and Machine Learning Engineer in software company. <br>
+After that, I was working as Data Scientist and Machine Learning Engineer in software company which has a anomaly detection products.<br>
 I have been involved in more than 20 data science projects to solve problems and provide support mainly for clients in the manufacturing industry, focusing on anomaly detection and its factor analysis. I have also been involved in the development of machine learning algorithms for our products.
 
-Now, I'm working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families.
+I was working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families.<br>
+I led the development of the data infrastructure and pipeline for the search system and the recommendation system using machine learning. I also contributed to the development of the external presence of the company through the promotion of MLOps.
+
+Now, I`m working as Machine Learning Engineer in software company which has a customer communication platform.
 
 ***
 ## **Work Experience**
-[June. 2021 - present] <u>Machine Learning Engineer, Connehito, Inc.</u>
+[Apr. 2023 - Present] <u>Machine Learning Engineer, Commmune, Inc.</u>
+- Develop recommendation system for customer communication platform.
+
+[June. 2021 - Mar. 2023] <u>Machine Learning Engineer, Connehito, Inc.</u>
 - Develop recommendation system, fraud detection system, search engine infrastructure and promote MLOps at a company that provides Questions & Answers service to mothers.
 
 <!-- [Jul. 2022 - present] <u>Machine Learning Engineer, High Link, Inc. (contracting job)</u>
