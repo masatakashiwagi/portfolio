@@ -8,6 +8,21 @@
     <language>en</language>
     <lastBuildDate>Sat, 28 Jan 2023 00:00:05 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>About me</title>
+      <link>https://masatakashiwagi.github.io/portfolio/about/</link>
+      <pubDate>Sun, 02 Apr 2023 17:00:00 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/about/</guid>
+      <description>I&amp;rsquo;m Masataka Kashiwagi.
+Now, I&amp;rsquo;m working as Machine Learning Engineer at Commmune, Inc.
+I am responsible for using machine learning to grow our products!
+Development of Machine Learning Systems for service growth.
+ Utilizing multimodal data to grow services. Utilize machine learning to create a better user experience.  I&amp;rsquo;m interested in multimodal learning and in consumer behavior model in life events.
+Summary I obtained a master&amp;rsquo;s degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations.
+After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.</description>
+    </item>
+    
+    <item>
       <title>2023年の個人目標を立てた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-goals-for-2023/</link>
       <pubDate>Sat, 28 Jan 2023 00:00:05 +0900</pubDate>
@@ -203,21 +218,6 @@
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</guid>
       <description>はじめに 6月から友人の@navitacionさんと一緒にPodcastの配信を開始しました．テック系の話題など自分たちが興味のある内容をあれこれと話すものになります． Anchorという無料で配信できる</description>
-    </item>
-    
-    <item>
-      <title>About me</title>
-      <link>https://masatakashiwagi.github.io/portfolio/about/</link>
-      <pubDate>Tue, 01 Jun 2021 17:00:00 +0900</pubDate>
-      
-      <guid>https://masatakashiwagi.github.io/portfolio/about/</guid>
-      <description>I&amp;rsquo;m Masataka Kashiwagi.
-Now, I&amp;rsquo;m working as Machine Learning Engineer at Commmune, Inc.
-I am responsible for using machine learning to grow our products!
-Development of Machine Learning Systems for service growth.
- Utilizing multimodal data to grow services. Utilize machine learning to create a better user experience.  I&amp;rsquo;m interested in multimodal learning and in consumer behavior model in life events.
-Summary I obtained a master&amp;rsquo;s degree in physics. My research is to reveal novel superconductivity phenomena using numerical calculations.
-After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.</description>
     </item>
     
     <item>

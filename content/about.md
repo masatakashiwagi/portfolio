@@ -1,7 +1,7 @@
 +++
 title = "About me"
 description = "This is personal information about me."
-date = 2021-06-01T17:00:00+09:00
+date = 2023-04-02T17:00:00+09:00
 showLicense = false
 showToc = false
 share = false
@@ -28,11 +28,9 @@ I obtained a master's degree in physics. My research is to reveal novel supercon
 
 After graduate school, I got a job with a major telecommunications carrier. I was working as Solution Engineer which was familiar with marketing automation tools in Digital Marketing.
 
-After that, I was working as Data Scientist and Machine Learning Engineer in software company which has a anomaly detection products.<br>
-I have been involved in more than 20 data science projects to solve problems and provide support mainly for clients in the manufacturing industry, focusing on anomaly detection and its factor analysis. I have also been involved in the development of machine learning algorithms for our products.
+After that, I was working as Data Scientist and Machine Learning Engineer in software company which has a anomaly detection products. I have been involved in more than 20 data science projects to solve problems and provide support mainly for clients in the manufacturing industry, focusing on anomaly detection and its factor analysis. I have also been involved in the development of machine learning algorithms for our products.
 
-I was working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families.<br>
-I led the development of the data infrastructure and pipeline for the search system and the recommendation system using machine learning. I also contributed to the development of the external presence of the company through the promotion of MLOps.
+I was working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families. I led the development of the data infrastructure and pipeline for the search system and the recommendation system using machine learning. I also contributed to the development of the external presence of the company through the promotion of MLOps.
 
 Now, I`m working as Machine Learning Engineer in software company which has a customer communication platform.
 
