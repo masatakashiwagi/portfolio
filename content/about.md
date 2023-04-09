@@ -32,7 +32,7 @@ After that, I was working as Data Scientist and Machine Learning Engineer in sof
 
 I was working as Machine Learning Engineer and MLOps Engineer in web services company that focuses on families. I led the development of the data infrastructure and pipeline for the search system and the recommendation system using machine learning. I also contributed to the development of the external presence of the company through the promotion of MLOps.
 
-Now, I`m working as Machine Learning Engineer in software company which has a customer communication platform.
+Now, I`m working as Machine Learning Engineer at a SaaS company which provides a platform for customer communication.
 
 ***
 ## **Work Experience**
