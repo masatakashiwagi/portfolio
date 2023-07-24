@@ -23,7 +23,7 @@ tags = []
 
 ### [MLOps Practices](https://masatakashiwagi.github.io/mlops-practices/)
 
-- 各社のMLOpsに関する事例を集めたWebサイト
+- 各社の MLOps に関する事例を集めた Web サイト
 
 ### [MLOps community JP](https://mlops.connpass.com/)
 
@@ -35,34 +35,34 @@ tags = []
 - [分析から機械学習システムの開発まで一人で複数ロールを担う大変さ](https://speakerdeck.com/masatakashiwagi/kanmu-gayu-rupurodakutokai-fa-xdetafen-xi-fen-xi-karaji-jie-xue-xi-sisutemunokai-fa-made-ren-defu-shu-roruwodan-uda-bian-sa)
 
 [17th Jan. 2023] **<u>[JAWS-UG AI/ML #15](https://jawsug-ai.connpass.com/event/263957/)</u>**
-- [SageMaker Experimentsで始める機械学習モデルの実験管理](https://speakerdeck.com/masatakashiwagi/ml-number-15-sagemaker-experimentsdeshi-meruji-jie-xue-xi-moderunoshi-yan-guan-li)
+- [SageMaker Experiments で始める機械学習モデルの実験管理](https://speakerdeck.com/masatakashiwagi/ml-number-15-sagemaker-experimentsdeshi-meruji-jie-xue-xi-moderunoshi-yan-guan-li)
 
 [8th Oct. 2022] **<u>[JAWS DAYS 2022 - Satellites](https://jawsdays2022.jaws-ug.jp/sessions/A11/)</u>**
-- [AWSのマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
+- [AWS のマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
 
 [4th Apr. 2022] **<u>[第18回 MLOps 勉強会 (Online)](https://mlops.connpass.com/event/242652/)</u>**
-- [MLOpsに関する事例を集めたMLOps Practicesを公開した話](https://speakerdeck.com/masatakashiwagi/di-18hui-mlops-mian-qiang-hui-mlops-practicesfalseshao-jie)
+- [MLOps に関する事例を集めた MLOps Practices を公開した話](https://speakerdeck.com/masatakashiwagi/di-18hui-mlops-mian-qiang-hui-mlops-practicesfalseshao-jie)
 
-[Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかったIT業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
+[Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかった IT 業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
 
 ## **Company's Tech Blog**
 
 本業 or 副業先の会社で書いたテックブログ
 
 - [Cloud Firestore を活用したバッチレコメンドシステムを開発した話](https://tech.high-link.co.jp/entry/Cloud-Firestore-batch-recommend-system)
-- [BigQueryのシャーディングされたテーブルをOpenSearchへ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
-- [Character filterを用いたアルファベットの大文字小文字対応によるゼロ件ヒット改善](https://tech.connehito.com/entry/2022/11/15/180104)
+- [BigQuery のシャーディングされたテーブルを OpenSearch へ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
+- [Character filter を用いたアルファベットの大文字小文字対応によるゼロ件ヒット改善](https://tech.connehito.com/entry/2022/11/15/180104)
 - [ニアリアルタイムで同期される検索基盤 ~パイプライン構築編~](https://tech.connehito.com/entry/2022/09/16/165655)
-- [ニアリアルタイムで同期される検索基盤を構築 ~AWS Glueによるデータ同期編~](https://tech.connehito.com/entry/2022/08/24/184911)
-- [SageMakerとStep Functionsを用いた機械学習パイプラインで構築した検閲システム（後編）](https://tech.connehito.com/entry/2022/03/28/190436)
-- [SageMakerとStep Functionsを用いた機械学習パイプラインで構築した検閲システム（前編）](https://tech.connehito.com/entry/2022/03/24/173719)
-- [SageMaker Experimentsを使った機械学習モデルの実験管理](https://tech.connehito.com/entry/2021/12/15/181332)
-- [ML Test Scoreを使って現状の機械学習システムをスコアリングしました](https://tech.connehito.com/entry/2021/09/30/181145)
-- [Pythonの機械学習ライブラリtslearnを使った時系列データのクラスタリング](https://blog.brains-tech.co.jp/tslearn-time-series-clustering)
+- [ニアリアルタイムで同期される検索基盤を構築 ~AWS Glue によるデータ同期編~](https://tech.connehito.com/entry/2022/08/24/184911)
+- [SageMaker と Step Functions を用いた機械学習パイプラインで構築した検閲システム（後編）](https://tech.connehito.com/entry/2022/03/28/190436)
+- [SageMaker と Step Functions を用いた機械学習パイプラインで構築した検閲システム（前編）](https://tech.connehito.com/entry/2022/03/24/173719)
+- [SageMaker Experiments を使った機械学習モデルの実験管理](https://tech.connehito.com/entry/2021/12/15/181332)
+- [ML Test Score を使って現状の機械学習システムをスコアリングしました](https://tech.connehito.com/entry/2021/09/30/181145)
+- [Python の機械学習ライブラリ tslearn を使った時系列データのクラスタリング](https://blog.brains-tech.co.jp/tslearn-time-series-clustering)
 
 ## **Podcast**
 
 ### [Double-M2.fm](https://anchor.fm/double-m2)
 
-- 友人と二人で運営しているPodcastチャンネルです
+- 友人と二人で運営している Podcast チャンネルです
 - episode note: [double-m2ml/podcast.fm](https://github.com/double-m2ml/podcast.fm)
