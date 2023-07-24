@@ -46,6 +46,7 @@ tags = []
 [Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかったIT業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
 
 ## **Company's Tech Blog**
+
 本業 or 副業先の会社で書いたテックブログ
 
 - [Cloud Firestore を活用したバッチレコメンドシステムを開発した話](https://tech.high-link.co.jp/entry/Cloud-Firestore-batch-recommend-system)
