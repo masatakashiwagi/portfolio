@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法 - Fractal Prologue</title>
+<title>Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="AWSのStep Functionsを使ってSageMakerのGPU環境を動かすためのTips" />
+<meta name="description" content="AWS の Step Functions を使って SageMaker の GPU 環境を動かすための Tips" />
 
 
 <meta name="keywords" content="AWS, Dev" />
 
-<meta property="og:title" content="Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法" />
-<meta property="og:description" content="AWSのStep Functionsを使ってSageMakerのGPU環境を動かすためのTips" />
+<meta property="og:title" content="Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法" />
+<meta property="og:description" content="AWS の Step Functions を使って SageMaker の GPU 環境を動かすための Tips" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-30T13:16:43+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法"/>
-<meta name="twitter:description" content="AWSのStep Functionsを使ってSageMakerのGPU環境を動かすためのTips"/>
+<meta name="twitter:title" content="Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法"/>
+<meta name="twitter:description" content="AWS の Step Functions を使って SageMaker の GPU 環境を動かすための Tips"/>
 
 
 
@@ -140,42 +140,42 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/">Step Functionsで自作Dockerfileを使ってSageMakerのGPUマシンを動かす方法</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/">Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-01-30</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2526 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-01-30</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2158 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Step FunctionsでSageMakerのリソースを特にカスタムコンテナイメージで使う場合，単純にInstanceTypeとして&quot;ml.g4dn.xlarge&quot;などのGPUマシンを設定するだけではGPUを使った学習はできなくて，使いたいDockerfileに少し手を加える必要があります．</p>
-<p>今回は備忘録も兼ねてDockerfileの中身を紹介しながら，GPU環境での動作確認をしたいと思います．</p>
+<p>Step Functions で SageMaker のリソースを特にカスタムコンテナイメージで使う場合，単純に InstanceType として &ldquo;ml.g4dn.xlarge&rdquo; などの GPU マシンを設定するだけでは GPU を使った学習はできなくて，使いたいDockerfile に少し手を加える必要があります．</p>
+<p>今回は備忘録も兼ねて Dockerfile の中身を紹介しながら，GPU 環境での動作確認をしたいと思います．</p>
 <p>以下の手順で動作確認を行っています．</p>
 <ol>
-<li>ローカルでDockerfileと動作確認用のPythonスクリプトを作成する</li>
-<li>ローカルでbuildし，AWS ECRにbuildしたイメージをpushする</li>
-<li>pushしたイメージのURIをSageMaker Training JobのTrainingImageに指定する</li>
-<li>Step Functionsを実行する</li>
-<li>CloudWatch Logsを確認する</li>
+<li>ローカルで Dockerfile と動作確認用の Python スクリプトを作成する</li>
+<li>ローカルで build し，AWS ECR に build したイメージを push する</li>
+<li>push したイメージの URI を SageMaker Training Job の TrainingImage に指定する</li>
+<li>Step Functions を実行する</li>
+<li>CloudWatch Logs を確認する</li>
 </ol>
 <p>今回の動作確認フローは以下の図のようなイメージです．</p>
 <p><img class="img-zoomable" src="../../img/aws-gpu-img1.png" alt="動作確認フロー" />
 </p>
 <h2 id="自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</h2>
-<p>今回はTensorflow-gpuのベースイメージを使っています．そのイメージに「<span class="marker_yellow"><strong>nvidia-docker</strong></span>」を追加でインストールすることでStep FunctionsでGPU用のカスタムコンテナイメージを使ってSageMakerを動作させることができます．</p>
-<p><a href="https://hub.docker.com/r/tensorflow/tensorflow/" target="_blank">TensorFlow Docker Images</a>から好きなgpu用のイメージを選択して下さい．今回は「tensorflow/tensorflow:2.6.1-gpu」を使用することにします．<strong>Optional Features</strong>にも記載されていますが，nvidia-dockerが必要だよとのことなので，この通りにします．</p>
+<p>今回は Tensorflow-gpu のベースイメージを使っています．そのイメージに「<span class="marker_yellow"><strong>nvidia-docker</strong></span>」を追加でインストールすることで Step Functions で GPU 用のカスタムコンテナイメージを使って SageMaker を動作させることができます．</p>
+<p><a href="https://hub.docker.com/r/tensorflow/tensorflow/" target="_blank">TensorFlow Docker Images</a>から好きな GPU 用のイメージを選択して下さい．今回は「tensorflow/tensorflow:2.6.1-gpu」を使用することにします．<strong>Optional Features</strong> にも記載されていますが，nvidia-docker が必要だよとのことなので，この通りにします．</p>
 <blockquote>
 <p><code>-gpu</code> tags are based on Nvidia CUDA. You need nvidia-docker to run them. NOTE: GPU versions of TensorFlow 1.13 and above (this includes the <code>latest-</code> tags) require an NVidia driver that supports CUDA 10. See NVidia&rsquo;s support matrix.</p>
 </blockquote>
-<p>大事な部分は以下の4行になります．以前は<a href="https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44" target="_blank">こちらの記事</a>にも書かれていますが，<code>nvidia-container-toolkit</code>をインストールする必要があったみたいですが，今は<code>nvidia-docker2</code>をインストールすることで，<code>nvidia-container-toolkit</code>も一緒にインストールされるみたいで，よりシンプルになっています．</p>
+<p>大事な部分は以下の4行になります．以前は<a href="https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44" target="_blank">こちらの記事</a>にも書かれていますが，<code>nvidia-container-toolkit</code> をインストールする必要があったみたいですが，今は <code>nvidia-docker2</code> をインストールすることで，<code>nvidia-container-toolkit</code> も一緒にインストールされるみたいで，よりシンプルになっています．</p>
 <pre><code class="language-dockerfile">RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
     &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
     &amp;&amp; curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 RUN sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-docker2
 </code></pre>
-<p>今回使用したDockerfile全体は以下になります．</p>
+<p>今回使用した Dockerfile 全体は以下になります．</p>
 <pre><code class="language-dockerfile"># Dockerfile.gpu
 FROM tensorflow/tensorflow:2.6.1-gpu
 
@@ -236,7 +236,7 @@ RUN chmod +x $PROGRAM_DIR/hello_gpu.py
 
 CMD [&quot;python3&quot;]
 </code></pre>
-<p>また，SageMakerでGPUを認識しているかを確認するためのPythonスクリプトは以下になります．</p>
+<p>また，SageMaker で GPU を認識しているかを確認するための Python スクリプトは以下になります．</p>
 <pre><code class="language-python"># hello_gpu.py
 import tensorflow as tf
 from tensorflow.python.client import device_lib
@@ -252,11 +252,11 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
-<p>これらのファイルを用意して，ローカルでbuildを行います，buildした後はそのイメージをECRにpushすることで，Step Functionsで使用することができます．</p>
-<p>※ ECRへのpush方法や設定は今回割愛します．</p>
-<h2 id="step-functionsの設定">Step Functionsの設定</h2>
-<p>Step Functionsとは，AWSが提供する各種サービスを組み合わせたパイプラインを構築するためのワークフローサービスになります．機械学習向けのアクションも用意されていて，今回使用するSageMaker Training Jobもその一つになります．</p>
-<p>設定はyamlファイルのような形式でAWSのコンソール画面上で打ち込んでいきます．今回実施する内容の記述は以下の通りになります．</p>
+<p>これらのファイルを用意して，ローカルで build を行います，build した後はそのイメージを ECR に push することで，Step Functions で使用することができます．</p>
+<p>※ ECR への push 方法や設定は今回割愛します．</p>
+<h2 id="step-functions-の設定">Step Functions の設定</h2>
+<p>Step Functions とは，AWS が提供する各種サービスを組み合わせたパイプラインを構築するためのワークフローサービスになります．機械学習向けのアクションも用意されていて，今回使用する SageMaker Training Job もその一つになります．</p>
+<p>設定は yaml ファイルのような形式で AWS のコンソール画面上で打ち込んでいきます．今回実施する内容の記述は以下の通りになります．</p>
 <pre><code class="language-yml">{
   &quot;Comment&quot;: &quot;Check GPU env&quot;,
   &quot;StartAt&quot;: &quot;Hello-GPU&quot;,
@@ -294,24 +294,24 @@ if __name__ == &quot;__main__&quot;:
 }
 </code></pre>
 <p>細かい設定内容に関しては，<a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html" target="_blank">CreateTrainingJob</a> というドキュメントを参考下さい．</p>
-<p>ここで，Environment（環境変数）の「<span class="marker_yellow"><strong>SAGEMAKER_PROGRAM</strong></span>」について説明しておきます．この変数に指定したプログラムはTraining Jobのエントリーポイントにすることができます．</p>
-<p>元々は以下のコマンドが実行されるのですが（train.pyがあればそれが対象となる），実行したいプログラムのパスを指定することで任意のプログラムを実行することができます．</p>
+<p>ここで，Environment（環境変数）の「<span class="marker_yellow"><strong>SAGEMAKER_PROGRAM</strong></span>」について説明しておきます．この変数に指定したプログラムは Training Job のエントリーポイントにすることができます．</p>
+<p>元々は以下のコマンドが実行されるのですが（train.py があればそれが対象となる），実行したいプログラムのパスを指定することで任意のプログラムを実行することができます．</p>
 <blockquote>
 <p>docker run &lt;イメージ&gt; train</p>
 </blockquote>
-<p>ただし，実行権限を与えておく必要があるので，Dockerfile内で<code>RUN chmod +x $PROGRAM_DIR/hello_gpu.py</code>としています．</p>
-<p>あとは，実行結果をCloudWatch Logsで確認して，以下の内容がログに出力されていればOKです．</p>
+<p>ただし，実行権限を与えておく必要があるので，Dockerfile 内で <code>RUN chmod +x $PROGRAM_DIR/hello_gpu.py</code> としています．</p>
+<p>あとは，実行結果を CloudWatch Logs で確認して，以下の内容がログに出力されていれば大丈夫です．</p>
 <blockquote>
 <p>GPUs Available: True <br>
 Num GPUs Available: 1</p>
 </blockquote>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，Step FunctionsでSageMakerのTraining Jobをカスタムコンテナイメージを使ってGPU環境で動かす方法を紹介しました．この方法を使えば，深層学習などのGPU環境を必要とした学習もパイプラインに組み込むことが可能になります．また，Training Jobを使った学習ができれば，実験結果はSageMaker Experimentsに保存されるので，再現性を担保することもできます．</p>
-<p>Step Functionsでカスタムコンテナイメージを使ってGPU環境で学習させたい場合には，参考にして頂ければと思います．</p>
+<p>今回は，Step Functions で SageMaker の Training Job をカスタムコンテナイメージを使って GPU 環境で動かす方法を紹介しました．この方法を使えば，深層学習などの GPU 環境を必要とした学習もパイプラインに組み込むことが可能になります．また，Training Job を使った学習ができれば，実験結果は SageMaker Experiments に保存されるので，再現性を担保することもできます．</p>
+<p>Step Functions でカスタムコンテナイメージを使って GPU 環境で学習させたい場合には，参考にして頂ければと思います．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://github.com/awsdocs/amazon-sagemaker-developer-guide/blob/master/doc_source/notebooks-available-instance-types.md" target="_blank">Available SageMaker Studio Instance Types</a></li>
-<li><a href="https://aws.amazon.com/jp/sagemaker/pricing/" target="_blank">Amazon SageMakerの料金</a></li>
+<li><a href="https://aws.amazon.com/jp/sagemaker/pricing/" target="_blank">Amazon SageMaker の料金</a></li>
 <li><a href="https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44" target="_blank">NVIDIA Docker って今どうなってるの？ (20.09 版)</a></li>
 <li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html" target="_blank">What is AWS Step Functions?</a></li>
 </ul>
@@ -439,7 +439,7 @@ Num GPUs Available: 1</p>
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</a></li>
-    <li><a href="#step-functionsの設定">Step Functionsの設定</a></li>
+    <li><a href="#step-functions-の設定">Step Functions の設定</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -547,7 +547,7 @@ Num GPUs Available: 1</p>
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#自作のdockerfilegpuファイル">自作の「Dockerfile.gpu」ファイル</a></li>
-    <li><a href="#step-functionsの設定">Step Functionsの設定</a></li>
+    <li><a href="#step-functions-の設定">Step Functions の設定</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>

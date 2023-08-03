@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>CMLを使ったMLモデルのCI/CD - Fractal Prologue</title>
+<title>CML を使った ML モデルの CI/CD - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Continuous Machine LearningによるCI/CD" />
+<meta name="description" content="Continuous Machine Learning による CI/CD" />
 
 
 <meta name="keywords" content="MLOps, Machine Learning" />
 
-<meta property="og:title" content="CMLを使ったMLモデルのCI/CD" />
-<meta property="og:description" content="Continuous Machine LearningによるCI/CD" />
+<meta property="og:title" content="CML を使った ML モデルの CI/CD" />
+<meta property="og:description" content="Continuous Machine Learning による CI/CD" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-05-01T01:28:05+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="CMLを使ったMLモデルのCI/CD"/>
-<meta name="twitter:description" content="Continuous Machine LearningによるCI/CD"/>
+<meta name="twitter:title" content="CML を使った ML モデルの CI/CD"/>
+<meta name="twitter:description" content="Continuous Machine Learning による CI/CD"/>
 
 
 
@@ -140,17 +140,17 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/">CMLを使ったMLモデルのCI/CD</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/">CML を使った ML モデルの CI/CD</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-05-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2997 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;<a href="/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-05-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2819 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;<a href="/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p><strong>Continuous Machine Learning (CML)</strong> という機械学習モデルのCIツールを個人プロジェクトで導入したので，その紹介をしようと思います．</p>
+<p><strong>Continuous Machine Learning (CML)</strong> という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います．</p>
 <p>機械学習プロジェクトでテストを考える時に，大きく3つあると思っています．</p>
 <ol>
 <li><span class="marker_yellow"><strong>ソフトウェアのテスト</strong></span>: 単体テストや結合テストなどコードが意図通りの挙動を示すかどうかを確認するテスト
@@ -170,25 +170,25 @@
 </li>
 </ol>
 <p>このうち今回は，「<strong>機械学習モデルのテスト</strong>」に着目してこれをどのように実施するかを紹介しています．</p>
-<p>※ 今回，<strong>DVC</strong>は使っていません．機械学習モデルは使用するデータに依存する部分がかなり大きいので，DVCと組み合わせて実施するのが望ましいですが，今回は簡易的なテストデータを用意して，CMLを実施しています．</p>
+<p>※ 今回，<strong>DVC</strong> は使っていません．機械学習モデルは使用するデータに依存する部分がかなり大きいので，DVC と組み合わせて実施するのが望ましいですが，今回は簡易的なテストデータを用意して，CML を実施しています．</p>
 <h2 id="continuous-machine-learning-cml-とは">Continuous Machine Learning (CML) とは？</h2>
-<p>Continuous Machine Learning (CML) は，<a href="https://iterative.ai/" target="_blank">Iterative.ai</a>が開発している機械学習プロジェクトのCI/CDを実現するOSSであり，特徴としては以下のような点があります．</p>
+<p>Continuous Machine Learning (CML) は，<a href="https://iterative.ai/" target="_blank">Iterative.ai</a> が開発している機械学習プロジェクトの CI/CD を実現する OSS であり，特徴としては以下のような点があります．</p>
 <ul>
-<li>モデルの学習と評価の結果をレポート（markdown形式）にして自動生成できる（メトリクスや図など）</li>
-<li>Github Actionsと連携して，Pull Requests時に自動的に実行する仕組み</li>
+<li>モデルの学習と評価の結果をレポート（markdown 形式）にして自動生成できる（メトリクスや図など）</li>
+<li>Github Actions と連携して，Pull Requests 時に自動的に実行する仕組み</li>
 <li>任意のクラウド環境で実験を実行することが可能</li>
 </ul>
 <p>これは例えば，次のような課題を解決するためのサポートになると思います．</p>
 <ul>
-<li>PoCでデータサイエンティストが作成したコードをプロダクション環境に載せた際に，モデルの学習と評価が適切に行われているかをどのように確認するか？</li>
-<li>モデルが前回から向上していることをどのように確認するか？（これについてはDVCとの連携も必要）</li>
+<li>PoC でデータサイエンティストが作成したコードをプロダクション環境に載せた際に，モデルの学習と評価が適切に行われているかをどのように確認するか？</li>
+<li>モデルが前回から向上していることをどのように確認するか？（これについては DVC との連携も必要）</li>
 <li>モデルの再学習の際にも同じようなチェックが行われるのか？</li>
 <li>etc&hellip;</li>
 </ul>
-<p>CMLはPRベースでモデルの学習と評価を行い，適切な意思決定に繋げるのに役立つツールだと思います．</p>
+<p>CML は PR ベースでモデルの学習と評価を行い，適切な意思決定に繋げるのに役立つツールだと思います．</p>
 <h2 id="個人プロジェクトへの導入">個人プロジェクトへの導入</h2>
 <p><a href="http://localhost:1313/portfolio/post/async-ml-processing" target="_blank">前回のブログポスト</a>の<a href="http://localhost:1313/portfolio/post/async-ml-processing/#consumer%E3%81%AE%E5%AE%9F%E8%A3%85" target="_blank">こちらの章</a>で少し触れた部分になります．</p>
-<p>機械学習によるモデル作成を行っている<code>tasks.py</code>の<code>if __name__ == &quot;__main__&quot;:</code>以下がCML用に用意したコードになります．</p>
+<p>機械学習によるモデル作成を行っている <code>tasks.py</code> の <code>if __name__ == &quot;__main__&quot;:</code> 以下が CML 用に用意したコードになります．</p>
 <details>
 <summary>if __name__ == "__main__":以下のコードを抜粋</summary>
 <pre><code class="language-python">if __name__ == &quot;__main__&quot;:
@@ -271,7 +271,7 @@
     plot_residual(y_valid, y_pred, savepath=savepath_residual)
 </code></pre>
 </details>
-<p>こちらのコードがレポートにする処理になります．<code>metrics.txt</code>というテキストファイルを一時的に作成し，そこにメトリクスの結果を書き込みます．また，作成した回帰モデルによる実測-予測プロットの図（Y-Yプロット）や残差プロットの図をpngファイルでこちらも一時的に保存し，レポートに出力します．</p>
+<p>こちらのコードがレポートにする処理になります．<code>metrics.txt</code> というテキストファイルを一時的に作成し，そこにメトリクスの結果を書き込みます．また，作成した回帰モデルによる実測-予測プロットの図（Y-Y プロット）や残差プロットの図を png ファイルでこちらも一時的に保存し，レポートに出力します．</p>
 <pre><code class="language-python"># Record the metrics
 outfile = &quot;data/metrics.txt&quot;
 if not os.path.isdir(&quot;data&quot;):
@@ -287,8 +287,8 @@ plot_yy(y_valid, y_pred, metrics=rmse, savepath=savepath_yy)
 savepath_residual = &quot;data/residual_plot.png&quot;
 plot_residual(y_valid, y_pred, savepath=savepath_residual)
 </code></pre>
-<p>レポートに出力したいファイルを用意できたら，CMLを使うために<code>cml.yaml</code>ファイルを<code>.github/workflows</code>以下に作成します．<a href="https://github.com/iterative/cml_base_case" target="_blank">公式のユースケース</a>を参考にしても良いと思います．</p>
-<p>以下は，今回のプロジェクトで実行したCMLになります．</p>
+<p>レポートに出力したいファイルを用意できたら，CML を使うために <code>cml.yaml</code> ファイルを <code>.github/workflows</code> 以下に作成します．<a href="https://github.com/iterative/cml_base_case" target="_blank">公式のユースケース</a>を参考にしても良いと思います．</p>
+<p>以下は，今回のプロジェクトで実行した CML になります．</p>
 <pre><code class="language-yml">name: train-my-model
 on:
   push:
@@ -327,11 +327,11 @@ jobs:
           cml-publish app/data/residual_plot.png --md --title 'Residual Plot' &gt;&gt; report.md
           cml-send-comment report.md
 </code></pre>
-<p>CMLが実行されるタイミングとして，<code>tasks.py</code>が変更された時と<code>dev</code>ブランチにPRが作成された時の2つを設定していますが，こちらは適宜状況に合わせるのが良いと思います．今回は単純なRandomForestのモデルなので簡単に短時間で回すことができますが，画像系のモデル学習など学習に時間もリソースもかかる場合（特にクラウド環境でCMLを動かす場合），コード修正の度に実行されるのは適切でないかもしれません．</p>
-<p><code>run</code>パートは，<code>docker compose up</code>で立ち上げたコンテナ環境内で<code>tasks.py</code>を実行して，出力されたテキストファイルと図をmarkdown形式のファイルに出力しています．ここで，<code>echo</code>を挟むことでheaderを付けたりもできます．</p>
+<p>CML が実行されるタイミングとして，<code>tasks.py</code> が変更された時と <code>dev</code> ブランチに PR が作成された時の2つを設定していますが，こちらは適宜状況に合わせるのが良いと思います．今回は単純な RandomForest のモデルなので簡単に短時間で回すことができますが，画像系のモデル学習など学習に時間もリソースもかかる場合（特にクラウド環境で CML を動かす場合），コード修正の度に実行されるのは適切でないかもしれません．</p>
+<p><code>run</code> パートは，<code>docker compose up</code> で立ち上げたコンテナ環境内で <code>tasks.py</code> を実行して，出力されたテキストファイルと図を markdown 形式のファイルに出力しています．ここで，<code>echo</code> を挟むことで header を付けたりもできます．</p>
 <ul>
 <li><code>cml-publish</code>: レポートに画像を表示させるコマンド</li>
-<li><code>cml-send-comment</code>: githubのPRにコメントととしてmarkdownレポートを作成するコマンド</li>
+<li><code>cml-send-comment</code>: github の PR にコメントととして markdown レポートを作成するコマンド</li>
 </ul>
 <p>参考: <a href="https://cml.dev/doc/ref" target="_blank">CML - Command Reference</a></p>
 <p>結果はこのような形のレポートになります．</p>
@@ -342,7 +342,7 @@ jobs:
 <ul>
 <li>良い点
 <ul>
-<li>作成した学習の結果や評価をPR上で議論できる点
+<li>作成した学習の結果や評価を PR 上で議論できる点
 <ul>
 <li>認識のズレなどを議論できるかなと思います</li>
 </ul>
@@ -358,9 +358,9 @@ jobs:
 <li>結果のテキストファイルや図を出力しておく必要があるので，そこが面倒だったり，何を出すかの検討も必要</li>
 </ul>
 </li>
-<li>どういった基準でCMLを実行するか
+<li>どういった基準で CML を実行するか
 <ul>
-<li>どのタイミングでCMLを実行するか？（push時？merge時？）</li>
+<li>どのタイミングで CML を実行するか？（push 時？ merge 時？）</li>
 <li>重たいモデルを実行する場合，全てのデータで学習させてテストすべきか？</li>
 <li>etc&hellip;</li>
 </ul>
@@ -370,11 +370,11 @@ jobs:
 </ul>
 <p>微妙な点として挙げた内容も一部は，利用する側で決めるべきルールやポリシーだったりするので，ここはどういった情報があれば「<strong>意思決定</strong>」をする上で判断材料となるのかを整理することでクリアになる部分かもしれないです．</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，機械学習モデルのためのテストとして，CMLという機械学習プロジェクトでCI/CDを行うツールを使ってみたのでその紹介になります．</p>
-<p>また，今回は使っていないですが，DVCという同じIterative.aiが開発しているデータのバージョン管理を行うツールをCMLと組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow"><strong>CI/CD for ML</strong></span>」が実現できるかなと思います．</p>
-<p>P.S. Twitterでコメント頂いたので，追記しておきます．</p>
-<p>確かに，モデルの学習をPush時やPR時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．</p>
-<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれるGitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
+<p>今回は，機械学習モデルのためのテストとして，CML という機械学習プロジェクトで CI/CD を行うツールを使ってみたのでその紹介になります．</p>
+<p>また，今回は使っていないですが，DVC という同じ Iterative.ai が開発しているデータのバージョン管理を行うツールを CML と組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow"><strong>CI/CD for ML</strong></span>」が実現できるかなと思います．</p>
+<p>P.S. Twitter でコメント頂いたので，追記しておきます．</p>
+<p>確かに，モデルの学習を Push 時や PR 時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．</p>
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれる GitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://cml.dev/" target="_blank">Continuous Machine Learning (CML)</a></li>

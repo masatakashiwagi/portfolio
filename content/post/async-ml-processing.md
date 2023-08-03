@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
-title = "FastAPIとRabbitMQを用いた機械学習タスクの非同期処理"
-description = "FastAPIとRabbitMQを用いて機械学習のモデル学習処理を非同期化する話"
+title = "FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理"
+description = "FastAPI と RabbitMQ を用いて機械学習のモデル学習処理を非同期化する話"
 date = 2022-04-24T02:10:25+09:00
 draft = false
 share = true
@@ -10,38 +10,42 @@ tags = ["Dev", "Machine Learning"]
 +++
 
 ## はじめに
-最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理をFastAPIとRabbitMQを用いて検証したお話になります．
 
-機械学習のようなモデル作成に時間がかかる場合，モデル作成を行うリクエストに対して，その情報を受け取ったというレスポンスだけを先に返し，実際の処理は非同期で行われることが多いと思います．この処理をRabbitMQというOSSのmessage queuing serviceを用いて実施した紹介になります．
+最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理を FastAPI と RabbitMQ を用いて検証したお話になります．
 
-あと個人的にRPC (Remote Procedure Call) やPublish/Subscribeの仕組みを理解したいという気持ちもありました．
+機械学習のようなモデル作成に時間がかかる場合，モデル作成を行うリクエストに対して，その情報を受け取ったというレスポンスだけを先に返し，実際の処理は非同期で行われることが多いと思います．この処理を RabbitMQ という OSS の message queuing service を用いて実施した紹介になります．
+
+あと個人的に RPC (Remote Procedure Call) や Publish/Subscribe の仕組みを理解したいという気持ちもありました．
 
 以下のリポジトリにソースコードなどを置いてあります．
 
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="teamaya/async-processing at main · masatakashiwagi/teamaya" src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya/tree/main/async-processing" width="300" height="150" frameborder="0" scrolling="no"></iframe>
 
 概要として，以下のような流れで処理を見ていきました．
-1. FastAPIにjson形式でリクエストをPOSTする（モデル作成するためのメッセージ情報）
+
+1. FastAPI に json 形式でリクエストを POST する（モデル作成するためのメッセージ情報）
 2. `/train`というエンドポイントにまずはデータをPOSTする
-3. モデルの学習が行われモデルをS3に保存する
+3. モデルの学習が行われモデルを S3 に保存する
 4. モデルの作成が完了したら，次に`/predict`というエンドポイントにデータをPOSTする
-5. 学習済みのモデルをS3からロードし，POSTされたデータに対して予測確率を返す
+5. 学習済みのモデルを S3 からロードし，POST されたデータに対して予測確率を返す
 
 ## Message Queuing Serviceとは？
-メッセージキューはProducerと呼ばれるクライアントアプリケーションが作成したメッセージを受け取り，メッセージが溜まっていく仕組みです．Producer側から見ると，メッセージキューにメッセージを配信します．このメッセージを処理する役割として，Consumer (Worker) と呼ばれる別のアプリケーションがあり，ConsumerはQueueに接続し，処理するメッセージを受信します．処理し終わったら，返信用のメッセージをクライアント側に送信することもできます．（Queueに入れられたメッセージは，Consumerが取り出すまで保存されます．）
 
-また，メッセージキューにはExchangeと呼ばれる機能があり，どのメッセージをどのように送るかを設定する機能もあります．（厳密には，Producerは直接Queueに送信するのではなく，Exchangeに送信することになります）
+メッセージキューは Producer と呼ばれるクライアントアプリケーションが作成したメッセージを受け取り，メッセージが溜まっていく仕組みです．Producer 側から見ると，メッセージキューにメッセージを配信します．このメッセージを処理する役割として，Consumer (Worker) と呼ばれる別のアプリケーションがあり，Consumer は Queue に接続し，処理するメッセージを受信します．処理し終わったら，返信用のメッセージをクライアント側に送信することもできます．（Queue に入れられたメッセージは，Consumer が取り出すまで保存されます）
 
-実際にこのメッセージキューの役割を担うものをBrokerと呼んだりします．サービスとして[RabbitMQ](https://www.rabbitmq.com/)や[Redis](https://redis.io/)などがあり，マネージドサービスでは[Amazon Simple Queue Service (SQS) ](https://aws.amazon.com/sqs/)があります．
+また，メッセージキューには Exchange と呼ばれる機能があり，どのメッセージをどのように送るかを設定する機能もあります．（厳密には，Producer は直接 Queue に送信するのではなく，Exchange に送信することになります）
+
+実際にこのメッセージキューの役割を担うものを Broker と呼んだりします．サービスとして [RabbitMQ](https://www.rabbitmq.com/) や [Redis](https://redis.io/) などがあり，マネージドサービスでは [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) があります．
 
 参考: [What is message queuing?](https://www.cloudamqp.com/blog/what-is-message-queuing.html)
 
 ### RabbitMQを使った実装
-今回はRabbitMQを使って実装しました．RabbitMQはOSSのMessage Brokerで動作が速く軽量で，複数のメッセージングプロトコルをサポートしています．いくつかの言語で実装可能ですが，pythonで扱う場合には，`pika`というライブラリを使うことになります．
 
-例えば，[Celery](https://docs.celeryq.dev/en/stable/)のような分散タスクキューツールを使うことで非同期処理をより簡単に実装できますが，Celery自体はメッセージキューを構築することはできないため，RabbitMQやRedisのようなBrokerが必要になります．今回はこのあたりのpub/subの仕組みを理解するためにCeleryは使わずにRabbitMQのpythonライブラリであるpikaを使って実装することにしました．
+今回は RabbitMQ を使って実装しました．RabbitMQ は OSS の Message Broker で動作が速く軽量で，複数のメッセージングプロトコルをサポートしています．いくつかの言語で実装可能ですが，python で扱う場合には，`pika` というライブラリを使うことになります．
 
-RabbitMQはdockerコンテナで立ち上げていて，definitions.jsonという定義ファイルを事前に用意することでそのスキーマに基づいてRabbitMQを立ち上げることができます．このファイルはコンテナ起動時に読み込まれることになります．
+例えば，[Celery](https://docs.celeryq.dev/en/stable/) のような分散タスクキューツールを使うことで非同期処理をより簡単に実装できますが，Celery 自体はメッセージキューを構築することはできないため，RabbitMQ や Redis のような Broker が必要になります．今回はこのあたりの pub/sub の仕組みを理解するために Celery は使わずに RabbitMQ の python ライブラリである pika を使って実装することにしました．
+
+RabbitMQ は docker コンテナで立ち上げていて，definitions.json という定義ファイルを事前に用意することでそのスキーマに基づいて RabbitMQ を立ち上げることができます．このファイルはコンテナ起動時に読み込まれることになります．
 
 <details>
 <summary>definitions.json</summary>
@@ -101,9 +105,10 @@ RabbitMQはdockerコンテナで立ち上げていて，definitions.jsonとい�
 RabbitMQには丁寧なTutorialsがあるので，それを読むと理解が進むと思います！
 
 ## システム構成
-非同期処理を行うシステムの構成は図のようになります．Producer/Broker/Consumerとコンテナを3つ用意しています．
 
-図の右下にあるResult Storesはタスクの処理結果を保存するためのものになります．Result StoresにはPostgreSQLやMySQLなどのDBを使用することもできますし，Redisも使用することができます．RedisはBrokerとしても使用することができるので，両方を1つで担うことが可能です．今回はモデルをS3に保存するだけとして，処理結果をDBに保存したりはしていないです．
+非同期処理を行うシステムの構成は図のようになります．Producer/Broker/Consumer とコンテナを3つ用意しています．
+
+図の右下にある Result Stores はタスクの処理結果を保存するためのものになります．Result Stores には PostgreSQL や MySQL などのDBを使用することもできますし，Redis も使用することができます．Redis は Broker としても使用することができるので，両方を1つで担うことが可能です．今回はモデルを S3 に保存するだけとして，処理結果を DB に保存したりはしていないです．
 
 - Producer: 機械学習タスクを行うためにメッセージをポストするコンテナ（=FastAPI）
 - Broker: メッセージキューの役割を担うコンテナ（=RabbitMQ）
@@ -112,7 +117,7 @@ RabbitMQには丁寧なTutorialsがあるので，それを読むと理解が進
 
 ![アーキテクチャー](../../img/teamaya-async-img1.png "アーキテクチャー")
 
-docker-compose.ymlは以下のような構成になります．
+docker-compose.yml は以下のような構成になります．
 
 <details>
 <summary>docker-compose.yml</summary>
@@ -188,9 +193,9 @@ services:
 
 </details>
 
-今回のシステムのディレクトリ構成は以下になります．少し冗長な構成になっていますが，`./app/producer`と`./app/consumer`配下にProducerとConsumerの処理を行うスクリプトがあります．
+今回のシステムのディレクトリ構成は以下になります．少し冗長な構成になっていますが，`./app/producer` と `./app/consumer` 配下に Producer と Consumer の処理を行うスクリプトがあります．
 
-```
+```text
 .
 ├── Dockerfile
 ├── README.md
@@ -223,11 +228,13 @@ services:
 ```
 
 ## Producerの実装
+
 それぞれのファイルの説明をしておくと，
-- `base.py`: RabbitMQに接続するための初期化やConsumerにメッセージを送信するための処理を実装したファイル
-- `producer.py`: `base.py`のクラスを継承して，個別のタスクに合わせて送信するメッセージの実行するAPIを実装したファイル
+
+- `base.py`: RabbitMQ に接続するための初期化や Consumer にメッセージを送信するための処理を実装したファイル
+- `producer.py`: `base.py` のクラスを継承して，個別のタスクに合わせて送信するメッセージの実行する API を実装したファイル
 - `schema.py`: データの入出力のスキーマを定義したファイル
-    - FastAPIでは入出力を`Pydantic`というライブラリを用いてData validationを行います．型ヒントを利用するためのスキーマ定義になります
+  - FastAPI では入出力を `Pydantic` というライブラリを用いて Data validation を行います．型ヒントを利用するためのスキーマ定義になります
 
 <details>
 <summary>producer.py</summary>
@@ -312,7 +319,7 @@ async def predict(params: ApiSchemaPredict) -> ProducerResult:
 
 </details>
 
-`ProducerTrain`と`ProducerPredict`はタスク実行用のメッセージを送るキューの`queue_name`とConsumer側からの返信用のキューである`rep_queue_name`の2つを引数に取ります．実際の学習や予測処理を行う部分はConsumer側で実装しています．
+`ProducerTrain` と `ProducerPredict` はタスク実行用のメッセージを送るキューの `queue_name` と Consumer 側からの返信用のキューである `rep_queue_name` の2つを引数に取ります．実際の学習や予測処理を行う部分は Consumer 側で実装しています．
 
 <details>
 <summary>base.py</summary>
@@ -395,22 +402,24 @@ class BaseProducer:
 
 </details>
 
-- `__init__`関数:
-    - RabbitMQのサーバーと接続するために`pika.BlockingConnection()`で`host`, `port`などのパラメータを渡してインスタンス化を行う
-    - ConsumerからのReply用にrep_queue_nameに指定したキュー名でcallback_queueを作成
-    - basic_consumeではsubscribeするキューが存在すればそれを実行
+- `__init__` 関数:
+  - RabbitMQ のサーバーと接続するために `pika.BlockingConnection()` で `host` , `port` などのパラメータを渡してインスタンス化を行う
+  - Consumer からの Reply 用に rep_queue_name に指定したキュー名で callback_queue を作成
+  - basic_consume では subscribe するキューが存在すればそれを実行
 
-- `send_message_to_consumer`関数:
-    - メッセージをjson.dumpし，basic_publishのbodyにつめてExchangeに送る
+- `send_message_to_consumer` 関数:
+  - メッセージを json.dump し，basic_publish の body につめて Exchange に送る
 
-## Consumerの実装
+## Consumer の実装
+
 それぞれのファイルの説明をしておくと，
-- `base.py`: RabbitMQに接続してキューにあるメッセージを受信し，処理を実行するベースファイル
-    - callback部分は`tasks.py`で実装しています
-- `consumer.py`: スレッド数を決める`num_threads`をコマンドライン引数に取り，コンテナ上ではこのファイルが実行されます
+
+- `base.py`: RabbitMQ に接続してキューにあるメッセージを受信し，処理を実行するベースファイル
+  - callback 部分は `tasks.py` で実装しています
+- `consumer.py`: スレッド数を決める `num_threads` をコマンドライン引数に取り，コンテナ上ではこのファイルが実行されます
 - `tasks.py`: 機械学習によるモデル作成や学習済みモデルをロードして予測を行う処理を実装したファイル
-    - callbackメソッドに実行したい処理を実装します
-    - `if __name__ == "__main__":`以下には[Continuous Machine Learning (CML)](https://cml.dev/) で利用するCT用の処理を実装しています．（CMLに関しては別でブログを書こうと思います）
+  - callback メソッドに実行したい処理を実装します
+  - `if __name__ == "__main__":` 以下には [Continuous Machine Learning (CML)](https://cml.dev/) で利用する CT 用の処理を実装しています．（CML に関しては別でブログを書こうと思います）
 
 <details>
 <summary>tasks.py</summary>
@@ -589,19 +598,20 @@ def predict(model: object, params: dict) -> Dict[str, Any]:
 </details>
 
 - 学習パート
-    - 今回，機械学習モデルは何でもよかったので，RandomForestで回帰を行う処理にしています
-    - 学習済みモデルはS3に保存しているので，この処理を実行する場合は`.env`ファイルに自身で利用しているAWSのバケット情報などを載せて下さい
+  - 今回，機械学習モデルは何でもよかったので，RandomForest で回帰を行う処理にしています
+  - 学習済みモデルは S3 に保存しているので，この処理を実行する場合は `.env` ファイルに自身で利用している AWS のバケット情報などを載せて下さい
+
 ```bash
 S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
 S3_PATH_NAME = os.getenv('S3_PATH_NAME')
 S3_MODEL_PATH_NAME = os.getenv('S3_MODEL_PATH_NAME')
 ```
 
-モデル学習時のメタ情報もDBに残しておくのが良いと思いますが，今回はその部分は実装していないです🙏
+モデル学習時のメタ情報も DB に残しておくのが良いと思いますが，今回はその部分は実装していないです🙏
 
 - 予測パート
-    - S3に保存したモデルをロードして，与えらたデータに対して予測を行います
-    - モデルIDは学習時に発行されたUUIDをコピーして貼り付ける必要があるのですが，出力されたログから拾うのでちょっといけてないですがモックなのでご勘弁を...
+  - S3 に保存したモデルをロードして，与えらたデータに対して予測を行います
+  - モデル ID は学習時に発行された UUID をコピーして貼り付ける必要があるのですが，出力されたログから拾うのでちょっといけてないですがモックなのでご勘弁を...
 
 <details>
 <summary>consumer.py</summary>
@@ -634,23 +644,25 @@ if __name__ == "__main__":
 
 </details>
 
-引数に指定したスレッド数に応じてConsumerが複数立ち上がります．
+引数に指定したスレッド数に応じて Consumer が複数立ち上がります．
 
 ## 実行結果
-`docker compose up`でコンテナを起動して，`http://localhost:5000/docs`にアクセスするとSwaggerによる表示がされます．FastAPIはデフォルトでOpenAPIを自動生成してくれ，SwaggerやReDocで表示することができます．
 
-この辺は個人的にとても便利だなと思っていて，データを簡単にGET/POSTすることで動作を確認することできます．
+`docker compose up` でコンテナを起動して，`http://localhost:5000/docs` にアクセスすると Swagger による表示がされます．FastAPI はデフォルトで OpenAPI を自動生成してくれ，Swagger や ReDoc で表示することができます．
 
-- Swaggerの画面
+この辺は個人的にとても便利だなと思っていて，データを簡単に GET/POST することで動作を確認することできます．
 
-![Swaggerの画面](../../img/teamaya-async-img2.png "Swagger")
+- Swagger の画面
 
-- ReDocの画面
+![Swagger の画面](../../img/teamaya-async-img2.png "Swagger")
 
-![ReDocの画面](../../img/teamaya-async-img3.png "ReDoc")
+- ReDoc の画面
+
+![ReDoc の画面](../../img/teamaya-async-img3.png "ReDoc")
 
 ### 学習編
-`/train`にリクエストをPOSTします．事前にS3に保存したデータセット名を`dataset_id`に，使用する特徴量（説明変数）を`features`に，目的変数を`target`に指定します．
+
+`/train` にリクエストを POST します．事前に S3 に保存したデータセット名を `dataset_id` に，使用する特徴量（説明変数）を `features` に，目的変数を `target` に指定します．
 
 ```bash
 curl -X 'POST' \
@@ -665,11 +677,12 @@ curl -X 'POST' \
 ```
 
 出力されるログは以下のような感じになります．
-- 4行目はProducerがキューに対して送信したメッセージ（Consumerに渡したい情報）
-- 7行目（中略後1行目）はConsumerからのReplyメッセージ
-- 最後のConsumerからのログは学習処理を実行中に出力されるログ
 
-```
+- 4行目は Producer がキューに対して送信したメッセージ（Consumer に渡したい情報）
+- 7行目（中略後1行目）は Consumer からの Reply メッセージ
+- 最後の Consumer からのログは学習処理を実行中に出力されるログ
+
+```text
 producer  | [2022-04-24 15:49:09] [ INFO] Created channel=1
 producer  | [2022-04-24 15:49:09] [ INFO] Pika connection initialized.
 producer  | [2022-04-24 15:49:09] [ INFO] Produce message for train.
@@ -692,8 +705,9 @@ consumer  | [2022-04-24 15:49:10] [ INFO] TASK_COMPLETED
 ```
 
 ### 予測編
-`/predict`にリクエストをPOSTします．`model_id`を元に学習済みモデルをS3からロードします．`input_data`には，モデルに入力するデータをdict形式で特徴量とその値という組で渡します．<br>
-※ `model_id`は学習編のログ出力にある`model_id`を使用する必要があります．
+
+`/predict` にリクエストを POST します．`model_id` を元に学習済みモデルを S3 からロードします．`input_data` には，モデルに入力するデータを辞書形式で特徴量とその値という組で渡します．<br>
+※ `model_id` は学習編のログ出力にある `model_id` を使用する必要があります．
 
 ```bash
 curl -X 'POST' \
@@ -718,11 +732,12 @@ curl -X 'POST' \
 ```
 
 出力されるログは以下のような感じになります．
-- 4行目はProducerがキューに対して送信したメッセージ（Consumerに渡したい情報）
-- 5行目のConsumerからのログは予測処理を実行中に出力されるログ
-- （中略後1行目）はConsumerからのReplyメッセージで，予測結果が入っています
 
-```
+- 4行目は Producer がキューに対して送信したメッセージ（Consumer に渡したい情報）
+- 5行目の Consumer からのログは予測処理を実行中に出力されるログ
+- （中略後1行目）は Consumer からの Reply メッセージで，予測結果が入っています
+
+```text
 producer  | [2022-04-24 18:00:16] [ INFO] Created channel=1
 producer  | [2022-04-24 18:00:16] [ INFO] Pika connection initialized.
 producer  | [2022-04-24 18:00:16] [ INFO] Produce message for predict.
@@ -737,26 +752,29 @@ producer  | INFO:     172.24.0.1:57624 - "POST /predict HTTP/1.1" 200 OK
 ```
 
 ## おわりに
-FastAPIとRabbitMQを用いてWebAPI形式で，機械学習タスクの非同期処理を行う検証をしました．非同期処理だったり，RPCやPub/Subの仕組みを少しは理解できたかなと思います．
 
-今回はDBにメタデータを保存したりDB周りの処理は実装していないので，この辺も時間があれば実装できればと思います...
+FastAPI と RabbitMQ を用いて WebAPI 形式で，機械学習タスクの非同期処理を行う検証をしました．非同期処理だったり，RPC や Pub/Sub の仕組みを少しは理解できたかなと思います．
 
-非同期処理を行う上でメインの役割を果たしたRabbitMQについてもコメントすると，OSSで簡単に非同期処理を行える便利な技術だと思います．Producer/Exchange/Queue/Consumerの関係性もTutorialsの図などでイメージしやすくなるので，サンプルコードを見ながら比較的容易に実装することができました．<br>
-一方で，ConsumerからProducerにReplyメッセージを送る場合に，どのように実装すればいいかが分かりづらく，個人的にはハマりポイントでした．
+今回は DB にメタデータを保存したり DB 周りの処理は実装していないので，この辺も時間があれば実装できればと思います...
 
-あと，なにげにFastAPIもほとんど使ったことなかったので良い勉強になりました！
+非同期処理を行う上でメインの役割を果たした RabbitMQ についてもコメントすると，OSS で簡単に非同期処理を行える便利な技術だと思います．Producer/Exchange/Queue/Consumer の関係性も Tutorials の図などでイメージしやすくなるので，サンプルコードを見ながら比較的容易に実装することができました．<br>
+一方で，Consumer から Producer に Reply メッセージを送る場合に，どのように実装すればいいかが分かりづらく，個人的にはハマりポイントでした．
+
+あと，なにげに FastAPI もほとんど使ったことなかったので良い勉強になりました！
 
 最後に今後やりたいことについて列挙しておくと...
-- AWS SQSを使った非同期処理の実装
-- Celeryを使った非同期処理の実装
-- BrokerとしてRedisを用いた実装
-- DBを使ったメタデータの保存
+
+- AWS SQS を使った非同期処理の実装
+- Celery を使った非同期処理の実装
+- Broker として Redis を用いた実装
+- DB を使ったメタデータの保存
 - etc...
 
 ## 参考
+
 - [FastAPI](https://fastapi.tiangolo.com/)
 - [RabbitMQ](https://www.rabbitmq.com/)
-    - [RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html)
+  - [RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html)
 - [Asynchronous message-based communication](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/asynchronous-message-based-communication)
 - [Deep Learning: Scaling your neural networks with containerization and a message broker](https://medium.com/@si.allen/part-1-deep-learning-scaling-your-neural-networks-with-containerization-and-a-message-broker-d9c872a8345b)
 - [katanaml/katana-skipper](https://github.com/katanaml/katana-skipper)

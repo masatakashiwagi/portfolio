@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
-title = "CMLを使ったMLモデルのCI/CD"
-description = "Continuous Machine LearningによるCI/CD"
+title = "CML を使った ML モデルの CI/CD"
+description = "Continuous Machine Learning による CI/CD"
 date = 2022-05-01T01:28:05+09:00
 draft = false
 share = true
@@ -10,7 +10,8 @@ tags = ["MLOps", "Machine Learning"]
 +++
 
 ## はじめに
-**Continuous Machine Learning (CML)** という機械学習モデルのCIツールを個人プロジェクトで導入したので，その紹介をしようと思います．
+
+**Continuous Machine Learning (CML)** という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います．
 
 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています．
 
@@ -23,28 +24,30 @@ tags = ["MLOps", "Machine Learning"]
 
 このうち今回は，「**機械学習モデルのテスト**」に着目してこれをどのように実施するかを紹介しています．
 
-※ 今回，**DVC**は使っていません．機械学習モデルは使用するデータに依存する部分がかなり大きいので，DVCと組み合わせて実施するのが望ましいですが，今回は簡易的なテストデータを用意して，CMLを実施しています．
+※ 今回，**DVC** は使っていません．機械学習モデルは使用するデータに依存する部分がかなり大きいので，DVC と組み合わせて実施するのが望ましいですが，今回は簡易的なテストデータを用意して，CML を実施しています．
 
 ## Continuous Machine Learning (CML) とは？
-Continuous Machine Learning (CML) は，[Iterative.ai](https://iterative.ai/)が開発している機械学習プロジェクトのCI/CDを実現するOSSであり，特徴としては以下のような点があります．
 
-- モデルの学習と評価の結果をレポート（markdown形式）にして自動生成できる（メトリクスや図など）
-- Github Actionsと連携して，Pull Requests時に自動的に実行する仕組み
+Continuous Machine Learning (CML) は，[Iterative.ai](https://iterative.ai/) が開発している機械学習プロジェクトの CI/CD を実現する OSS であり，特徴としては以下のような点があります．
+
+- モデルの学習と評価の結果をレポート（markdown 形式）にして自動生成できる（メトリクスや図など）
+- Github Actions と連携して，Pull Requests 時に自動的に実行する仕組み
 - 任意のクラウド環境で実験を実行することが可能
 
 これは例えば，次のような課題を解決するためのサポートになると思います．
 
-- PoCでデータサイエンティストが作成したコードをプロダクション環境に載せた際に，モデルの学習と評価が適切に行われているかをどのように確認するか？
-- モデルが前回から向上していることをどのように確認するか？（これについてはDVCとの連携も必要）
+- PoC でデータサイエンティストが作成したコードをプロダクション環境に載せた際に，モデルの学習と評価が適切に行われているかをどのように確認するか？
+- モデルが前回から向上していることをどのように確認するか？（これについては DVC との連携も必要）
 - モデルの再学習の際にも同じようなチェックが行われるのか？
 - etc...
 
-CMLはPRベースでモデルの学習と評価を行い，適切な意思決定に繋げるのに役立つツールだと思います．
+CML は PR ベースでモデルの学習と評価を行い，適切な意思決定に繋げるのに役立つツールだと思います．
 
 ## 個人プロジェクトへの導入
+
 [前回のブログポスト](http://localhost:1313/portfolio/post/async-ml-processing)の[こちらの章](http://localhost:1313/portfolio/post/async-ml-processing/#consumer%E3%81%AE%E5%AE%9F%E8%A3%85)で少し触れた部分になります．
 
-機械学習によるモデル作成を行っている`tasks.py`の`if __name__ == "__main__":`以下がCML用に用意したコードになります．
+機械学習によるモデル作成を行っている `tasks.py` の `if __name__ == "__main__":` 以下が CML 用に用意したコードになります．
 
 <details>
 <summary>if __name__ == "__main__":以下のコードを抜粋</summary>
@@ -132,7 +135,7 @@ if __name__ == "__main__":
 
 </details>
 
-こちらのコードがレポートにする処理になります．`metrics.txt`というテキストファイルを一時的に作成し，そこにメトリクスの結果を書き込みます．また，作成した回帰モデルによる実測-予測プロットの図（Y-Yプロット）や残差プロットの図をpngファイルでこちらも一時的に保存し，レポートに出力します．
+こちらのコードがレポートにする処理になります．`metrics.txt` というテキストファイルを一時的に作成し，そこにメトリクスの結果を書き込みます．また，作成した回帰モデルによる実測-予測プロットの図（Y-Y プロット）や残差プロットの図を png ファイルでこちらも一時的に保存し，レポートに出力します．
 
 ```python
 # Record the metrics
@@ -151,9 +154,9 @@ savepath_residual = "data/residual_plot.png"
 plot_residual(y_valid, y_pred, savepath=savepath_residual)
 ```
 
-レポートに出力したいファイルを用意できたら，CMLを使うために`cml.yaml`ファイルを`.github/workflows`以下に作成します．[公式のユースケース](https://github.com/iterative/cml_base_case)を参考にしても良いと思います．
+レポートに出力したいファイルを用意できたら，CML を使うために `cml.yaml` ファイルを `.github/workflows` 以下に作成します．[公式のユースケース](https://github.com/iterative/cml_base_case)を参考にしても良いと思います．
 
-以下は，今回のプロジェクトで実行したCMLになります．
+以下は，今回のプロジェクトで実行した CML になります．
 
 ```yml
 name: train-my-model
@@ -195,12 +198,12 @@ jobs:
           cml-send-comment report.md
 ```
 
-CMLが実行されるタイミングとして，`tasks.py`が変更された時と`dev`ブランチにPRが作成された時の2つを設定していますが，こちらは適宜状況に合わせるのが良いと思います．今回は単純なRandomForestのモデルなので簡単に短時間で回すことができますが，画像系のモデル学習など学習に時間もリソースもかかる場合（特にクラウド環境でCMLを動かす場合），コード修正の度に実行されるのは適切でないかもしれません．
+CML が実行されるタイミングとして，`tasks.py` が変更された時と `dev` ブランチに PR が作成された時の2つを設定していますが，こちらは適宜状況に合わせるのが良いと思います．今回は単純な RandomForest のモデルなので簡単に短時間で回すことができますが，画像系のモデル学習など学習に時間もリソースもかかる場合（特にクラウド環境で CML を動かす場合），コード修正の度に実行されるのは適切でないかもしれません．
 
-`run`パートは，`docker compose up`で立ち上げたコンテナ環境内で`tasks.py`を実行して，出力されたテキストファイルと図をmarkdown形式のファイルに出力しています．ここで，`echo`を挟むことでheaderを付けたりもできます．
+`run` パートは，`docker compose up` で立ち上げたコンテナ環境内で `tasks.py` を実行して，出力されたテキストファイルと図を markdown 形式のファイルに出力しています．ここで，`echo` を挟むことで header を付けたりもできます．
 
 - `cml-publish`: レポートに画像を表示させるコマンド
-- `cml-send-comment`: githubのPRにコメントととしてmarkdownレポートを作成するコマンド
+- `cml-send-comment`: github の PR にコメントととして markdown レポートを作成するコマンド
 
 参考: [CML - Command Reference](https://cml.dev/doc/ref)
 
@@ -209,35 +212,38 @@ CMLが実行されるタイミングとして，`tasks.py`が変更された時�
 ![CML実行結果の画像](../../img/cml-img1.png "CMLサンプル画像")
 
 ## 実際使ってみた感想
+
 個人的に良いと思う部分と微妙だなと思う部分を挙げておきます．
 
 - 良い点
-    - 作成した学習の結果や評価をPR上で議論できる点
-        - 認識のズレなどを議論できるかなと思います
-    - モデルの結果を見て，デプロイするかどうかなど意思決定に繋げることができる点
-    - 再現性を一定担保することができる点
+  - 作成した学習の結果や評価を PR 上で議論できる点
+    - 認識のズレなどを議論できるかなと思います
+  - モデルの結果を見て，デプロイするかどうかなど意思決定に繋げることができる点
+  - 再現性を一定担保することができる点
 - 微妙な点
-    - 必要なものを出力してからレポート作成する必要がある点
-        - 結果のテキストファイルや図を出力しておく必要があるので，そこが面倒だったり，何を出すかの検討も必要
-    - どういった基準でCMLを実行するか
-        - どのタイミングでCMLを実行するか？（push時？merge時？）
-        - 重たいモデルを実行する場合，全てのデータで学習させてテストすべきか？
-        - etc...
+  - 必要なものを出力してからレポート作成する必要がある点
+    - 結果のテキストファイルや図を出力しておく必要があるので，そこが面倒だったり，何を出すかの検討も必要
+  - どういった基準で CML を実行するか
+    - どのタイミングで CML を実行するか？（push 時？ merge 時？）
+    - 重たいモデルを実行する場合，全てのデータで学習させてテストすべきか？
+    - etc...
 
 微妙な点として挙げた内容も一部は，利用する側で決めるべきルールやポリシーだったりするので，ここはどういった情報があれば「**意思決定**」をする上で判断材料となるのかを整理することでクリアになる部分かもしれないです．
 
 ## おわりに
-今回は，機械学習モデルのためのテストとして，CMLという機械学習プロジェクトでCI/CDを行うツールを使ってみたのでその紹介になります．
 
-また，今回は使っていないですが，DVCという同じIterative.aiが開発しているデータのバージョン管理を行うツールをCMLと組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow">**CI/CD for ML**</span>」が実現できるかなと思います．
+今回は，機械学習モデルのためのテストとして，CML という機械学習プロジェクトで CI/CD を行うツールを使ってみたのでその紹介になります．
 
-P.S. Twitterでコメント頂いたので，追記しておきます．
+また，今回は使っていないですが，DVC という同じ Iterative.ai が開発しているデータのバージョン管理を行うツールを CML と組み合わせて使う方法もあるので，ここも次回実験して使ってみたいと思います．これを使うことで前回の結果との差分なども見ることができるので，より良い「<span class="marker_yellow">**CI/CD for ML**</span>」が実現できるかなと思います．
 
-確かに，モデルの学習をPush時やPR時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．
+P.S. Twitter でコメント頂いたので，追記しておきます．
 
-<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれるGitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
+確かに，モデルの学習を Push 時や PR 時に毎回回すのは大変なので，学習時に適用するのではなく，学習済みのモデルに対して適当なサブセットのデータを用意してそれに対する推論結果をレポート出力するのが軽量で試しやすそうだなと思いました．
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">プルリクコメントでモデルの評価結果を出力してくれる GitHub Action。学習まで回すのは大変そうなので、サブセットの推論結果くらいに留めた方が良さそう？ <a href="https://t.co/5QkaHvQYxt">https://t.co/5QkaHvQYxt</a></p>&mdash; ken_jimmy (@ken_jimmy) <a href="https://twitter.com/ken_jimmy/status/1520939687275540480?ref_src=twsrc%5Etfw">May 2, 2022</a></blockquote>
 
 ## 参考
+
 - [Continuous Machine Learning (CML)](https://cml.dev/)
 - [Data Version Control (DVC)](https://dvc.org/)
 - [masatakashiwagi/teamaya/async-processing](https://github.com/masatakashiwagi/teamaya/tree/main/async-processing)

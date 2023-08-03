@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>CMLを使ったMLモデルのCI/CD</title>
+      <title>CML を使った ML モデルの CI/CD</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
       <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
-      <description>はじめに Continuous Machine Learning (CML) という機械学習モデルのCIツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテス</description>
+      <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
     </item>
     
     <item>
