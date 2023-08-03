@@ -8,12 +8,12 @@
     <language>en</language>
     <lastBuildDate>Mon, 18 Jul 2022 09:58:08 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/mlops/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</title>
+      <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</guid>
-      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github ActionsとCodePipelineを使ってマージトリガーでStep F</description>
+      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     
     <item>
@@ -26,12 +26,12 @@
     </item>
     
     <item>
-      <title>各社のMLOps事例を集めたMLOps PracticesというWebsiteを公開しました</title>
+      <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
-      <description>はじめに 最近個人的にMLOpsという領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例やMLOpsの各領域で使用されている技術やツールなど個別のTipsが点在</description>
+      <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
     </item>
     
   </channel>

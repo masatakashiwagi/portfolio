@@ -17,7 +17,7 @@
     </item>
     
     <item>
-      <title>JAWS-UG AI/MLとプロダクト開発での苦労話をするイベントで登壇した感想</title>
+      <title>JAWS-UG AI/ML とプロダクト開発での苦労話をするイベントで登壇した感想</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-jawsug-aiml15-and-products-hardship-story/</link>
       <pubDate>Fri, 27 Jan 2023 10:09:39 +0900</pubDate>
       
@@ -35,12 +35,12 @@
     </item>
     
     <item>
-      <title>JAWS DAYS 2022で登壇した感想</title>
+      <title>JAWS DAYS 2022 で登壇した感想</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-jawsdays2022/</link>
       <pubDate>Mon, 10 Oct 2022 07:28:10 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-jawsdays2022/</guid>
-      <description>はじめに 今回初めてAWSのユーザーイベントである &amp;ldquo;JAWS DAYS 2022&amp;rdquo; で登壇させて貰ったので，その感想でも書こうと思います． JAWS DAYSは毎年行われていて，今年は2022年10月8日（土）に行われました．AWSユーザに</description>
+      <description>はじめに 今回初めて AWS のユーザーイベントである &amp;ldquo;JAWS DAYS 2022&amp;rdquo; で登壇させて貰ったので，その感想でも書こうと思います． JAWS DAYS は毎年行われていて，今年は2022年10月8日（土）に行われました．AWS ユーザによる AWS ユー</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Fri, 02 Sep 2022 02:15:12 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</guid>
-      <description>はじめに きっかけは@kaggle_araisanさんのこちらのTweetを見かけて，面白そうな取り組みだなーと感じたので，この機会に僕もやってみようと思ったのが始まりです！ こういうのは，誰かと一緒にや</description>
+      <description>はじめに きっかけは@kaggle_araisanさんのこちらの Tweet を見かけて，面白そうな取り組みだなーと感じたので，この機会に僕もやってみようと思ったのが始まりです！ こういうのは，誰かと一緒にやったり，</description>
     </item>
     
     <item>
@@ -58,61 +58,61 @@
       <pubDate>Tue, 26 Jul 2022 11:01:27 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/first-childcare-leave/</guid>
-      <description>はじめに 少し時間が空いてしまいましたが，初めての育休（今は育業というみたいですがw）を2月末〜5月のGW明けまで2ヶ月ちょい取得した感想とオススメしたいものを紹介していきたいと思います！ 育児休業とは？</description>
+      <description>はじめに 少し時間が空いてしまいましたが，初めての育休（今は育業というみたいですがw）を2月末〜5月のゴールデンウィーク明けまで2ヶ月ちょい取得した感想とオススメしたいものを紹介していきたいと思います！</description>
     </item>
     
     <item>
-      <title>MLOps勉強会で登壇した感想</title>
+      <title>MLOps 勉強会で登壇した感想</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-the-mlops-study/</link>
       <pubDate>Wed, 04 May 2022 01:21:41 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-speaking-at-the-mlops-study/</guid>
-      <description>はじめに 2週間ぐらい間が空きましたが，先月の4月19日にこちらのMLOps勉強会で登壇させて頂いた時の感想ポエムを書こうと思います． ところでMLOps勉強会とは？ コミュニティーの説明を引用させて貰うと</description>
+      <description>はじめに 2週間ぐらい間が空きましたが，先月の4月19日にこちらの MLOps 勉強会で登壇させて頂いた時の感想ポエムを書こうと思います． ところで MLOps 勉強会とは？ コミュニティーの説明を引用させて貰うと&amp;hellip;</description>
     </item>
     
     <item>
-      <title>各社のMLOps事例を集めたMLOps PracticesというWebsiteを公開しました</title>
+      <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
-      <description>はじめに 最近個人的にMLOpsという領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例やMLOpsの各領域で使用されている技術やツールなど個別のTipsが点在</description>
+      <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
     </item>
     
     <item>
-      <title>teamayaという個人プロジェクトをはじめてみた</title>
+      <title>teamaya という個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>
       <pubDate>Sun, 12 Dec 2021 16:55:14 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</guid>
-      <description>はじめに 最近，データエンジニアリングとMLOpsの領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，デー</description>
+      <description>はじめに 最近，データエンジニアリングと MLOps の領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジ</description>
     </item>
     
     <item>
-      <title>Buy Me a Coffeeをブログに追加した話</title>
+      <title>Buy Me a Coffee をブログに追加した話</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee/</link>
       <pubDate>Tue, 07 Dec 2021 12:58:47 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee/</guid>
-      <description>はじめに Buy Me a Coffeeというコーヒー1杯をクリエイター活動のサポートという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，@huru</description>
+      <description>はじめに Buy Me a Coffee というコーヒー1杯をクリエイター活動のサポートという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，@hurutoriy</description>
     </item>
     
     <item>
-      <title>Podcastによる配信のキッカケとその方法</title>
+      <title>Podcast による配信のキッカケとその方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</link>
       <pubDate>Sun, 13 Jun 2021 16:32:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</guid>
-      <description>はじめに 6月から友人の@navitacionさんと一緒にPodcastの配信を開始しました．テック系の話題など自分たちが興味のある内容をあれこれと話すものになります． Anchorという無料で配信できる</description>
+      <description>はじめに 6月から友人の@navitacionさんと一緒に Podcast の配信を開始しました．テック系の話題など自分たちが興味のある内容をあれこれと話すものになります． Anchor という無料で配信できるプラットフォームを使用</description>
     </item>
     
     <item>
-      <title>Kaggleを始めて半年経って個人的に得たもの</title>
+      <title>Kaggle を始めて半年経って個人的に得たもの</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</link>
       <pubDate>Fri, 20 Dec 2019 12:41:03 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</guid>
-      <description>はじめに Kaggleを始めて半年ほど経ち，個人的にこの半年で得たものを整理するという意味で「kaggle その2 Advent Calendar 2019」の20日目を担当します． 簡単な自己紹介として，普段は都内のベンチャー企業で主</description>
+      <description>はじめに Kaggle を始めて半年ほど経ち，個人的にこの半年で得たものを整理するという意味で「kaggle その2 Advent Calendar 2019」の20日目を担当します． 簡単な自己紹介として，普段は都内のベンチャー企業で主に製造業の</description>
     </item>
     
   </channel>

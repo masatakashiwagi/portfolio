@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>RuntimeError: CUDA error: Device-side assert triggeredの解決方法 - Fractal Prologue</title>
+<title>RuntimeError: CUDA error: Device-side assert triggered の解決方法 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="RuntimeError: CUDA error: Device-side assert triggeredの解決方法" />
+<meta name="description" content="RuntimeError: CUDA error: Device-side assert triggered の解決方法" />
 
 
 <meta name="keywords" content="Dev" />
 
-<meta property="og:title" content="RuntimeError: CUDA error: Device-side assert triggeredの解決方法" />
-<meta property="og:description" content="RuntimeError: CUDA error: Device-side assert triggeredの解決方法" />
+<meta property="og:title" content="RuntimeError: CUDA error: Device-side assert triggered の解決方法" />
+<meta property="og:description" content="RuntimeError: CUDA error: Device-side assert triggered の解決方法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-01T16:14:09+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="RuntimeError: CUDA error: Device-side assert triggeredの解決方法"/>
-<meta name="twitter:description" content="RuntimeError: CUDA error: Device-side assert triggeredの解決方法"/>
+<meta name="twitter:title" content="RuntimeError: CUDA error: Device-side assert triggered の解決方法"/>
+<meta name="twitter:description" content="RuntimeError: CUDA error: Device-side assert triggered の解決方法"/>
 
 
 
@@ -140,32 +140,32 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/">RuntimeError: CUDA error: Device-side assert triggeredの解決方法</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/">RuntimeError: CUDA error: Device-side assert triggered の解決方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;754 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-02-01</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;689 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Pytorchでモデルを作成していた際に，「<strong>RuntimeError: CUDA error: device-side assert triggered</strong>」が発生し，原因がよくわからなかったので，調べたことをメモしておきます．</p>
+<p>Pytorch でモデルを作成していた際に，「<strong>RuntimeError: CUDA error: device-side assert triggered</strong>」が発生し，原因がよくわからなかったので，調べたことをメモしておきます．</p>
 <h2 id="エラー発生の原因">エラー発生の原因</h2>
 <p>調べてみると，原因としては以下のようなものがあります．</p>
 <ul>
-<li>ライブラリのVersionが違う</li>
-<li>ラベル/クラスの数とネットワークの入出力のshapeが異なる</li>
-<li>Loss関数の入力が正確でない</li>
+<li>ライブラリの Version が違う</li>
+<li>ラベル/クラスの数とネットワークの入出力の shape が異なる</li>
+<li>Loss 関数の入力が正確でない</li>
 </ul>
 <p>などなど&hellip;</p>
 <p>よくあるのが，下2つかなと思います．</p>
-<h3 id="ラベルクラスの数とネットワークの入出力のshapeが異なる">ラベル/クラスの数とネットワークの入出力のshapeが異なる</h3>
-<p>想定しているラベルもしくはクラス数とネットワークの出力のクラス数が異なる場合，この場合はFC層の最後に<code>nn.Linear(input, num_class)</code>を入れて調整する必要があります．</p>
-<h3 id="loss関数の入力が正確でない">Loss関数の入力が正確でない</h3>
+<h3 id="ラベルクラスの数とネットワークの入出力の-shape-が異なる">ラベル/クラスの数とネットワークの入出力の shape が異なる</h3>
+<p>想定しているラベルもしくはクラス数とネットワークの出力のクラス数が異なる場合，この場合は FC 層の最後に <code>nn.Linear(input, num_class)</code> を入れて調整する必要があります．</p>
+<h3 id="loss-関数の入力が正確でない">Loss 関数の入力が正確でない</h3>
 <p>僕が遭遇したのはこちらのパターンになります．</p>
-<p>例えば，BCELossを考えた場合，計算するためには値としては0~1を取る必要があります．そのため普通は最終出力に<strong>Sigmoid関数</strong> or <strong>Softmax関数</strong>を入れるかと思います．</p>
-<p>それ以外にもLossの設計で以下のようにしておくと良いかと思います．</p>
+<p>例えば，BCELoss を考えた場合，計算するためには値としては0~1を取る必要があります．そのため普通は最終出力に <strong>Sigmoid関数</strong> or <strong>Softmax関数</strong> を入れるかと思います．</p>
+<p>それ以外にも Loss の設計で以下のようにしておくと良いかと思います．</p>
 <pre><code class="language-python">class BCELoss(nn.Module):
     def __init__(self):
         super().__init__()
@@ -181,11 +181,11 @@
         return self.bce(input, target)
 </code></pre>
 <h3 id="他の解決方法">他の解決方法</h3>
-<p>他にも調べていると解決方法としてCUDAの設定を以下にすると良いなどもありましたが，解決するかどうかはよくわからないです．</p>
+<p>他にも調べていると解決方法として CUDA の設定を以下にすると良いなどもありましたが，解決するかどうかはよくわからないです．</p>
 <pre><code class="language-bash">CUDA_LAUNCH_BLOCKING=1
 </code></pre>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，Pytorchでのモデル作成時に発生したエラーについて整理しました，モデル作成時にはモデルのIn/OutやLoss関数の定義をきちんと理解し把握しておく必要があると改めて感じました．同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．</p>
+<p>今回は，Pytorch でのモデル作成時に発生したエラーについて整理しました，モデル作成時にはモデルの In/Out や Loss 関数の定義をきちんと理解し把握しておく必要があると改めて感じました．同様のエラーが起きた場合には，この辺りをまずは調べてみるのが良さそうです．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://towardsdatascience.com/cuda-error-device-side-assert-triggered-c6ae1c8fa4c3" target="_blank">CUDA error 59: Device-side assert triggered</a></li>
@@ -315,8 +315,8 @@
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#エラー発生の原因">エラー発生の原因</a>
       <ul>
-        <li><a href="#ラベルクラスの数とネットワークの入出力のshapeが異なる">ラベル/クラスの数とネットワークの入出力のshapeが異なる</a></li>
-        <li><a href="#loss関数の入力が正確でない">Loss関数の入力が正確でない</a></li>
+        <li><a href="#ラベルクラスの数とネットワークの入出力の-shape-が異なる">ラベル/クラスの数とネットワークの入出力の shape が異なる</a></li>
+        <li><a href="#loss-関数の入力が正確でない">Loss 関数の入力が正確でない</a></li>
         <li><a href="#他の解決方法">他の解決方法</a></li>
       </ul>
     </li>
@@ -428,8 +428,8 @@
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#エラー発生の原因">エラー発生の原因</a>
       <ul>
-        <li><a href="#ラベルクラスの数とネットワークの入出力のshapeが異なる">ラベル/クラスの数とネットワークの入出力のshapeが異なる</a></li>
-        <li><a href="#loss関数の入力が正確でない">Loss関数の入力が正確でない</a></li>
+        <li><a href="#ラベルクラスの数とネットワークの入出力の-shape-が異なる">ラベル/クラスの数とネットワークの入出力の shape が異なる</a></li>
+        <li><a href="#loss-関数の入力が正確でない">Loss 関数の入力が正確でない</a></li>
         <li><a href="#他の解決方法">他の解決方法</a></li>
       </ul>
     </li>

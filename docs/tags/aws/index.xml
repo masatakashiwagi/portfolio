@@ -8,30 +8,30 @@
     <language>en</language>
     <lastBuildDate>Wed, 16 Nov 2022 18:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Step FunctionsからGlueのジョブパラメータを指定して実行する方法</title>
+      <title>Step Functions から Glue のジョブパラメータを指定して実行する方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</link>
       <pubDate>Wed, 16 Nov 2022 18:00:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</guid>
-      <description>はじめに Glueを使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由でGlueを実行する場合</description>
+      <description>はじめに Glue を使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由で Glue を実行する場合に，インプッ</description>
     </item>
     
     <item>
-      <title>Step FunctionsでのOpensearch Packageの更新は直列or並列？</title>
+      <title>Step Functions での Opensearch Package の更新は直列or並列？</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
       <pubDate>Sat, 29 Oct 2022 10:38:31 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</guid>
-      <description>はじめに OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残してお</description>
+      <description>はじめに OpenSearch の Package 更新，つまりユーザー辞書やシノニム辞書の更新を Step Functions で行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます． 結論としては，OpenSearch の Package 更新は</description>
     </item>
     
     <item>
-      <title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</title>
+      <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</guid>
-      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github ActionsとCodePipelineを使ってマージトリガーでStep F</description>
+      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     
     <item>
@@ -44,12 +44,12 @@
     </item>
     
     <item>
-      <title>ValueError: Must setup local AWS configurationの対処方法</title>
+      <title>ValueError: Must setup local AWS configuration の対処方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</link>
       <pubDate>Sun, 26 Dec 2021 17:16:07 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</guid>
-      <description>はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと</description>
+      <description>はじめに Step Functions で SageMaker ProceesingJob を使ってカスタムコンテナを実行した際に，その実行スクリプト内で ExperimentAnalytics の API を使用していたところ，「ValueError: Must setup local AWS configuration with a region supported by SageMaker.」というエラーが発生したので</description>
     </item>
     
   </channel>

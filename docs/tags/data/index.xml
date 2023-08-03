@@ -8,21 +8,21 @@
     <language>en</language>
     <lastBuildDate>Thu, 29 Sep 2022 15:37:53 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/data/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AirbyteでスプレッドシートのデータをBigQueryに連携</title>
+      <title>Airbyte でスプレッドシートのデータを BigQuery に連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</link>
       <pubDate>Thu, 29 Sep 2022 15:37:53 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</guid>
-      <description>はじめに 以前から気になっていたOSSの Airbyte というELに特化したData Integrationツールを使ってみたかったので，今回はこれを使って以前Embulkで実装していたスプレッドシートからBigQue</description>
+      <description>はじめに 以前から気になっていた OSS の Airbyte という EL に特化した Data Integration ツールを使ってみたかったので，今回はこれを使って以前 Embulk で実装していたスプレッドシートから BigQuery へのデータ同期処理と同じことができるか試してみた話に</description>
     </item>
     
     <item>
-      <title>スプレッドシートからBigQueryへDigdagを使ったデータ連携</title>
+      <title>スプレッドシートから BigQuery へ Digdag を使ったデータ連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</link>
       <pubDate>Wed, 22 Dec 2021 18:00:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</guid>
-      <description>はじめに 今回は，teamayaという個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
+      <description>はじめに 今回は，teamaya という個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
     </item>
     
   </channel>

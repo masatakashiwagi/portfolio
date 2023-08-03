@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Step FunctionsからGlueのジョブパラメータを指定して実行する方法 - Fractal Prologue</title>
+<title>Step Functions から Glue のジョブパラメータを指定して実行する方法 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Step Functions経由でGlueにジョブパラメータを渡して実行したい時にどうすればいいか" />
+<meta name="description" content="Step Functions 経由で Glue にジョブパラメータを渡して実行したい時にどうすればいいか" />
 
 
 <meta name="keywords" content="AWS, Dev" />
 
-<meta property="og:title" content="Step FunctionsからGlueのジョブパラメータを指定して実行する方法" />
-<meta property="og:description" content="Step Functions経由でGlueにジョブパラメータを渡して実行したい時にどうすればいいか" />
+<meta property="og:title" content="Step Functions から Glue のジョブパラメータを指定して実行する方法" />
+<meta property="og:description" content="Step Functions 経由で Glue にジョブパラメータを渡して実行したい時にどうすればいいか" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-11-16T18:00:00+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Step FunctionsからGlueのジョブパラメータを指定して実行する方法"/>
-<meta name="twitter:description" content="Step Functions経由でGlueにジョブパラメータを渡して実行したい時にどうすればいいか"/>
+<meta name="twitter:title" content="Step Functions から Glue のジョブパラメータを指定して実行する方法"/>
+<meta name="twitter:description" content="Step Functions 経由で Glue にジョブパラメータを渡して実行したい時にどうすればいいか"/>
 
 
 
@@ -140,21 +140,21 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/">Step FunctionsからGlueのジョブパラメータを指定して実行する方法</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/">Step Functions から Glue のジョブパラメータを指定して実行する方法</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1376 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1211 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Glueを使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由でGlueを実行する場合に，インプットパラメータに必要な情報を渡してそれをGlueにどう紐付けるかに関する内容になってます．</p>
-<p>今回の内容は，実務で発生した検索エンジンのインデックスに簡単にデータを流せるように，SFnのパイプラインのインプットにパラメータを渡すだけで実行できるようにしたかったので，その時に実施したお話です．</p>
-<h2 id="glueのジョブパラメータ設定">Glueのジョブパラメータ設定</h2>
-<p>ジョブパラメータはGlue実行時に渡すことができるパラメータで，デフォルトでもいくつか用意されています（参考：<a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html" target="_blank">Job parameters used by AWS Glue</a>）．</p>
-<p>これに自前で用意したパラメータを受け取りたい場合，<code>getResolvedOptions</code>の第二引数にリストに渡されてくるパラメータを定義します．これは後ほどのSFnのインプットに与えてGlueで受け取るものです．</p>
+<p>Glue を使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由で Glue を実行する場合に，インプットパラメータに必要な情報を渡してそれを Glue にどう紐付けるかに関する内容になってます．</p>
+<p>今回の内容は，実務で発生した検索エンジンのインデックスに簡単にデータを流せるように，SFn のパイプラインのインプットにパラメータを渡すだけで実行できるようにしたかったので，その時に実施したお話です．</p>
+<h2 id="glue-のジョブパラメータ設定">Glue のジョブパラメータ設定</h2>
+<p>ジョブパラメータは Glue 実行時に渡すことができるパラメータで，デフォルトでもいくつか用意されています（参考：<a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html" target="_blank">Job parameters used by AWS Glue</a>）．</p>
+<p>これに自前で用意したパラメータを受け取りたい場合，<code>getResolvedOptions</code> の第二引数にリストに渡されてくるパラメータを定義します．これは後ほどの SFn のインプットに与えて Glue で受け取るものです．</p>
 <pre><code class="language-python"># JobName: sample_glue_job
 import sys
 from awsglue.utils import getResolvedOptions
@@ -174,10 +174,10 @@ index_name = args[&quot;index_name&quot;]
 ...(実際の処理が続く)
 </code></pre>
 <p><strong>パラメータは文字列のみ</strong>しか受け付けないので，期間を数値で使いたい場合は，上記コードのように数値型に変換する必要があります．</p>
-<h2 id="step-functionsのinputにデータを渡してglueで使う方法">Step Functionsのinputにデータを渡してGlueで使う方法</h2>
-<p>Glueジョブが作成できたら，それをStep Functionsで動かしていきます．</p>
-<p>以下にStep FunctionsのState Machineのサンプルコードを載せていますが，ポイントは<code>glue:startJobRun.sync</code>アクションのParametersにあるArgumentsの設定です．inputパラメータを渡す場合は，<code>$</code>をkeyの末尾とvalueの先頭に付与する必要があります（参考：<a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html" target="_blank">Pass Parameters to a Service API</a>）．</p>
-<p>また，keyの先頭に<code>--</code>を付与しないとパラメータと認識されずにエラーになるので，注意が必要です．</p>
+<h2 id="step-functions-の-input-にデータを渡して-glue-で使う方法">Step Functions の input にデータを渡して Glue で使う方法</h2>
+<p>Glue ジョブが作成できたら，それを Step Functions で動かしていきます．</p>
+<p>以下に Step Functions の State Machine のサンプルコードを載せていますが，ポイントは <code>glue:startJobRun.sync</code> アクションの Parameters にある Arguments の設定です．input パラメータを渡す場合は，<code>$</code>を key の末尾と value の先頭に付与する必要があります（参考：<a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html" target="_blank">Pass Parameters to a Service API</a>）．</p>
+<p>また，key の先頭に<code>--</code>を付与しないとパラメータと認識されずにエラーになるので，注意が必要です．</p>
 <pre><code class="language-json">{
   &quot;Comment&quot;: &quot;Glueでデータ連携を行うステートマシン&quot;,
   &quot;StartAt&quot;: &quot;Glue-Job&quot;,
@@ -214,13 +214,13 @@ index_name = args[&quot;index_name&quot;]
   }
 }
 </code></pre>
-<p>SFnのコンソールから実行する場合，下図のように実行前の画面でJSON形式で必要なパラメータを渡すことで，SFnで定義したGlueのジョブパラメータに値がセットされます．</p>
-<p>今回の場合だと，<code>period_date</code>と<code>index_name</code>をパラメータとしてSFnのinputから渡して，Glueでそれらを受け取りETL処理を実行していきます．</p>
-<p><img class="img-zoomable" src="../../img/glue-job-params-sfn-img1.png" alt="SFnのコンソール実行画面" />
+<p>SFn のコンソールから実行する場合，下図のように実行前の画面で JSON 形式で必要なパラメータを渡すことで，SFn で定義した Glue のジョブパラメータに値がセットされます．</p>
+<p>今回の場合だと，<code>period_date</code> と <code>index_name</code> をパラメータとして SFn の input から渡して，Glue でそれらを受け取り ETL 処理を実行していきます．</p>
+<p><img class="img-zoomable" src="../../img/glue-job-params-sfn-img1.png" alt="SFn のコンソール実行画面" />
 </p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回はStep Functionsのinputパラメータを変更することで，簡単にGlueのジョブパラメータに値を渡してパイプラインを実行する方法を紹介しました．</p>
-<p>Glue Studioからコードを直接変更することでもできますが，毎回コードを変更するのはバグが混入する可能性もあるので，パイプライン実行時のinputで制御できた方が汎用性があり，シンプルかなと思い試してみました．</p>
+<p>今回は Step Functions の input パラメータを変更することで，簡単に Glue のジョブパラメータに値を渡してパイプラインを実行する方法を紹介しました．</p>
+<p>Glue Studio からコードを直接変更することでもできますが，毎回コードを変更するのはバグが混入する可能性もあるので，パイプライン実行時の input で制御できた方が汎用性があり，シンプルかなと思い試してみました．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html" target="_blank">Job parameters used by AWS Glue</a></li>
@@ -349,8 +349,8 @@ index_name = args[&quot;index_name&quot;]
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#glueのジョブパラメータ設定">Glueのジョブパラメータ設定</a></li>
-    <li><a href="#step-functionsのinputにデータを渡してglueで使う方法">Step Functionsのinputにデータを渡してGlueで使う方法</a></li>
+    <li><a href="#glue-のジョブパラメータ設定">Glue のジョブパラメータ設定</a></li>
+    <li><a href="#step-functions-の-input-にデータを渡して-glue-で使う方法">Step Functions の input にデータを渡して Glue で使う方法</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -457,8 +457,8 @@ index_name = args[&quot;index_name&quot;]
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#glueのジョブパラメータ設定">Glueのジョブパラメータ設定</a></li>
-    <li><a href="#step-functionsのinputにデータを渡してglueで使う方法">Step Functionsのinputにデータを渡してGlueで使う方法</a></li>
+    <li><a href="#glue-のジョブパラメータ設定">Glue のジョブパラメータ設定</a></li>
+    <li><a href="#step-functions-の-input-にデータを渡して-glue-で使う方法">Step Functions の input にデータを渡して Glue で使う方法</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>

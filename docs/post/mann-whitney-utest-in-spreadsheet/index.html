@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>スプレッドシートで行うMann-WhitneyのU検定 - Fractal Prologue</title>
+<title>スプレッドシートで行う Mann-Whitney の U 検定 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Mann-WhitneyのU検定をスプレッドシートを使って実施" />
+<meta name="description" content="Mann-Whitney の U 検定をスプレッドシートを使って実施" />
 
 
 <meta name="keywords" content="Data Science, Statistics" />
 
-<meta property="og:title" content="スプレッドシートで行うMann-WhitneyのU検定" />
-<meta property="og:description" content="Mann-WhitneyのU検定をスプレッドシートを使って実施" />
+<meta property="og:title" content="スプレッドシートで行う Mann-Whitney の U 検定" />
+<meta property="og:description" content="Mann-Whitney の U 検定をスプレッドシートを使って実施" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-16T16:08:32+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="スプレッドシートで行うMann-WhitneyのU検定"/>
-<meta name="twitter:description" content="Mann-WhitneyのU検定をスプレッドシートを使って実施"/>
+<meta name="twitter:title" content="スプレッドシートで行う Mann-Whitney の U 検定"/>
+<meta name="twitter:description" content="Mann-Whitney の U 検定をスプレッドシートを使って実施"/>
 
 
 
@@ -140,24 +140,24 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/">スプレッドシートで行うMann-WhitneyのU検定</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/">スプレッドシートで行う Mann-Whitney の U 検定</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2271 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/data-science">Data Science</a>&nbsp;<a href="/tags/statistics">Statistics</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2173 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/data-science">Data Science</a>&nbsp;<a href="/tags/statistics">Statistics</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>普段はPythonの<a href="https://scipy.org/" target="_blank">SciPy</a>というライブラリを用いて，ABテスト実施後の2群間における有意差を調べるために検定を行っていますが，Pythonを使っていないorこのようなライブラリに触れたことがない人でも簡単に検定が行えるようにスプレッドシートを使ってMann-WhitneyのU検定を実施したものになります．</p>
+<p>普段は Python の <a href="https://scipy.org/" target="_blank">SciPy</a> というライブラリを用いて，AB テスト実施後の2群間における有意差を調べるために検定を行っていますが，Python を使っていない or このようなライブラリに触れたことがない人でも簡単に検定が行えるようにスプレッドシートを使って Mann-Whitney の U 検定を実施したものになります．</p>
 <p>公開中のスプレッドシート → <u><a href="https://docs.google.com/spreadsheets/d/1fxzMimSCCsrONp3dIkaVcxLsv915YGmxM4U4n6XH67I/edit?usp=sharing" target="_blank">Mann-Whitney U-test in spreadsheet</a></u></p>
 <p>コピーしてご自由にお使い下さい（全自動でない部分があるので，ご留意下さい）．</p>
-<h2 id="mann-whitneyのu検定とは">Mann-WhitneyのU検定とは</h2>
-<p>Mann-Whitney（マン・ホイットニー）のU検定（ウィルコクソンの順位和検定）とは，2つの母集団が特定の分布であることを仮定しないで，「<strong>2つの分布の重なり具合</strong>」を検定します．（ノンパラメトリック方法の一つ）<br>
+<h2 id="mann-whitney-の-u-検定とは">Mann-Whitney の U 検定とは</h2>
+<p>Mann-Whitney（マン・ホイットニー）の U 検定（ウィルコクソンの順位和検定）とは，2つの母集団が特定の分布であることを仮定しないで，「<strong>2つの分布の重なり具合</strong>」を検定します．（ノンパラメトリック方法の一つ）<br>
 <del>これは，2つの母集団の中央値の差に注目しています．</del> → <a href="https://elsur.jpn.org/mt/2018/09/002684.html" target="_blank">こちらの記事</a>を見ると，中央値の検定というわけではないみたいです．（自分も誤って理解していました）</p>
-<p>U検定の特徴としては，外れ値の影響を受けにくいなどが挙げられます．一方でよく使われるt検定の場合，平均値を見ているので外れ値があるとその影響を受けます．そのため，外れ値除去などの対処が必要なケースが発生します．</p>
-<p>ここで，U検定には以下の仮定があります．</p>
+<p>U 検定の特徴としては，外れ値の影響を受けにくいなどが挙げられます．一方でよく使われる t 検定の場合，平均値を見ているので外れ値があるとその影響を受けます．そのため，外れ値除去などの対処が必要なケースが発生します．</p>
+<p>ここで，U 検定には以下の仮定があります．</p>
 <ul>
 <li>2つの母集団は互いに独立</li>
 <li>2つの母集団の分布が正規分布であると仮定できない</li>
@@ -170,47 +170,47 @@
 <h2 id="検定を行う手順">検定を行う手順</h2>
 <p>検定を行う手順を紹介します．まずA群とB群の2つの群を考えます．</p>
 <ol>
-<li>それぞれのサンプルサイズをn1, n2とした場合に，2つの群を混ぜたデータ(n1+n2)を用意します．</li>
+<li>それぞれのサンプルサイズを n1, n2 とした場合に，2つの群を混ぜたデータ (n1+n2) を用意します．</li>
 <li>1のデータを昇順に並び替えます．</li>
 <li>並び替えたものに対して，順位を割り当てます（ランク付け）．もし同順位を持つ要素が存在する場合は，順位の平均を計算し，その順位の平均を各要素に割り当てます．</li>
-<li>A群に属するサンプルの順位和を計算する（=<i>R1</i>）</li>
-<li>同様にB群に属するサンプルの順位和を計算する（=<i>R2</i>）</li>
+<li>A 群に属するサンプルの順位和を計算する（=<i>R1</i>）</li>
+<li>同様に B 群に属するサンプルの順位和を計算する（=<i>R2</i>）</li>
 </ol>
 <p>ここまで計算すると，検定統計量（U値）は以下になります．</p>
 <p>$$ U_1 = n_1n_2 + \frac{n_1(n_1 + 1)}{2} - R_1 $$
 $$ U_2 = n_2n_1 + \frac{n_2(n_2 + 1)}{2} - R_2 $$
 $$ U = min(U_1, U_2) $$</p>
-<p>Uが計算できたら，<a href="https://www.real-statistics.com/statistics-tables/mann-whitney-table/" target="_blank">Mann-Whitney検定表</a>を用いて有意差5%で棄却できるかどうかを確認します．<br>
-α=0.05の表を眺めて，今回のサンプルサイズn1, n2に該当する値と計算したU値の大小関係を比較して，計算した値が小さい場合には，帰無仮説を棄却します，つまり有意差ありとなります．逆に計算した値の方が大きい場合には，帰無仮説を棄却できないので，有意差なしとなります．</p>
-<p>ここで，サンプルサイズがn1&gt;20またはn2&gt;20の時は，検定統計量Uを標準化してz値を求めて，標準正規分布で近似する方法を用います．平均値，標準偏差，z値は以下の計算式で求めます．</p>
+<p>U が計算できたら，<a href="https://www.real-statistics.com/statistics-tables/mann-whitney-table/" target="_blank">Mann-Whitney 検定表</a>を用いて有意差5%で棄却できるかどうかを確認します．<br>
+α=0.05 の表を眺めて，今回のサンプルサイズ n1, n2 に該当する値と計算した U 値の大小関係を比較して，計算した値が小さい場合には，帰無仮説を棄却します，つまり有意差ありとなります．逆に計算した値の方が大きい場合には，帰無仮説を棄却できないので，有意差なしとなります．</p>
+<p>ここで，サンプルサイズが n1&gt;20 または n2&gt;20 の時は，検定統計量 U を標準化してz値を求めて，標準正規分布で近似する方法を用います．平均値，標準偏差，z値は以下の計算式で求めます．</p>
 <p>$$ \mu_u = \frac{n_1n_2}{2} $$
 $$ \sigma_u = \sqrt{\frac{n_1n_2(n_1+n_2+1)}{12}} $$
 $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
-<p>z値が計算できたら，<a href="https://staff.aist.go.jp/t.ihara/normsdist.html" target="_blank">標準正規分布表</a>を用いて，該当するp値を見に行きます．<br>
-(z値をスプレッドシートの組み込み関数であるNORMSDISTに代入して，1から引くことでp値を計算しています: 式=1-NORMSDIST(z))</p>
+<p>z 値が計算できたら，<a href="https://staff.aist.go.jp/t.ihara/normsdist.html" target="_blank">標準正規分布表</a>を用いて，該当するp値を見に行きます．<br>
+(z 値をスプレッドシートの組み込み関数である NORMSDIST に代入して，1から引くことで p 値を計算しています: 式=1-NORMSDIST(z))</p>
 <ul>
-<li>p≧αの時，帰無仮説を棄却できない</li>
-<li>p&lt;αの時，帰無仮説を棄却する．つまり，有意差ありとなる</li>
+<li>p≧α の時，帰無仮説を棄却できない</li>
+<li>p&lt;α の時，帰無仮説を棄却する．つまり，有意差ありとなる</li>
 </ul>
-<h2 id="スプレッドシートでu検定を行う">スプレッドシートでU検定を行う</h2>
+<h2 id="スプレッドシートで-u-検定を行う">スプレッドシートで U 検定を行う</h2>
 <p>公開しているスプレッドシートは<a href="https://docs.google.com/spreadsheets/d/1fxzMimSCCsrONp3dIkaVcxLsv915YGmxM4U4n6XH67I/edit?usp=sharing" target="_blank">こちら</a>になります．（再掲）</p>
-<p><img class="img-zoomable" src="../../img/u-test1.png" alt="スプレッドシートでU検定" />
+<p><img class="img-zoomable" src="../../img/u-test1.png" alt="スプレッドシートで U 検定" />
 </p>
-<p>サンプルデータとしてグループABの身長のデータを載せています．こちらのデータを検定したい2群のデータに適宜変更して頂くと，#検定を行う手順 で紹介した方法に則ってp値の計算がされます．</p>
-<p>サンプルサイズがn&lt;=20の場合は，U値での評価になるので，その場合はリンクにあるマン・ホイットニーのＵ検定表を用いて，該当する値から検定結果を見積って貰うと良いです．</p>
+<p>サンプルデータとしてグループ AB の身長のデータを載せています．こちらのデータを検定したい2群のデータに適宜変更して頂くと，#検定を行う手順 で紹介した方法に則って p 値の計算がされます．</p>
+<p>サンプルサイズが n&lt;=20 の場合は，U値での評価になるので，その場合はリンクにあるマン・ホイットニーの U 検定表を用いて，該当する値から検定結果を見積って貰うと良いです．</p>
 <p>※ 補足:<br>
 サンプルデータのデータ順序は意識しないで問題ありません，順序並び替えで自動的に昇順で並び変わります．ただし，順位については，スプレッドシートのマウスオーバーでセルの右下に表示される黒い部分をデータが存在している部分まで下にズラして貰う必要があります．（スプレッドシートを完璧に使いこなしているわけではないので，特に順位をつけてる部分が自動化できていないです．もしご存知の方は，方法を教えて貰えると大変助かります🙏）</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，スプレッドシートを使ってMann-WhitneyのU検定を試してみた内容になります．Pythonを使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．ABテストを実施して検定するまでを誰でも簡単にできるようになれば良いなと思ってます．実装していて，スプレッドシートって意外と組み込みの関数が用意されていることを改めて知ることができました😄</p>
-<p>また，普段ライブラリを何気なく使っていますが，内部の計算方法やどうゆう手続きで出力されるのか，またその値をちゃんと理解して使っていかないとなーということを改めて感じました．例えば，<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html" target="_blank">scipy.stats.mannwhitneyu</a>はp値を出すだけであれば良いが，U値を使いたい場合には少し使いづらいと感じました．</p>
-<p>P.S. t検定についてもスプレッドシートで実施できるようにしているので，また紹介したいと思います．</p>
+<p>今回は，スプレッドシートを使って Mann-Whitney の U 検定を試してみた内容になります．Python を使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．AB テストを実施して検定するまでを誰でも簡単にできるようになれば良いなと思ってます．実装していて，スプレッドシートって意外と組み込みの関数が用意されていることを改めて知ることができました😄</p>
+<p>また，普段ライブラリを何気なく使っていますが，内部の計算方法やどうゆう手続きで出力されるのか，またその値をちゃんと理解して使っていかないとなーということを改めて感じました．例えば，<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html" target="_blank">scipy.stats.mannwhitneyu</a> は p 値を出すだけであれば良いが，U 値を使いたい場合には少し使いづらいと感じました．</p>
+<p>P.S. t 検定についてもスプレッドシートで実施できるようにしているので，また紹介したいと思います．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test" target="_blank">Mann–Whitney U test</a></li>
 <li><a href="https://www.real-statistics.com/statistics-tables/mann-whitney-table/" target="_blank">Mann-Whitney Table</a></li>
 <li><a href="https://staff.aist.go.jp/t.ihara/normsdist.html" target="_blank">標準正規分布表</a></li>
 <li><a href="https://support.google.com/docs/answer/3094089" target="_blank">スプレッドシート - NORMSDIST</a></li>
-<li><a href="https://elsur.jpn.org/mt/2018/09/002684.html" target="_blank">Divine, et al. (2018) Mann-Whitney検定は中央値の検定ではない</a></li>
+<li><a href="https://elsur.jpn.org/mt/2018/09/002684.html" target="_blank">Divine, et al. (2018) Mann-Whitney 検定は中央値の検定ではない</a></li>
 </ul>
 
         <div id="share-buttons">
@@ -335,9 +335,9 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#mann-whitneyのu検定とは">Mann-WhitneyのU検定とは</a></li>
+    <li><a href="#mann-whitney-の-u-検定とは">Mann-Whitney の U 検定とは</a></li>
     <li><a href="#検定を行う手順">検定を行う手順</a></li>
-    <li><a href="#スプレッドシートでu検定を行う">スプレッドシートでU検定を行う</a></li>
+    <li><a href="#スプレッドシートで-u-検定を行う">スプレッドシートで U 検定を行う</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -444,9 +444,9 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#mann-whitneyのu検定とは">Mann-WhitneyのU検定とは</a></li>
+    <li><a href="#mann-whitney-の-u-検定とは">Mann-Whitney の U 検定とは</a></li>
     <li><a href="#検定を行う手順">検定を行う手順</a></li>
-    <li><a href="#スプレッドシートでu検定を行う">スプレッドシートでU検定を行う</a></li>
+    <li><a href="#スプレッドシートで-u-検定を行う">スプレッドシートで U 検定を行う</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>

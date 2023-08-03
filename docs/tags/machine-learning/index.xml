@@ -26,12 +26,12 @@
     </item>
     
     <item>
-      <title>TensorflowのCallback関数をカスタマイズ</title>
+      <title>Tensorflow の Callback 関数をカスタマイズ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
       <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
-      <description>はじめに AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator というSageMakerのinterfaceがあり</description>
+      <description>はじめに AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator という SageMaker の interface があります． 一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に</description>
     </item>
     
   </channel>

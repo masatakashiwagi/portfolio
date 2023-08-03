@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Kaggle-MoAの振り返り - Fractal Prologue</title>
+<title>Kaggle-MoA の振り返り - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Kaggle MoAに参加したので，その振り返り" />
+<meta name="description" content="Kaggle-MoA に参加したので，その振り返り" />
 
 
 <meta name="keywords" content="Kaggle" />
 
-<meta property="og:title" content="Kaggle-MoAの振り返り" />
-<meta property="og:description" content="Kaggle MoAに参加したので，その振り返り" />
+<meta property="og:title" content="Kaggle-MoA の振り返り" />
+<meta property="og:description" content="Kaggle-MoA に参加したので，その振り返り" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-12-11T23:13:30+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Kaggle-MoAの振り返り"/>
-<meta name="twitter:description" content="Kaggle MoAに参加したので，その振り返り"/>
+<meta name="twitter:title" content="Kaggle-MoA の振り返り"/>
+<meta name="twitter:description" content="Kaggle-MoA に参加したので，その振り返り"/>
 
 
 
@@ -140,59 +140,49 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/">Kaggle-MoAの振り返り</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/">Kaggle-MoA の振り返り</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1911 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/kaggle">Kaggle</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1724 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/kaggle">Kaggle</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <h2 id="kaggle-moaコンペにteam-90sで初参加">Kaggle-MoAコンペにTeam 90&rsquo;sで初参加</h2>
-<p>このブログは2020/9/4~12/1まで開催していた<a href="https://www.kaggle.com/c/lish-moa" target="_blank">MoAコンペ</a>での取り組みを紹介する内容です．
+        <h2 id="kaggle-moa-コンペに-team-90s-で初参加">Kaggle-MoA コンペに Team 90&rsquo;s で初参加</h2>
+<p>このブログは2020/9/4~12/1まで開催していた <a href="https://www.kaggle.com/c/lish-moa" target="_blank">MoA コンペ</a>での取り組みを紹介する内容です．
 （コンペの詳細な内容については割愛します）</p>
-<p>今回のコンペでは，同世代のメンバーでチームを組んで取り組みました！</p>
-<p>チーム結成の経緯は，Twitterでお互いが90年生まれということを知って，同世代でKaggleチーム組んで戦いたいねーという感じだったと思います．
-それが少し前のことで当時取り組める良い感じのコンペがなかったのですが，今回テーブルデータのコンペで取り組めそうということで始まりました．
-<br></p>
+<p>今回のコンペでは，同世代のメンバーでチームを組んで取り組みました！チーム結成の経緯は，Twitter でお互いが90年生まれということを知って，同世代で Kaggle チーム組んで戦いたいねーという感じだったと思います．それが少し前のことで当時取り組める良い感じのコンペがなかったのですが，今回テーブルデータのコンペで取り組めそうということで始まりました．</p>
 <p>チームでの取り組みはとにかく学びが多く，終盤までモチベーションを保つことができたのが大きかったです．</p>
 <p>また，議論することで理解なども深まっていくので，コンペを通してより成長できたんじゃないかなと思います．</p>
-<p>今回の僕たちのチームでの取り組み方を紹介すると</p>
-<p><strong>1. 情報はSlackで共有</strong>
-<strong>2. 分析方針や実験結果はGithubのissueで管理</strong>
+<p>今回の僕たちのチームでの取り組み方を紹介すると，</p>
+<p><strong>1. 情報は Slack で共有</strong>
+<strong>2. 分析方針や実験結果は Github の issue で管理</strong>
 <strong>3. 毎週末に2時間程度のディスカッション</strong></p>
 <p>といった感じです．</p>
 <p>3番目の週末のディスカッションは強制ではなく，参加可能な人が参加する形式で運用してました．
-（と言いつつもみんな真面目に毎回参加してました笑）
-<br></p>
+（と言いつつもみんな真面目に毎回参加してました笑）</p>
 <p>今回はチームでの取り組み方針の具体的な内容について少しだけ掘り下げます．</p>
-<h3 id="1-情報はslackで共有">1. 情報はSlackで共有</h3>
-<p>Slackをどうゆう感じで活用していたのかというと，</p>
-<p>コンペのDiscussionやNotebookの内容について疑問点などを話し合ったり，それ以外にも進め方の相談や雑談などを基本的に行っていました．
-あとはsubmitする時は一言声をかけるなどのsubmit管理もしていました．</p>
-<p>こうゆうのがあれば良かったなーというところでは，新着のDiscussionやNotebookをKaggleから連携して通知する仕組みを用意しておければ尚良かったのかなと思いました．</p>
-<h3 id="2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</h3>
-<p>Githubをどうゆう感じで活用していたのかというと，</p>
-<p>分析での実験毎に1つのissueを立てて，そこでどうゆう実験をしたのかsubmitした結果のスコアがどうだったのかなどを記録として残してました．
-また，共通で使える特徴量生成のコードだったり，CVの切り方のコードなどの共有も行ってました．</p>
-<p>その他にはDiscussionの内容を整理したり，情報をまとめるために活用したりしていました．</p>
+<h3 id="1-情報は-slack-で共有">1. 情報は Slack で共有</h3>
+<p>Slack をどうゆう感じで活用していたのかというと，コンペの Discussion や Notebook の内容について疑問点などを話し合ったり，それ以外にも進め方の相談や雑談などを基本的に行っていました．
+あとは submit する時は一言声をかけるなどの submit 管理もしていました．</p>
+<p>こうゆうのがあれば良かったなーというところでは，新着の Discussion や Notebook を Kaggle から連携して通知する仕組みを用意しておければ尚良かったのかなと思いました．</p>
+<h3 id="2-分析方針や実験結果は-github-の-issue-で管理">2. 分析方針や実験結果は Github の issue で管理</h3>
+<p>Github をどうゆう感じで活用していたのかというと，分析での実験毎に1つの issue を立てて，そこでどうゆう実験をしたのか submit した結果のスコアがどうだったのかなどを記録として残してました．
+また，共通で使える特徴量生成のコードだったり，CV の切り方のコードなどの共有も行ってました．</p>
+<p>その他には Discussion の内容を整理したり，情報をまとめるために活用したりしていました．</p>
 <h3 id="3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</h3>
-<p>週末にGoogle meetでオンラインディスカッションでしていて，そこで何をしていたかというと，</p>
-<p>基本的には，今週何をしたのかを各々共有したり，わからない部分を話し合ってどうゆうふうに次進めて行くかなどをチームで考えていました．
-あとは，次の週でどうゆうことをするかの方向性を決めて終わる感じでした．</p>
+<p>週末に Google meet でオンラインディスカッションでしていて，そこで何をしていたかというと，基本的には，今週何をしたのかを各々共有したり，わからない部分を話し合ってどうゆうふうに次進めて行くかなどをチームで考えていました．あとは，次の週でどうゆうことをするかの方向性を決めて終わる感じでした．</p>
 <p>もちろん雑談や仕事での苦労を労ったりもしていました笑</p>
 <h2 id="最終順位">最終順位</h2>
 <p>最終順位は4373チーム中<strong>34位の銀メダル</strong>で、金メダルまであともう少しのところまで行ったので，とても悔しい結果となりました．</p>
-<p>個人的にはInferenceの処理がエラーで通らない状況に最後の3日ぐらいでなって泣きそうになりました．
-チームメンバーにはweight0の状態で非常に申し訳なかったなと思ってます泣</p>
-<p>学習時に回していたノートブックでは，スコアがチーム内で作ったモデルの中でも上位5つ以内に入っていたので，アンサンブル時には効いてただろうなと思うと尚更です．
-<br></p>
-<p>個人的な成長としては，テーブルデータに対してNeuralNetが有効に作用する場面について多少理解が深まったと感じています．</p>
-<p>今回のMoAでは，マルチラベルの予測だったので，一度に大量のクラスを予測する場合にはNNが有効でかつGBDT系と比較して計算速度も速いんだなと感じました．</p>
-<p>また，特徴量的にも交互作用的な部分はNN内部の中間層の組み方などで実現できるので，GBDT系みたく大量に特徴量を用意しなくても対処できるのが大きいのかなと思っています．（今回のケースだとGBDTで大量のモデルを作るとなると速度的な部分で特徴量が膨大になるとかなり厳しい感じでした）</p>
-<p>あとは，NNの実装をPytorchで行ったこともあり，Pytorchの扱い方がわかるようになったのは大きいと思っています．（仕事ではTensorflowだったりするので&hellip;）</p>
-<p>Pytorchでの実装に関してはもっと進めて行きたいのとコードの整理も合わせてして行きたいので，次に参加予定のコンペではその辺りも意識して挑めたらなーと思います．</p>
+<p>個人的には Inference の処理がエラーで通らない状況に最後の3日ぐらいでなって泣きそうになりました．チームメンバーには weight0 の状態で非常に申し訳なかったなと思ってます泣</p>
+<p>学習時に回していたノートブックでは，スコアがチーム内で作ったモデルの中でも上位5つ以内に入っていたので，アンサンブル時には効いてただろうなと思うと尚更です．</p>
+<p>個人的な成長としては，テーブルデータに対して NeuralNet が有効に作用する場面について多少理解が深まったと感じています．</p>
+<p>今回の MoA では，マルチラベルの予測だったので，一度に大量のクラスを予測する場合には NN が有効でかつ GBDT 系と比較して計算速度も速いんだなと感じました．</p>
+<p>また，特徴量的にも交互作用的な部分はNN内部の中間層の組み方などで実現できるので，GBDT 系みたく大量に特徴量を用意しなくても対処できるのが大きいのかなと思っています．（今回のケースだと GBDT で大量のモデルを作るとなると速度的な部分で特徴量が膨大になるとかなり厳しい感じでした）</p>
+<p>あとは，NN の実装を Pytorch で行ったこともあり，Pytorch の扱い方がわかるようになったのは大きいと思っています．（仕事では Tensorflow だったりするので&hellip;）</p>
+<p>Pytorch での実装に関してはもっと進めて行きたいのとコードの整理も合わせてして行きたいので，次に参加予定のコンペではその辺りも意識して挑めたらなーと思います．</p>
 
         <div id="share-buttons">
             
@@ -315,10 +305,10 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-moaコンペにteam-90sで初参加">Kaggle-MoAコンペにTeam 90&rsquo;sで初参加</a>
+    <li><a href="#kaggle-moa-コンペに-team-90s-で初参加">Kaggle-MoA コンペに Team 90&rsquo;s で初参加</a>
       <ul>
-        <li><a href="#1-情報はslackで共有">1. 情報はSlackで共有</a></li>
-        <li><a href="#2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</a></li>
+        <li><a href="#1-情報は-slack-で共有">1. 情報は Slack で共有</a></li>
+        <li><a href="#2-分析方針や実験結果は-github-の-issue-で管理">2. 分析方針や実験結果は Github の issue で管理</a></li>
         <li><a href="#3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</a></li>
       </ul>
     </li>
@@ -426,10 +416,10 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-moaコンペにteam-90sで初参加">Kaggle-MoAコンペにTeam 90&rsquo;sで初参加</a>
+    <li><a href="#kaggle-moa-コンペに-team-90s-で初参加">Kaggle-MoA コンペに Team 90&rsquo;s で初参加</a>
       <ul>
-        <li><a href="#1-情報はslackで共有">1. 情報はSlackで共有</a></li>
-        <li><a href="#2-分析方針や実験結果はgithubのissueで管理">2. 分析方針や実験結果はGithubのissueで管理</a></li>
+        <li><a href="#1-情報は-slack-で共有">1. 情報は Slack で共有</a></li>
+        <li><a href="#2-分析方針や実験結果は-github-の-issue-で管理">2. 分析方針や実験結果は Github の issue で管理</a></li>
         <li><a href="#3-毎週末に2時間程度のディスカッション">3. 毎週末に2時間程度のディスカッション</a></li>
       </ul>
     </li>

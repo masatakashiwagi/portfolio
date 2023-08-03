@@ -38,7 +38,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Kaggle-Shopeeコンペの振り返りとソリューション - Fractal Prologue</title>
+<title>Kaggle-Shopee コンペの振り返りとソリューション - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
@@ -49,7 +49,7 @@
 
 <meta name="keywords" content="Kaggle" />
 
-<meta property="og:title" content="Kaggle-Shopeeコンペの振り返りとソリューション" />
+<meta property="og:title" content="Kaggle-Shopee コンペの振り返りとソリューション" />
 <meta property="og:description" content="コンペの振り返りとソリューション" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
@@ -59,7 +59,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Kaggle-Shopeeコンペの振り返りとソリューション"/>
+<meta name="twitter:title" content="Kaggle-Shopee コンペの振り返りとソリューション"/>
 <meta name="twitter:description" content="コンペの振り返りとソリューション"/>
 
 
@@ -140,27 +140,25 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/">Kaggle-Shopeeコンペの振り返りとソリューション</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/">Kaggle-Shopee コンペの振り返りとソリューション</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-14</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;5435 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/kaggle">Kaggle</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-14</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4530 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/kaggle">Kaggle</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <h2 id="kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</h2>
-<p>2021/03/09~2021/05/11まで開催していた<a href="https://www.kaggle.com/c/shopee-product-matching" target="_blank">Shopeeコンペ</a>の振り返りになります．</p>
-<p>2週間程度しか手を動かせなかったですが，久しぶりに参加したので備忘録として記録を残しておきます．</p>
-<p>最終的な結果は179th/2464で銅メダルで，特に凝ったことは何もしていなかったので，妥当かなと思います．</p>
-<p>このコンペは上位10チーム中7チームが日本人チームで，日本人のレベルの高さを改めて実感できるコンペでした！</p>
+        <h2 id="kaggle-shopee-コンペの振り返り">Kaggle-Shopee コンペの振り返り</h2>
+<p>2021/03/09~2021/05/11まで開催していた<a href="https://www.kaggle.com/c/shopee-product-matching" target="_blank">Shopee コンペ</a>の振り返りになります．</p>
+<p>2週間程度しか手を動かせなかったですが，久しぶりに参加したので備忘録として記録を残しておきます．最終的な結果は179th/2464で銅メダルで，特に凝ったことは何もしていなかったので，妥当かなと思います．このコンペは上位10チーム中7チームが日本人チームで，日本人のレベルの高さを改めて実感できるコンペでした！</p>
 <h2 id="概要">概要</h2>
 <p>コンペの内容は簡単に言うと，画像とテキスト情報を用いて、2つの画像の類似性を比較し，どのアイテムが同じ商品であるかを予測するコンペになります．</p>
 <ul>
 <li>開催期間: 2021/03/09 ~ 2021/05/11</li>
 <li>参加チーム数: 2464</li>
-<li>予測対象: <code>posting_id</code>列にマッチする全てのposting_idを予測する．ただし，posting_idは必ずself-matchし，グループの上限は50個となっている．</li>
-<li>データ: 投稿ID，画像，商品のタイトル，画像の知覚ハッシュ(perceptual hash)，ラベルグループID</li>
+<li>予測対象: <code>posting_id</code> 列にマッチする全ての posting_id を予測する．ただし，posting_id は必ず self-match し，グループの上限は50個となっている．</li>
+<li>データ: 投稿ID，画像，商品のタイトル，画像の知覚ハッシュ (perceptual hash)，ラベルグループID</li>
 <li>評価指標: F1-Score</li>
 <li>その他: コードコンペ</li>
 </ul>
@@ -168,7 +166,7 @@
 <p><img class="img-zoomable" src="../../img/kaggle-shopee-my_solution.png" alt="My Solution" />
 </p>
 <ul>
-<li>画像特徴量・テキスト特徴量・画像のphash値をconcatして結果をユニーク化したものを最終的な予測値としました．</li>
+<li>画像特徴量・テキスト特徴量・画像の phash 値を concat して結果をユニーク化したものを最終的な予測値としました．</li>
 <li>何も複雑なことはしていないモデルですが，結果的に銅メダルを取ることができました．</li>
 </ul>
 <h3 id="image-model">Image Model</h3>
@@ -227,26 +225,20 @@
 </li>
 </ul>
 <h4 id="少し工夫したポイント">少し工夫したポイント</h4>
-<ul>
-<li>画像特徴量を抽出する部分で，いくつか工夫した点をあげます．
-<ul>
-<li><a href="http://cmp.felk.cvut.cz/cnnimageretrieval/" target="_blank">CNN Image Retrieval</a>を参考にしました．</li>
-</ul>
-</li>
-</ul>
+<p>画像特徴量を抽出する部分で，いくつか工夫した点をあげます（<a href="http://cmp.felk.cvut.cz/cnnimageretrieval/" target="_blank">CNN Image Retrieval</a> を参考にしました）．</p>
 <ol>
-<li>lossに<code>ArcFace</code>と<code>CurricularFace</code>を用いた
+<li>loss に <code>ArcFace</code> と <code>CurricularFace</code> を用いた
 <ul>
-<li>ArcFaceを使っている人が多かったが，CurricularFaceも使いました．スコア的にはCurricularFaceの方がよかったです．</li>
+<li>ArcFace を使っている人が多かったが，CurricularFace も使いました．スコア的にはCurricularFace の方がよかったです．</li>
 </ul>
 </li>
-<li>いくつかのモデルでpooling層に<code>GeM</code>と<code>MAC</code>を用いた
+<li>いくつかのモデルで pooling 層に <code>GeM</code> と <code>MAC</code> を用いた
 <ul>
-<li>Google Landmark Retrieval Challengeで上手くいっていたGeMやMACなどのプーリング手法を用いました．</li>
+<li>Google Landmark Retrieval Challenge で上手くいっていた GeM や MAC などのプーリング手法を用いました．</li>
 </ul>
 </li>
-<li>loss(criterion)に<code>FocalLoss</code>を用いた</li>
-<li>最終的に得られた特徴量をconcatした後，<code>ZCAWhitening</code>による次元削減を行った</li>
+<li>loss (criterion) に <code>FocalLoss</code> を用いた</li>
+<li>最終的に得られた特徴量を concat した後，<code>ZCAWhitening</code> による次元削減を行った</li>
 </ol>
 <h4 id="有効でなかったもの">有効でなかったもの</h4>
 <ul>
@@ -271,31 +263,29 @@
 </li>
 <li>TF-IDF</li>
 </ul>
-<p>textの方のモデルは特に改良する時間が取れなかったので，ほとんど手を付けれてなかったです．</p>
-<ul>
-<li>transformerとTF-IDFで得られた特徴量それぞれに対して，Cosine Similarityを計算し，テキストのpredictionを作成しました．</li>
-</ul>
-<p>最終的な予測値は画像特徴量とテキスト特徴量に加えて，画像のphash値を追加して，ユニークを取った値としています．</p>
+<p>text の方のモデルは特に改良する時間が取れなかったので，ほとんど手を付けれてなかったです．
+transformer と TF-IDF で得られた特徴量それぞれに対して，Cosine Similarity を計算し，text の prediction を作成しました．</p>
+<p>最終的な予測値は画像特徴量とテキスト特徴量に加えて，画像の phash 値を追加して，ユニークを取った値としています．</p>
 <h3 id="反省">反省</h3>
 <ul>
-<li>post-processingが全然できていなかった
+<li>post-processing が全然できていなかった
 <ul>
-<li>他の解法を見るに，post-processingでスコアが伸びているので，この部分は結構大事だったんだなと感じています．</li>
-<li>6位の解法にもありましたが，今回のコンペでは，label_groupの長さが2以上であることから，「予測した結果のposting_idが1つしかない場合，強制的に似たものを持ってきて，2つにする」というアイデアでLBがかなり上がるみたい</li>
+<li>他の解法を見るに，post-processing でスコアが伸びているので，この部分は結構大事だったんだなと感じています．</li>
+<li>6位の解法にもありましたが，今回のコンペでは，label_group の長さが2以上であることから，「予測した結果の posting_id が1つしかない場合，強制的に似たものを持ってきて，2つにする」というアイデアで LB がかなり上がるみたい</li>
 </ul>
 </li>
-<li>ImageとTextをMulti-modal的にモデルに組み込んで学習することができていなかった</li>
+<li>Image と Text を Multi-modal 的にモデルに組み込んで学習することができていなかった</li>
 <li>グラフ理論全然わかってないです笑</li>
 <li>細かい部分
 <ul>
-<li>他のoptimizerを試す
+<li>他の optimizer を試す
 <ul>
-<li>SAMとか</li>
+<li>SAM とか</li>
 </ul>
 </li>
 <li>Database-side feature augmentation (DBA) / Query Extension (QE)
 <ul>
-<li>全然知らなかったので，<a href="https://arxiv.org/pdf/1610.07940.pdf" target="_blank">End-to-end Learning of Deep Visual Representations for Image Retrieval</a>を読んで勉強したい</li>
+<li>全然知らなかったので，<a href="https://arxiv.org/pdf/1610.07940.pdf" target="_blank">End-to-end Learning of Deep Visual Representations for Image Retrieval</a> を読んで勉強したい</li>
 </ul>
 </li>
 <li>閾値の調整</li>
@@ -304,7 +294,7 @@
 </li>
 </ul>
 <hr>
-<p>ここからは上位の解法を書きたいと思います．数もそれなりにあるので，載せるのは上位5つにします．最後に上位5つ以外にもDiscussionsに投稿されている解法のリンクを載せておきます．</p>
+<p>ここからは上位の解法を書きたいと思います．数もそれなりにあるので，載せるのは上位5つにします．最後に上位5つ以外にも Discussions に投稿されている解法のリンクを載せておきます．</p>
 <h2 id="1st-place-solution">1st Place Solution</h2>
 <p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238136" target="_blank">1st Place Solution - From Embeddings to Matches</a></p>
 <h3 id="model">Model</h3>
@@ -324,23 +314,23 @@
 </ul>
 </li>
 <li>loss: ArcFace</li>
-<li>poolingした後にbatch normalizationとfeature-wise normalizationを行った</li>
-<li>ArcFaceのチューニングを行った
+<li>pooling した後に batch normalization と feature-wise normalization を行った</li>
+<li>ArcFace のチューニングを行った
 <ul>
-<li>学習段階で徐々にmarginを大きくした（埋め込み表現のqualityに影響する）
+<li>学習段階で徐々に margin を大きくした（埋め込み表現の quality に影響する）
 <ul>
-<li>画像に対するmargin: 0.8~1.0</li>
-<li>テキストに対するmargin: 0.6~0.8</li>
+<li>画像に対する margin: 0.8~1.0</li>
+<li>テキストに対する margin: 0.6~0.8</li>
 </ul>
 </li>
-<li>marginを大きくすると，モデルの収束に問題が出たので，以下を行った
+<li>margin を大きくすると，モデルの収束に問題が出たので，以下を行った
 <ul>
-<li>warmup stepsを大きくする</li>
-<li>cosineheadに対するlearning rateをより大きくする</li>
-<li>gradient clippingを行う</li>
+<li>warmup steps を大きくする</li>
+<li>cosinehead に対する learning rate をより大きくする</li>
+<li>gradient clipping を行う</li>
 </ul>
 </li>
-<li>class-size-adaptive marginも試したが，不均衡性が小さかったため，改善は少しだけだった
+<li>class-size-adaptive margin も試したが，不均衡性が小さかったため，改善は少しだけだった
 <ul>
 <li>image: <code>class_size^-0.1</code></li>
 <li>text: <code>class_size^-0.2</code></li>
@@ -348,24 +338,20 @@
 </li>
 </ul>
 </li>
-<li>global average poolingの後にFC層を追加するとモデルが悪くなるが，feature-wise normalizationの前にbatch normalizationを追加するとスコアが改善した</li>
+<li>global average pooling の後に FC 層を追加するとモデルが悪くなるが，feature-wise normalization の前に batch normalization を追加するとスコアが改善した</li>
 </ul>
 <p><img class="img-zoomable" src="../../img/kaggle-shopee-1st_solution_model.png" alt="Model" />
 </p>
 <h3 id="features">Features</h3>
 <ul>
 <li>Combining Image &amp; Text Matches
-<ul>
-<li>マッチングさせる方法をいくつかトライした</li>
-</ul>
+マッチングさせる方法をいくつかトライした
 <ol>
-<li>画像のembeddingによるマッチングとテキストのembeddingによるマッチングを結合する</li>
-<li>画像のembeddingとテキストのembeddingをconcatしてからマッチングする</li>
-<li>1と2を組み合わせてマッチングする</li>
+<li>画像の embedding によるマッチングとテキストの embedding によるマッチングを結合する</li>
+<li>画像の embedding とテキストの embedding を concat してからマッチングする</li>
+<li>1と2を組み合わせてマッチングする
+これは，画像の embedding が強く示唆するアイテム・テキストの embedding が強く示唆するアイテム・画像とテキストの embedding がどちらも適度に示唆するアイテムを取り入れることができる</li>
 </ol>
-<ul>
-<li>これは，画像のembeddingが強く示唆するアイテム・テキストのembeddingが強く示唆するアイテム・画像とテキストのembeddingがどちらも適度に示唆するアイテムを取り入れることができる</li>
-</ul>
 </li>
 </ul>
 <p><img class="img-zoomable" src="../../img/kaggle-shopee-comb_match.png" alt="Features" />
@@ -373,7 +359,7 @@
 <ul>
 <li>Iterative Neighborhood Blending (INB)
 <ul>
-<li>QE/DBAとは少し異なる，embeddingからマッチする商品を検索するパイプラインを作った</li>
+<li>QE/DBA とは少し異なる，embedding からマッチする商品を検索するパイプラインを作った</li>
 <li>k-Nearest Neighbor Search:
 <ul>
 <li>近隣探索ラリブラリ: <a href="https://github.com/facebookresearch/faiss" target="_blank">faiss</a> (k=51: 50(自身以外)) + 1(自身))</li>
@@ -381,28 +367,28 @@
 </li>
 <li>Threshold:
 <ul>
-<li>コサイン類似度をコサイン距離(=1-コサイン類似度)に変換し，distance&lt;thresholdを満たす(matches, distances)のペアを取得した</li>
-<li>閾値処理を行う場合，1つのクエリに対して少なくとも2つ以上のマッチがあることがコンペで保証されているので，distanceがmin2-thresholdを超えた場合にのみ，二番目に近いマッチを除外する</li>
+<li>コサイン類似度をコサイン距離(=1-コサイン類似度)に変換し，distance &lt; threshold を満たす <code>(matches, distances)</code> のペアを取得した</li>
+<li>閾値処理を行う場合，1つのクエリに対して少なくとも2つ以上のマッチがあることがコンペで保証されているので，distance が min2-threshold を超えた場合にのみ，二番目に近いマッチを除外する</li>
 </ul>
 </li>
 <li>Neighborhood Blending:
 <ul>
-<li>kNNによるサーチとmin2による閾値処理をした後，各アイテムの<code>(matches, similarities)</code>ペアを取得し，グラフを作成する
+<li>kNN によるサーチと min2 による閾値処理をした後，各アイテムの <code>(matches, similarities)</code> ペアを取得し，グラフを作成する
 <ul>
 <li>各ノードはアイテム，エッジの重みは2つのノード間の類似性を示す</li>
-<li>近傍のみが繋がっており，閾値条件とmin2条件を満たさないノードは切断される</li>
+<li>近傍のみが繋がっており，閾値条件と min2 条件を満たさないノードは切断される</li>
 </ul>
 </li>
-<li>近傍のアイテムの情報を使いたいので，クエリアイテムのembeddingを改良し，よりクラスタを明確にする
+<li>近傍のアイテムの情報を使いたいので，クエリアイテムの embedding を改良し，よりクラスタを明確にする
 <ul>
-<li>重みとして類似性を持つ近傍のembeddingを加重合計し，それをクエリembeddingに追加する
+<li>重みとして類似性を持つ近傍の embedding を加重合計し，それをクエリ embedding に追加する
 <img class="img-zoomable" src="../../img/kaggle-shopee-NB.png" alt="Neighborhood Blending" />
 </li>
 </ul>
 </li>
-<li>上図を簡単に説明すると，最初Aは[B,C,D]と繋がっているが，加重合計した結果閾値=0.5の場合，Cとの接続が切れて，Aは[B,D]のみと接続していることがわかる</li>
-<li>このNBの処理を評価指標の改善が止まるまで繰り返し実行する</li>
-<li>最終的なNBのパイプラインは以下になる
+<li>上図を簡単に説明すると，最初 A は [B,C,D] と繋がっているが，加重合計した結果閾値=0.5の場合，C との接続が切れて，A は [B,D] のみと接続していることがわかる</li>
+<li>この NB の処理を評価指標の改善が止まるまで繰り返し実行する</li>
+<li>最終的な NB のパイプラインは以下になる
 <img class="img-zoomable" src="../../img/kaggle-shopee-NB_pipeline.png" alt="Neighborhood Blending pipeline" />
 </li>
 </ul>
@@ -411,21 +397,21 @@
 <ul>
 <li>調整する閾値は全部で10種類ある
 <ul>
-<li>stage1のtext, image, combinationの閾値が3つ</li>
-<li>stage2の閾値が1つ</li>
-<li>stage3の閾値が1つ</li>
-<li>直接最終結合部分に繋がるstage1のtext, imageの閾値が2つ</li>
-<li>stage1~3のmin2閾値が3つ</li>
+<li>stage1 の text, image, combination の閾値が3つ</li>
+<li>stage2 の閾値が1つ</li>
+<li>stage3 の閾値が1つ</li>
+<li>直接最終結合部分に繋がる stage1 の text, image の閾値が2つ</li>
+<li>stage1~3 の min2 閾値が3つ</li>
 </ul>
 </li>
-<li>最終的にはstage2,3の閾値を2つ調整するだけでよかった</li>
+<li>最終的には stage2,3 の閾値を2つ調整するだけでよかった</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Visualizations of Embeddings before/after INB
 <ul>
-<li>INBの効果を可視化したノートブックが公開されている
+<li>INB の効果を可視化したノートブックが公開されている
 <ul>
 <li><a href="https://www.kaggle.com/harangdev/shopee-embedding-visualizations-before-after-inb" target="_blank">(SHOPEE) Embedding Visualizations before/after INB</a></li>
 <li>見るからに各点が凝集されたクラスタを形成していることがわかる</li>
@@ -436,10 +422,10 @@
 </ul>
 <h3 id="others">Others</h3>
 <ul>
-<li>画像に対するCutMix(p=0.1)</li>
-<li>画像のaugmentation
+<li>画像に対する CutMix(p=0.1)</li>
+<li>画像の augmentation
 <ul>
-<li>horizontal flipのみがよかった</li>
+<li>horizontal flip のみがよかった</li>
 </ul>
 </li>
 <li>madgrad optimizer: <a href="https://github.com/facebookresearch/madgrad" target="_blank">https://github.com/facebookresearch/madgrad</a></li>
@@ -449,8 +435,8 @@
 <p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238022" target="_blank">2nd place solution (matching prediction by GAT &amp; LGB)</a>, <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238362" target="_blank">2nd Place Solution Code</a></p>
 <h3 id="summary">Summary</h3>
 <ul>
-<li>1st stage: 画像・テキスト・画像+テキストデータに対するコサイン類似度を得るためにMetric Learningによるモデルを学習する</li>
-<li>2nd stage: 同じlabel groupに属するアイテムのペアかどうかを識別するために&quot;メタ&quot;モデルを学習する</li>
+<li>1st stage: 画像・テキスト・画像+テキストデータに対するコサイン類似度を得るために Metric Learning によるモデルを学習する</li>
+<li>2nd stage: 同じ label group に属するアイテムのペアかどうかを識別するために&quot;メタ&quot;モデルを学習する</li>
 </ul>
 <h3 id="model-1">Model</h3>
 <ul>
@@ -464,7 +450,7 @@
 </li>
 <li>loss: CurricularFace</li>
 <li>optimizer: SAM</li>
-<li>embeddingの結合: <code>F.normalize(torch.cat([F.normalize(emb1), F.normalize(emb2)], axis=1))</code></li>
+<li>embedding の結合: <code>F.normalize(torch.cat([F.normalize(emb1), F.normalize(emb2)], axis=1))</code></li>
 </ul>
 </li>
 <li>text: 3つのモデル + TF-IDF
@@ -474,10 +460,10 @@
 <li><code>paraphrase-xlm</code></li>
 </ul>
 </li>
-<li>image+text: <code>nfnet-F0</code>と<code>indonesian-bert</code>のFC層のembeddingを結合したもの</li>
+<li>image+text: <code>nfnet-F0</code> と <code>indonesian-bert</code> の FC 層の embedding を結合したもの</li>
 <li>Training Tips:
 <ul>
-<li>label groupのサイズに基づいたSample Weighting
+<li>label group のサイズに基づいた Sample Weighting
 <ul>
 <li>1 / (label group size) ** 0.4</li>
 </ul>
@@ -488,7 +474,7 @@
 <h3 id="features-1">Features</h3>
 <h4 id="graph-features">Graph features</h4>
 <ul>
-<li>それぞれのアイテムのtop-Kコサイン類似度の平均と分散
+<li>それぞれのアイテムの top-K コサイン類似度の平均と分散
 <ul>
 <li>K=5, 10, 15, 30, etc</li>
 </ul>
@@ -514,7 +500,7 @@
 <li>合計値&gt;0の場合，アイテムペアが同じグループに属するとする</li>
 <li>お互いにエッジを持たないペアを削除する
 <ul>
-<li>A-Bはあるが，B-Aがない場合は両方を削除する</li>
+<li>A-B はあるが，B-A がない場合は両方を削除する</li>
 </ul>
 </li>
 </ul>
@@ -526,14 +512,14 @@
 <ul>
 <li>Performance and Memory Tunings
 <ul>
-<li>CuDF, cupy, cugraph: GPUを有効に使うためには大事</li>
-<li>ForestInference: 40分かかるCPUでの推論が2分になる</li>
+<li>CuDF, cupy, cugraph: GPU を有効に使うためには大事</li>
+<li>ForestInference: 40分かかる CPU での推論が2分になる</li>
 </ul>
 </li>
 <li>Not worked
 <ul>
-<li>Graph-basedの特徴量</li>
-<li>固有ベクトルの中心性とjaccard</li>
+<li>Graph-based の特徴量</li>
+<li>固有ベクトルの中心性と jaccard</li>
 <li>End-to-end model</li>
 <li>Local feature matching</li>
 </ul>
@@ -562,44 +548,44 @@
 <li>common
 <ul>
 <li>loss: TripletLoss (margin=0.1)</li>
-<li>各エポック，label_groupsから重複したペアを作成し，各バッチでlabel_groupsから1ペアが挿入される．バッチサイズは128を使っていたため，バッチ毎に64の重複を取得し，ランダムな5点でそれらの各々を比較する</li>
-<li>5fold CVで，validationスコアを計算する時は，validation-foldの中から候補を選ぶのではなく，学習サンプル全体から候補を探した
+<li>各エポック，label_groups から重複したペアを作成し，各バッチで label_groups から1ペアが挿入される．バッチサイズは128を使っていたため，バッチ毎に64の重複を取得し，ランダムな5点でそれらの各々を比較する</li>
+<li>5fold CV で，validation スコアを計算する時は，validation-fold の中から候補を選ぶのではなく，学習サンプル全体から候補を探した
 <ul>
-<li>この方法はCV/LBのgapを抑えて，相関を取ることが出来る</li>
-<li>oofを用意して，2nd-levelの予測に使用する</li>
-<li>CVから得られた5つのモデルで，テストデータに対して推論を行った</li>
-<li>より速く推論するためには，validationなしの1つのモデルでテストデータにfitさせること</li>
+<li>この方法は CV/LB の gap を抑えて，相関を取ることが出来る</li>
+<li>oof を用意して，2nd-level の予測に使用する</li>
+<li>CV から得られた5つのモデルで，テストデータに対して推論を行った</li>
+<li>より速く推論するためには，validation なしの1つのモデルでテストデータにfitさせること</li>
 </ul>
 </li>
-<li>ArcFaceは上手くいかなかった</li>
+<li>ArcFace は上手くいかなかった</li>
 </ul>
 </li>
 </ul>
 <h3 id="features-2">Features</h3>
 <ul>
 <li>複数モデルを用いて，異なる表現方法を作成するのが良い</li>
-<li>全てのembeddingsから候補となる近しいものを結合し，ペアが実際に重複しているかどうかにかかわらず、binary targetを使用してペアオブジェクトのサンプルを作成する
+<li>全ての embeddings から候補となる近しいものを結合し，ペアが実際に重複しているかどうかにかかわらず，binary target を使用してペアオブジェクトのサンプルを作成する
 <ul>
 <li>3M点のペアがあり，重複率は4%だった</li>
 </ul>
 </li>
-<li>これらに対して，GBM(=CatBoost)を作成し，embedding毎に計算する
+<li>これらに対して，GBM(=CatBoost) を作成し，embedding 毎に計算する
 <ul>
 <li>pairwise-distances (コサイン類似度，ユークリッド距離など)</li>
 <li>両方の点周辺の密度</li>
 <li>points ranks</li>
 </ul>
 </li>
-<li>最終的には500個特徴量を作成し，CVやLBを使いながら，重複確率による閾値の候補を出す -&gt; LB:0.76+</li>
+<li>最終的には500個特徴量を作成し，CV や LB を使いながら，重複確率による閾値の候補を出す → LB:0.76+</li>
 </ul>
 <h3 id="post-processing-1">Post-Processing</h3>
 <ul>
-<li>クラスタリングを行ったが，embeddingsを使うのではなく，pairwise-distanceを使う</li>
-<li>重複推定のためにGBM(=CatBoost)の確率を使い，類似度を求める</li>
+<li>クラスタリングを行ったが，embeddings を使うのではなく，pairwise-distance を使う</li>
+<li>重複推定のために GBM(=CatBoost) の確率を使い，類似度を求める</li>
 <li>凝集クラスタリングのアイデアを採用
 <ul>
 <li>各単一点をクラスタとして開始し，平均的なクラスタサイズが閾値に等しくなるまでそれらをマージしていく</li>
-<li>クラスタが単一の場合，最も近傍のクラスタにマージする -&gt; LB:0.79</li>
+<li>クラスタが単一の場合，最も近傍のクラスタにマージする → LB:0.79</li>
 </ul>
 </li>
 </ul>
@@ -607,9 +593,9 @@
 <ul>
 <li>最適化するために
 <ul>
-<li><code>half precision(torch AMP)</code>を使って学習と推論を行った</li>
-<li>画像モデルの場合，画像の読み込みとリサイズに<code>NVIDIA DALI</code>を使った</li>
-<li>GBMの推論には，Rapids ForestInference Libraryを使った</li>
+<li><code>half precision(torch AMP)</code> を使って学習と推論を行った</li>
+<li>画像モデルの場合，画像の読み込みとリサイズに <code>NVIDIA DALI</code> を使った</li>
+<li>GBM の推論には，Rapids ForestInference Library を使った</li>
 </ul>
 </li>
 <li>上記の方法を使わないと，2時間で全てのモデルを推論することは不可能だった</li>
@@ -618,19 +604,19 @@
 <p>解法はこちらになります: <a href="https://www.kaggle.com/c/shopee-product-matching/discussion/238295" target="_blank">4th Place Solution</a></p>
 <h3 id="model-3">Model</h3>
 <ul>
-<li>image: backboneに<code>nfnet</code>と<code>efficientnet</code>
+<li>image: backbone に <code>nfnet</code> と <code>efficientnet</code>
 <ul>
 <li>pooling: GeM＆Avg pooling</li>
-<li>embeddingが大きいほど，LBのスコアがよくなった</li>
+<li>embedding が大きいほど，LB のスコアがよくなった</li>
 <li>loss: ArcFace</li>
-<li>marginの調整が大事だった</li>
+<li>margin の調整が大事だった</li>
 </ul>
 </li>
 <li>text: BERTベース + TF-IDF
 <ul>
-<li>TF-IDF: かなり大きいembeddingを生成し，notebook上ではメモリの制約を受けるため，Random Sparse Projectionで次元削減を行った</li>
+<li>TF-IDF: かなり大きい embedding を生成し，notebook 上ではメモリの制約を受けるため，Random Sparse Projection で次元削減を行った</li>
 <li>loss: ArcFace</li>
-<li>marginの調整が大事だった</li>
+<li>margin の調整が大事だった</li>
 </ul>
 </li>
 </ul>
@@ -638,8 +624,8 @@
 </p>
 <h3 id="ensemble-1">Ensemble</h3>
 <ul>
-<li>画像のembedding・テキスト（BERTベース）のembedding・TF-IDFのembeddingを結合して，正規化した</li>
-<li>これらのベクトル表現のそれぞれに対して，pairwiseコサイン類似度を計算し，3つの行列を作成した
+<li>画像の embedding・テキスト（BERTベース）の embedding・TF-IDF の embedding を結合して，正規化した</li>
+<li>これらのベクトル表現のそれぞれに対して，pairwise コサイン類似度を計算し，3つの行列を作成した
 <ul>
 <li>最初に二乗し，その後加重平均を取って行列を結合した</li>
 </ul>
@@ -650,11 +636,11 @@
 <li>閾値の調整</li>
 <li>Rank2 matching
 <ul>
-<li>もし，AがRank2にBを持っており，BはRank2にAを持っている場合，お互いに追加する</li>
+<li>もし，A が Rank2 に B を持っており，B は Rank2 に A を持っている場合，お互いに追加する</li>
 </ul>
 </li>
-<li>Rank2とRank3の違いが大きい場合，Rank2のIDを追加する</li>
-<li>少なくとも1つの他とのマッチング（Rank2のコサイン類似度が極端に小さくなければ）</li>
+<li>Rank2 と Rank3 の違いが大きい場合，Rank2 の ID を追加する</li>
+<li>少なくとも1つの他とのマッチング（Rank2 のコサイン類似度が極端に小さくなければ）</li>
 <li>Query Expansion</li>
 <li>マッチしていない行との再マッチング</li>
 </ul>
@@ -802,7 +788,7 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</a></li>
+    <li><a href="#kaggle-shopee-コンペの振り返り">Kaggle-Shopee コンペの振り返り</a></li>
     <li><a href="#概要">概要</a></li>
     <li><a href="#my-solution">My Solution</a>
       <ul>
@@ -947,7 +933,7 @@
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-shopeeコンペの振り返り">Kaggle-Shopeeコンペの振り返り</a></li>
+    <li><a href="#kaggle-shopee-コンペの振り返り">Kaggle-Shopee コンペの振り返り</a></li>
     <li><a href="#概要">概要</a></li>
     <li><a href="#my-solution">My Solution</a>
       <ul>

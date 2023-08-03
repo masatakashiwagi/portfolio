@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>AirbyteでスプレッドシートのデータをBigQueryに連携 - Fractal Prologue</title>
+<title>Airbyte でスプレッドシートのデータを BigQuery に連携 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="OSSのELツールであるAirbyteでデータ連携" />
+<meta name="description" content="OSS の EL ツールである Airbyte でデータ連携" />
 
 
 <meta name="keywords" content="Dev, Data" />
 
-<meta property="og:title" content="AirbyteでスプレッドシートのデータをBigQueryに連携" />
-<meta property="og:description" content="OSSのELツールであるAirbyteでデータ連携" />
+<meta property="og:title" content="Airbyte でスプレッドシートのデータを BigQuery に連携" />
+<meta property="og:description" content="OSS の EL ツールである Airbyte でデータ連携" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-09-29T15:37:53+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="AirbyteでスプレッドシートのデータをBigQueryに連携"/>
-<meta name="twitter:description" content="OSSのELツールであるAirbyteでデータ連携"/>
+<meta name="twitter:title" content="Airbyte でスプレッドシートのデータを BigQuery に連携"/>
+<meta name="twitter:description" content="OSS の EL ツールである Airbyte でデータ連携"/>
 
 
 
@@ -140,36 +140,36 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/">AirbyteでスプレッドシートのデータをBigQueryに連携</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/">Airbyte でスプレッドシートのデータを BigQuery に連携</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-09-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2158 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/data">Data</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-09-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1867 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/data">Data</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>以前から気になっていたOSSの <span class="marker_yellow"><strong><a href="https://airbyte.com/" target="_blank">Airbyte</a></strong></span> というELに特化したData Integrationツールを使ってみたかったので，今回はこれを使って以前Embulkで実装していたスプレッドシートからBigQueryへのデータ同期処理と同じことができるか試してみた話になります．</p>
+<p>以前から気になっていた OSS の <span class="marker_yellow"><strong><a href="https://airbyte.com/" target="_blank">Airbyte</a></strong></span> という EL に特化した Data Integration ツールを使ってみたかったので，今回はこれを使って以前 Embulk で実装していたスプレッドシートから BigQuery へのデータ同期処理と同じことができるか試してみた話になります．</p>
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="スプレッドシートからBigQueryへDigdagを使ったデータ連携" src="https://hatenablog-parts.com/embed?url=https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/" width="300" height="150" frameborder="0" scrolling="no"></iframe>
-<p>Airbyteは良い感じのUIがあるので，UIをポチポチしながら設定していきます．</p>
+<p>Airbyte は良い感じのUIがあるので，UI をポチポチしながら設定していきます．</p>
 <h2 id="airbyteとは">Airbyteとは？</h2>
 <p><img class="img-zoomable" src="../../img/airbyte-img1.png" alt="Airbyte" />
 </p>
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="airbytehq/airbyte" src="https://hatenablog-parts.com/embed?url=https://github.com/airbytehq/airbyte" width="300" height="150" frameborder="0" scrolling="no"></iframe>
-<p>AirbyteはOSSのETLツールですが，特にExtractとLoadに注力しているツールになります．豊富なデータソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/sources" target="_blank">Source</a>）とターゲットソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/destinations" target="_blank">Destination</a>）に対応していて，これらを設定することでデータを簡単に連携することができます．Transform部分は内部的にはdbtを使ってハンドリングしているみたいです．（<a href="https://airbyte.gitbook.io/airbyte/operator-guides/transformation-and-normalization/transformations-with-sql" target="_blank">Transformations with SQL (Part 1/3)</a>）</p>
-<p>提供形態としては，OSSとマネージドサービス（クラウド版: 有料）があり，ローカルをはじめ，AWS/GCP/Azureと各種クラウドサービスでデプロイすることができます（参考: <a href="https://airbyte.gitbook.io/airbyte/deploying-airbyte" target="_blank">Deploying Airbyte Open Source</a>）．</p>
-<p>Connectorは既に用意されているもの（<a href="https://github.com/airbytehq/airbyte/tree/master/airbyte-integrations/connectors" target="_blank">airbyte/airbyte-integrations/connectors/</a>）もあれば，独自で作成することもできます．</p>
-<h2 id="スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</h2>
-<p>基本的には，Tutorialに沿って進めていきます．まずは<code>git clone</code>してUIを立ち上げます．</p>
+<p>Airbyte は OSS の ETL ツールですが，特に Extract と Load に注力しているツールになります．豊富なデータソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/sources" target="_blank">Source</a>）とターゲットソース（<a href="https://airbyte.gitbook.io/airbyte/integrations/destinations" target="_blank">Destination</a>）に対応していて，これらを設定することでデータを簡単に連携することができます．Transform 部分は内部的には dbt を使ってハンドリングしているみたいです．（<a href="https://airbyte.gitbook.io/airbyte/operator-guides/transformation-and-normalization/transformations-with-sql" target="_blank">Transformations with SQL (Part 1/3)</a>）</p>
+<p>提供形態としては，OSS とマネージドサービス（クラウド版: 有料）があり，ローカルをはじめ，AWS/GCP/Azure と各種クラウドサービスでデプロイすることができます（参考: <a href="https://airbyte.gitbook.io/airbyte/deploying-airbyte" target="_blank">Deploying Airbyte Open Source</a>）．</p>
+<p>Connector は既に用意されているもの（<a href="https://github.com/airbytehq/airbyte/tree/master/airbyte-integrations/connectors" target="_blank">airbyte/airbyte-integrations/connectors/</a>）もあれば，独自で作成することもできます．</p>
+<h2 id="スプレッドシートから-bigquery-に連携">スプレッドシートから BigQuery に連携</h2>
+<p>基本的には，Tutorial に沿って進めていきます．まずは <code>git clone</code> して UI を立ち上げます．</p>
 <pre><code class="language-bash">git clone https://github.com/airbytehq/airbyte.git
 cd airbyte
 docker compose up
 </code></pre>
-<p><code>docker compose</code>を実行したら，<a href="http://localhost:8000" target="_blank">http://localhost:8000</a> でUIにアクセスすることができます．</p>
-<p>ここからはUIの世界で全て完結することができます！</p>
+<p><code>docker compose</code> を実行したら，<a href="http://localhost:8000" target="_blank">http://localhost:8000</a> で UI にアクセスすることができます．</p>
+<p>ここからは UI の世界で全て完結することができます！</p>
 <h3 id="source">Source</h3>
-<p>案内に従って進めると，まずプルダウンから今回のデータソースであるGoogle SheetsをSource typeとして選択します．右側にSetup Guideがあるので，見ながら設定できて親切設計だなと感じました．</p>
+<p>案内に従って進めると，まずプルダウンから今回のデータソースである Google Sheets を Source type として選択します．右側に Setup Guide があるので，見ながら設定できて親切設計だなと感じました．</p>
 <p><img class="img-zoomable" src="../../img/airbyte-img2.png" alt="Google Sheets" />
 </p>
 <p>以下の設定を埋めていきます．</p>
@@ -181,7 +181,7 @@ docker compose up
 </li>
 <li><strong>Authentication</strong>
 <ul>
-<li>GCPのサービスアカウントを設定します．JSONファイルの中身をコピーして貼り付けます</li>
+<li>GCP のサービスアカウントを設定します．json ファイルの中身をコピーして貼り付けます</li>
 <li><code>cat ~/.gcp/hoge_service_account.json | pbcopy</code>でクリップボードにコピーするとやりやすいです</li>
 </ul>
 </li>
@@ -192,13 +192,13 @@ docker compose up
 </li>
 <li><strong>Spreadsheet Link</strong>
 <ul>
-<li>対象となるスプレッドシートのURLを設定します</li>
+<li>対象となるスプレッドシートの URL を設定します</li>
 <li>事前にサービスアカウントでのアクセスを許可しておく必要があります</li>
 </ul>
 </li>
 </ul>
 <h3 id="destination">Destination</h3>
-<p>次に，プルダウンからターゲットソースであるBigQueryをDestination typeとして選択します．</p>
+<p>次に，プルダウンからターゲットソースである BigQuery を Destination type として選択します．</p>
 <p><img class="img-zoomable" src="../../img/airbyte-img3.png" alt="BigQuery" />
 </p>
 <p>以下の設定を埋めていきます．</p>
@@ -210,7 +210,7 @@ docker compose up
 </li>
 <li><strong>Project ID</strong>
 <ul>
-<li>GCPにアクセスして現在使っているプロジェクトIDを設定します</li>
+<li>GCP にアクセスして現在使っているプロジェクト ID を設定します</li>
 </ul>
 </li>
 <li><strong>Dataset Location</strong>
@@ -220,32 +220,32 @@ docker compose up
 </li>
 <li><strong>Default Dataset ID</strong>
 <ul>
-<li>BigQueryのデータセットとして作成されるIDになります</li>
+<li>BigQuery のデータセットとして作成される ID になります</li>
 </ul>
 </li>
 <li><strong>Loading Method</strong>
 <ul>
-<li>Standard InsertsとGCS Stagingの2種類あります</li>
+<li>Standard Inserts と GCS Staging の2種類あります</li>
 <li>Standard Inserts
 <ul>
-<li>SQL INSERTで直接アップロードする方法で，非効率的なためGCS Stagingを推奨しています（今回はこちらを選択）</li>
+<li>SQL INSERT で直接アップロードする方法で，非効率的なため GCS Staging を推奨しています（今回はこちらを選択）</li>
 </ul>
 </li>
 <li>GCS Staging
 <ul>
-<li>ファイルにレコードを書き込み，そのファイルをGCSにアップロードし，その後COPY INTOテーブルを使用してファイルをアップロードする方法（GCSのバケットなどの情報が必要になります）</li>
+<li>ファイルにレコードを書き込み，そのファイルを GCS にアップロードし，その後 COPY INTO テーブルを使用してファイルをアップロードする方法（GCS のバケットなどの情報が必要になります）</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>Service Account Key JSON (Required for cloud, optional for open-source)</strong>
 <ul>
-<li>GCPのサービスアカウントを設定します．JSONファイルの中身をコピーして貼り付けます</li>
+<li>GCP のサービスアカウントを設定します．json ファイルの中身をコピーして貼り付けます</li>
 </ul>
 </li>
 <li><strong>Transformation Query Run Type (Optional)</strong>
 <ul>
-<li>interactiveとbatchの2種類あります</li>
+<li>interactive と batch の2種類あります</li>
 </ul>
 </li>
 <li><strong>Google BigQuery Client Chunk Size (Optional)</strong>
@@ -255,7 +255,7 @@ docker compose up
 </li>
 </ul>
 <h3 id="connection">Connection</h3>
-<p>最後に，Connectionのセットアップを行います．設定したSourceとDestinationをセットし，Replication frequency（同期頻度）, Destination NamespaceやPrefixなどを決めていきます．</p>
+<p>最後に，Connection のセットアップを行います．設定した Source と Destination をセットし，Replication frequency（同期頻度）, Destination Namespace や Prefix などを決めていきます．</p>
 <ul>
 <li><strong>Transfer</strong>
 <ul>
@@ -270,7 +270,7 @@ docker compose up
 <ul>
 <li>Destination Namespace
 <ul>
-<li>Mirror source structure, Destination default, Custom formatの3種類あります</li>
+<li>Mirror source structure, Destination default, Custom format の3種類あります</li>
 </ul>
 </li>
 <li>Destination Stream Prefix (Optional)
@@ -284,23 +284,23 @@ docker compose up
 <ul>
 <li>Raw data (JSON)</li>
 <li>Normalized tabular data</li>
-<li>上記どちらかを選択しますが，Raw dataだとJSONのままデータが格納されるので，Normalized tabular dataで良いと思います</li>
+<li>上記どちらかを選択しますが，Raw data だと json のままデータが格納されるので，Normalized tabular data で良いと思います</li>
 </ul>
 </li>
 </ul>
 <p>個人的に同期するスプレッドシートの各シートがそれぞれ表示されて，どれを同期するか選択して決められるというのが感動しました 🎉</p>
-<p>今回は1シートだけ連携することにし，Custom Transformの処理はせずに単純にデータをそのまま連携していきます．</p>
+<p>今回は1シートだけ連携することにし，Custom Transform の処理はせずに単純にデータをそのまま連携していきます．</p>
 <p><img class="img-zoomable" src="../../img/airbyte-img4.png" alt="Connection" />
 </p>
-<p>実行結果のログは以下のような感じ<code>Sync Succeeded</code>となっています．</p>
+<p>実行結果のログは以下のような感じ <code>Sync Succeeded</code> となっています．</p>
 <p><img class="img-zoomable" src="../../img/airbyte-img5.png" alt="Execution Logs" />
 </p>
-<p>Airbyte側は大丈夫そうなので，BigQueryの方も確認してみると，ちゃんと入ってるので問題なさそうです！</p>
+<p>Airbyte 側は大丈夫そうなので，BigQuery の方も確認してみると，ちゃんと入ってるので問題なさそうです！</p>
 <p><img class="img-zoomable" src="../../img/airbyte-img6.png" alt="BigQuery Logs" />
 </p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，OSSのAirbyteを使ったスプレッドシートからBigQueryへのデータ同期を行ってみました．AirbyteはUIが用意されていて，直感的に操作できる+設定も簡単でデータ同期の体験としてとても良かったです！データソースが豊富なのもメリットとして大きいと思います．</p>
-<p>Extract &amp; Loadのみしか使えていないので，次はdbtを理解してTransformも追加して処理を実行してみたいと思います．あとは他のデータパイプラインツールとの比較とかも出来たら楽しそうかなと思いました．</p>
+<p>今回は，OSS の Airbyte を使ったスプレッドシートから BigQuery へのデータ同期を行ってみました．Airbyte は UI が用意されていて，直感的に操作できる+設定も簡単でデータ同期の体験としてとても良かったです！データソースが豊富なのもメリットとして大きいと思います．</p>
+<p>Extract &amp; Load のみしか使えていないので，次は dbt を理解して Transform も追加して処理を実行してみたいと思います．あとは他のデータパイプラインツールとの比較とかも出来たら楽しそうかなと思いました．</p>
 
         <div id="share-buttons">
             
@@ -425,7 +425,7 @@ docker compose up
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#airbyteとは">Airbyteとは？</a></li>
-    <li><a href="#スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</a>
+    <li><a href="#スプレッドシートから-bigquery-に連携">スプレッドシートから BigQuery に連携</a>
       <ul>
         <li><a href="#source">Source</a></li>
         <li><a href="#destination">Destination</a></li>
@@ -538,7 +538,7 @@ docker compose up
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#airbyteとは">Airbyteとは？</a></li>
-    <li><a href="#スプレッドシートからbigqueryに連携">スプレッドシートからBigQueryに連携</a>
+    <li><a href="#スプレッドシートから-bigquery-に連携">スプレッドシートから BigQuery に連携</a>
       <ul>
         <li><a href="#source">Source</a></li>
         <li><a href="#destination">Destination</a></li>

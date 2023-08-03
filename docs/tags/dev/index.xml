@@ -8,39 +8,39 @@
     <language>en</language>
     <lastBuildDate>Wed, 16 Nov 2022 18:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Step FunctionsからGlueのジョブパラメータを指定して実行する方法</title>
+      <title>Step Functions から Glue のジョブパラメータを指定して実行する方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</link>
       <pubDate>Wed, 16 Nov 2022 18:00:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</guid>
-      <description>はじめに Glueを使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由でGlueを実行する場合</description>
+      <description>はじめに Glue を使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由で Glue を実行する場合に，インプッ</description>
     </item>
     
     <item>
-      <title>Step FunctionsでのOpensearch Packageの更新は直列or並列？</title>
+      <title>Step Functions での Opensearch Package の更新は直列or並列？</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
       <pubDate>Sat, 29 Oct 2022 10:38:31 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</guid>
-      <description>はじめに OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残してお</description>
+      <description>はじめに OpenSearch の Package 更新，つまりユーザー辞書やシノニム辞書の更新を Step Functions で行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます． 結論としては，OpenSearch の Package 更新は</description>
     </item>
     
     <item>
-      <title>AirbyteでスプレッドシートのデータをBigQueryに連携</title>
+      <title>Airbyte でスプレッドシートのデータを BigQuery に連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</link>
       <pubDate>Thu, 29 Sep 2022 15:37:53 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</guid>
-      <description>はじめに 以前から気になっていたOSSの Airbyte というELに特化したData Integrationツールを使ってみたかったので，今回はこれを使って以前Embulkで実装していたスプレッドシートからBigQue</description>
+      <description>はじめに 以前から気になっていた OSS の Airbyte という EL に特化した Data Integration ツールを使ってみたかったので，今回はこれを使って以前 Embulk で実装していたスプレッドシートから BigQuery へのデータ同期処理と同じことができるか試してみた話に</description>
     </item>
     
     <item>
-      <title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</title>
+      <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</guid>
-      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github ActionsとCodePipelineを使ってマージトリガーでStep F</description>
+      <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     
     <item>
@@ -62,63 +62,63 @@
     </item>
     
     <item>
-      <title>ValueError: Must setup local AWS configurationの対処方法</title>
+      <title>ValueError: Must setup local AWS configuration の対処方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</link>
       <pubDate>Sun, 26 Dec 2021 17:16:07 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</guid>
-      <description>はじめに Step FunctionsでSageMakerのProceesingJobを使ってカスタムコンテナを実行した際に，その実行スクリプト内でExperimentAnalyticsのAPIを使用していたと</description>
+      <description>はじめに Step Functions で SageMaker ProceesingJob を使ってカスタムコンテナを実行した際に，その実行スクリプト内で ExperimentAnalytics の API を使用していたところ，「ValueError: Must setup local AWS configuration with a region supported by SageMaker.」というエラーが発生したので</description>
     </item>
     
     <item>
-      <title>スプレッドシートからBigQueryへDigdagを使ったデータ連携</title>
+      <title>スプレッドシートから BigQuery へ Digdag を使ったデータ連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</link>
       <pubDate>Wed, 22 Dec 2021 18:00:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</guid>
-      <description>はじめに 今回は，teamayaという個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
+      <description>はじめに 今回は，teamaya という個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
     </item>
     
     <item>
-      <title>teamayaという個人プロジェクトをはじめてみた</title>
+      <title>teamaya という個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>
       <pubDate>Sun, 12 Dec 2021 16:55:14 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</guid>
-      <description>はじめに 最近，データエンジニアリングとMLOpsの領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，デー</description>
+      <description>はじめに 最近，データエンジニアリングと MLOps の領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジ</description>
     </item>
     
     <item>
-      <title>TensorflowのCallback関数をカスタマイズ</title>
+      <title>Tensorflow の Callback 関数をカスタマイズ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
       <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
-      <description>はじめに AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator というSageMakerのinterfaceがあり</description>
+      <description>はじめに AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator という SageMaker の interface があります． 一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に</description>
     </item>
     
     <item>
-      <title>VSCodeとgitを連携してpushできるようにするまで</title>
+      <title>VSCode と git を連携して push できるようにするまで</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</link>
       <pubDate>Fri, 26 Mar 2021 22:18:34 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/vscode_git_connect/</guid>
-      <description>はじめに 今まで仕事では，開発環境としてIntelliJを使っていたのですが，最近はVSCodeの人気が高くExtensionsも便利なものが多くあるということで，個人的な作業をする時はVSCodeを使</description>
+      <description>はじめに 今まで仕事では，開発環境として IntelliJ を使っていたのですが，最近は VSCode の人気が高く Extensions も便利なものが多くあるということで，個人的な作業をする時は VSCode を使ってみようと思って使っています． そんな中で，タイトル</description>
     </item>
     
     <item>
-      <title>RuntimeError: CUDA error: Device-side assert triggeredの解決方法</title>
+      <title>RuntimeError: CUDA error: Device-side assert triggered の解決方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</link>
       <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</guid>
-      <description>はじめに Pytorchでモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみ</description>
+      <description>はじめに Pytorch でモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみると，原因と</description>
     </item>
     
     <item>
       <title>ネストしたリストの更新処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/list-objects/</link>
-      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 12 Sep 2020 15:44:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
       <description>初期化したリストの更新処理でハマってしまった 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． 詳しい内容は参考サイトに載っています．（かなりわかりやすい</description>
@@ -130,16 +130,16 @@
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</guid>
-      <description>ポートフォリオ作成 こちらのQiitaの記事でHugoを使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていたpersonal pageを移植しました． 移植した際に少し詰まった部</description>
+      <description>ポートフォリオ作成 こちらの Qiita の記事で Hugo を使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていた personal page を移植しました． 移植した際に少し詰まった部分があるので，Tips としてこの記</description>
     </item>
     
     <item>
-      <title>Excel Binary WorkbookをPythonで処理</title>
+      <title>Excel Binary Workbook を Python で処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/</link>
       <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/</guid>
-      <description>はじめに 今回は，先日初めて見たファイル形式のExcel Binary Workbook (xlsb)に関して，pythonでcsvにパースする話です． .xlsxはよくあるExcelファイルの形式ですが，それのバイナリー形式である.</description>
+      <description>はじめに 今回は，先日初めて見たファイル形式の Excel Binary Workbook (xlsb) に関して，python で csv にパースする話です． .xlsx はよくある Excel ファイルの形式ですが，それのバイナリー形式である .xlsb に関しての話です．（今まで見たことなか</description>
     </item>
     
   </channel>

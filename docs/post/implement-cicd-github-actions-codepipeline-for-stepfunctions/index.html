@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築 - Fractal Prologue</title>
+<title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築 - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Github ActionsとCodePipelineでStep Functionsを回すCI/CDを構築した話" />
+<meta name="description" content="Github Actions と CodePipeline で Step Functions を回す CI/CD を構築した話" />
 
 
 <meta name="keywords" content="Dev, AWS, MLOps" />
 
-<meta property="og:title" content="Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築" />
-<meta property="og:description" content="Github ActionsとCodePipelineでStep Functionsを回すCI/CDを構築した話" />
+<meta property="og:title" content="Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築" />
+<meta property="og:description" content="Github Actions と CodePipeline で Step Functions を回す CI/CD を構築した話" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-07-18T09:58:08+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築"/>
-<meta name="twitter:description" content="Github ActionsとCodePipelineでStep Functionsを回すCI/CDを構築した話"/>
+<meta name="twitter:title" content="Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築"/>
+<meta name="twitter:description" content="Github Actions と CodePipeline で Step Functions を回す CI/CD を構築した話"/>
 
 
 
@@ -140,39 +140,39 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/">Github ActionsとCodePipelineを使ってStep Functionsを動かすCI/CDを構築</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/">Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-07-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4734 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-07-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3896 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github ActionsとCodePipelineを使ってマージトリガーでStep Functionsのパイプラインを動かすCI/CDを構築したお話になります．</p>
+<p>2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話になります．</p>
 <p>今回のモチベーションは，3つほどあります．</p>
 <ol>
-<li>ML系のモデル学習パイプラインの構築とDryRun的なものを毎回手動で実行するのがいいかげんめんどくさくなってきた</li>
-<li>人数が少ないMLチームだと担当者が対応できない場合に，属人化したものを代わりにオペレーションするのが大変でオペミスが発生する可能性がある
+<li>ML 系のモデル学習パイプラインの構築と DryRun 的なものを毎回手動で実行するのがいいかげんめんどくさくなってきた</li>
+<li>人数が少ない ML チームだと担当者が対応できない場合に，属人化したものを代わりにオペレーションするのが大変でオペミスが発生する可能性がある
 <ul>
 <li>この辺りはドキュメント整備やチーム内での共有といった部分を整理しておく必要があるのは理解しつつ&hellip;</li>
 </ul>
 </li>
-<li>CI/CD周りの設定含めてもう少し知識を付けてMLOpsのレベルを上げたかった</li>
+<li>CI/CD 周りの設定含めてもう少し知識を付けて MLOps のレベルを上げたかった</li>
 </ol>
-<p>ML系プロジェクトにおいて，CI/CD整備の優先度が低かったり，そもそもソフトウェアエンジニアに比べてこの辺りの経験や知識が豊富でないということで後回しにされがちですが，MLOpsを考える上でCI/CDは大事なファクターの1つなのでしっかり取り組むべきだと思います（CI/CDの自動化はGoogleが定義しているMLOps level 2: CI/CD pipeline automationに相当する部分）．また，少人数チームの場合は尚のこと，人手をかけられない+属人化を排除する意味でも取り入れていくのが良いかなと思います．</p>
+<p>ML 系プロジェクトにおいて，CI/CD 整備の優先度が低かったり，そもそもソフトウェアエンジニアに比べてこの辺りの経験や知識が豊富でないということで後回しにされがちですが，MLOps を考える上で CI/CD は大事なファクターの1つなのでしっかり取り組むべきだと思います（CI/CD の自動化は Google が定義している MLOps level 2: CI/CD pipeline automation に相当する部分）．また，少人数チームの場合は尚のこと，人手をかけられない+属人化を排除する意味でも取り入れていくのが良いかなと思います．</p>
 <!-- 継続的な取り組みとしてのContinuous IntegrationとContinuous Delivery & Deployは品質・運用・スピードを高めるためにも大事にすべき要素だと思います． -->
 <p>以下のリポジトリにソースコードなどを置いてあります．</p>
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px;" title="teamaya/cicd-pipeline at main · masatakashiwagi/teamaya" src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya/tree/main/cicd-pipeline" width="300" height="150" frameborder="0" scrolling="no"></iframe>
-<h2 id="cicdパイプラインの構成">CI/CDパイプラインの構成</h2>
-<p>※ はじめに，CodePipelineの設定やIAMロールの必要な権限は詳細に説明しないのでご了承くださいませ．公式ドキュメントや巷にある詳細な説明がされているブログをご覧下さい．</p>
-<p>今回のゴールは<span class="marker_yellow"><strong>Githubのブランチマージから最終的にStep Functionsのパイプラインを動かす</strong></span>ところまでになります．本来はStep Functions内でMLのモデル学習を行うパイプラインを構築しますが，今回はサンプルとしてSageMaker ProcessingJobを単発で動かすだけになります．</p>
-<p>今回構築したCI/CDパイプラインは以下のような感じになります．</p>
-<p><img class="img-zoomable" src="../../img/cicd-img1.png" alt="CI/CDパイプライン" />
+<h2 id="cicd-パイプラインの構成">CI/CD パイプラインの構成</h2>
+<p>※ はじめに，CodePipeline の設定や IAM ロールの必要な権限は詳細に説明しないのでご了承くださいませ．公式ドキュメントや巷にある詳細な説明がされているブログをご覧下さい．</p>
+<p>今回のゴールは <span class="marker_yellow"><strong>Github のブランチマージから最終的に Step Functions のパイプラインを動かす</strong></span>ところまでになります．本来は Step Functions 内で ML のモデル学習を行うパイプラインを構築しますが，今回はサンプルとして SageMaker ProcessingJob を単発で動かすだけになります．</p>
+<p>今回構築した CI/CD パイプラインは以下のような感じになります．</p>
+<p><img class="img-zoomable" src="../../img/cicd-img1.png" alt="CI/CD パイプライン" />
 </p>
 <p>ディレクトリ構成は以下になります．</p>
-<pre><code>.
+<pre><code class="language-text">.
 ├── .github
 │   └── workflows
 │       └── sam-codepipeline.yaml
@@ -208,7 +208,7 @@
 <p>流れを説明していくと，</p>
 <ul>
 <li>
-<p><span class="marker_yellow"><strong>Github Actionsパート</strong></span></p>
+<p><span class="marker_yellow"><strong>Github Actions パート</strong></span></p>
   <details>
   <summary>sam-codepipeline.yaml</summary>
 <pre><code class="language-yml">name: sam-stepfunctions-codepipeline
@@ -278,21 +278,21 @@ jobs:
 </code></pre>
   </details>
 <ol>
-<li>Pull ReqestがOpenしたタイミングでGithub Actionsが走る</li>
-<li>AWS Serverless Application Model (SAM)のBuildとDeployを行う
+<li>Pull Reqest が Open したタイミングで Github Actions が走る</li>
+<li>AWS Serverless Application Model (SAM) の Build と Deploy を行う
 <ul>
-<li>マージ先のブランチに応じて，切り替わるようにしています．devマージではdev用のリソースを作成し，mainマージではprod用のリソースを作成します．</li>
+<li>マージ先のブランチに応じて，切り替わるようにしています．dev マージでは dev 用のリソースを作成し，main マージでは prod 用のリソースを作成します．</li>
 </ul>
 </li>
-<li>AWS CLIを使ってCodePipelineのaction configurationを更新する
+<li>AWS CLI を使って CodePipeline の action configuration を更新する
 <ul>
-<li>Step FunctionsのStateMachineArnがMLのモデル学習のバージョンによって変更されることがあるので，後続のCodePipelineで動かす対象のStep Functionsを更新します．</li>
+<li>Step Functions の StateMachineArn が ML のモデル学習のバージョンによって変更されることがあるので，後続の CodePipeline で動かす対象の Step Functions を更新します．</li>
 </ul>
 </li>
 </ol>
 </li>
 <li>
-<p><span class="marker_yellow"><strong>CodePipelineパート</strong></span></p>
+<p><span class="marker_yellow"><strong>CodePipeline パート</strong></span></p>
   <details>
   <summary>buildspec.yml</summary>
 <pre><code class="language-yml">version: 0.2
@@ -330,31 +330,29 @@ phases:
 </code></pre>
   </details>
 <ol>
-<li>PRがdev/mainにマージされたタイミングでAWSで事前に設定しているCodePipelineが走る
+<li>PR が dev/main にマージされたタイミングで AWS で事前に設定している CodePipeline が走る
 <ul>
-<li>事前にCodePipeline上で組んでいるフローが動く</li>
+<li>事前に CodePipeline 上で組んでいるフローが動く</li>
 </ul>
 </li>
-<li>CodeBuildが起動し，Docker ImageのBuildが行われ，ImageをECRにpushします</li>
-<li>Step Functionsが起動し，パイプラインが走る
+<li>CodeBuild が起動し，Docker Image の Build が行われ，Image を ECR に push します</li>
+<li>Step Functions が起動し，パイプラインが走る
 <ul>
-<li>ECRに登録しているImageを使って，SageMaker ProcessingJobが動く</li>
+<li>ECR に登録している Image を使って，SageMaker ProcessingJob が動く</li>
 </ul>
 </li>
 </ol>
-<ul>
-<li>細かい部分で言うと，<code>AWS_ACCOUNT_ID</code>, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>などの機密情報は，パラメータストア(<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank">AWS Systems Manager Parameter Store</a>)へ登録しておき，それを参照する形で使うようにしています．</li>
-</ul>
+<p>細かい部分で言うと，<code>AWS_ACCOUNT_ID</code>, <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> などの機密情報は，パラメータストア（<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank">AWS Systems Manager Parameter Store</a>）へ登録しておき，それを参照する形で使うようにしています．</p>
 </li>
 </ul>
 <h3 id="aws-serverless-application-model">AWS Serverless Application Model</h3>
-<p>AWS Serverless Application Model (SAM)とはAWSでサーバーレスアプリケーションを簡単に構築することがフレームワークになります．CloudFormationの拡張でCloudFormationで利用できるリソースはSAMでも使用することができます．YAMLもしくはJSON形式のテンプレートを使って簡単に環境構築ができますし，CLIも提供されてます．詳しくは公式の「<a href="https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/what-is-sam.html" target="_blank">AWS Serverless Application Model (AWS SAM) とは</a>」を見て頂ければと思います．</p>
+<p>AWS Serverless Application Model (SAM) とは AWS でサーバーレスアプリケーションを簡単に構築することがフレームワークになります．CloudFormation の拡張で CloudFormation で利用できるリソースは SAM でも使用することができます．YAML もしくは JSON 形式のテンプレートを使って簡単に環境構築ができますし，CLI も提供されてます．詳しくは公式の「<a href="https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/what-is-sam.html" target="_blank">AWS Serverless Application Model (AWS SAM) とは</a>」を見て頂ければと思います．</p>
 <p>設定するファイルは2つあります．</p>
 <ol>
 <li>samconfig.toml</li>
 <li>template.yaml</li>
 </ol>
-<p>dev環境の設定ファイルを見ていくと，</p>
+<p>dev 環境の設定ファイルを見ていくと，</p>
 <ul>
 <li>
 <p><span class="marker_yellow"><strong>samconfig.toml</strong></span></p>
@@ -373,11 +371,11 @@ disable_rollback = true
 </code></pre>
   </details>
 <ul>
-<li>こちらのファイルは1つのファイルにdevとprodの両方の設定を実装することもできますが，今回は環境毎にファイルを分けています．（後述するテンプレートと一緒に管理する必要があるが，微妙に環境毎で変数が違う部分もあるのでこのファイルも分けて管理した方が良いかなと思い分けています）</li>
-<li><code>[default.deploy.parameters]</code>は<code>sam deploy</code>コマンドが実行された時に渡される引数になります</li>
-<li>注意としては，<code>s3_bucket</code>は事前に作成しておかないとデプロイした際に<code>S3 Bucket does not exist.</code>といったエラーが発生します．
+<li>こちらのファイルは1つのファイルに dev と prod の両方の設定を実装することもできますが，今回は環境毎にファイルを分けています．（後述するテンプレートと一緒に管理する必要があるが，微妙に環境毎で変数が違う部分もあるのでこのファイルも分けて管理した方が良いかなと思い分けています）</li>
+<li><code>[default.deploy.parameters]</code> は <code>sam deploy</code> コマンドが実行された時に渡される引数になります</li>
+<li>注意としては，<code>s3_bucket</code> は事前に作成しておかないとデプロイした際に <code>S3 Bucket does not exist.</code> といったエラーが発生します．
 <ul>
-<li>S3には，ビルドしたテンプレートファイルとリソースファイルが保存されます</li>
+<li>S3 には，ビルドしたテンプレートファイルとリソースファイルが保存されます</li>
 </ul>
 </li>
 </ul>
@@ -434,15 +432,15 @@ Resources:
 </code></pre>
   </details>
 <ul>
-<li>JSONではなく，YAML形式で書けるので良きですね！</li>
-<li>Parametersブロックでは，値を変数化できるので，共通設定やdev/prodで動的に変わる部分だったりを書いておくと使い回しやすいかなと思います．</li>
-<li>Resourcesブロックでは，Parametersブロックで定義した変数を<code>!Ref</code>や<code>!Sub</code>で使うことができます．
+<li>JSON ではなく，YAML 形式で書けるので良きですね！</li>
+<li>Parameters ブロックでは，値を変数化できるので，共通設定や dev/prod で動的に変わる部分だったりを書いておくと使い回しやすいかなと思います．</li>
+<li>Resources ブロックでは，Parameters ブロックで定義した変数を <code>!Ref</code> や <code>!Sub</code> で使うことができます．
 <ul>
-<li><code>!Sub</code>は値の一部に変数を使用したい時に使うことができます．</li>
+<li><code>!Sub</code> は値の一部に変数を使用したい時に使うことができます．</li>
 </ul>
 </li>
-<li>Roleの設定もできますが，今回は事前に設定しておいたIAMロールを使用しています．</li>
-<li>今回はStep Functionsだけを定義したので，定義ファイル<code>sample-ml-pipelines-ver1.asl.json</code>を次に見ていきます．</li>
+<li>Role の設定もできますが，今回は事前に設定しておいた IAM ロールを使用しています．</li>
+<li>今回は Step Functions だけを定義したので，定義ファイル <code>sample-ml-pipelines-ver1.asl.json</code> を次に見ていきます．</li>
 </ul>
 </li>
 <li>
@@ -501,39 +499,39 @@ Resources:
 </code></pre>
   </details>
 <ul>
-<li>JSON形式で書かれたStep Functionsの定義ファイルになります．</li>
-<li>Hello Worldを出力するだけの内容になっていますが，それをSageMaker ProcessingJobで動かしています．今回は単純な処理ですが，MLモデルを構築するためのパイプラインをここに実装すれば，その内容がSAMで構築されます．</li>
-<li>パイプラインを構築する際は，Step FunctionsのWorkflow studioで直感的なGUIで簡単に作成できるので，それで作成した後にJSONの定義ファイルをDLすれば同じものを本番環境用にサクッと構築することができます．</li>
-<li>ProcessingJobを動かすImageはCodeBuild時にECRにpushしたものを使っています．</li>
-<li>また，<code>ProcessingJobName</code>は一意でないとエラーになるので，<a href="https://docs.aws.amazon.com/ja_jp/step-functions/latest/dg/input-output-contextobject.html" target="_blank">Contextオブジェクト</a>の<code>$$.Execution.Name</code>を使用しています．</li>
+<li>JSON 形式で書かれた Step Functions の定義ファイルになります．</li>
+<li>Hello World を出力するだけの内容になっていますが，それを SageMaker ProcessingJob で動かしています．今回は単純な処理ですが，ML モデルを構築するためのパイプラインをここに実装すれば，その内容が SAM で構築されます．</li>
+<li>パイプラインを構築する際は，Step Functions の Workflow studio で直感的な GUI で簡単に作成できるので，それで作成した後に JSON の定義ファイルをDLすれば同じものを本番環境用にサクッと構築することができます．</li>
+<li>ProcessingJob を動かす Image は CodeBuild 時に ECR に push したものを使っています．</li>
+<li>また，<code>ProcessingJobName</code> は一意でないとエラーになるので，<a href="https://docs.aws.amazon.com/ja_jp/step-functions/latest/dg/input-output-contextobject.html" target="_blank">Context オブジェクト</a>の <code>$$.Execution.Name</code> を使用しています．</li>
 </ul>
 </li>
 </ul>
 <h3 id="aws-codepipeline">AWS CodePipeline</h3>
-<p>CodePipelineは複数のステージというものが用意されていて，それを繋ぎ合わせて一連のパイプラインを構築しCI/CDを自動化するものになります．詳しくは公式の「<a href="https://docs.aws.amazon.com/ja_jp/codepipeline/latest/userguide/welcome.html" target="_blank">AWS CodePipeline とは</a>」を見て頂ければと思います．</p>
-<p>今回の場合，Source→Build→Execute(Invoke)のような流れになっています．</p>
+<p>CodePipeline は複数のステージというものが用意されていて，それを繋ぎ合わせて一連のパイプラインを構築し CI/CD を自動化するものになります．詳しくは公式の「<a href="https://docs.aws.amazon.com/ja_jp/codepipeline/latest/userguide/welcome.html" target="_blank">AWS CodePipeline とは</a>」を見て頂ければと思います．</p>
+<p>今回の場合，Source → Build → Execute (Invoke) のような流れになっています．</p>
 <ul>
-<li>Source: Githubのブランチマージトリガーで起動する</li>
-<li>Build: Docker ImageのBuildとECRへのPushを行う</li>
-<li>Execute(Invoke): Step Functionsを起動する</li>
+<li>Source: Github のブランチマージトリガーで起動する</li>
+<li>Build: Docker ImageのBuild と ECR への push を行う</li>
+<li>Execute (Invoke): Step Functions を起動する</li>
 </ul>
 <p><img class="img-zoomable" src="../../img/cp-img1.png" alt="CodePipeline" />
 </p>
 <ul>
-<li>処理が正常に終了すると，Step Functionsの実行結果とCloudWatch Logsのログは以下のようになります．</li>
+<li>処理が正常に終了すると，Step Functions の実行結果と CloudWatch Logs のログは以下のようになります．</li>
 </ul>
-<p><img class="img-zoomable" src="../../img/sf-img1.png" alt="Step Functionsの結果" />
+<p><img class="img-zoomable" src="../../img/sf-img1.png" alt="Step Functions の結果" />
 </p>
-<p><img class="img-zoomable" src="../../img/cwl-img1.png" alt="CloudWatch Logsの結果" />
+<p><img class="img-zoomable" src="../../img/cwl-img1.png" alt="CloudWatch Logs の結果" />
 </p>
 <ul>
-<li>CodePipelineを動かす時の注意としては，権限周りのエラーがよく発生するのでCodePipelineから何を動かす必要があるかをチェックして動かすアクションの権限を与えてやる必要があります．
+<li>CodePipeline を動かす時の注意としては，権限周りのエラーがよく発生するので CodePipeline から何を動かす必要があるかをチェックして動かすアクションの権限を与えてやる必要があります．
 <ul>
 <li>今回の場合:
 <ul>
-<li>CodePipelineでは，CodeBuildとStep Functionsを動かすためのポリシーが必要</li>
-<li>CodeBuildでは，ECRとSystemsManagerを操作するためのポリシーが必要</li>
-<li>Step Functionsでは，SageMakerの操作とECRへのアクセスを行うポリシーが必要</li>
+<li>CodePipeline では，CodeBuild と Step Functions を動かすためのポリシーが必要</li>
+<li>CodeBuild では，ECR と SystemsManager を操作するためのポリシーが必要</li>
+<li>Step Functions では，SageMaker の操作と ECR へのアクセスを行うポリシーが必要</li>
 </ul>
 </li>
 <li>エラー周りは参考に挙げたブログが役に立ちました．</li>
@@ -541,13 +539,13 @@ Resources:
 </li>
 </ul>
 <h2 id="おわりに">おわりに</h2>
-<p>今回はGithub ActionsとCodePipelineを使ってStep Functionsを動かすCICDパイプラインを構築したお話でした．</p>
-<p>Step Functionsの中身をMLモデル学習のパイプラインとすれば，Github ActionsのPR Openとブランチマージをトリガーとして，CodePipelineが走ることで，一連の流れをCICDで実現できることになります．</p>
-<p>ここにテストを追加したり，例えば，ECSでML-APIが動いている場合には，Step Functionsのパイプラインが正常終了した後に，承認プロセスを入れてECSのタスク定義とサービスの更新を入れることで，デプロイまで持っていくことができるかなと思います！</p>
-<p>もう少し発展させることでより良い開発体験が生み出すことができるのと，MLOpsの成熟度も上がって運用の自動化も一歩前進すると考えています．</p>
+<p>今回は Github Actions と CodePipeline を使って Step Functions を動かす CI/CD パイプラインを構築したお話でした．</p>
+<p>Step Functions の中身をMLモデル学習のパイプラインとすれば，Github Actions の PR が Open とブランチマージをトリガーとして，CodePipeline が走ることで，一連の流れを CI/CD で実現できることになります．</p>
+<p>ここにテストを追加したり，例えば，ECS で ML-API が動いている場合には，Step Functions のパイプラインが正常終了した後に，承認プロセスを入れて ECS のタスク定義とサービスの更新を入れることで，デプロイまで持っていくことができるかなと思います！</p>
+<p>もう少し発展させることでより良い開発体験が生み出すことができるのと，MLOps の成熟度も上がって運用の自動化も一歩前進すると考えています．</p>
 <h2 id="参考">参考</h2>
 <ul>
-<li><a href="https://rinoguchi.net/2021/08/aws-fullstack-sample-application-part3.html" target="_blank">CodeBuild・CodePipelineを使ってデリバリーパイプラインを導入（AWSでWebアプリ構築 part3）</a></li>
+<li><a href="https://rinoguchi.net/2021/08/aws-fullstack-sample-application-part3.html" target="_blank">CodeBuild・CodePipeline を使ってデリバリーパイプラインを導入（AWS で Web アプリ構築 part3）</a></li>
 <li><a href="https://bobbyhadz.com/blog/aws-policy-has-prohibited-field-principal" target="_blank">Solve - Policy has Prohibited field Principal AWS Error</a></li>
 <li><a href="https://docs.aws.amazon.com/codebuild/latest/userguide/troubleshooting.html" target="_blank">Troubleshooting AWS CodeBuild</a></li>
 <li><a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/troubleshooting.html" target="_blank">Troubleshooting CodePipeline</a></li>
@@ -675,7 +673,7 @@ Resources:
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#cicdパイプラインの構成">CI/CDパイプラインの構成</a>
+    <li><a href="#cicd-パイプラインの構成">CI/CD パイプラインの構成</a>
       <ul>
         <li><a href="#aws-serverless-application-model">AWS Serverless Application Model</a></li>
         <li><a href="#aws-codepipeline">AWS CodePipeline</a></li>
@@ -787,7 +785,7 @@ Resources:
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#cicdパイプラインの構成">CI/CDパイプラインの構成</a>
+    <li><a href="#cicd-パイプラインの構成">CI/CD パイプラインの構成</a>
       <ul>
         <li><a href="#aws-serverless-application-model">AWS Serverless Application Model</a></li>
         <li><a href="#aws-codepipeline">AWS CodePipeline</a></li>

@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>teamayaという個人プロジェクトをはじめてみた - Fractal Prologue</title>
+<title>teamaya という個人プロジェクトをはじめてみた - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="家計簿のデータをBigQueryに連携して遊ぶプロジェクト" />
+<meta name="description" content="家計簿のデータを BigQuery に連携して遊ぶプロジェクト" />
 
 
 <meta name="keywords" content="Dev, Poem" />
 
-<meta property="og:title" content="teamayaという個人プロジェクトをはじめてみた" />
-<meta property="og:description" content="家計簿のデータをBigQueryに連携して遊ぶプロジェクト" />
+<meta property="og:title" content="teamaya という個人プロジェクトをはじめてみた" />
+<meta property="og:description" content="家計簿のデータを BigQuery に連携して遊ぶプロジェクト" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-12T16:55:14+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="teamayaという個人プロジェクトをはじめてみた"/>
-<meta name="twitter:description" content="家計簿のデータをBigQueryに連携して遊ぶプロジェクト"/>
+<meta name="twitter:title" content="teamaya という個人プロジェクトをはじめてみた"/>
+<meta name="twitter:description" content="家計簿のデータを BigQuery に連携して遊ぶプロジェクト"/>
 
 
 
@@ -140,28 +140,28 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/">teamayaという個人プロジェクトをはじめてみた</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/">teamaya という個人プロジェクトをはじめてみた</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1978 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/poem">Poem</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-12-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1888 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/poem">Poem</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>最近，データエンジニアリングとMLOpsの領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジニアリングとMLOpsの技術検証をしようと言う考えに至りました．</p>
+<p>最近，データエンジニアリングと MLOps の領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジニアリングとMLOpsの技術検証をしようと言う考えに至りました．</p>
 <p>そもそも，なんで上記領域への関心が高まってきたかというと，以前までは，ある問題設定に対して，どういったアプローチでその問題を解くかといったモデリング部分に興味があり，特徴量エンジニアリングや新しいアルゴリズムを試すといった部分が楽しいと感じていました．一方で最近は，そこで作ったモデルはそのままでは機能せず，何らかのシステムに載せて動かし続けることで真価を発揮すると思っていますし，動かし続けて使っていかないと意味がなく，せっかく作ったモデルがもったいないなーという気持ちがあります．</p>
-<p>機械学習モデルのシステム化のためには，どういったことを知っておくといいのかを考えた場合，データ連携を含めたデータを貯める部分とモデル作成後のMLOps部分を理解しておくことが大事だと思うので，ここをより深めて行きたいと思った次第です．</p>
+<p>機械学習モデルのシステム化のためには，どういったことを知っておくといいのかを考えた場合，データ連携を含めたデータを貯める部分とモデル作成後の MLOps 部分を理解しておくことが大事だと思うので，ここをより深めて行きたいと思った次第です．</p>
 <p>データ連携周りは自分自身でモデルを作る際にも，「簡単にデータを取り出せる，品質が保たれているデータ」というのは大事な部分であり，世の中的にもデータを活用する流れはこれからも進んでいき，データ基盤を作れる人の価値は上がっていくと思うので，じゃあそこを自分でも出来るようになっておこうという思いがあります．</p>
 <p>もう一つのMLOpsは構成要素が色々あり技術的にも興味深い（サービス名とかは知ってるけど，どうやって使うの？的な部分もあります）のと，まだまだこの分野の知見は日本でも多くないなという印象なので，しっかり理解しておくと今後より活きてくるかなと思っています．</p>
 <p>そういった流れの中で，理解も含めて個人プロジェクトでできることをしたいというお気持ちがです．</p>
-<p>技術スタックとしては，普段BigQuery以外は業務でもあまり触れる機会がない<a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a> (GCP) のサービスとOSSを組み合わせてできることをしようと考えています．</p>
+<p>技術スタックとしては，普段 BigQuery 以外は業務でもあまり触れる機会がない <a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a> (GCP) のサービスと OSS を組み合わせてできることをしようと考えています．</p>
 <h2 id="プロジェクト名-teamaya">プロジェクト名: teamaya</h2>
 <p>プロジェクトを始めるにあたりプロジェクト名を決めるとワクワクするので，最初に決めることにしました．沖縄好きなので，沖縄の言葉を組み合わせて何か名前を付けたいと考えていて，沖縄県と東京都のハーフである妻にも相談しながら今回の「<strong><span class="marker_yellow">teamaya</span></strong>」と言う名前にしました．</p>
-<p>githubのリポジトリは以下になります．（スター貰えると泣いて喜びます😂）</p>
+<p>github のリポジトリは以下になります．（スター貰えると泣いて喜びます😂）</p>
 <iframe class="hatenablogcard" style="width:100%;height:155px;margin:15px 0;max-width:680px;" title="masatakashiwagi/teamaya: This is a repository for Data integration and Machine Learning Pipeline." src="https://hatenablog-parts.com/embed?url=https://github.com/masatakashiwagi/teamaya" frameborder="0" scrolling="no"></iframe>
-<p><strong>teamaya</strong>は&quot;<strong>team</strong>&ldquo;と&rdquo;<strong>maya</strong>&ldquo;を組み合わせた造語です．teamは「〔動物に引かせて～を〕運ぶ、運搬する」という意味があり，maya（マヤー）は沖縄の方言で猫という意味があるので，<span class="marker_yellow">猫にデータを運んで貰う</span>という意味を込めてこの名前にしました．</p>
+<p><strong>teamaya</strong> は &ldquo;<strong>team</strong>&rdquo; と &ldquo;<strong>maya</strong>&rdquo; を組み合わせた造語です．team は「〔動物に引かせて～を〕運ぶ、運搬する」という意味があり，maya（マヤー）は沖縄の方言で猫という意味があるので，<span class="marker_yellow">猫にデータを運んで貰う</span>という意味を込めてこの名前にしました．</p>
 <p>ちなみに，リポジトリにあるアイコンのハイビスカス🌺を付けた猫😸は妻に書いて貰いました！</p>
 <h2 id="どういったプロジェクトなのか">どういったプロジェクトなのか</h2>
 <p>今のところ考えているのは，大きく2つになります．</p>
@@ -181,13 +181,13 @@
 </ol>
 </li>
 </ol>
-<p>まず，データ連携については．ローカルからクラウドへの連携，特に特定のデータソースからBigQueryに連携する部分を実施して，データウェアハウス（DWH）を作ろうと思っています．そこからELTツールでデータマート（DM）を作成し，BIツール（Data Studioなど）でデータの可視化を行うといった流れを検証しようと考えています．</p>
-<p>個人的には，<a href="https://dataform.co/" target="_blank">Dataform</a>や<a href="https://www.getdbt.com/" target="_blank">dbt</a>といったサービスでELTパイプラインを作って，データ変換やデータの品質管理を一通り試してみたいと思っています．</p>
-<p>機械学習システムの構築に関しては，機械学習モデル作成のためのパイプラインや実験管理などを行いつつ，コードのテストやデータ・予測結果のモニタリングなどをできるようにしたいのと，<a href="https://feast.dev/" target="_blank">Feast</a>などのfeature storeを試したりもしたいなと思っています．</p>
+<p>まず，データ連携については．ローカルからクラウドへの連携，特に特定のデータソースから BigQuery に連携する部分を実施して，データウェアハウス（DWH）を作ろうと思っています．そこからELTツールでデータマート（DM）を作成し，BI ツール（Data Studio など）でデータの可視化を行うといった流れを検証しようと考えています．</p>
+<p>個人的には，<a href="https://dataform.co/" target="_blank">Dataform</a> や <a href="https://www.getdbt.com/" target="_blank">dbt</a> といったサービスでELTパイプラインを作って，データ変換やデータの品質管理を一通り試してみたいと思っています．</p>
+<p>機械学習システムの構築に関しては，機械学習モデル作成のためのパイプラインや実験管理などを行いつつ，コードのテストやデータ・予測結果のモニタリングなどをできるようにしたいのと，<a href="https://feast.dev/" target="_blank">Feast</a> などのfeature store を試したりもしたいなと思っています．</p>
 <p>現状では上記2つを構築していきたいと思ってますが，進めていく中で興味が湧いたものを適宜取り入れていきたいなと思っています．</p>
 <h2 id="おわりに">おわりに</h2>
 <p>今回はプロジェクトを新しく始めたので，その紹介になります．ローカルからクラウドにデータ連携する部分については，既に作成しているので別途内容を紹介したいと思います．</p>
-<p>試行錯誤しながら面白そうなものは色々と取り入れて進めて行きたいと思うので，もし面白いツールなどがあればTwitterで教えて頂ければ嬉しいです．</p>
+<p>試行錯誤しながら面白そうなものは色々と取り入れて進めて行きたいと思うので，もし面白いツールなどがあれば Twitter で教えて頂ければ嬉しいです．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://mlops.toys/" target="_blank">MLOps.toys</a></li>

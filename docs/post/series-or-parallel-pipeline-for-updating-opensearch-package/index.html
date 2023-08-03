@@ -38,7 +38,7 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Step FunctionsでのOpensearch Packageの更新は直列or並列？ - Fractal Prologue</title>
+<title>Step Functions での Opensearch Package の更新は直列or並列？ - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
@@ -49,7 +49,7 @@
 
 <meta name="keywords" content="AWS, Dev" />
 
-<meta property="og:title" content="Step FunctionsでのOpensearch Packageの更新は直列or並列？" />
+<meta property="og:title" content="Step Functions での Opensearch Package の更新は直列or並列？" />
 <meta property="og:description" content="複数の辞書更新を直列パイプラインで行うか並列パイプラインで行うか" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
@@ -59,7 +59,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="Step FunctionsでのOpensearch Packageの更新は直列or並列？"/>
+<meta name="twitter:title" content="Step Functions での Opensearch Package の更新は直列or並列？"/>
 <meta name="twitter:description" content="複数の辞書更新を直列パイプラインで行うか並列パイプラインで行うか"/>
 
 
@@ -140,28 +140,32 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/">Step FunctionsでのOpensearch Packageの更新は直列or並列？</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/">Step Functions での Opensearch Package の更新は直列or並列？</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-10-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3676 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-10-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3492 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/aws">AWS</a>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます．</p>
-<p>結論としては，OpenSearchのPackage更新は同時に複数更新すると，関連付けでエラーが発生する可能性があるので，<strong>直列</strong>でパイプラインを組みのが良いと思いました．特にインスタンススペックが低いとドメインへの負荷でエラーになる可能性が高いと思います．</p>
+<p>OpenSearch の Package 更新，つまりユーザー辞書やシノニム辞書の更新を Step Functions で行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます．</p>
+<p>結論としては，OpenSearch の Package 更新は同時に複数更新すると，関連付けでエラーが発生する可能性があるので，<strong>直列</strong>でパイプラインを組みのが良いと思いました．特にインスタンススペックが低いとドメインへの負荷でエラーになる可能性が高いと思います．</p>
 <p>以下のようなエラーが発生する場合があります．</p>
 <p><img class="img-zoomable" src="../../img/opensearch-error-img1.png" alt="関連付けエラー" />
 </p>
-<h2 id="step-functionsによる辞書更新パイプライン">Step Functionsによる辞書更新パイプライン</h2>
-<p>まず初めにOpenSearchのPackageをAPIで更新する手順を説明すると</p>
+<h2 id="step-functions-による辞書更新パイプライン">Step Functions による辞書更新パイプライン</h2>
+<p>まず初めに OpenSearch の Package を API で更新する手順を説明すると</p>
 <ol>
-<li><code>OpenSearch: UpdatePackage</code>
+<li>
+<p><code>OpenSearch: UpdatePackage</code></p>
 <ul>
-<li><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/update-package.html" target="_blank">update-package</a></li>
-<li>APIパラメータとして以下のJSONを渡す感じです
+<li>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/update-package.html" target="_blank">update-package</a></p>
+</li>
+<li>
+<p>API パラメータとして以下の JSON を渡す感じです</p>
 <pre><code class="language-json">{
   &quot;PackageID&quot;: &quot;&lt;OpenSearchのドメインに関連付けられたパッケージの内部ID&gt;&quot;,
   &quot;PackageSource&quot;: {
@@ -173,13 +177,17 @@
 </li>
 </ul>
 </li>
-<li><code>OpenSearch: AssociatePackage</code>
+<li>
+<p><code>OpenSearch: AssociatePackage</code></p>
 <ul>
-<li><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/associate-package.html" target="_blank">associate-package</a></li>
-<li>APIパラメータとして以下のJSONを渡す感じです
+<li>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/associate-package.html" target="_blank">associate-package</a></p>
+</li>
+<li>
+<p>APIパラメータとして以下の JSON を渡す感じです</p>
 <pre><code class="language-json">{
-  &quot;DomainName&quot;: &quot;&lt;関連付けを行うOpenSearchのドメイン名&gt;&quot;,
-  &quot;PackageID&quot;: &quot;&lt;OpenSearchのドメインに関連付けられたパッケージの内部ID&gt;&quot;
+  &quot;DomainName&quot;: &quot;&lt;関連付けを行う OpenSearch のドメイン名&gt;&quot;,
+  &quot;PackageID&quot;: &quot;&lt;OpenSearch のドメインに関連付けられたパッケージの内部 ID &gt;&quot;
 }
 </code></pre>
 </li>
@@ -187,7 +195,7 @@
 </li>
 </ol>
 <p>この2つを実行するだけになります．</p>
-<p>一方で，それぞれのAPIを実行すると処理が走るが，更新や関連付けには一定の時間が必要になります．そのため，<code>OpenSearch: ListDomainsForPackage</code>でドメインとパッケージの状態を確認し，<code>ACTIVE</code>状態になったら次の処理を実行する必要があります．</p>
+<p>一方で，それぞれのAPIを実行すると処理が走るが，更新や関連付けには一定の時間が必要になります．そのため，<code>OpenSearch: ListDomainsForPackage</code> でドメインとパッケージの状態を確認し，<code>ACTIVE</code> 状態になったら次の処理を実行する必要があります．</p>
 <p>これ踏まえて，ユーザー辞書とシノニム辞書の2つを更新する処理を直列と並列それぞれ実装してみます．</p>
 <h3 id="直列でパイプラインを組んだ場合">直列でパイプラインを組んだ場合</h3>
 <p>ユーザー辞書を更新した後にシノニム辞書の更新を行うパイプラインになります．</p>
@@ -714,11 +722,11 @@
 </details>
 <p><img class="img-zoomable" src="../../img/stepfunctions-parallel-img2.png" alt="並列パイプライン" />
 </p>
-<p>パイプライン内では<code>OpenSearch: ListDomainsForPackage</code>でパッケージの状況を確認し，ACTIVE状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．</p>
+<p>パイプライン内では <code>OpenSearch: ListDomainsForPackage</code> でパッケージの状況を確認し，ACTIVE 状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．</p>
 <p>辞書更新にかかる処理時間は5分以内ぐらいなので，より安全に実施できる直列で更新する方法に落ち着きました．</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回はOpenSearchの複数の辞書更新をStep Functionsで行う場合に，直列で更新処理を組むのが良いか，並列で更新処理を組むのが良いかをというところで，より安全に実行するという観点で直列を選択しました．</p>
-<p>パイプラインが長くなってしまいますが，辞書更新用のStep Functionsを用意することで，このSFをデータ同期のパイプラインのステップの1つとして組み込めば，処理単位でモジュール化することができるので，修正やデバッグもやりやすくなると思います．</p>
+<p>今回は OpenSearch の複数の辞書更新を Step Functions で行う場合に，直列で更新処理を組むのが良いか，並列で更新処理を組むのが良いかをというところで，より安全に実行するという観点で直列を選択しました．</p>
+<p>パイプラインが長くなってしまいますが，辞書更新用の Step Functions を用意することで，このSFをデータ同期のパイプラインのステップの1つとして組み込めば，処理単位でモジュール化することができるので，修正やデバッグもやりやすくなると思います．</p>
 
         <div id="share-buttons">
             
@@ -842,7 +850,7 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#step-functionsによる辞書更新パイプライン">Step Functionsによる辞書更新パイプライン</a>
+    <li><a href="#step-functions-による辞書更新パイプライン">Step Functions による辞書更新パイプライン</a>
       <ul>
         <li><a href="#直列でパイプラインを組んだ場合">直列でパイプラインを組んだ場合</a></li>
         <li><a href="#並列でパイプラインを組んだ場合">並列でパイプラインを組んだ場合</a></li>
@@ -953,7 +961,7 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#step-functionsによる辞書更新パイプライン">Step Functionsによる辞書更新パイプライン</a>
+    <li><a href="#step-functions-による辞書更新パイプライン">Step Functions による辞書更新パイプライン</a>
       <ul>
         <li><a href="#直列でパイプラインを組んだ場合">直列でパイプラインを組んだ場合</a></li>
         <li><a href="#並列でパイプラインを組んだ場合">並列でパイプラインを組んだ場合</a></li>

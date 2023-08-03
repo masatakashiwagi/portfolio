@@ -1,6 +1,6 @@
 +++
 author = "Masataka Kashiwagi"
-title = "Step FunctionsでのOpensearch Packageの更新は直列or並列？"
+title = "Step Functions での Opensearch Package の更新は直列or並列？"
 description = "複数の辞書更新を直列パイプラインで行うか並列パイプラインで行うか"
 date = 2022-10-29T10:38:31+09:00
 draft = false
@@ -11,20 +11,23 @@ tags = ["AWS", "Dev"]
 +++
 
 ## はじめに
-OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の更新をStep Functionsで行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます．
 
-結論としては，OpenSearchのPackage更新は同時に複数更新すると，関連付けでエラーが発生する可能性があるので，**直列**でパイプラインを組みのが良いと思いました．特にインスタンススペックが低いとドメインへの負荷でエラーになる可能性が高いと思います．
+OpenSearch の Package 更新，つまりユーザー辞書やシノニム辞書の更新を Step Functions で行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます．
+
+結論としては，OpenSearch の Package 更新は同時に複数更新すると，関連付けでエラーが発生する可能性があるので，**直列**でパイプラインを組みのが良いと思いました．特にインスタンススペックが低いとドメインへの負荷でエラーになる可能性が高いと思います．
 
 以下のようなエラーが発生する場合があります．
 
 ![関連付けエラー](../../img/opensearch-error-img1.png "関連付けエラー")
 
-## Step Functionsによる辞書更新パイプライン
-まず初めにOpenSearchのPackageをAPIで更新する手順を説明すると
+## Step Functions による辞書更新パイプライン
+
+まず初めに OpenSearch の Package を API で更新する手順を説明すると
 
 1. `OpenSearch: UpdatePackage`
     - [update-package](https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/update-package.html)
-    - APIパラメータとして以下のJSONを渡す感じです
+    - API パラメータとして以下の JSON を渡す感じです
+
         ```json
         {
           "PackageID": "<OpenSearchのドメインに関連付けられたパッケージの内部ID>",
@@ -34,23 +37,26 @@ OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の
           }
         }
         ```
+
 2. `OpenSearch: AssociatePackage`
     - [associate-package](https://docs.aws.amazon.com/ja_jp/cli/latest/reference/opensearch/associate-package.html)
-    - APIパラメータとして以下のJSONを渡す感じです
+    - APIパラメータとして以下の JSON を渡す感じです
+
         ```json
         {
-          "DomainName": "<関連付けを行うOpenSearchのドメイン名>",
-          "PackageID": "<OpenSearchのドメインに関連付けられたパッケージの内部ID>"
+          "DomainName": "<関連付けを行う OpenSearch のドメイン名>",
+          "PackageID": "<OpenSearch のドメインに関連付けられたパッケージの内部 ID >"
         }
         ```
 
 この2つを実行するだけになります．
 
-一方で，それぞれのAPIを実行すると処理が走るが，更新や関連付けには一定の時間が必要になります．そのため，`OpenSearch: ListDomainsForPackage`でドメインとパッケージの状態を確認し，`ACTIVE`状態になったら次の処理を実行する必要があります．
+一方で，それぞれのAPIを実行すると処理が走るが，更新や関連付けには一定の時間が必要になります．そのため，`OpenSearch: ListDomainsForPackage` でドメインとパッケージの状態を確認し，`ACTIVE` 状態になったら次の処理を実行する必要があります．
 
 これ踏まえて，ユーザー辞書とシノニム辞書の2つを更新する処理を直列と並列それぞれ実装してみます．
 
 ### 直列でパイプラインを組んだ場合
+
 ユーザー辞書を更新した後にシノニム辞書の更新を行うパイプラインになります．
 
 <details>
@@ -297,6 +303,7 @@ OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の
 ![直列パイプライン](../../img/stepfunctions-series-img1.png "直列パイプライン")
 
 ### 並列でパイプラインを組んだ場合
+
 ユーザー辞書とシノニム辞書の更新を同時に実行するパイプラインになります．
 
 <details>
@@ -585,11 +592,12 @@ OpenSearchのPackage更新，つまりユーザー辞書やシノニム辞書の
 
 ![並列パイプライン](../../img/stepfunctions-parallel-img2.png "並列パイプライン")
 
-パイプライン内では`OpenSearch: ListDomainsForPackage`でパッケージの状況を確認し，ACTIVE状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．
+パイプライン内では `OpenSearch: ListDomainsForPackage` でパッケージの状況を確認し，ACTIVE 状態でない場合は数十秒の待機処理を入れてから再度確認する方法で更新を行っています．
 
 辞書更新にかかる処理時間は5分以内ぐらいなので，より安全に実施できる直列で更新する方法に落ち着きました．
 
 ## おわりに
-今回はOpenSearchの複数の辞書更新をStep Functionsで行う場合に，直列で更新処理を組むのが良いか，並列で更新処理を組むのが良いかをというところで，より安全に実行するという観点で直列を選択しました．
 
-パイプラインが長くなってしまいますが，辞書更新用のStep Functionsを用意することで，このSFをデータ同期のパイプラインのステップの1つとして組み込めば，処理単位でモジュール化することができるので，修正やデバッグもやりやすくなると思います．
+今回は OpenSearch の複数の辞書更新を Step Functions で行う場合に，直列で更新処理を組むのが良いか，並列で更新処理を組むのが良いかをというところで，より安全に実行するという観点で直列を選択しました．
+
+パイプラインが長くなってしまいますが，辞書更新用の Step Functions を用意することで，このSFをデータ同期のパイプラインのステップの1つとして組み込めば，処理単位でモジュール化することができるので，修正やデバッグもやりやすくなると思います．

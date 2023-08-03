@@ -38,19 +38,19 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>TensorflowのCallback関数をカスタマイズ - Fractal Prologue</title>
+<title>Tensorflow の Callback 関数をカスタマイズ - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="TensorflowのCallback関数をカスタマイズした話" />
+<meta name="description" content="Tensorflow の Callback 関数をカスタマイズした話" />
 
 
 <meta name="keywords" content="Dev, Machine Learning" />
 
-<meta property="og:title" content="TensorflowのCallback関数をカスタマイズ" />
-<meta property="og:description" content="TensorflowのCallback関数をカスタマイズした話" />
+<meta property="og:title" content="Tensorflow の Callback 関数をカスタマイズ" />
+<meta property="og:description" content="Tensorflow の Callback 関数をカスタマイズした話" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-10T00:14:33+09:00" />
@@ -59,8 +59,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="TensorflowのCallback関数をカスタマイズ"/>
-<meta name="twitter:description" content="TensorflowのCallback関数をカスタマイズした話"/>
+<meta name="twitter:title" content="Tensorflow の Callback 関数をカスタマイズ"/>
+<meta name="twitter:description" content="Tensorflow の Callback 関数をカスタマイズした話"/>
 
 
 
@@ -140,24 +140,24 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">TensorflowのCallback関数をカスタマイズ</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/">Tensorflow の Callback 関数をカスタマイズ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1772 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/machine-learning">Machine Learning</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1361 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>AWSのSageMaker上でSageMaker Python SDKを使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える <strong><a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Estimator</a></strong> というSageMakerのinterfaceがあります．<br>
-一方で，SageMaker Experimentsで実験管理を行いたい場合には，このEstimatorに色々と渡してあげる必要があります．</p>
-<p>その中でも学習時に出力されるlossの値や評価メトリクスを記録するためには，Estimatorのmetric_definitionsに正規表現を記述してログから上手く取得する必要があります．<br>
-これをより簡単にするために，CustomCallback関数を作成した話になります．</p>
-<h2 id="callback関数のカスタマイズ">Callback関数のカスタマイズ</h2>
-<p>Tensorflow，厳密にはKerasのCallback関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code>クラスを継承した<code>CustomCallBack(tf.keras.callbacks.Callback)</code>クラスを作成します．この作成したクラスを<code>model.fit</code>時に引数のcallbacksに渡してやることで使用することができます．</p>
-<p>今回はSageMaker Experimentsで使うことを想定したもので，Estimatorのmetric_definitionsに渡すRegexとして，以下のようなログが出力されて欲しいとします．（メトリクスはRMSEとした場合を想定）
-MetricDefinitionsはこちらが参考になります → <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html" target="_blank">Define Metrics</a></p>
+<p>AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える <strong><a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Estimator</a></strong> という SageMaker の interface があります．<br>
+一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に色々と渡してあげる必要があります．</p>
+<p>その中でも学習時に出力される loss の値や評価メトリクスを記録するためには，Estimator の metric_definitions に正規表現を記述してログから上手く取得する必要があります．<br>
+これをより簡単にするために，CustomCallback 関数を作成した話になります．</p>
+<h2 id="callback-関数のカスタマイズ">Callback 関数のカスタマイズ</h2>
+<p>Tensorflow，厳密には Keras の Callback 関数をカスタマイズします．<code>tf.keras.callbacks.Callback</code> クラスを継承した <code>CustomCallBack(tf.keras.callbacks.Callback)</code> クラスを作成します．この作成したクラスを <code>model.fit</code> 時に引数の callbacks に渡してやることで使用することができます．</p>
+<p>今回は SageMaker Experiments で使うことを想定したもので，Estimator の metric_definitions に渡す Regex として，以下のようなログが出力されて欲しいとします．（メトリクスは RMSE とした場合を想定）
+MetricDefinitions はこちらが参考になります → <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html" target="_blank">Define Metrics</a></p>
 <pre><code class="language-python">sagemaker.estimator.Estimator(
     ...,
     metric_definitions={
@@ -168,8 +168,8 @@ MetricDefinitionsはこちらが参考になります → <a href="https://docs.
     }
 )
 </code></pre>
-<p>しかしながら，Kerasでモデルを作成する際のデフォルトでは，学習時のLossは「<strong>loss</strong>」，メトリクスは「<strong>root_mean_squared_error</strong>」でprefixが無い状態になります．これをCallback関数をカスタマイズすることでprefixに「<strong>train_</strong>」を付けて，Regexで簡単に取得したいという気持ちです．</p>
-<p>Tensorflow公式ドキュメントの<a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a>や<a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a>を参考に作成しました．</p>
+<p>しかしながら，Keras でモデルを作成する際のデフォルトでは，学習時の Loss は「<strong>loss</strong>」，メトリクスは「<strong>root_mean_squared_error</strong>」で prefix が無い状態になります．これを Callback 関数をカスタマイズすることで prefix に「<strong>train_</strong>」を付けて，Regex で簡単に取得したいという気持ちです．</p>
+<p>Tensorflow 公式ドキュメントの <a href="https://www.tensorflow.org/guide/keras/custom_callback?hl=en" target="_blank">Writing your own callbacks</a> や <a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" target="_blank">tf.keras.callbacks.Callback</a> を参考に作成しました．</p>
 <pre><code class="language-python">import tensorflow as tf
 
 class CustomCallback(tf.keras.callbacks.Callback):
@@ -254,19 +254,19 @@ model.fit(
     callbacks=[CustomCallBack()],
 )
 </code></pre>
-<p>出力は以下のような感じになります．今回は<code>print</code>文で出力していますが，loggerを用意して<code>logger.info</code>を使うのも良いかと思います．</p>
+<p>出力は以下のような感じになります．今回は <code>print</code> 文で出力していますが，logger を用意して <code>logger.info</code> を使うのも良いかと思います．</p>
 <pre><code class="language-python">Start training - 2021-11-09 23:48:12.787257
 Epoch 1/10 - train_loss: 4.6889; - train_root_mean_squared_error: 2.1654; - val_loss: 11.1416; - val_root_mean_squared_error: 3.3379;
 ...
 Finish training - 2021-11-09 23:48:15.095133
 </code></pre>
 <h2 id="おわりに">おわりに</h2>
-<p>今回はSageMaker Experimentsで実験管理を行う上でログ出力の形を修正したいという動機からCallBack関数をカスタマイズしました．Callback関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflowのフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
+<p>今回は SageMaker Experiments で実験管理を行う上でログ出力の形を修正したいという動機から CallBack 関数をカスタマイズしました．Callback 関数の中身を知るためにソースコードを読んだりして勉強になりました．Tensorflow のフレームワークは拡張性があり，カスタマイズの方法もドキュメントに整備されているので，比較的容易に修正できると思います．今回は時間経過や予測時間の表示は省いてしまったので，余裕があればログにこれらを出力するようにしていきたいです．</p>
 <h2 id="追記">追記</h2>
 <ul>
 <li>2022/02/24: 更新</li>
 </ul>
-<p>earlystoppingに対応する形式にCallBack関数を修正しました．<code>current_loss = logs.get('val_loss')</code>でlogsからgetするvalueは<code>callbacks.EarlyStopping(monitor='val_loss')</code>で<code>monitor</code>に指定している値になります．</p>
+<p>earlystopping に対応する形式に CallBack 関数を修正しました．<code>current_loss = logs.get('val_loss')</code> で logs から get する value は <code>callbacks.EarlyStopping(monitor='val_loss')</code> で <code>monitor</code> に指定している値になります．</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://sagemaker.readthedocs.io/en/stable/api/training/estimators.html" target="_blank">Sagemaker Training APIs - Estimator</a></li>
@@ -396,7 +396,7 @@ Finish training - 2021-11-09 23:48:15.095133
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
+    <li><a href="#callback-関数のカスタマイズ">Callback 関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#追記">追記</a></li>
     <li><a href="#参考">参考</a></li>
@@ -504,7 +504,7 @@ Finish training - 2021-11-09 23:48:15.095133
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#callback関数のカスタマイズ">Callback関数のカスタマイズ</a></li>
+    <li><a href="#callback-関数のカスタマイズ">Callback 関数のカスタマイズ</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#追記">追記</a></li>
     <li><a href="#参考">参考</a></li>
