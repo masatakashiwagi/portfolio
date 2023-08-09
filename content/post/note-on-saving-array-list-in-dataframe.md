@@ -95,8 +95,8 @@ print(type(tmp_df_rec['recommend_items'][0]))
 import ast
 
 # 以下のどちらかを使うと良い
-tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(lambda str_arr: eval(str_arr))
-tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(lambda str_arr: ast.literal_eval(str_arr))
+tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(eval)
+tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(ast.literal_eval)
 
 print(type(type(tmp_df_rec['recommend_items'][0])))
 > list
