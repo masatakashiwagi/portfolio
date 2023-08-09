@@ -56,4 +56,4 @@ tags = ["Poem"]
 
 ## 参考
 
-- [MLOps 勉強会](https://mlops.connpass.com/)
+- [MLOps勉強会](https://mlops.connpass.com/)

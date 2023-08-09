@@ -105,6 +105,6 @@ P.S. DSB コンペでメダルを獲得します！
 
 ## 参考
 
-- [1] [Kaggle で使える Feather 形式を利用した特徴量管理法](https://amalog.hateblo.jp/entry/kaggle-feature-management)
+- [1] [Kaggleで使えるFeather形式を利用した特徴量管理法](https://amalog.hateblo.jp/entry/kaggle-feature-management)
 - [2] [データ分析コンペで使っているワイの学習・推論パイプラインを晒します](https://www.takapy.work/entry/2019/12/14/165119)
 - [3] [hakubishin3/kaggle_ieee](https://github.com/hakubishin3/kaggle_ieee)

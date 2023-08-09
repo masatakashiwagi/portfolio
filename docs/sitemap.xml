@@ -2,6 +2,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   
+  
+  
+  
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <lastmod>2023-08-03T13:39:35+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    <lastmod>2023-08-03T13:39:35+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</loc>
+    <lastmod>2023-08-03T13:39:35+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  
+  
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/about/</loc>
     <lastmod>2023-04-02T17:00:00+09:00</lastmod>
@@ -20,24 +53,6 @@
   
   
   
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
-    <lastmod>2023-01-28T00:00:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  
-  
-  
-  
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    <lastmod>2023-01-28T00:00:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
   
   
   
@@ -56,9 +71,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  
-  
   
   
   
@@ -98,9 +110,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  
-  
   
   
   

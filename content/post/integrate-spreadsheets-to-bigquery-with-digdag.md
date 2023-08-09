@@ -419,7 +419,7 @@ Status が Success になっていれば，正常終了で BigQuery にデータ
 ## 参考
 
 - [Digdag 入門](https://recruit.gmo.jp/engineer/jisedai/blog/introduction-to-digdag/)
-- [Embulk と Digdag とデータ分析基盤と](https://www.slideshare.net/ToruTakahashi4/embulkdigdag)
-- [digdag を Dockerize して ECS 上で運用することにしました - 雑なメモ](https://yukiyan.hatenablog.jp/entry/2017/01/23/102411)
+- [EmbulkとDigdagとデータ分析基盤と](https://www.slideshare.net/ToruTakahashi4/embulkdigdag)
+- [digdagを DockerizeしてECS上で運用することにしました - 雑なメモ](https://yukiyan.hatenablog.jp/entry/2017/01/23/102411)
 - [Docker Compose の depends_on の使い方まとめ](https://gotohayato.com/content/533/)
-- [Docker の TTY って何?](https://zenn.dev/hohner/articles/43a0da20181d34)
+- [DockerのTTYって何?](https://zenn.dev/hohner/articles/43a0da20181d34)

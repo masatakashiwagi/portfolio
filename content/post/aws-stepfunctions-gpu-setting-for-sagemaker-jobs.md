@@ -199,6 +199,6 @@ Step Functions でカスタムコンテナイメージを使って GPU 環境で
 ## 参考
 
 - [Available SageMaker Studio Instance Types](https://github.com/awsdocs/amazon-sagemaker-developer-guide/blob/master/doc_source/notebooks-available-instance-types.md)
-- [Amazon SageMaker の料金](https://aws.amazon.com/jp/sagemaker/pricing/)
-- [NVIDIA Docker って今どうなってるの？ (20.09 版)](https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44)
+- [Amazon SageMakerの料金](https://aws.amazon.com/jp/sagemaker/pricing/)
+- [NVIDIA Dockerって今どうなってるの？ (20.09 版)](https://medium.com/nvidiajapan/nvidia-docker-%E3%81%A3%E3%81%A6%E4%BB%8A%E3%81%A9%E3%81%86%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE-20-09-%E7%89%88-558fae883f44)
 - [What is AWS Step Functions?](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html)

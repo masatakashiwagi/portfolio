@@ -104,5 +104,5 @@ git remote set-url origin git@github.com:<ユーザー名>/<リポジトリ名>.
 
 ## 参考
 
-- [初めての git は5ステップで完了](https://qiita.com/takuyanin/items/c6a097028a837052c90c)
-- [GitHub で ssh 接続する手順~公開鍵・秘密鍵の生成から~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)
+- [初めてのgitは5ステップで完了](https://qiita.com/takuyanin/items/c6a097028a837052c90c)
+- [GitHubでssh接続する手順~公開鍵・秘密鍵の生成から~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)

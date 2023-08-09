@@ -71,4 +71,4 @@ np.full((2, 3), 5).tolist()  # 任意の値で初期化
 
 ## 参考
 
-- [Python のリスト（配列）を任意の値・要素数で初期化](https://note.nkmk.me/python-list-initialize/)
+- [Pythonのリスト（配列）を任意の値・要素数で初期化](https://note.nkmk.me/python-list-initialize/)
