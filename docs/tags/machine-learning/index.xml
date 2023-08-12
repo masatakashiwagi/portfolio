@@ -6,7 +6,16 @@
     <description>Recent content in Machine Learning on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 May 2022 01:28:05 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Aug 2023 15:56:37 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
+      <pubDate>Wed, 09 Aug 2023 15:56:37 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</guid>
+      <description>はじめに Annoy という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，Fatal Python error:</description>
+    </item>
+    
     <item>
       <title>CML を使った ML モデルの CI/CD</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>

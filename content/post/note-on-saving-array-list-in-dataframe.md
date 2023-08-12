@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意"
 description = "ndarray を csv ファイルで保存する時は注意が必要"
-date = 2023-08-03T13:39:35+09:00
+date = 2023-07-31T13:39:35+09:00
 draft = false
 share = true
 showLicense = false
@@ -104,7 +104,7 @@ print(type(type(tmp_df_rec['recommend_items'][0])))
 
 `eval()` と `ast.literal_eval()` の違いは，`ast.literal_eval()` はリテラルのみを含む式を評価するのに対して，`eval()` はリテラルに加え変数およびそれらの演算を含んだ式を評価することができます．
 
-これでリストとして元の値を使うことができるます．
+これでリストとして元の値を使うことができます．
 
 ## おわりに
 

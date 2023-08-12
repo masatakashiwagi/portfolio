@@ -6,11 +6,20 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Aug 2023 13:39:35 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Aug 2023 15:56:37 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
+      <pubDate>Wed, 09 Aug 2023 15:56:37 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</guid>
+      <description>はじめに Annoy という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，Fatal Python error:</description>
+    </item>
+    
     <item>
       <title>データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</link>
-      <pubDate>Thu, 03 Aug 2023 13:39:35 +0900</pubDate>
+      <pubDate>Mon, 31 Jul 2023 13:39:35 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</guid>
       <description>はじめに Python のデータフレームを使ってレコメンドリストを生成した場合に遭遇した内容で，備忘録がてら筆を取ってます．内容としては，リストを ndarray に変換して，それらの値が入ったデータフレームを csv ファイルとして保存</description>

@@ -38,29 +38,29 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意 - Fractal Prologue</title>
+<title>ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="ndarray を csv ファイルで保存する時は注意が必要" />
+<meta name="description" content="Annoy で build index する際に発生したエラーについての対処方法" />
 
 
-<meta name="keywords" content="Dev, Data" />
+<meta name="keywords" content="Dev, Machine Learning" />
 
-<meta property="og:title" content="データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意" />
-<meta property="og:description" content="ndarray を csv ファイルで保存する時は注意が必要" />
+<meta property="og:title" content="ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した" />
+<meta property="og:description" content="Annoy で build index する際に発生したエラーについての対処方法" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-07-31T13:39:35+09:00" />
-<meta property="article:modified_time" content="2023-07-31T13:39:35+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-09T15:56:37+09:00" />
+<meta property="article:modified_time" content="2023-08-09T15:56:37+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意"/>
-<meta name="twitter:description" content="ndarray を csv ファイルで保存する時は注意が必要"/>
+<meta name="twitter:title" content="ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した"/>
+<meta name="twitter:description" content="Annoy で build index する際に発生したエラーについての対処方法"/>
 
 
 
@@ -140,115 +140,56 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/">データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリである Annoy の build index 時に Illegal Instruction Error が発生した</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-07-31</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1515 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/data">Data</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-08-09</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1587 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;<a href="/tags/machine-learning">Machine Learning</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p>Python のデータフレームを使ってレコメンドリストを生成した場合に遭遇した内容で，備忘録がてら筆を取ってます．内容としては，リストを ndarray に変換して，それらの値が入ったデータフレームを csv ファイルとして保存し，再度ロードする場合に発生する事象への対応方法になります．</p>
-<p>結論は，データフレームにリスト形式のデータを保存したい場合は，str 型に変換してから保存するようにしましょう！ということです．これは csv のカンマ区切りでの保存による影響を受けてしまうからです．</p>
-<h2 id="発生した事象">発生した事象</h2>
-<p>例えば，各ユーザーに対してアイテムをレコメンドしたい場合を考えてみます．各ユーザーに対して用意されたレコメンドリストがあるとします．10人ユーザーが存在するとしてサンプルデータを作って考えてみると，</p>
-<pre><code class="language-python">import random
-import pandas as pd
-import numpy as np
-
-user_id = [random.randint(1, 99999) for _ in range(10)]
-recommend_items = [np.array([random.randint(1, 99999) for _ in range(3)]) for _ in range(10)]
-
-# recommend_itemsのカラムには，リストをndarrayに変換したデータが入っている
-df_rec = pd.DataFrame({&quot;user_id&quot;: user_id, &quot;recommend_items&quot;: recommend_items})
-
-print(df_rec['recommend_items'][0])
-&gt; array([4775, 44953, 85874])  # 数値は適当に入れてます
-
-print(type(df_rec['recommend_items'][0]))
-&gt; numpy.ndarray
+<p><a href="https://github.com/spotify/annoy" target="_blank">Annoy</a> という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，<code>Fatal Python error: Illegal instruction</code> というエラーが発生して困っていたので，今回はこのエラーの対処方法について書いていこうと思います．</p>
+<!-- 結論としては，ローカルの M1 Mac と GitHub Actions 経由での docker build を両立するためには，Dockerfile に Annoy のライブラリをインストールする時に使用する `ANNOY_COMPILER_ARGS` という環境変数を追加することで解決できました🎉 -->
+<p>※ Annoy については，<a href="https://techblog.zozo.com/entry/annoy-explanation" target="_blank">こちらの ZOZO さんの記事</a>が詳しく解説してくれています．</p>
+<h2 id="docker-build-時の環境による問題">docker build 時の環境による問題？</h2>
+<h3 id="発生した事象">発生した事象</h3>
+<p>Annoy のライブラリを含んだ Docker イメージを作り，それを元に作成したコンポーネントを機械学習パイプラインである Vertex AI Pipelines で動かしたところ，<code>Fatal Python error: Illegal instruction</code> というエラーが発生しました．これは具体的には，<code>AnnoyIndex</code> を構築する際に発生しているように思われます．</p>
+<p>Annoy を含む Python ライブラリは poetry で管理し，Dockerfile 内で <code>poetry install</code> しています．</p>
+<h3 id="エラー原因">エラー原因</h3>
+<p>今回の問題は，Docker コンテナのイメージをビルドする時に指定するオプションが原因でした．</p>
+<p>ローカル環境は Apple M1 Max (ARM アーキテクチャ) で開発していたため，イメージ作成時に以下のオプションを指定してビルドしていました．</p>
+<pre><code class="language-bash">docker build --platform linux/amd64 -t sample-recsys:latest -f ./Dockerfile .
 </code></pre>
-<p>データフレームの中身を見ると，以下のようなデータが入っています．</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:right">user_id</th>
-<th style="text-align:right">recommend_items</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:right">8482</td>
-<td style="text-align:right">[4775, 44953, 85874]</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:right">83899</td>
-<td style="text-align:right">[96090, 53639, 82456]</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:right">93606</td>
-<td style="text-align:right">[8355, 76477, 58666]</td>
-</tr>
-</tbody>
-</table>
-<p>recommend_items のカラムのデータの実態は ndarray になっているのですが，見た目はリスト型のデータが入っていると勘違いが起きたりします．特に色々な処理を行っていくと，途中で型が変わっていることに気づいていない場合もあるかと思います．</p>
-<p>ここで，各ユーザーのレコメンドリストをデモ的に ndarray に変換していますが，</p>
+<p>AMD 環境でも動くように <code>--platform</code> フラグにターゲットプラットフォームである <code>linux/amd64</code> を指定してビルドしていました．このビルドしたイメージを GCP の Artifact Registry にプッシュし，そのイメージを使って Vertex AI Pipelines で各コンポーネントの検証を行っていました．</p>
+<p>一方で，<code>--platform</code> フラグを付けずに M1 Mac からビルドしたイメージを使った場合には，<code>exec format error</code> というエラーが発生します．</p>
+<p>検証時には，ローカル環境から直接イメージをビルド &amp; プッシュし，そのイメージを使ったコンポーネントを Vertex AI Pipelines 上で動かして検証を行っていました．その際に使用していたスクリプトをそのまま GitHub Actions での CI/CD 構築時に使用したことで，今回の <code>Fatal Python error: Illegal instruction</code> という事象が発生することになります．</p>
+<p><code>Illegal instruction</code> というエラーが発生するという事象はいくつか Issue が上がっていました．</p>
 <ul>
-<li>BigQuery に配列で格納されているデータをロードした場合</li>
-<li>処理過程で，Numpy 配列に変換した方が高速に処理でき，結果をそのまま格納した場合</li>
-<li>etc&hellip;</li>
+<li><a href="https://github.com/spotify/annoy/issues/492" target="_blank">Error: illegal hardware instruction (core dumped) #492</a></li>
+<li><a href="https://github.com/spotify/annoy/issues/513" target="_blank">&ldquo;Illegal instruction: 4&rdquo; when trying to build index (Python 3.7, Annoy version 1.17.0, macOS 10.14.6) #513</a></li>
 </ul>
-<p>などの場合で生じることがあるかなと思います．</p>
-<p>このデータフレームを csv ファイルに保存して，ロードすると，</p>
-<pre><code class="language-python"># csvファイルで結果を保存
-df_rec.to_csv(&quot;./tmp_recommend_results1.csv&quot;, index=False)
-
-# 保存したcsvファイルをデータフレームとしてロードする
-tmp_df_rec = pd.read_csv(&quot;./tmp_recommend_results1.csv&quot;)
-
-print(tmp_df_rec['recommend_items'][0])
-&gt; [ 4775 44953 85874]
+<p><code>--platform</code> フラグを付けてイメージをビルドしても問題ないライブラリも多数あるのですが，Annoy では <code>linux/amd64</code> を指定したのを GitHub Actions の Runner (<a href="https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md" target="_blank">ubuntu-latest</a>) で動かしたのがどうも上手く行かなかったみたいです．</p>
+<ul>
+<li><a href="https://github.com/spotify/annoy/issues/472" target="_blank">Initializing an AnnoyIndex crashes on AMD processors #472</a></li>
+</ul>
+<h2 id="解決方法">解決方法</h2>
+<p>僕の例では，<a href="https://github.com/spotify/annoy/issues/472" target="_blank">Initializing an AnnoyIndex crashes on AMD processors #472</a> の Issue に記載されている方法で解決することができました．</p>
+<p>Annoy のライブラリをインストールする際に，コンパイルパラメータである <code>ANNOY_COMPILER_ARGS</code> を Dockerfile 内に環境変数として指定することで解決することができました．<a href="https://github.com/spotify/annoy/blob/main/setup.py" target="_blank">annoy/setup.py</a> を見ると良いかもしれません．</p>
+<pre><code class="language-dockerfile">ENV ANNOY_COMPILER_ARGS -D_CRT_SECURE_NO_WARNINGS,-DANNOYLIB_MULTITHREADED_BUILD,-mtune=native
 </code></pre>
-<p>要素を1つ取り出してみると，カンマが取れて右詰めのような形式で表示されます．</p>
-<h2 id="ndarray-を-csv-ファイルに保存する前にリストに変換する">ndarray を csv ファイルに保存する前にリストに変換する</h2>
-<p>ndarray のまま csv ファイルに保存してしまうと，ロード時に意図しない形式で処理ができなくなってしまうので，簡単な方法としては，事前にリストに変換してからデータフレームに入れることが望ましいです．</p>
-<pre><code class="language-python">recommend_items_list = [list(arr) for arr in df_rec['recommend_items']]
-df_rec['recommend_items'] = recommend_items_list
-
-print(type(df_rec['recommend_items'][0]))
-&gt; list
-
-df_rec.to_csv(&quot;./tmp_recommend_results2.csv&quot;, index=False)
-tmp_df_rec = pd.read_csv(&quot;./tmp_recommend_results2.csv&quot;)
-
-print(type(tmp_df_rec['recommend_items'][0]))
-&gt; &lt;class 'str'&gt;
+<p>この環境変数を Dockerfile にセットすると，<code>--platform</code> に <code>linux/amd64</code> を付け Docker イメージを GitHub Actions 経由でビルドしたものを Vertex AI Pipelines で使用しても，エラー無く処理が完了しました．</p>
+<p>あとは，そもそもこれはローカルの M1 Mac と GitHub Actions の両方で同一のスクリプトを使用したいが為に行っている対応策なので，スクリプトを別々にすれば，GitHub Actions でビルドする際には，上記の <code>ANNOY_COMPILER_ARGS</code> を設定することなく，シンプルに以下のビルドコマンドだけでいけます．</p>
+<pre><code class="language-bash">docker build -t sample-recsys:latest -f ./Dockerfile .
 </code></pre>
-<p>リストに変換してから csv ファイルで保存すると，値は文字列になります．リストとして再度使いたい場合は，以下のように組み込み関数の <code>eval()</code> か，<code>ast.literal_eval()</code> を使って文字列をリストに変換するのが良いです．</p>
-<pre><code class="language-python">import ast
-
-# 以下のどちらかを使うと良い
-tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(eval)
-tmp_df_rec['recommend_items'] = tmp_df_rec['recommend_items'].apply(ast.literal_eval)
-
-print(type(type(tmp_df_rec['recommend_items'][0])))
-&gt; list
-</code></pre>
-<p><code>eval()</code> と <code>ast.literal_eval()</code> の違いは，<code>ast.literal_eval()</code> はリテラルのみを含む式を評価するのに対して，<code>eval()</code> はリテラルに加え変数およびそれらの演算を含んだ式を評価することができます．</p>
-<p>これでリストとして元の値を使うことができます．</p>
+<p>また，，<code>--platform</code> のオプションを付けてビルドすると時間が余計にかかるみたいなので，無駄なものは付けない方が良さそうですね．</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回の事象に全然気づかずにそのままデータを保存していて，いざ分析しようとした時に，あれ？なんかおかしいぞとなり発覚しました．正規表現などを使えば無理やりできるのかもしれないですが，あまり好ましいやり方ではないと思うので，今回のように忘れずにリストに変換するのが良いと思います．</p>
-<p>あとはそもそも csv ファイルに保存せずに別のファイル形式で保存するやり方もあると思います．が，なんやかんや分析する場合は csv ファイルが楽だったりもします笑</p>
-<p>でも，最近 csv ファイル絡みでの予期せぬことに遭遇することが多くて嫌になりつつあります&hellip;😅</p>
+<p>今回は思いもよらないエラーで悩んでいたので，こうして無事？エラーの原因と解決策が分かって良かったです．全然このことに気づかなかったので，Annoy をやめて Faiss を使用することも考えていました（Faiss でも同じことになっていたかもです笑）．</p>
+<p>コンテナイメージをビルドする際のローカルとプロダクション適用時のマシンスペックが違うことも考えた上で，再現性を意識したコードを書かなければと改めて感じたので，良い教訓となりそうです．</p>
 <h2 id="参考">参考</h2>
 <ul>
-<li><a href="https://note.nkmk.me/python-ast-literal-eval/" target="_blank">Pythonのast.literal_eval()で文字列をリストや辞書に変換</a></li>
+<li><a href="https://techblog.zozo.com/entry/annoy-explanation" target="_blank">近傍探索ライブラリ「Annoy」のコード詳解</a></li>
 </ul>
 
         <div id="share-buttons">
@@ -373,8 +314,13 @@ print(type(type(tmp_df_rec['recommend_items'][0])))
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#発生した事象">発生した事象</a></li>
-    <li><a href="#ndarray-を-csv-ファイルに保存する前にリストに変換する">ndarray を csv ファイルに保存する前にリストに変換する</a></li>
+    <li><a href="#docker-build-時の環境による問題">docker build 時の環境による問題？</a>
+      <ul>
+        <li><a href="#発生した事象">発生した事象</a></li>
+        <li><a href="#エラー原因">エラー原因</a></li>
+      </ul>
+    </li>
+    <li><a href="#解決方法">解決方法</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -481,8 +427,13 @@ print(type(type(tmp_df_rec['recommend_items'][0])))
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#発生した事象">発生した事象</a></li>
-    <li><a href="#ndarray-を-csv-ファイルに保存する前にリストに変換する">ndarray を csv ファイルに保存する前にリストに変換する</a></li>
+    <li><a href="#docker-build-時の環境による問題">docker build 時の環境による問題？</a>
+      <ul>
+        <li><a href="#発生した事象">発生した事象</a></li>
+        <li><a href="#エラー原因">エラー原因</a></li>
+      </ul>
+    </li>
+    <li><a href="#解決方法">解決方法</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
