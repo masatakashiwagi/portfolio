@@ -38,29 +38,25 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>ネストしたリストの更新処理 - Fractal Prologue</title>
+<title>GCP - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="リストを複製して作成し，それを更新したい場合" />
+<meta name="description" content="Masataka Kashiwagi, Machine Learning Engineer, MLOps Engineer" />
 
 
-<meta name="keywords" content="Dev" />
-
-<meta property="og:title" content="ネストしたリストの更新処理" />
-<meta property="og:description" content="リストを複製して作成し，それを更新したい場合" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/list-objects/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-09-12T15:44:00+09:00" />
-<meta property="article:modified_time" content="2020-09-12T15:44:00+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:title" content="GCP" />
+<meta property="og:description" content="Masataka Kashiwagi, Machine Learning Engineer, MLOps Engineer" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/tags/gcp/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="og:site_name" content="Fractal Prologue" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="ネストしたリストの更新処理"/>
-<meta name="twitter:description" content="リストを複製して作成し，それを更新したい場合"/>
+<meta name="twitter:title" content="GCP"/>
+<meta name="twitter:description" content="Masataka Kashiwagi, Machine Learning Engineer, MLOps Engineer"/>
 
 
 
@@ -137,94 +133,31 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-<article>
-    
-    <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/list-objects/">ネストしたリストの更新処理</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-09-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;700 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
 
-    </div>
-    
-    
-    <div class="post-content markdown-body">
-        <h2 id="初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</h2>
-<p>今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます．
-詳しい内容は参考サイトに載っています．（かなりわかりやすいです！）</p>
-<p>python 決まった形のリストを予め作成しておきたい場合に，以下のようにすることがあると思います．</p>
-<pre><code class="language-python">shape you want: [[0, 0], [0, 0], [0, 0]]  # 要素が2つあるリストが3つ
-&gt;&gt;&gt; list1 = [[0] * 2] * 3
-&gt;&gt;&gt; list1
-[[0, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>そして，上記リストを何かしらの値で更新したい場合を考えます．
-今回だと，<code>[0][0]</code> の要素を更新するとします．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list1[0][0] = 3.5
-&gt;&gt;&gt; list1
-[[3.5, 0], [3.5, 0], [3.5, 0]]
-</code></pre>
-<p>結果は，各リストの0番目の要素が全て更新されています．
-この原因は，<code>list1 = [[0] * 2] * 3</code> と書くと，要素のリストが全て同じオブジェクトになってしまい，どこかの要素を変更すると全て変わってしまうからです．</p>
-<h2 id="対処法">対処法</h2>
-<p>上記の結果を回避するためにはリスト内包表記を使うと解決することができます．
-先程の例の場合，以下のように書くといいです．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list2 = [[0] * 2 for i in range(3)]
-&gt;&gt;&gt; list2
-[[0, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>内包表記を使うと，リストはそれぞれ異なるオブジェクトとして扱われます．
-ですので，<code>[0][0]</code> の要素を更新すると，意図した部分だけが更新され問題ありません．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list2[0][0] = 3.5
-&gt;&gt;&gt; list2
-[[3.5, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>リストを初期化する際はこれらに注意しておかないと，本来の意図とは違う動きになってしまいます．</p>
-<p>こうゆうミスを気にしたくない場合には，numpy の array で作りたい shape を作成し，その後にリストに変換すれば良いかもしれないです．</p>
-<pre><code class="language-python">&gt;&gt;&gt; np.zeros((2, 3)).tolist()  # 0で初期化
-[[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
-
-# 0以外の場合
-np.ones((2, 3)).tolist()  # 1で初期化
-np.full((2, 3), 5).tolist()  # 任意の値で初期化
-</code></pre>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://note.nkmk.me/python-list-initialize/" target="_blank">Pythonのリスト（配列）を任意の値・要素数で初期化</a></li>
-</ul>
-
-        <div id="share-buttons">
-            
-
-<style>
-    #share-buttons {display: inline-block; vertical-align: middle; }
-    #share-buttons > div {
-        position: relative;
-        text-align: left;
-         
-        float: left;
-        margin-top: 10.25mm
-    }
-</style>
-
-
-<div id="share-buttons">
-    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<div class="page-info">
+    <span>Posts with the tag GCP: </span>
 </div>
 
-        </div>
+
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/">Vertex AI Pipelines のサービスアカウントで少しつまずいた</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-08-14</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1555 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/gcp">GCP</a>&nbsp;</span>
+
     </div>
-    
-    <div class="post-content markdown-body">
-        <h2>Support</h2>
-        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
-        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    <div class="post-item post-summary markdown-body">
+        はじめに Vertex AI Pipelines のサービスアカウント周りが分かりづらかったのと，GCP の他のサービスへの権限付与（IAM ロールの付与）の方法について備忘録として残しておきます． Vertex AI Pipelines に関連する3つのサービスアカウント Vertex
     </div>
-    
-</article>
+</div>
+
+
+
+
+
+
 
 
 
@@ -313,17 +246,6 @@ np.full((2, 3), 5).tolist()  # 任意の値で初期化
     </div>
     
     
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>TOC</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
-    <li><a href="#対処法">対処法</a></li>
-    <li><a href="#参考">参考</a></li>
-  </ul>
-</nav>
-    </div>
     
     
 </aside>
@@ -420,19 +342,6 @@ np.full((2, 3), 5).tolist()  # 任意の値で初期化
             </span>
             
         </div>
-    </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>TOC</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
-    <li><a href="#対処法">対処法</a></li>
-    <li><a href="#参考">参考</a></li>
-  </ul>
-</nav>
     </div>
     
     

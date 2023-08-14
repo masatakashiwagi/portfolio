@@ -38,29 +38,29 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>ネストしたリストの更新処理 - Fractal Prologue</title>
+<title>Vertex AI Pipelines のサービスアカウントで少しつまずいた - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="リストを複製して作成し，それを更新したい場合" />
+<meta name="description" content="Vertex AI Pipelines のサービスアカウント周りが分かりづらかったので，そのための備忘録になります" />
 
 
-<meta name="keywords" content="Dev" />
+<meta name="keywords" content="GCP" />
 
-<meta property="og:title" content="ネストしたリストの更新処理" />
-<meta property="og:description" content="リストを複製して作成し，それを更新したい場合" />
+<meta property="og:title" content="Vertex AI Pipelines のサービスアカウントで少しつまずいた" />
+<meta property="og:description" content="Vertex AI Pipelines のサービスアカウント周りが分かりづらかったので，そのための備忘録になります" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/list-objects/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-09-12T15:44:00+09:00" />
-<meta property="article:modified_time" content="2020-09-12T15:44:00+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-14T14:56:44+09:00" />
+<meta property="article:modified_time" content="2023-08-14T14:56:44+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="ネストしたリストの更新処理"/>
-<meta name="twitter:description" content="リストを複製して作成し，それを更新したい場合"/>
+<meta name="twitter:title" content="Vertex AI Pipelines のサービスアカウントで少しつまずいた"/>
+<meta name="twitter:description" content="Vertex AI Pipelines のサービスアカウント周りが分かりづらかったので，そのための備忘録になります"/>
 
 
 
@@ -140,58 +140,91 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/list-objects/">ネストしたリストの更新処理</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/">Vertex AI Pipelines のサービスアカウントで少しつまずいた</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-09-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;700 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">Dev</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-08-14</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1555 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/gcp">GCP</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <h2 id="初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</h2>
-<p>今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます．
-詳しい内容は参考サイトに載っています．（かなりわかりやすいです！）</p>
-<p>python 決まった形のリストを予め作成しておきたい場合に，以下のようにすることがあると思います．</p>
-<pre><code class="language-python">shape you want: [[0, 0], [0, 0], [0, 0]]  # 要素が2つあるリストが3つ
-&gt;&gt;&gt; list1 = [[0] * 2] * 3
-&gt;&gt;&gt; list1
-[[0, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>そして，上記リストを何かしらの値で更新したい場合を考えます．
-今回だと，<code>[0][0]</code> の要素を更新するとします．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list1[0][0] = 3.5
-&gt;&gt;&gt; list1
-[[3.5, 0], [3.5, 0], [3.5, 0]]
-</code></pre>
-<p>結果は，各リストの0番目の要素が全て更新されています．
-この原因は，<code>list1 = [[0] * 2] * 3</code> と書くと，要素のリストが全て同じオブジェクトになってしまい，どこかの要素を変更すると全て変わってしまうからです．</p>
-<h2 id="対処法">対処法</h2>
-<p>上記の結果を回避するためにはリスト内包表記を使うと解決することができます．
-先程の例の場合，以下のように書くといいです．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list2 = [[0] * 2 for i in range(3)]
-&gt;&gt;&gt; list2
-[[0, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>内包表記を使うと，リストはそれぞれ異なるオブジェクトとして扱われます．
-ですので，<code>[0][0]</code> の要素を更新すると，意図した部分だけが更新され問題ありません．</p>
-<pre><code class="language-python">&gt;&gt;&gt; list2[0][0] = 3.5
-&gt;&gt;&gt; list2
-[[3.5, 0], [0, 0], [0, 0]]
-</code></pre>
-<p>リストを初期化する際はこれらに注意しておかないと，本来の意図とは違う動きになってしまいます．</p>
-<p>こうゆうミスを気にしたくない場合には，numpy の array で作りたい shape を作成し，その後にリストに変換すれば良いかもしれないです．</p>
-<pre><code class="language-python">&gt;&gt;&gt; np.zeros((2, 3)).tolist()  # 0で初期化
-[[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
-
-# 0以外の場合
-np.ones((2, 3)).tolist()  # 1で初期化
-np.full((2, 3), 5).tolist()  # 任意の値で初期化
-</code></pre>
-<h2 id="参考">参考</h2>
+        <h2 id="はじめに">はじめに</h2>
+<p>Vertex AI Pipelines のサービスアカウント周りが分かりづらかったのと，GCP の他のサービスへの権限付与（IAM ロールの付与）の方法について備忘録として残しておきます．</p>
+<h2 id="vertex-ai-pipelines-に関連する3つのサービスアカウント">Vertex AI Pipelines に関連する3つのサービスアカウント</h2>
+<p>Vertex AI Pipelines に関連するサービスアカウントは以下の3つあります．</p>
 <ul>
-<li><a href="https://note.nkmk.me/python-list-initialize/" target="_blank">Pythonのリスト（配列）を任意の値・要素数で初期化</a></li>
+<li>パイプライン実行時に指定できるサービスアカウント</li>
+<li>パイプライン実行時に各種リソースにアクセスするために GCP 側が作成するサービスアカウント（サービスエージェント）
+<ol>
+<li>Vertex AI Service Agent</li>
+<li>Vertex AI Custom Code Service Agent</li>
+</ol>
+</li>
 </ul>
+<h3 id="パイプライン実行時に指定できるサービスアカウント">パイプライン実行時に指定できるサービスアカウント</h3>
+<p>Vertex AI Pipelines の <code>job.submit</code> に指定できるサービスアカウントでパイプライン実行で使用されるものになります．これを指定しない場合は，Compute Engine のデフォルトのサービスアカウントを使用してパイプラインが実行されます．</p>
+<pre><code class="language-python"># sample code
+SERVICE_ACCOUNT = os.environ[&quot;SERVICE_ACCOUNT&quot;]
+PROJECT_ID = os.environ[&quot;PROJECT_ID&quot;]
+
+job = aiplatform.PipelineJob(
+    display_name=&quot;sample-pipelines&quot;,
+    template_path=&quot;sample-pipelines.json&quot;,
+    project=PROJECT_ID,
+    location=&quot;asia-northeast1&quot;,
+    enable_caching=False
+)
+
+job.submit(service_account=SERVICE_ACCOUNT)
+</code></pre>
+<p>僕はこのサービスアカウントを開発時に勘違いしていて，<strong>ここのサービスアカウントに指定したもので，パイプラインの全てのコンポーネントが動くと勘違いしていました</strong>．なので，ML 用にカスタマイズした（必要な IAM ロールを付与）サービスアカウントを指定して実行したものの，権限エラーで動かずという感じで困っていました．</p>
+<ul>
+<li><a href="https://cloud.google.com/vertex-ai/docs/pipelines/configure-project#service-account" target="_blank">Configure a service account with granular permissions</a></li>
+</ul>
+<p>次に説明する2つのサービスアカウントが実際の各コンポーネントを動かすサービスアカウントになります．</p>
+<h3 id="gcp-側が用意したサービスアカウントサービスエージェント">GCP 側が用意したサービスアカウント（サービスエージェント）</h3>
+<p>Vertex AI に関する GCP 側が用意したサービスアカウント（サービスエージェント）は2つあります．</p>
+<ul>
+<li>Vertex AI Custom Code Service Agent</li>
+<li>Vertex AI Service Agent</li>
+</ul>
+<p>IAM ロールの画面上では，以下のような登録になっています．</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Principal</th>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="mailto:service-PROJECT_NUMBER@gcp-sa-aiplatform-cc.iam.gserviceaccount.com">service-PROJECT_NUMBER@gcp-sa-aiplatform-cc.iam.gserviceaccount.com</a></td>
+<td style="text-align:left">AI Platform Custom Code Service Agent</td>
+<td style="text-align:left">Vertex AI Custom Code Service Agent</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="mailto:service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com">service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com</a></td>
+<td style="text-align:left">AI Platform Service Agent</td>
+<td style="text-align:left">Vertex AI Service Agent</td>
+</tr>
+</tbody>
+</table>
+<h4 id="vertex-ai-custom-code-service-agent">Vertex AI Custom Code Service Agent</h4>
+<p>このロールは<strong>カスタムトレーニングコードを実行する</strong>ために使用され，実際に付与されているロールは <a href="https://cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.customCodeServiceAgent" target="_blank">Vertex AI Custom Code Service Agent (roles/aiplatform.customCodeServiceAgent)</a> ドキュメントから確認できます．</p>
+<h4 id="vertex-ai-service-agent">Vertex AI Service Agent</h4>
+<p>このロールは<strong>Vertex AI 全般の機能を動作させる</strong>ために使用され，実際に付与されているロールは <a href="https://cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent" target="_blank">Vertex AI Service Agent (roles/aiplatform.serviceAgent)</a> ドキュメントから確認できます．</p>
+<p>実際のパイプラインの各コンポーネントの権限は，上記2つのサービスアカウントのどちらかが使われることになるので，このどちらかのサービスアカウントに予め付与されていない権限のサービスを使う場合は権限エラーになってしまいます．そのため，使用したいサービスの権限がリンク先のアクセスコントロールのページで付与されていない場合は，IAM ロールの画面から追加する必要が出てきます．</p>
+<h2 id="gcp-側が用意したサービスアカウントに-iam-ロールを付与する方法">GCP 側が用意したサービスアカウントに IAM ロールを付与する方法</h2>
+<p>2つのサービスアカウントのうち使用されるアカウントに対して，適宜必要なロールを付与することで付与されていないサービスにもアクセスすることができます．</p>
+<p>例えば，Firestore へのアクセスは上記2つのアカウントには付与されていないため，デフォルトの状態だと権限不足でアクセスできません．そのため read/write できる <a href="https://cloud.google.com/iam/docs/understanding-roles#datastore.user" target="_blank">Cloud Datastore User (roles/datastore.user)</a> のロールを追加で付与することで Firestore への読み書きができるようになります．</p>
+<p><img class="img-zoomable" src="../../img/service-account-img1.png" alt="IAM ロールの設定画面" />
+</p>
+<p>画面上からだと，上図の「<strong>Include Google-provided role grants</strong>」にチェックを入れることで，GCP 側が用意したサービスアカウントが表示されます．上記2つのサービスアカウントを探して必要な権限を編集して追加することで権限エラーを回避することができます．</p>
+<h2 id="おわりに">おわりに</h2>
+<p><code>job.summit</code> 時に指定したサービスアカウントでパイプラインのコンポーネント動かせると思い込んでいて，実際はパイプラインを実行するだけだったので，若干混乱しました．</p>
+<p>パイプラインを動かす実際のサービスアカウントは別で2つ存在しており，このドキュメントを見つけることがすぐにできず，時間を消費してしまったのもあり，もしこの辺りで悩んでいる人が居れば参考になるかなと思い，備忘録として残すことにしました．</p>
 
         <div id="share-buttons">
             
@@ -318,9 +351,15 @@ np.full((2, 3), 5).tolist()  # 任意の値で初期化
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
-    <li><a href="#対処法">対処法</a></li>
-    <li><a href="#参考">参考</a></li>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#vertex-ai-pipelines-に関連する3つのサービスアカウント">Vertex AI Pipelines に関連する3つのサービスアカウント</a>
+      <ul>
+        <li><a href="#パイプライン実行時に指定できるサービスアカウント">パイプライン実行時に指定できるサービスアカウント</a></li>
+        <li><a href="#gcp-側が用意したサービスアカウントサービスエージェント">GCP 側が用意したサービスアカウント（サービスエージェント）</a></li>
+      </ul>
+    </li>
+    <li><a href="#gcp-側が用意したサービスアカウントに-iam-ロールを付与する方法">GCP 側が用意したサービスアカウントに IAM ロールを付与する方法</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
   </ul>
 </nav>
     </div>
@@ -428,9 +467,15 @@ np.full((2, 3), 5).tolist()  # 任意の値で初期化
         <h3>TOC</h3>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#初期化したリストの更新処理でハマってしまった">初期化したリストの更新処理でハマってしまった</a></li>
-    <li><a href="#対処法">対処法</a></li>
-    <li><a href="#参考">参考</a></li>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#vertex-ai-pipelines-に関連する3つのサービスアカウント">Vertex AI Pipelines に関連する3つのサービスアカウント</a>
+      <ul>
+        <li><a href="#パイプライン実行時に指定できるサービスアカウント">パイプライン実行時に指定できるサービスアカウント</a></li>
+        <li><a href="#gcp-側が用意したサービスアカウントサービスエージェント">GCP 側が用意したサービスアカウント（サービスエージェント）</a></li>
+      </ul>
+    </li>
+    <li><a href="#gcp-側が用意したサービスアカウントに-iam-ロールを付与する方法">GCP 側が用意したサービスアカウントに IAM ロールを付与する方法</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
   </ul>
 </nav>
     </div>
