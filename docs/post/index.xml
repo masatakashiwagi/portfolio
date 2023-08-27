@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 14 Aug 2023 14:56:44 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Aug 2023 13:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Vertex AI Pipelines のサービスアカウントで少しつまずいた</title>
+      <title>Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/</link>
-      <pubDate>Mon, 14 Aug 2023 14:56:44 +0900</pubDate>
+      <pubDate>Mon, 14 Aug 2023 13:00:00 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/</guid>
       <description>はじめに Vertex AI Pipelines のサービスアカウント周りが分かりづらかったのと，GCP の他のサービスへの権限付与（IAM ロールの付与）の方法について備忘録として残しておきます． Vertex AI Pipelines に関連する3つのサービスアカウント Vertex</description>

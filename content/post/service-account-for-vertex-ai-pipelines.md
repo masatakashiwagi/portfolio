@@ -1,8 +1,8 @@
 +++
 author = "Masataka Kashiwagi"
-title = "Vertex AI Pipelines のサービスアカウントで少しつまずいた"
+title = "Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した"
 description = "Vertex AI Pipelines のサービスアカウント周りが分かりづらかったので，そのための備忘録になります"
-date = 2023-08-14T14:56:44+09:00
+date = 2023-08-14T13:00:00+09:00
 draft = false
 share = true
 showLicense = false
