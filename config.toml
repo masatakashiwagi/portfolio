@@ -127,7 +127,7 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
 
 [sitemap]
   changefreq = "weekly"
-  priority = 0.5
+  priority = 1.0
   filename = "sitemap.xml"
 
 [menu]
