@@ -34,6 +34,15 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
 [permalinks]
   post = "/:section/:filename/" # Custom post links, e.g. "/:year/:month/:title/"
 
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
 [params]
   author = "Masataka Kashiwagi" # You can also set author in post front matter individually
   title = "Fractal Prologue"

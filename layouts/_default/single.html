@@ -13,6 +13,8 @@
     <!-- post main content -->
     <div class="post-content markdown-body">
         {{ .Content }}
+        <hr>
+        {{ partial "related.html" . }}
         <div id="share-buttons">
             {{ partial "share.html" . }}
         </div>

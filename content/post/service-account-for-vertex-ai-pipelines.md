@@ -3,11 +3,12 @@ author = "Masataka Kashiwagi"
 title = "Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した"
 description = "Vertex AI Pipelines のサービスアカウント周りが分かりづらかったので，そのための備忘録になります"
 date = 2023-08-14T13:00:00+09:00
+lastmod = 2023-08-30T14:32:16+09:00
 draft = false
 share = true
 showLicense = false
 support = true
-tags = ["GCP"]
+tags = ["GCP", "Dev"]
 +++
 
 ## はじめに
@@ -60,8 +61,8 @@ IAM ロールの画面上では，以下のような登録になっています�
 
 | Principal | Name | Role |
 | :--- | :--- | :--- |
-| service-PROJECT_NUMBER@gcp-sa-aiplatform-cc.iam.gserviceaccount.com | AI Platform Custom Code Service Agent | Vertex AI Custom Code Service Agent |
-| service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com | AI Platform Service Agent | Vertex AI Service Agent |
+| `service-PROJECT_NUMBER@gcp-sa-aiplatform-cc.iam.gserviceaccount.com` | AI Platform Custom Code Service Agent | Vertex AI Custom Code Service Agent |
+| `service-PROJECT_NUMBER@gcp-sa-aiplatform.iam.gserviceaccount.com` | AI Platform Service Agent | Vertex AI Service Agent |
 
 #### Vertex AI Custom Code Service Agent
 

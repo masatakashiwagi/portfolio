@@ -43,5 +43,14 @@
       <description>はじめに AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator という SageMaker の interface があります． 一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に</description>
     </item>
     
+    <item>
+      <title>RuntimeError: CUDA error: Device-side assert triggered の解決方法</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</link>
+      <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/cuda_error_device-side_assert_triggered/</guid>
+      <description>はじめに Pytorch でモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみると，原因と</description>
+    </item>
+    
   </channel>
 </rss>
