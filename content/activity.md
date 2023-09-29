@@ -49,6 +49,7 @@ tags = []
 
 本業 or 副業先の会社で書いたテックブログ
 
+- [コミュニティプラットフォームの投稿レコメンド機能を支える機械学習基盤](https://tech.commmune.jp/entry/2023/09/27/173000)
 - [Cloud Firestore を活用したバッチレコメンドシステムを開発した話](https://tech.high-link.co.jp/entry/Cloud-Firestore-batch-recommend-system)
 - [BigQuery のシャーディングされたテーブルを OpenSearch へ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
 - [Character filter を用いたアルファベットの大文字小文字対応によるゼロ件ヒット改善](https://tech.connehito.com/entry/2022/11/15/180104)
