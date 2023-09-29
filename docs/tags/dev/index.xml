@@ -162,15 +162,6 @@
     
     <item>
       <title>Excel Binary Workbook を Python で処理</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</link>
-      <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
-      
-      <guid>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</guid>
-      <description>はじめに 今回は，先日初めて見たファイル形式の Excel Binary Workbook (xlsb) に関して，python で csv にパースする話です． .xlsx はよくある Excel ファイルの形式ですが，それのバイナリー形式である .xlsb に関しての話です．（今まで見たことなか</description>
-    </item>
-    
-    <item>
-      <title>Excel Binary Workbook を Python で処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/excel_processing_using_python/</link>
       <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
       
