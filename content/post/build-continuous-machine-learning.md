@@ -6,7 +6,7 @@ date = 2022-05-01T01:28:05+09:00
 draft = false
 share = true
 showLicense = false
-tags = ["MLOps", "Machine Learning"]
+tags = ["MLOPS", "ML"]
 +++
 
 ## はじめに

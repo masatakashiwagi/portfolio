@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["Dev"]
+tags = ["DEV"]
 +++
 
 ## 初期化したリストの更新処理でハマってしまった

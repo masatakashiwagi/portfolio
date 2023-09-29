@@ -8,7 +8,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["GCP", "Dev"]
+tags = ["GCP", "DEV"]
 +++
 
 ## はじめに

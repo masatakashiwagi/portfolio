@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["Dev", "Machine Learning"]
+tags = ["DEV", "ML"]
 +++
 
 ## はじめに

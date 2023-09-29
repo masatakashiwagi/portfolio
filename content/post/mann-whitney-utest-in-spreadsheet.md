@@ -8,7 +8,7 @@ share = true
 showLicense = false
 support = true
 math = true
-tags = ["Data Science", "Statistics"]
+tags = ["DS", "STATS"]
 +++
 
 ## はじめに

@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["Kaggle"]
+tags = ["KAGGLE"]
 +++
 
 ## Kaggle-Shopee コンペの振り返り

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T3W696WJ1K');
+</script>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/favicon/mstile-150x150.png?raw=true">
+<meta name="generator" content="Hugo 0.111.3">
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>Excel Binary Workbook を Python で処理 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="EBW を処理するために" />
+
+
+<meta name="keywords" content="DEV" />
+
+<meta property="og:title" content="Excel Binary Workbook を Python で処理" />
+<meta property="og:description" content="EBW を処理するために" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-10-05T15:16:44+09:00" />
+<meta property="article:modified_time" content="2019-10-05T15:16:44+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="Excel Binary Workbook を Python で処理"/>
+<meta name="twitter:description" content="EBW を処理するために"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-T3W696WJ1K');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+
+
+<script>
+    window.ga_tid = 'G-T3W696WJ1K';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/">Excel Binary Workbook を Python で処理</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-10-05</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1243 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">DEV</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>今回は，先日初めて見たファイル形式の Excel Binary Workbook (xlsb) に関して，python で csv にパースする話です．</p>
+<p><code>.xlsx</code> はよくある Excel ファイルの形式ですが，それのバイナリー形式である <code>.xlsb</code> に関しての話です．（今まで見たことなかった拡張子です笑）</p>
+<p>Excel の闇や Excel との格闘は色々ありますが，今回はそこをグッと堪えて進めたいと思います笑</p>
+<h2 id="xlsb-とは">.xlsb とは</h2>
+<p><a href="https://www.weblio.jp/content/.xlsb" target="_blank">Weblio 辞書</a>によると以下のように記載されています．</p>
+<blockquote>
+<p>.xlsbとは，Excel 2007で作成したブックを「XML形式でないバイナリブック」として保存する際に用いられる拡張子である．.xlsbでブックを保存した場合はファイル全体がバイナリ形式で保存され，XMLベースである.xlsxなどのファイル形式で保存した場合と比べて，ファイルサイズを数分の1程度に抑えることができる．</p>
+</blockquote>
+<p>受け取ったファイルは <code>.xlsb</code> 形式でも100MBぐらいあったため，<code>.xlsx</code> 形式だとかなり容量が大きく，ファイルを開くと処理が重たくなることが想像できるので，圧縮したのだと考えられます．</p>
+<h2 id="excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</h2>
+<h3 id="openpyxl">openpyxl</h3>
+<p>定番の <a href="https://openpyxl.readthedocs.io/en/stable/" target="_blank">openpyxl</a> です．</p>
+<p>上記ページにも記載されてますが，Excel ファイルの拡張子である <code>.xlsx</code> を扱うことができます．</p>
+<blockquote>
+<p>openpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.</p>
+</blockquote>
+<p>いつものようにこのライブラリで処理しようとしたところ，下記のようなエラーが発生しました．</p>
+<pre><code class="language-bash">openpyxl.utils.exceptions.InvalidFileException: openpyxl does not support binary format .xlsb, please convert this file to .xlsx format if you want to open it with openpyxl
+</code></pre>
+<p>もう一度 openpyxl の説明を見ると，確かに扱える拡張子は <code>xlsx/xlsm/xltx/xltm</code> となっているので，<code>.xlsb</code> は扱えないのが分かります．</p>
+<p>そこで，<code>.xlsb</code> の拡張子が扱えるライブラリを調べたところ，pyxlsb というのがあるみたいなので，それを使うことにしました．</p>
+<h3 id="pyxlsb">pyxlsb</h3>
+<p><a href="https://github.com/wwwiiilll/pyxlsb" target="_blank">pyxlsb</a> は公式の説明にあるように，xlsb 形式を扱える python ライブラリになります．</p>
+<blockquote>
+<p>pyxlsb is an Excel 2007-2010 Binary Workbook (xlsb) parser for Python.</p>
+</blockquote>
+<p>pip でインストールすることができます．</p>
+<pre><code class="language-python">pip install pyxlsb
+</code></pre>
+<p>公式のサンプルコードを記載しておきます．</p>
+<pre><code class="language-python">import csv
+from pyxlsb import open_workbook
+
+with open_workbook('Book1.xlsb') as wb:
+    for name in wb.sheets:
+        with wb.get_sheet(name) as sheet, open(name + '.csv', 'w') as f:
+            writer = csv.writer(f)
+            for row in sheet.rows():
+                writer.writerow([c.v for c in row])
+</code></pre>
+<p>もし pandas のデータフレームに変換したい場合は，参考ページのコードで可能となります．</p>
+<p>ただし，時刻変換に関して少し注意が必要なので，記載しておくと公式にもある通り，日付は <strong>float</strong> に変換されてしまうため，<strong>convert_date 関数</strong>を使う必要があります．</p>
+<blockquote>
+<p>Note that dates will appear as floats. You must use the convert_date(date) method from the corresponding Workbook instance to turn them into datetime.</p>
+</blockquote>
+<p>なので，元のファイルに時刻が入っている場合には上記変換をコードの中に入れて処理する必要がありますのでご注意下さい．</p>
+<pre><code class="language-python">print(wb.convert_date(41235.45578))
+&gt;&gt;&gt; datetime.datetime(2012, 11, 22, 10, 56, 19)
+</code></pre>
+<h2 id="おわりに">おわりに</h2>
+<p>今回は個人的に嵌ってしまった <code>.xlsb</code> 形式のファイルを扱う方法を紹介しましたが，出来ればデータ分析をするようなデータを Excel ファイルで扱いたくないのが本音です😅</p>
+<p>もちろん簡単なデータの可視化とか表計算で Excel が活躍する場面は多々あると思うので，使い分けて行くのが良いのではと思います．</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/45019778/read-xlsb-file-in-pandas-python" target="_blank">Stack Overflow - Read XLSB File in Pandas Python</a></li>
+</ul>
+<h2 id="追記">追記</h2>
+<ul>
+<li>2020/01/05: 更新</li>
+</ul>
+<p>pandas の「<strong>version=1.0.0</strong>」で <code>.xlsb</code> ファイルをロードできるようになったみたいです．方法は <code>pd.read_excel</code> の引数で <code>engine=&quot;pyxlsb&quot;</code> と指定するだけです．</p>
+<pre><code class="language-python"># Returns a DataFrame
+pd.read_excel(&quot;path_to_file.xlsb&quot;, engine=&quot;pyxlsb&quot;)
+</code></pre>
+<p>参考: <a href="https://pandas.pydata.org/docs/user_guide/io.html#io-xlsb" target="_blank">https://pandas.pydata.org/docs/user_guide/io.html#io-xlsb</a></p>
+
+        <hr>
+        
+
+  <h3>この記事と関連する記事を読んでみる</h3>
+  <ul>
+    
+      <li><a href="/portfolio/post/service-account-for-vertex-ai-pipelines/">Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した</a></li>
+    
+      <li><a href="/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</a></li>
+    
+      <li><a href="/portfolio/post/note-on-saving-array-list-in-dataframe/">データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</a></li>
+    
+      <li><a href="/portfolio/post/glue-job-params-and-stepfunctions-execution/">Step Functions から Glue のジョブパラメータを指定して実行する方法</a></li>
+    
+      <li><a href="/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/">Step Functions での Opensearch Package の更新は直列or並列？</a></li>
+    
+  </ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#xlsb-とは">.xlsb とは</a></li>
+    <li><a href="#excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</a>
+      <ul>
+        <li><a href="#openpyxl">openpyxl</a></li>
+        <li><a href="#pyxlsb">pyxlsb</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#追記">追記</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#xlsb-とは">.xlsb とは</a></li>
+    <li><a href="#excelを扱えるpythonライブラリ">Excelを扱えるpythonライブラリ</a>
+      <ul>
+        <li><a href="#openpyxl">openpyxl</a></li>
+        <li><a href="#pyxlsb">pyxlsb</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#追記">追記</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2023
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

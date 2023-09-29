@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dev on Fractal Prologue</title>
+    <title>DEV on Fractal Prologue</title>
     <link>https://masatakashiwagi.github.io/portfolio/tags/dev/</link>
-    <description>Recent content in Dev on Fractal Prologue</description>
+    <description>Recent content in DEV on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 14 Aug 2023 13:00:00 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/dev/index.xml" rel="self" type="application/rss+xml" />
@@ -158,6 +158,15 @@
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</guid>
       <description>ポートフォリオ作成 こちらの Qiita の記事で Hugo を使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていた personal page を移植しました． 移植した際に少し詰まった部分があるので，Tips としてこの記</description>
+    </item>
+    
+    <item>
+      <title>Excel Binary Workbook を Python で処理</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</link>
+      <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</guid>
+      <description>はじめに 今回は，先日初めて見たファイル形式の Excel Binary Workbook (xlsb) に関して，python で csv にパースする話です． .xlsx はよくある Excel ファイルの形式ですが，それのバイナリー形式である .xlsb に関しての話です．（今まで見たことなか</description>
     </item>
     
     <item>

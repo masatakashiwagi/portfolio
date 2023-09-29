@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["Dev", "Poem"]
+tags = ["DEV", "POEM"]
 +++
 
 ## はじめに

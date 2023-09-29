@@ -6,7 +6,7 @@ date = 2022-04-24T02:10:25+09:00
 draft = false
 share = true
 showLicense = false
-tags = ["Dev", "Machine Learning"]
+tags = ["DEV", "ML"]
 +++
 
 ## はじめに

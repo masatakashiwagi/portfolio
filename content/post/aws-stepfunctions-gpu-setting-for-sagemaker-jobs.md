@@ -6,7 +6,7 @@ date = 2022-01-30T13:16:43+09:00
 draft = false
 share = true
 showLicense = false
-tags = ["AWS", "Dev"]
+tags = ["AWS", "DEV"]
 +++
 
 ## はじめに

@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["AWS", "Dev"]
+tags = ["AWS", "DEV"]
 +++
 
 ## はじめに

@@ -7,7 +7,7 @@ draft = false
 share = true
 showLicense = false
 support = true
-tags = ["Kaggle"]
+tags = ["KAGGLE"]
 +++
 
 ## Kaggle-MoA コンペに Team 90's で初参加
