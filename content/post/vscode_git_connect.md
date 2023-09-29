@@ -8,6 +8,8 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV"]
+aliases = ["/post/vscode_git_connect/"]
+url = "/post/vscode-git-connect/"
 +++
 
 ## はじめに

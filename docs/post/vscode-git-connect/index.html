@@ -38,29 +38,29 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した - Fractal Prologue</title>
+<title>VSCode と git を連携して push できるようにするまで - Fractal Prologue</title>
 
 
 <meta name="author" content="Masataka Kashiwagi" />
 
 
-<meta name="description" content="Annoy で build index する際に発生したエラーについての対処方法" />
+<meta name="description" content="VSCode と git の連携" />
 
 
-<meta name="keywords" content="DEV, ML" />
+<meta name="keywords" content="DEV" />
 
-<meta property="og:title" content="ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した" />
-<meta property="og:description" content="Annoy で build index する際に発生したエラーについての対処方法" />
+<meta property="og:title" content="VSCode と git を連携して push できるようにするまで" />
+<meta property="og:description" content="VSCode と git の連携" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-08-09T15:56:37+09:00" />
-<meta property="article:modified_time" content="2023-08-09T15:56:37+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-26T22:18:34+09:00" />
+<meta property="article:modified_time" content="2021-03-26T22:18:34+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した"/>
-<meta name="twitter:description" content="Annoy で build index する際に発生したエラーについての対処方法"/>
+<meta name="twitter:title" content="VSCode と git を連携して push できるようにするまで"/>
+<meta name="twitter:description" content="VSCode と git の連携"/>
 
 
 
@@ -142,56 +142,80 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</a>
+        <a href="https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/">VSCode と git を連携して push できるようにするまで</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-08-09</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1587 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">DEV</a>&nbsp;<a href="/tags/ml">ML</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1149 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/dev">DEV</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="はじめに">はじめに</h2>
-<p><a href="https://github.com/spotify/annoy" target="_blank">Annoy</a> という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，<code>Fatal Python error: Illegal instruction</code> というエラーが発生して困っていたので，今回はこのエラーの対処方法について書いていこうと思います．</p>
-<!-- 結論としては，ローカルの M1 Mac と GitHub Actions 経由での docker build を両立するためには，Dockerfile に Annoy のライブラリをインストールする時に使用する `ANNOY_COMPILER_ARGS` という環境変数を追加することで解決できました🎉 -->
-<p>※ Annoy については，<a href="https://techblog.zozo.com/entry/annoy-explanation" target="_blank">こちらの ZOZO さんの記事</a>が詳しく解説してくれています．</p>
-<h2 id="docker-build-時の環境による問題">docker build 時の環境による問題？</h2>
-<h3 id="発生した事象">発生した事象</h3>
-<p>Annoy のライブラリを含んだ Docker イメージを作り，それを元に作成したコンポーネントを機械学習パイプラインである Vertex AI Pipelines で動かしたところ，<code>Fatal Python error: Illegal instruction</code> というエラーが発生しました．これは具体的には，<code>AnnoyIndex</code> を構築する際に発生しているように思われます．</p>
-<p>Annoy を含む Python ライブラリは poetry で管理し，Dockerfile 内で <code>poetry install</code> しています．</p>
-<h3 id="エラー原因">エラー原因</h3>
-<p>今回の問題は，Docker コンテナのイメージをビルドする時に指定するオプションが原因でした．</p>
-<p>ローカル環境は Apple M1 Max (ARM アーキテクチャ) で開発していたため，イメージ作成時に以下のオプションを指定してビルドしていました．</p>
-<pre><code class="language-bash">docker build --platform linux/amd64 -t sample-recsys:latest -f ./Dockerfile .
+<p>今まで仕事では，開発環境として IntelliJ を使っていたのですが，最近は VSCode の人気が高く Extensions も便利なものが多くあるということで，個人的な作業をする時は VSCode を使ってみようと思って使っています．
+そんな中で，タイトルにもあるように VSCode から git push しようとしたら，<code>&lt;アカウント名&gt;@github.com: Permission denied (publickey).</code> とエラーが出たので，それを解消して VSCode で git push できるようにした備忘録になります．</p>
+<h2 id="エラー原因ssh-接続エラー">エラー原因（SSH 接続エラー）</h2>
+<p>「<strong>Permission denied (publickey)</strong>」とあり，GitHub に SSH 接続するために，公開鍵を登録しておかないといけないのですが，それをしていなかったので，エラーが発生したということになります．</p>
+<p>以下のコマンドを打つことで接続を確認することができます．</p>
+<pre><code class="language-bash">ssh -T git@github.com
+&gt; git@github.com: Permission denied (publickey).
 </code></pre>
-<p>AMD 環境でも動くように <code>--platform</code> フラグにターゲットプラットフォームである <code>linux/amd64</code> を指定してビルドしていました．このビルドしたイメージを GCP の Artifact Registry にプッシュし，そのイメージを使って Vertex AI Pipelines で各コンポーネントの検証を行っていました．</p>
-<p>一方で，<code>--platform</code> フラグを付けずに M1 Mac からビルドしたイメージを使った場合には，<code>exec format error</code> というエラーが発生します．</p>
-<p>検証時には，ローカル環境から直接イメージをビルド &amp; プッシュし，そのイメージを使ったコンポーネントを Vertex AI Pipelines 上で動かして検証を行っていました．その際に使用していたスクリプトをそのまま GitHub Actions での CI/CD 構築時に使用したことで，今回の <code>Fatal Python error: Illegal instruction</code> という事象が発生することになります．</p>
-<p><code>Illegal instruction</code> というエラーが発生するという事象はいくつか Issue が上がっていました．</p>
-<ul>
-<li><a href="https://github.com/spotify/annoy/issues/492" target="_blank">Error: illegal hardware instruction (core dumped) #492</a></li>
-<li><a href="https://github.com/spotify/annoy/issues/513" target="_blank">&ldquo;Illegal instruction: 4&rdquo; when trying to build index (Python 3.7, Annoy version 1.17.0, macOS 10.14.6) #513</a></li>
-</ul>
-<p><code>--platform</code> フラグを付けてイメージをビルドしても問題ないライブラリも多数あるのですが，Annoy では <code>linux/amd64</code> を指定したのを GitHub Actions の Runner (<a href="https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md" target="_blank">ubuntu-latest</a>) で動かしたのがどうも上手く行かなかったみたいです．</p>
-<ul>
-<li><a href="https://github.com/spotify/annoy/issues/472" target="_blank">Initializing an AnnoyIndex crashes on AMD processors #472</a></li>
-</ul>
-<h2 id="解決方法">解決方法</h2>
-<p>僕の例では，<a href="https://github.com/spotify/annoy/issues/472" target="_blank">Initializing an AnnoyIndex crashes on AMD processors #472</a> の Issue に記載されている方法で解決することができました．</p>
-<p>Annoy のライブラリをインストールする際に，コンパイルパラメータである <code>ANNOY_COMPILER_ARGS</code> を Dockerfile 内に環境変数として指定することで解決することができました．<a href="https://github.com/spotify/annoy/blob/main/setup.py" target="_blank">annoy/setup.py</a> を見ると良いかもしれません．</p>
-<pre><code class="language-dockerfile">ENV ANNOY_COMPILER_ARGS -D_CRT_SECURE_NO_WARNINGS,-DANNOYLIB_MULTITHREADED_BUILD,-mtune=native
+<p>ではどうすればいいかというと，鍵を生成して GitHub に登録すればいいということになります．</p>
+<h2 id="公開鍵と秘密鍵の作成">公開鍵と秘密鍵の作成</h2>
+<p>詳細な作成方法は<a href="https://qiita.com/shizuma/items/2b2f873a0034839e47ce" target="_blank">こちらの記事</a>が参考になります．</p>
+<p>簡単に手順を載せておきます．</p>
+<pre><code class="language-bash">cd ~/.ssh
+ssh-keygen -t rsa -b 4096 -C &quot;&lt;メールアドレス&gt;&quot; -f github_rsa  # オプションをいくつか設定して，鍵を生成
+
+# 以下実行結果（一部マスクしてます）
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in github_rsa.
+Your public key has been saved in github_rsa.pub.
+The key fingerprint is:
+SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx &lt;メールアドレス&gt;
+The key's randomart image is:
++---[RSA 4096]----+
+|===              |
+|.B      o     .  |
+|o..  . *     . o |
+|. . . B +. oo .o*|
+| . o * OSo.oooo*+|
+|  . = + = o ..*..|
+|   E . . o . . ..|
+|        . .      |
+|                 |
++----[SHA256]-----+
 </code></pre>
-<p>この環境変数を Dockerfile にセットすると，<code>--platform</code> に <code>linux/amd64</code> を付け Docker イメージを GitHub Actions 経由でビルドしたものを Vertex AI Pipelines で使用しても，エラー無く処理が完了しました．</p>
-<p>あとは，そもそもこれはローカルの M1 Mac と GitHub Actions の両方で同一のスクリプトを使用したいが為に行っている対応策なので，スクリプトを別々にすれば，GitHub Actions でビルドする際には，上記の <code>ANNOY_COMPILER_ARGS</code> を設定することなく，シンプルに以下のビルドコマンドだけでいけます．</p>
-<pre><code class="language-bash">docker build -t sample-recsys:latest -f ./Dockerfile .
+<p>鍵の種類を RSA にし，鍵の長さを4096にしています．ファイル名は github_rsa と設定しました．</p>
+<h2 id="github-に生成した公開鍵を登録">GitHub に生成した公開鍵を登録</h2>
+<pre><code class="language-bash">cd ~/.ssh
+ssh-add -K github_rsa  # 秘密鍵をssh-agentデーモンに登録
+pbcopy &lt; github_rsa.pub  # pbcopyコマンドで公開鍵の中身をクリップボードにコピー
 </code></pre>
-<p>また，，<code>--platform</code> のオプションを付けてビルドすると時間が余計にかかるみたいなので，無駄なものは付けない方が良さそうですね．</p>
+<p>この後は，コピーした公開鍵の中身を GitHub に登録します．</p>
+<p>GitHub のアカウントから Settings に進み，SSH and GPG keys を選択し，New SSH key を押して，先程コピーした中身をペーストし，名前を決めて保存します．</p>
+<h2 id="ssh-接続確認">SSH 接続確認</h2>
+<p>保存が完了したら，SSH 接続できるか確認するために，以下のコマンドを打って確認します．</p>
+<pre><code class="language-bash">ssh -T git@github.com
+&gt;Hi &lt;ユーザー名&gt;! You've successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<h2 id="remote-設定の上書き">Remote 設定の上書き</h2>
+<p>ここまで来たら後一息で，最後に remote の設定を上書きします．
+以下のような感じでリポジトリ名を書いて，実行すればOK．</p>
+<pre><code class="language-bash">git remote set-url origin git@github.com:&lt;ユーザー名&gt;/&lt;リポジトリ名&gt;.git
+</code></pre>
+<h2 id="vscode-からgit-push">VSCode からgit push</h2>
+<p><img class="img-zoomable" src="../../img/vscode_git_connect_img1.png" alt="VSCodeからpush" />
+</p>
+<p>今までの設定が完了していれば，上記画像の手順で VSCode の画面から簡単に git に commit や push などの操作を行うことができます．</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は思いもよらないエラーで悩んでいたので，こうして無事？エラーの原因と解決策が分かって良かったです．全然このことに気づかなかったので，Annoy をやめて Faiss を使用することも考えていました（Faiss でも同じことになっていたかもです笑）．</p>
-<p>コンテナイメージをビルドする際のローカルとプロダクション適用時のマシンスペックが違うことも考えた上で，再現性を意識したコードを書かなければと改めて感じたので，良い教訓となりそうです．</p>
+<p>まだまだ VSCode 初心者なので，使いやすい Extensions を取り入れて開発環境をカスタマイズしていきたいと思います！</p>
 <h2 id="参考">参考</h2>
 <ul>
-<li><a href="https://techblog.zozo.com/entry/annoy-explanation" target="_blank">近傍探索ライブラリ「Annoy」のコード詳解</a></li>
+<li><a href="https://qiita.com/takuyanin/items/c6a097028a837052c90c" target="_blank">初めてのgitは5ステップで完了</a></li>
+<li><a href="https://qiita.com/shizuma/items/2b2f873a0034839e47ce" target="_blank">GitHubでssh接続する手順~公開鍵・秘密鍵の生成から~</a></li>
 </ul>
 
         <hr>
@@ -200,15 +224,15 @@
   <h3>この記事と関連する記事を読んでみる</h3>
   <ul>
     
-      <li><a href="/portfolio/post/async-ml-processing/">FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</a></li>
-    
-      <li><a href="/portfolio/post/customize-tf-callback/">Tensorflow の Callback 関数をカスタマイズ</a></li>
-    
-      <li><a href="/portfolio/post/cuda-error-device-side-assert-triggered/">RuntimeError: CUDA error: Device-side assert triggered の解決方法</a></li>
-    
       <li><a href="/portfolio/post/service-account-for-vertex-ai-pipelines/">Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した</a></li>
     
+      <li><a href="/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</a></li>
+    
       <li><a href="/portfolio/post/note-on-saving-array-list-in-dataframe/">データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</a></li>
+    
+      <li><a href="/portfolio/post/glue-job-params-and-stepfunctions-execution/">Step Functions から Glue のジョブパラメータを指定して実行する方法</a></li>
+    
+      <li><a href="/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/">Step Functions での Opensearch Package の更新は直列or並列？</a></li>
     
   </ul>
 
@@ -338,13 +362,12 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#docker-build-時の環境による問題">docker build 時の環境による問題？</a>
-      <ul>
-        <li><a href="#発生した事象">発生した事象</a></li>
-        <li><a href="#エラー原因">エラー原因</a></li>
-      </ul>
-    </li>
-    <li><a href="#解決方法">解決方法</a></li>
+    <li><a href="#エラー原因ssh-接続エラー">エラー原因（SSH 接続エラー）</a></li>
+    <li><a href="#公開鍵と秘密鍵の作成">公開鍵と秘密鍵の作成</a></li>
+    <li><a href="#github-に生成した公開鍵を登録">GitHub に生成した公開鍵を登録</a></li>
+    <li><a href="#ssh-接続確認">SSH 接続確認</a></li>
+    <li><a href="#remote-設定の上書き">Remote 設定の上書き</a></li>
+    <li><a href="#vscode-からgit-push">VSCode からgit push</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -455,13 +478,12 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
-    <li><a href="#docker-build-時の環境による問題">docker build 時の環境による問題？</a>
-      <ul>
-        <li><a href="#発生した事象">発生した事象</a></li>
-        <li><a href="#エラー原因">エラー原因</a></li>
-      </ul>
-    </li>
-    <li><a href="#解決方法">解決方法</a></li>
+    <li><a href="#エラー原因ssh-接続エラー">エラー原因（SSH 接続エラー）</a></li>
+    <li><a href="#公開鍵と秘密鍵の作成">公開鍵と秘密鍵の作成</a></li>
+    <li><a href="#github-に生成した公開鍵を登録">GitHub に生成した公開鍵を登録</a></li>
+    <li><a href="#ssh-接続確認">SSH 接続確認</a></li>
+    <li><a href="#remote-設定の上書き">Remote 設定の上書き</a></li>
+    <li><a href="#vscode-からgit-push">VSCode からgit push</a></li>
     <li><a href="#おわりに">おわりに</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>

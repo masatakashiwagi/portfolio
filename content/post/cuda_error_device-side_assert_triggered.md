@@ -7,6 +7,8 @@ description = "RuntimeError: CUDA error: Device-side assert triggered の解決�
 tags = ["DEV", "ML"]
 showLicense = false
 share = true
+aliases = ["/post/cuda_error_device-side_assert_triggered/"]
+url = "/post/cuda-error-device-side-assert-triggered/"
 +++
 
 ## はじめに
