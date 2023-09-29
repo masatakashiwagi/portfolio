@@ -3,12 +3,11 @@ author = "Masataka Kashiwagi"
 title = "Excel Binary Workbook を Python で処理"
 date = 2019-10-05T15:16:44+09:00
 description = "EBW を処理するために"
-draft = true
+draft = false
 share = true
 showLicense = false
 support = true
 tags = ["DEV"]
-aliases = ["/post/excel_processing_using_python/"]
 +++
 
 ## はじめに
