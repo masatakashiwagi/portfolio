@@ -19,7 +19,7 @@ defaultContentLanguage = "en"  # For HTML page, now support: en, zh-hans, zh-han
 summaryLength = 100 # Custom summary length, add <!--more--> in post file to custom split point
 paginate = 10
 
-googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
+googleAnalytics = "G-T3W696WJ1K" # Set your Google Analytics UA here. old: UA-199882807-1
 
 [outputFormats]
   [outputFormats.SearchIndex]
@@ -56,7 +56,7 @@ googleAnalytics = "UA-199882807-1" # Set your Google Analytics UA here
   # Use CloudFlare Workers to accelerate the Google Analytics
   # If you are using this please comment the googleAnalytics above
   # Check https://github.com/SukkaW/cloudflare-workers-async-google-analytics for more details
-  googleAnalyticsTid = "UA-199882807-1"
+  googleAnalyticsTid = "G-T3W696WJ1K"
   googleAnalyticsRoute = "https://masatakashiwagi.github.io/portfolio/"
 
   # Google AdSense
