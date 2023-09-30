@@ -24,9 +24,10 @@ I'm interested in multimodal learning and in consumer behavior model in life eve
 
 ## **Work Experience**
 
-**[Apr. 2023 - Present] Machine Learning Engineer, Commmune, Inc.**
+**[Apr. 2023 - Present] Machine Learning Engineer - Tech Lead, Commmune, Inc.**
 
 - Develop recommendation system for customer communication platform.
+- Responsible as a machine learning tech lead for the stable operation of the machine learning infrastructure.
 
 [June. 2021 - Mar. 2023] Machine Learning Engineer, Connehito, Inc.
 
