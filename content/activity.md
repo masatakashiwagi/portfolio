@@ -31,16 +31,24 @@ tags = []
 
 ## **Presentations**
 
+[31th Oct. 2023] **<u>[第35回 MLOps 勉強会](https://mlops.connpass.com/event/297976/)</u>**
+
+- コミュニティプラットフォームのバッチレコメンドを支える機械学習基盤
+
 [26th Jan. 2023] **<u>[MoT/コネヒト/Kanmu が語るプロダクト開発xデータ分析](https://kanmu.connpass.com/event/270440/)</u>**
+
 - [分析から機械学習システムの開発まで一人で複数ロールを担う大変さ](https://speakerdeck.com/masatakashiwagi/kanmu-gayu-rupurodakutokai-fa-xdetafen-xi-fen-xi-karaji-jie-xue-xi-sisutemunokai-fa-made-ren-defu-shu-roruwodan-uda-bian-sa)
 
 [17th Jan. 2023] **<u>[JAWS-UG AI/ML #15](https://jawsug-ai.connpass.com/event/263957/)</u>**
+
 - [SageMaker Experiments で始める機械学習モデルの実験管理](https://speakerdeck.com/masatakashiwagi/ml-number-15-sagemaker-experimentsdeshi-meruji-jie-xue-xi-moderunoshi-yan-guan-li)
 
 [8th Oct. 2022] **<u>[JAWS DAYS 2022 - Satellites](https://jawsdays2022.jaws-ug.jp/sessions/A11/)</u>**
+
 - [AWS のマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
 
 [4th Apr. 2022] **<u>[第18回 MLOps 勉強会 (Online)](https://mlops.connpass.com/event/242652/)</u>**
+
 - [MLOps に関する事例を集めた MLOps Practices を公開した話](https://speakerdeck.com/masatakashiwagi/di-18hui-mlops-mian-qiang-hui-mlops-practicesfalseshao-jie)
 
 [Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかった IT 業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
