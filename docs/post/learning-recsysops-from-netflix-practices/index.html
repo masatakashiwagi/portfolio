@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T3W696WJ1K');
+</script>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/favicon/mstile-150x150.png?raw=true">
+<meta name="generator" content="Hugo 0.111.3">
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>Netflix の事例から RecSysOps を学ぶ - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="Netflix のテックブログから大規模な RecSys を運用するためのノウハウを学ぶ" />
+
+
+<meta name="keywords" content="MLOPS, RECSYS" />
+
+<meta property="og:title" content="Netflix の事例から RecSysOps を学ぶ" />
+<meta property="og:description" content="Netflix のテックブログから大規模な RecSys を運用するためのノウハウを学ぶ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-10-02T15:58:26+09:00" />
+<meta property="article:modified_time" content="2023-10-02T15:58:26+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="Netflix の事例から RecSysOps を学ぶ"/>
+<meta name="twitter:description" content="Netflix のテックブログから大規模な RecSys を運用するためのノウハウを学ぶ"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-T3W696WJ1K');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+
+
+<script>
+    window.ga_tid = 'G-T3W696WJ1K';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/">Netflix の事例から RecSysOps を学ぶ</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-10-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4698 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/mlops">MLOPS</a>&nbsp;<a href="/tags/recsys">RECSYS</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>Netflix は RecSys のトップランナーの1社であり，そこで行われているオペレーションは非常に興味深く気になっていたので，2022年のテックブログで紹介された RecSysOps に関する取り組みからノウハウを学ぼうと思い，記事の内容を取り上げながら，所感を書いていこうと思います．</p>
+<ul>
+<li><a href="https://netflixtechblog.medium.com/recsysops-best-practices-for-operating-a-large-scale-recommender-system-95bbe195a841" target="_blank">RecSysOps: Best Practices for Operating a Large-Scale Recommender System</a></li>
+</ul>
+<p><code>Large-Scale</code> と書かれていますが，Netflix のような規模でなくても試せることは多いと思います．</p>
+<h2 id="recsysops-とはそれに必要な要素とは">RecSysOps とは？それに必要な要素とは？</h2>
+<p>RecSysOps (= Recommender Systems Operations) という言葉はこのブログが初かなと思います．もちろんこういった言葉で表現されていないけど，各社推薦システムの運用を通して何かしらのプラクティスを持っているとは思います．</p>
+<p>RecSysOps が何を指すかは，動画で以下のように述べられています．</p>
+<blockquote>
+<p>RecSysOps: Lessons we learned while operating a large RecSys</p>
+</blockquote>
+<p>多くのリクエストに応えたり，安定的に稼働させ続ける（可用性）推薦システムを運用する上で得られたプラクティスを RecSysOps として紹介してくれています．</p>
+<p>この取り組みを行うことで，以下の点で役立ったと書かれています．</p>
+<ul>
+<li><strong>Reduce</strong> our firefighting time</li>
+<li><strong>Focus</strong> on innovations</li>
+<li>Build <strong>trust</strong> with our stakeholders</li>
+</ul>
+<p>RecSysOps には4つの主要な取り組みがあり，</p>
+<ul>
+<li><strong><em>Issue Detection</em></strong></li>
+<li><strong><em>Issue Prediction</em></strong></li>
+<li><strong><em>Issue Diagnosis</em></strong></li>
+<li><strong><em>Issue Resolution</em></strong></li>
+</ul>
+<p>これらを通して，Netflix のような大規模な推薦システムを健全に運用できているとのことです．</p>
+<p>こういった取り組みは自分達が本来集中したいこと，また検証したいことだったりクリエイティブな活動に時間を割けるようにする上でも大事な取り組みだなと感じる．機械学習システムは本番環境に導入されてからが <strong>本番</strong> なので，最初は上手くいってても，時間が経過するにつれて綻びというか予期せぬこと・開発時には想像していなかった事象は平気で起きるので，これらを検知したり予測して，適切に対処していく活動は尊いなと感じます．</p>
+<p>モニタリングして，検知できる状態にするまではよく行われるが，じゃあ検知した後にそれらが分析できる状態になっているか，Run Book のような形でオペレーション手順にまで落とし込めているか，これらができている会社はまだまだ多くない印象です．</p>
+<p>では，それぞれ4つのトピックを見て行きます．</p>
+<h2 id="issue-detection">Issue Detection</h2>
+<p>RecSysOps における最初のフェーズで，「<strong>Issue Detection = 問題の検出</strong>」が最も重要な要素だと語られています．理由としては，これが後続ステップのトリガーとなるため，これが行われないと後続ステップは意味がないからです．</p>
+<p>この取り組みとしては，3ステップ紹介されています．</p>
+<h3 id="ステップ1-関連する分野から既知の全てのベストプラクティスを取り入れる">ステップ1: 関連する分野から既知の全てのベストプラクティスを取り入れる</h3>
+<p>最初のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>The very first step is to incorporate all the known best practices from related disciplines.</p>
+</blockquote>
+<p>「<strong>関連する分野から既知の全てのベストプラクティスを取り入れる</strong>」ということで，推薦システムの場合だと，ソフトウェアエンジニアリングと機械学習が含まれるため，DevOps と MLOps の両方のプラクティスを取り入れることが示されています．ここでも <a href="https://research.google/pubs/pub46555/" target="_blank">ML Test Score</a> をチェックリストとして活用できるよと紹介されています．</p>
+<p>本番環境で発生する問題は無数にある &amp; 未知なる問題もあるため全てに対応することは難しいと感じますが，問題に気づくための取り組み・検出範囲を拡げるための教訓は先人の知恵から学ぶことができると思うので，こういったものをリサーチするのも必要だと感じます．</p>
+<h3 id="ステップ2-システムを自分たちの視点からエンドツーエンドで監視する">ステップ2: システムを自分たちの視点からエンドツーエンドで監視する</h3>
+<p>2番目のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>The second step is to monitor the system end-to-end from your perspective.</p>
+</blockquote>
+<p>「<strong>システムを自分たちの視点からエンドツーエンドで監視する</strong>」ということで，大規模な推薦システムの場合，多くのチームが開発や運用に関わってきます．ML チームの視点から見ると，</p>
+<ul>
+<li>アップストリームチーム
+<ul>
+<li>データを提供するチーム</li>
+</ul>
+</li>
+<li>ダウンストリームチーム
+<ul>
+<li>モデルを使用するチーム</li>
+</ul>
+</li>
+</ul>
+<p>があります．データチームや自分たちのモデルを使いたい別チームが社内に居るかもしれません．それぞれのチームが独自にモニタリングなどの監視をしているかもしれないですが，<strong>そのチームの取り組みだけに頼らずに自分たちの視点からも必要な情報（入力と出力など）をモニタリングするのが良い</strong>と紹介されています．</p>
+<p>この教訓は，ML Test Score の「Monitor 1: Dependency changes result in notification」でも似たようなことが述べられています．例えば，データチームや開発チームと連携して，スキーマ変更や保存されるデータが変わる場合は連携するようにオペレーションを整えるべきだったりが挙げられると思います．</p>
+<p>他チームに任せるのではなく，オーナーシップを持って自分たちの範疇で取り組めることに関しては積極的に行っていく姿勢は素晴らしいと感じます．</p>
+<h3 id="ステップ3-ステークホルダーの懸念を理解する">ステップ3: ステークホルダーの懸念を理解する</h3>
+<p>3番目のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>The third step for getting a comprehensive coverage is to understand your stakeholders’ concerns.</p>
+</blockquote>
+<p>「<strong>ステークホルダーの懸念を理解する</strong>」ということで，推薦システムの文脈では，主要な視点として，メンバー（ユーザー）とアイテムがあります．この取り組みは問題の検出要素のカバー範囲を拡げるのに良いと書かれています．</p>
+<h4 id="メンバー視点">メンバー視点</h4>
+<p>提供している推薦モデルによって高く評価されていないアイテムを選択している場合，何かしらの潜在的な問題があるかもしれません．また，これは将来の優れたインスピレーションの源になるとも書かれています．</p>
+<h4 id="アイテム視点">アイテム視点</h4>
+<p>Netflix の場合，アイテムに責任を持つチームはアイテムのコールドスタートと潜在的な本番バイアスに関する懸念を持っています．彼らの懸念に関してサポートするために，メトリクスの定義・モニタリングツールの提供だけでなく，問題がアイテムごとに発生しているかどうかについてのインサイトの提供などもしています．これらを通して，アイテムに関連する主要な問題に積極的に対処し，ステークホルダーとの信頼関係を構築していると書かれています．</p>
+<p>Netflix のようなアイテムに責任を持つチームやカスタマーサクセス・サポートチームのようにユーザーのことを常に考えているステークホルダーの懸念や悩みをヒアリングしたり，サポートすることは自分たちが気づいていない新しい視点を提供してくれるので，とても参考になると日々の業務でも感じます．こういったチームからの要望などを元にモニタリングすべき項目を追加したり参考にしたりしているので，ホットラインを築いて協力していくことで問題に気づくことはありそうです．</p>
+<h2 id="issue-prediction">Issue Prediction</h2>
+<p>2つ目のトピックは，「<strong>Issue Prediction = 問題の予測</strong>」です．問題が本番環境で起こる前に予測して修正することです．</p>
+<p>Netflix では，アイテムのコールドスタート問題が重要なテーマです．この問題を過去のデータを使用して，ローンチ当日の本番モデルの行動統計を予測できるモデルを構築して予測しているとのことで，これによりアイテムのコールドスタートに関連する潜在的な問題を一週間以上前に検出し，問題を修正する時間を確保できているとのことです．</p>
+<p>この取り組みは正直かなり難易度が高いと感じました．アイテムに関する事前の情報やメタデータを駆使しながら，類似アイテムとの関連性を見つけて予測するのが良いのですかね？正直これに関するアイデアは現時点だとあまりないです😅</p>
+<h2 id="issue-diagnosis">Issue Diagnosis</h2>
+<p>3つ目のトピックは，「<strong>Issue Diagnosis = 問題の原因特定</strong>」です．3つステップに分けて取り組みを紹介しています．</p>
+<h3 id="問題を分離して再現する">問題を分離して再現する</h3>
+<p>まず最初のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>the next phase is to find its root cause.</p>
+</blockquote>
+<p>「<strong>問題を分離して再現すること</strong>」ということで，問題を再現するには事前に適切なログ設定を行う必要があると書かれています．これは何かしら問題がある場合に，単純にコードを再実行しても問題が再現できない状況があるということです．そのため，問題を理解するための再現に必要なログを出力しておくのが大事です．ただし，コストを削減するためにトラフィックの一部に対してログの記録を行っているとのことです．この場合には，適切なスライスでカバレッジを満たせるサンプリング方法を設計する必要があるとのことです．</p>
+<p>Netflix レベルになると，全部をロギングしておくとコストが尋常じゃないぐらい増えるので，こういった観点も必要になるんだなと感じました．ロギングは完全に同意で，問題の再現だけでなくモデル改善・分析観点でも必須だと思います．</p>
+<h3 id="問題がmlモデルの入力またはモデル自体と関連しているかどうかを理解する">問題がMLモデルの入力またはモデル自体と関連しているかどうかを理解する</h3>
+<p>2つ目のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>The next step after reproducing the issue is to figure out if the issue is related to inputs of the ML model or the model itself.</p>
+</blockquote>
+<p>「<strong>問題がMLモデルの入力またはモデル自体と関連しているかどうかを理解すること</strong>」ということで，入力データに関連しているかどうかは，入力が正確で有効であることを検証する必要があるので，非常に難しい問題ですとのこと．</p>
+<p>これ難しいですね．データ全体でスケーリングしたりする処理を入れているとそのモデルも持っておかないとですし，ある特徴量を生成するのに別の特徴量を使っている場合は，その追跡やリネージュ関係を理解する必要があるので，より複雑な問題になりそうです．そういったこともあり，データのバリデーションは大事な取り組みの1つになってきますね．</p>
+<h3 id="mlモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける">MLモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける</h3>
+<p>3つ目のステップとしては，以下のように紹介されています．</p>
+<blockquote>
+<p>the next step is to dig deep inside the ML model and its training data to find the root cause of the issue.</p>
+</blockquote>
+<p>「<strong>MLモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける</strong>」ということで，ここでは例えば，モデルを解釈するために SHAP / LIME などの可視化ツールを使ったり，決定気のノードやニューラルネットワークのレイヤーを可視化する方法などを述べています．</p>
+<h2 id="issue-resolution">Issue Resolution</h2>
+<p>最後のトピックは，「<strong>Issue Resolution = 問題の解決</strong>」です．解決には，短期的で緊急度が高いものから，長期的に取り組む必要があるものが考えられます．ML モデルは高度に最適化されているので，気軽に手動で変更することはできないし，しても適切な推薦を提供できない可能性が生じるということです．</p>
+<p>ここでは，事前に緊急に解決すべきかどうかの選択肢やトレードオフを用意しておくというのが紹介されています．</p>
+<ul>
+<li>検出または予測コンポーネントのチェックが定期的に自動実行されているか</li>
+<li>人間の判断が必要な場合に，その人が必要な情報をすぐに手に入れるようになっているか</li>
+<li>Hotfix が必要な時に，デプロイを数クリックで簡単に適用することができるか</li>
+</ul>
+<p>後半2つは非常に刺さります．例えば，データを集めるだけでなくすぐに使える状態に整理されているか，対応時のレポートラインやステークホルダーとの調整が事前にされているか，優先度の応じて対応できるようにオペレーションが確立されているかなど色々とありそうで，こういったことを事前に準備しておけると，いざその問題に直面した時に自分たちが楽になるし，変に焦る必要もなくなるので，動きやすいし信頼感もあるだろうな感じます．</p>
+<h2 id="おわりに">おわりに</h2>
+<p>RecSysOps という推薦システムに焦点を当てていますが，これは別に推薦システム特有のものではなく，他の機械学習システムにおける MLOps として，適用できる話だと感じました．泥臭いオペレーションや関連するチームとの信頼関係を通して，日々の運用やサービスが安定稼働しているのを感じます．Issue Detection の3つのステップに全てが詰まってる気がしますね．</p>
+<p>機械学習の場合は，データ・コード・モデルの三大要素があるので，問題を検知していく上でこれらの「<strong>Versioning・Reproducibility・Monitoring</strong>」への取り組みはより必要だと改めて感じました．</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://youtu.be/TDCpTHwfpqg" target="_blank">YouTube: RecSysOps: Best Practices for Operating a Large-Scale Recommender System</a></li>
+</ul>
+
+        <hr>
+        
+
+  <h3>この記事と関連する記事を読んでみる</h3>
+  <ul>
+    
+      <li><a href="/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/">Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</a></li>
+    
+      <li><a href="/portfolio/post/build-continuous-machine-learning/">CML を使った ML モデルの CI/CD</a></li>
+    
+      <li><a href="/portfolio/post/start-mlops-practices-project/">各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</a></li>
+    
+  </ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#recsysops-とはそれに必要な要素とは">RecSysOps とは？それに必要な要素とは？</a></li>
+    <li><a href="#issue-detection">Issue Detection</a>
+      <ul>
+        <li><a href="#ステップ1-関連する分野から既知の全てのベストプラクティスを取り入れる">ステップ1: 関連する分野から既知の全てのベストプラクティスを取り入れる</a></li>
+        <li><a href="#ステップ2-システムを自分たちの視点からエンドツーエンドで監視する">ステップ2: システムを自分たちの視点からエンドツーエンドで監視する</a></li>
+        <li><a href="#ステップ3-ステークホルダーの懸念を理解する">ステップ3: ステークホルダーの懸念を理解する</a></li>
+      </ul>
+    </li>
+    <li><a href="#issue-prediction">Issue Prediction</a></li>
+    <li><a href="#issue-diagnosis">Issue Diagnosis</a>
+      <ul>
+        <li><a href="#問題を分離して再現する">問題を分離して再現する</a></li>
+        <li><a href="#問題がmlモデルの入力またはモデル自体と関連しているかどうかを理解する">問題がMLモデルの入力またはモデル自体と関連しているかどうかを理解する</a></li>
+        <li><a href="#mlモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける">MLモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける</a></li>
+      </ul>
+    </li>
+    <li><a href="#issue-resolution">Issue Resolution</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#recsysops-とはそれに必要な要素とは">RecSysOps とは？それに必要な要素とは？</a></li>
+    <li><a href="#issue-detection">Issue Detection</a>
+      <ul>
+        <li><a href="#ステップ1-関連する分野から既知の全てのベストプラクティスを取り入れる">ステップ1: 関連する分野から既知の全てのベストプラクティスを取り入れる</a></li>
+        <li><a href="#ステップ2-システムを自分たちの視点からエンドツーエンドで監視する">ステップ2: システムを自分たちの視点からエンドツーエンドで監視する</a></li>
+        <li><a href="#ステップ3-ステークホルダーの懸念を理解する">ステップ3: ステークホルダーの懸念を理解する</a></li>
+      </ul>
+    </li>
+    <li><a href="#issue-prediction">Issue Prediction</a></li>
+    <li><a href="#issue-diagnosis">Issue Diagnosis</a>
+      <ul>
+        <li><a href="#問題を分離して再現する">問題を分離して再現する</a></li>
+        <li><a href="#問題がmlモデルの入力またはモデル自体と関連しているかどうかを理解する">問題がMLモデルの入力またはモデル自体と関連しているかどうかを理解する</a></li>
+        <li><a href="#mlモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける">MLモデルとその学習データの内部を詳しく調べて問題の根本原因を見つける</a></li>
+      </ul>
+    </li>
+    <li><a href="#issue-resolution">Issue Resolution</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2023
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>
