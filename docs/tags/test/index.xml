@@ -13,7 +13,7 @@
       <pubDate>Tue, 10 Oct 2023 15:55:06 +0900</pubDate>
       
       <guid>https://masatakashiwagi.github.io/portfolio/post/learning-software-testing-for-machine-learning/</guid>
-      <description>はじめに おわりに 参考</description>
+      <description>はじめに ML Test Score の論文を読んでいて，引用されていた機械学習に関連するテストの論文が2つあったので，その内容と読んだ感想などを備忘録として残しておきます． An Approach to Software Testing of Machine Learning Applications Software Testing for Machine Learning 機械学習のテストの方法</description>
     </item>
     
   </channel>

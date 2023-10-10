@@ -145,7 +145,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/">Netflix の事例から RecSysOps を学ぶ</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-10-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4698 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/mlops">MLOPS</a>&nbsp;<a href="/tags/recsys">RECSYS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-10-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4807 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/mlops">MLOPS</a>&nbsp;<a href="/tags/recsys">RECSYS</a>&nbsp;</span>
 
     </div>
     
@@ -210,15 +210,16 @@
 </li>
 </ul>
 <p>があります．データチームや自分たちのモデルを使いたい別チームが社内に居るかもしれません．それぞれのチームが独自にモニタリングなどの監視をしているかもしれないですが，<strong>そのチームの取り組みだけに頼らずに自分たちの視点からも必要な情報（入力と出力など）をモニタリングするのが良い</strong>と紹介されています．</p>
-<p>この教訓は，ML Test Score の「Monitor 1: Dependency changes result in notification」でも似たようなことが述べられています．例えば，データチームや開発チームと連携して，スキーマ変更や保存されるデータが変わる場合は連携するようにオペレーションを整えるべきだったりが挙げられると思います．</p>
-<p>他チームに任せるのではなく，オーナーシップを持って自分たちの範疇で取り組めることに関しては積極的に行っていく姿勢は素晴らしいと感じます．</p>
+<p>この教訓は，ML Test Score の「Monitor 1: Dependency changes result in notification」でも似たようなことが述べられています．例えば，データチームや開発チームと連携して，スキーマ変更や保存されるデータが変わる場合は連携するようにオペレーションを整えるべきだったりが挙げられます．</p>
+<p>データチームはデータ全体を見ているので，ML だけが使う一部のデータをどこまで感知しているかはわからないので，ML で使用するデータに関しては ML 側できちんと把握して必要なことは自分たちで率先して動くことが大事だと感じます．</p>
+<p>他チームに任せるのではなく，オーナーシップを持って自分たちの範疇で取り組めることに関しては積極的に行っていく姿勢は素晴らしいですね．</p>
 <h3 id="ステップ3-ステークホルダーの懸念を理解する">ステップ3: ステークホルダーの懸念を理解する</h3>
 <p>3番目のステップとしては，以下のように紹介されています．</p>
 <blockquote>
 <p>The third step for getting a comprehensive coverage is to understand your stakeholders’ concerns.</p>
 </blockquote>
 <p>「<strong>ステークホルダーの懸念を理解する</strong>」ということで，推薦システムの文脈では，主要な視点として，メンバー（ユーザー）とアイテムがあります．この取り組みは問題の検出要素のカバー範囲を拡げるのに良いと書かれています．</p>
-<h4 id="メンバー視点">メンバー視点</h4>
+<h4 id="メンバーユーザー視点">メンバー（ユーザー）視点</h4>
 <p>提供している推薦モデルによって高く評価されていないアイテムを選択している場合，何かしらの潜在的な問題があるかもしれません．また，これは将来の優れたインスピレーションの源になるとも書かれています．</p>
 <h4 id="アイテム視点">アイテム視点</h4>
 <p>Netflix の場合，アイテムに責任を持つチームはアイテムのコールドスタートと潜在的な本番バイアスに関する懸念を持っています．彼らの懸念に関してサポートするために，メトリクスの定義・モニタリングツールの提供だけでなく，問題がアイテムごとに発生しているかどうかについてのインサイトの提供などもしています．これらを通して，アイテムに関連する主要な問題に積極的に対処し，ステークホルダーとの信頼関係を構築していると書かれています．</p>
