@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "ValueError: Must setup local AWS configuration の対処方法"
-description = "local AWS configuration の設定方法を備忘録として書いた"
+description = "local AWS configuration の設定方法を備忘録として書きました"
 date = 2021-12-26T17:16:07+09:00
 draft = false
 share = true

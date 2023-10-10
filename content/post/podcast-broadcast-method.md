@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Podcast による配信のキッカケとその方法"
-description = "Podcast の配信を始めたキッカケについて"
+description = "Podcast の配信を始めたキッカケについての話を書きました"
 date = 2021-06-13T16:32:00+09:00
 draft = false
 share = true

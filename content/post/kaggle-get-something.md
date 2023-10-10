@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Kaggle を始めて半年経って個人的に得たもの"
-description = "Kaggle を始めて半年経ったので，その感想など"
+description = "Kaggle を始めて半年経ったので，その感想などを書きました"
 date = 2019-12-20T12:41:03+09:00
 draft = false
 share = true

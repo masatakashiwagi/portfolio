@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "各社の MLOps 事例を集めた MLOps Practices という Website を公開しました"
-description = "MLOps の事例を収集した Website を公開"
+description = "MLOps の事例を収集した Website を公開した話を書きました"
 date = 2022-02-05T16:08:29+09:00
 draft = false
 share = true

@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Kaggle-MoA の振り返り"
-description = "Kaggle-MoA に参加したので，その振り返り"
+description = "Kaggle-MoA に参加したので，その振り返りを書きました"
 date = 2020-12-11T23:13:30+09:00
 draft = false
 share = true

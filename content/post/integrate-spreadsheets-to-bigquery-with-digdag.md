@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "スプレッドシートから BigQuery へ Digdag を使ったデータ連携"
-description = "teamaya プロジェクトのデータ連携をした話"
+description = "teamaya プロジェクトのデータ連携をした話を書きました"
 date = 2021-12-22T18:00:00+09:00
 draft = false
 share = true

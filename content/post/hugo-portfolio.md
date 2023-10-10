@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "Hugoを使ったポートフォリオ作成"
 date = "2020-07-13"
-description = "Hugoで簡単にポートフォリオを作成したので，その備忘録"
+description = "Hugoで簡単にポートフォリオを作成したので，その備忘録を書きました"
 draft = false
 share = true
 showLicense = false

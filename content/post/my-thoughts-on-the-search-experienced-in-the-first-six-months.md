@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て"
-description = "初めて検索という領域に触れたので，その感想を認める"
+description = "初めて検索という領域に触れたので，その感想を書きました"
 date = 2022-12-20T00:01:02+09:00
 draft = false
 share = true

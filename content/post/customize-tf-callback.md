@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Tensorflow の Callback 関数をカスタマイズ"
-description = "Tensorflow の Callback 関数をカスタマイズした話"
+description = "Tensorflow の Callback 関数をカスタマイズした話を書きました"
 date = 2021-11-10T00:14:33+09:00
 draft = false
 share = true

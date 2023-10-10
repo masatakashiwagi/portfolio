@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "2022年夏休みのテック備忘録日記"
-description = "something new for xx days!! の感想"
+description = "something new for xx days!! の感想を書きました"
 date = 2022-09-02T02:15:12+09:00
 draft = false
 share = true

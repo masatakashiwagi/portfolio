@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "VSCode と git を連携して push できるようにするまで"
-description = "VSCode と git の連携"
+description = "VSCode と git の連携する方法について書きました"
 date = 2021-03-26T22:18:34+09:00
 draft = false
 share = true

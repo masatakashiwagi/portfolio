@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Step Functions から Glue のジョブパラメータを指定して実行する方法"
-description = "Step Functions 経由で Glue にジョブパラメータを渡して実行したい時にどうすればいいか"
+description = "Step Functions 経由で Glue にジョブパラメータを渡して実行したい時にどうすればいいかを書きました"
 date = 2022-11-16T18:00:00+09:00
 draft = false
 share = true

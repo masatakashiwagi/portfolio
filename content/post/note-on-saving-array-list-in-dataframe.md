@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意"
-description = "ndarray を csv ファイルで保存する時は注意が必要"
+description = "ndarray を csv ファイルで保存する時は注意が必要だという話を書きました"
 date = 2023-07-31T13:39:35+09:00
 draft = false
 share = true

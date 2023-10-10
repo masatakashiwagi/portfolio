@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "Excel Binary Workbook を Python で処理"
 date = 2019-10-05T15:16:44+09:00
-description = "EBW を処理するために"
+description = "Python で どうやって EBW を処理すればいいかを書きました"
 draft = false
 share = true
 showLicense = false

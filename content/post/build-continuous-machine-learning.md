@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "CML を使った ML モデルの CI/CD"
-description = "Continuous Machine Learning による CI/CD"
+description = "Continuous Machine Learning による CI/CD の方法を書きました"
 date = 2022-05-01T01:28:05+09:00
 draft = false
 share = true

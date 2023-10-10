@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Kaggle-Shopee コンペの振り返りとソリューション"
-description = "コンペの振り返りとソリューション"
+description = "コンペの振り返りとソリューションを書きました"
 date = 2021-05-14T15:44:00+09:00
 draft = false
 share = true

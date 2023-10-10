@@ -256,15 +256,6 @@ Develop recommendation system for customer communication platform. Responsible a
     </item>
     
     <item>
-      <title>ネストしたリストの更新処理</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/list-objects/</link>
-      <pubDate>Sat, 12 Sep 2020 15:44:00 +0900</pubDate>
-      
-      <guid>https://masatakashiwagi.github.io/portfolio/post/list-objects/</guid>
-      <description>初期化したリストの更新処理でハマってしまった 今回は，初期化したリストを更新した際にハマってしまった失敗があるので，備忘録として残しておきます． 詳しい内容は参考サイトに載っています．（かなりわかりやすい</description>
-    </item>
-    
-    <item>
       <title>Hugoを使ったポートフォリオ作成</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>

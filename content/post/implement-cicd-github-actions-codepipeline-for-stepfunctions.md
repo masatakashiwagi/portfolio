@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築"
-description = "Github Actions と CodePipeline で Step Functions を回す CI/CD を構築した話"
+description = "Github Actions と CodePipeline で Step Functions を回す CI/CD を構築した話を書きました"
 date = 2022-07-18T09:58:08+09:00
 draft = false
 share = true

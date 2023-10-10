@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Airbyte でスプレッドシートのデータを BigQuery に連携"
-description = "OSS の EL ツールである Airbyte でデータ連携"
+description = "OSS の EL ツールである Airbyte でデータ連携する話を書きました"
 date = 2022-09-29T15:37:53+09:00
 draft = false
 share = true

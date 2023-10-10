@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した"
-description = "Annoy で build index する際に発生したエラーについての対処方法"
+description = "Annoy で build index する際に発生したエラーについての対処方法を書きました"
 date = 2023-08-09T15:56:37+09:00
 draft = false
 share = true

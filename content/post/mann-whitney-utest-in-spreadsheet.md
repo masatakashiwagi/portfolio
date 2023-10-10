@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "スプレッドシートで行う Mann-Whitney の U 検定"
-description = "Mann-Whitney の U 検定をスプレッドシートを使って実施"
+description = "Mann-Whitney の U 検定をスプレッドシートを使って実施した話を書きました"
 date = 2021-11-16T16:08:32+09:00
 draft = false
 share = true

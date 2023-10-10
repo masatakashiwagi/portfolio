@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "teamaya という個人プロジェクトをはじめてみた"
-description = "家計簿のデータを BigQuery に連携して遊ぶプロジェクト"
+description = "家計簿のデータを BigQuery に連携して遊ぶプロジェクトを始めた話を書きました"
 date = 2021-12-12T16:55:14+09:00
 draft = false
 share = true

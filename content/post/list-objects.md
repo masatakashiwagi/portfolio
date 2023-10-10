@@ -1,9 +1,9 @@
 +++
 author = "Masataka Kashiwagi"
 title = "ネストしたリストの更新処理"
-description = "リストを複製して作成し，それを更新したい場合"
+description = "リストを複製して作成し，それを更新したい場合の話を書きました"
 date = 2020-09-12T15:44:00+09:00
-draft = false
+draft = true
 share = true
 showLicense = false
 support = true

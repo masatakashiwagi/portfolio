@@ -1,7 +1,7 @@
 +++
 author = "Masataka Kashiwagi"
 title = "Netflix の事例から RecSysOps を学ぶ"
-description = "Netflix のテックブログから大規模な RecSys を運用するためのノウハウを学ぶ"
+description = "Netflix のテックブログから大規模な RecSys を運用するためのノウハウを学んだ話を書きました"
 date = 2023-10-02T15:58:26+09:00
 draft = false
 share = true
