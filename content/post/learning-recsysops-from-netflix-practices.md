@@ -164,4 +164,6 @@ RecSysOps という推薦システムに焦点を当てていますが，これ�
 
 ## 参考
 
-- [YouTube: RecSysOps: Best Practices for Operating a Large-Scale Recommender System](https://youtu.be/TDCpTHwfpqg)
+- RecSysOps: Best Practices for Operating a Large-Scale Recommender System
+  - [SlideShare](https://www.slideshare.net/Ehsan38/recsysops-best-practices-for-operating-a-largescale-recommender-system)
+  - [YouTube](https://youtu.be/TDCpTHwfpqg)
