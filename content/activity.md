@@ -33,7 +33,7 @@ tags = []
 
 [31th Oct. 2023] **<u>[第35回 MLOps 勉強会](https://mlops.connpass.com/event/297976/)</u>**
 
-- コミュニティプラットフォームのバッチレコメンドを支える機械学習基盤
+- [コミュニティプラットフォームのバッチレコメンドを支える機械学習基盤](https://speakerdeck.com/masatakashiwagi/di-35hui-mlops-mian-qiang-hui-komiyuniteipuratutohuomunobatutirekomendowozhi-eruji-jie-xue-xi-ji-pan)
 
 [26th Jan. 2023] **<u>[MoT/コネヒト/Kanmu が語るプロダクト開発xデータ分析](https://kanmu.connpass.com/event/270440/)</u>**
 
