@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T3W696WJ1K');
+</script>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/favicon/mstile-150x150.png?raw=true">
+<meta name="generator" content="Hugo 0.111.3">
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>機械学習パイプラインの作り方を改めて考えてみる - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="機械学習パイプラインの組み方をどうするのが良いかについて書きました" />
+
+
+<meta name="keywords" content="ML, MLOps" />
+
+<meta property="og:title" content="機械学習パイプラインの作り方を改めて考えてみる" />
+<meta property="og:description" content="機械学習パイプラインの組み方をどうするのが良いかについて書きました" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-12-15T01:49:24+09:00" />
+<meta property="article:modified_time" content="2023-12-15T01:49:24+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
+
+<meta name="twitter:title" content="機械学習パイプラインの作り方を改めて考えてみる"/>
+<meta name="twitter:description" content="機械学習パイプラインの組み方をどうするのが良いかについて書きました"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-T3W696WJ1K');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+
+
+<script>
+    window.ga_tid = 'G-T3W696WJ1K';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/">機械学習パイプラインの作り方を改めて考えてみる</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-12-15</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3706 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ml">ML</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>もう今年もあと数週間ということで，1年があっという間に終わってしまいますね😅</p>
+<p>この記事は <a href="https://qiita.com/advent-calendar/2023/mlops" target="_blank">MLOps Advent Calendar 2023</a> の15日目の記事になります！アドベントカレンダーの日付を選ぶ際についつい自分の好きな数字を選びがちですが，皆さんはどうですか？笑</p>
+<p>最近，機械学習（ML）パイプラインの良い構成やパイプラインとコンポーネントの良い組み方に興味があり，それをどう管理するかのディレクトリ構成などを考えたりしているのですが，きっかけとしては参考にも載せてある「<a href="https://www.hopsworks.ai/post/mlops-to-ml-systems-with-fti-pipelines" target="_blank">From MLOps to ML Systems with Feature/Training/Inference Pipelines</a>」という Hopsworks の CEO である Jim Dowling が書いた記事を以前読んでとても良いなと思ったのがきっかけです．</p>
+<p>また，AB テストなどのオンライン検証を見据えた時に，どういったディレクトリ構成だとスムーズに開発ができたり，実施までの工程を減らして素早くデプロイし，検証できるかも考えることが多々あり，良い方法を模索しているのもあります．</p>
+<p>この記事では，その辺りの自分が今考えている内容について紹介しようと思います！技術検証系の記事ではなく，考え方の一例を紹介する形になります．</p>
+<p>僕の中の現時点の結論は，</p>
+<ul>
+<li><strong>コンポーネント単位ではなく，パイプライン単位で管理し，パイプラインは程よくモジュール化する</strong></li>
+</ul>
+<p>です．</p>
+<h2 id="パイプライン-処理単位で分けられたコンポーネントで構成">パイプライン: 処理単位で分けられたコンポーネントで構成</h2>
+<p>ML パイプラインを組み立てる時，大抵の場合は処理単位で分けられたコンポーネントを用意し，それを有向グラフで繋げてパイプラインを構成することが多いかと思います．下図は学習パイプラインや推論パイプラインの例を書いています．パイプラインの中には，ストレージやデータベースからデータを抽出する処理だったり，推論や予測結果をデータベースに保存する処理が加わるかもしれません．</p>
+<p><img class="img-zoomable" src="../../img/pipeline-img1.png" alt="Pipeline" />
+</p>
+<p>処理をコンポーネントもしくはモジュールというかもしれませんが，それ毎に分けて I/O を定義し，管理することはとても良いと思います．疎結合になっていることで，処理の入れ替えなどが容易でメンテナンスもしやすくなります．</p>
+<p>一方で，こんな疑問や悩みを持ったりしています．</p>
+<ul>
+<li>どこまで細かくコンポーネントに分けて使うのが良いか？
+<ul>
+<li>どの程度，共通化や汎用化を考えるのが良いか</li>
+<li>過度なコンポーネント化は逆に管理しづらくなる？</li>
+</ul>
+</li>
+<li>チーム開発を考えた場合にコンポーネント単位での分割は効率的なのか？<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>バッチ/リアルタイムの両方を満たすことを考えるとどうだろうか？<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<p>（共通化や汎用化を行い再利用することを意識して設計開発することはとても大事だと思います．一方で，最初からそれを意識しすぎると中途半端なものができたりして，逆に使いづらいことが過去の経験としてあるので，何度か使われる内に共通化を進めて行く方がユースケースに合ったものが出来て良いかなと最近は思っています．）</p>
+<p>コンポーネント単位での接続では，インターフェイスがコンポーネント間でのやり取りになり，先行するコンポーネントの出力結果に応じて後続のコンポーネントに微調整が入ることもあります．例えば，AB テストをするのに，ちょこっとだけ先行のコンポーネントを変えたことで，後続のコンポーネントにも修正が入り，それが元で既存のパイプラインに影響が出たりして厄介だなと感じたことがあります．（これは僕の実装力不足な点もあると思いますが&hellip;😅）</p>
+<h2 id="featuretraininginference-pipelines-とは">Feature/Training/Inference Pipelines とは？</h2>
+<p>冒頭紹介したブログでは，<strong>Feature/Training/Inference (FTI) Pipelines</strong> というものを紹介しています．これは独立した3つのパイプラインから構成されていて，それぞれが独立して開発や運用ができる点が良く，役割もパイプライン毎に明確になっています．</p>
+<p><img class="img-zoomable" src="../../img/pipeline-img2.png" alt="Pipeline" />
+</p>
+<p>記事では，バッチ/リアルタイムの ML システムの例を紹介した後に，その両方に対応した <strong>Unified Architecture for ML Systems</strong> として紹介されています．</p>
+<p>それぞれのパイプライン間のインターフェースがこの例だと，Feature Store/Model Registry になっています．これは彼らの製品である Feature Store を上手く活用する仕組みになっていてなかなか考えられているなと感じました！😄</p>
+<h3 id="それぞれのパイプラインの役割はどうなっているか">それぞれのパイプラインの役割はどうなっているか</h3>
+<p>役割は以下のように説明されています．</p>
+<blockquote>
+<ul>
+<li>a feature pipeline that takes as input raw data that it transforms into features (and labels)</li>
+<li>a training pipeline that takes as input features (and labels) and outputs a trained model</li>
+<li>an inference pipeline that takes new feature data and a trained model and makes predictions.</li>
+</ul>
+</blockquote>
+<ul>
+<li>feature pipeline: 生データを入力として受け取り，特徴量（とラベル）に変換する</li>
+<li>training pipeline: （feature pipeline で生成された）特徴量（とラベル）を入力として受け取り，学習済みモデルを出力する</li>
+<li>inference pipeline: （feature pipeline で生成された）新しい特徴量と学習済みモデルを受け取り，予測を返す</li>
+</ul>
+<p>例えば，レコメンドシステムのバッチ推論で良くあるパターンだと，下図<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>のように feature pipeline, training pipeline, inference pipeline を3つ繋げて（上側の点線）最終的に結果をストレージやデータベースに保存しておくという流れになります．</p>
+<p>また，リアルタイムレコメンドのパターンだと，feature pipeline, inference pipeline の2つが繋がり（下側の点線）結果をアプリケーションに返す流れになります．</p>
+<p><img class="img-zoomable" src="../../img/pipeline-img3.png" alt="Pipeline" />
+</p>
+<p>パイプラインは適度にコンポーネント化されていて，それぞれのステージで明確なインターフェースがあります．個々のパイプライン内でさらにコンポーネント化されていても良いですが，あくまでパイプライン間での関係を見るので，内部は柔軟になっていて良いと思います．</p>
+<p>特に ML パイプラインはスクラップ &amp; ビルドされることも多々あるので，そこまで内部をコンポーネントに分けてもそこまでの恩恵が無いと感じています．むしろ，チームで1つのパイプラインを開発するケースでは，これぐらいの粒度の方が開発効率が良いのではないかなと思います．</p>
+<p>ありがちなモノリシックなバッチパイプライン（下図<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>）よりは遥かに使いやすく，リアルタイムへの移行もスムーズになり，開発スピードは上がるはずです．</p>
+<p><img class="img-zoomable" src="../../img/pipeline-img4.png" alt="Pipeline" />
+</p>
+<h3 id="パイプライン間のインターフェース">パイプライン間のインターフェース</h3>
+<p>Feature/Training/Inference (FTI) Pipelines の考え方の場合，各パイプライン間のインターフェースはデータに関しては，Feature Store や Object Storage (S3, GCS &hellip;etc) などになるかと思います．</p>
+<p>僕はマネージドサービスでパイプラインを組むことが多いのですが，AWS と GCP だと以下のような感じでできるのではないでしょうか．</p>
+<ul>
+<li>AWS:
+<ul>
+<li>パイプライン: SageMaker + Step Functions (or SageMaker Pipelines)</li>
+<li>構造: Step Functions では，ステートマシン同士の接続が可能なので，パイプライン同士の接続は容易にできる</li>
+<li>パイプライン間のインターフェース: S3，Amazon SageMaker Feature Store</li>
+</ul>
+</li>
+<li>GCP:
+<ul>
+<li>パイプライン: Vertex AI Pipelines</li>
+<li>構造: コンポーネント同士はオブジェクトで繋がる仕組み．Step Functions のようにパイプライン同士の接続ができるかは把握できていない</li>
+<li>パイプライン間のインターフェース: GCS，Vertex AI Feature Store</li>
+</ul>
+</li>
+</ul>
+<h2 id="fti-pipelines-で疑問や悩みは解消するのか">FTI Pipelines で疑問や悩みは解消するのか</h2>
+<p>最初に挙げていたいくつかの疑問や悩みについて，</p>
+<ul>
+<li>どこまで細かくコンポーネントに分けて使うのが良いか？
+<ul>
+<li>→ <strong>より少ない単位（パイプライン単位）で管理可能</strong></li>
+</ul>
+</li>
+<li>チーム開発を考えた場合にコンポーネント単位での分割は効率的なのか？
+<ul>
+<li>→ <strong>パイプライン単位で分割することである程度は効率的に開発できそう</strong></li>
+</ul>
+</li>
+<li>バッチ/リアルタイムの両方を満たすことを考えるとどうだろうか？
+<ul>
+<li>→ <strong>バッチからリアルタイムへの移行などもパイプライン単位ならしやすい</strong></li>
+<li>バッチ/リアルタイムのアーキテクチャどうするか問題は，Lambda/Kappa Architecture の話などもあるので，またどこかでブログにまとめたいです</li>
+</ul>
+</li>
+</ul>
+<p>また，AB テストを実施する場合は，パイプラインを AB テスト用にもう1セット準備することで比較的容易に対応できるのではないでしょうか．</p>
+<p>最後にディレクトリ構成をどんな感じにするのが良いか紹介しようと思いましたが，まだ整理できていないのですいません🙏</p>
+<p>LayerX さんのこちらの記事<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>で紹介されているモノレポの構成は，僕のところもモノレポで管理しているというのもありとても参考になります．</p>
+<p>あとは，パイプラインでまとめている今回の構成において，エラーが発生した場合のリカバリー方法やエラー箇所の特定をどうするかについてはまた別途考えていきたいです．</p>
+<h2 id="おわりに">おわりに</h2>
+<p>今回紹介した内容がどのような場合でも上手く機能するかは正直わからないですが，こういった選択肢もあるという形で見て頂ければと思います．今の僕の所属するチーム規模や体制などではワークするかもしれないですが，もっと大きな規模になると別かもしれません．</p>
+<p>僕も1年後には別の方法が良いかもなと感じているかもしれないので，またその時に良い方法を模索して考えたいと思います😄</p>
+<p>もし他にもこういった考え方や構成が良いよなどありましたら，是非お話を聞きたいので，よろしくお願いします🙏</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.hopsworks.ai/post/mlops-to-ml-systems-with-fti-pipelines" target="_blank">From MLOps to ML Systems with Feature/Training/Inference Pipelines</a></li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>チームで分担した場合には分担の仕方にもよるが，例えば，前後のコンポーネントの用意が遅れたりして，なかなかパイプラインを動かせないなどもありうる&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>バッチの場合，一度に大量のデータを処理することを想定するが，リアルタイムの場合，ストリーミングデータを想定するので，入口の扱いが異なるが処理は一貫したものにすべき&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>(From MLOps to ML Systems with Feature/Training/Inference Pipelines) Figure 11: The Feature/Training/Inference (FTI) pipelines Mental Map for building ML Systems&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>(From MLOps to ML Systems with Feature/Training/Inference Pipelines) Figure 4: A monolithic batch ML system that can run in either (1) training mode or (2) inference mode.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://tech.layerx.co.jp/entry/2023/11/16/185944#%E5%AE%9F%E9%9A%9B%E3%81%AE%E9%81%8B%E7%94%A8%E6%96%B9%E9%87%9D" target="_blank">https://tech.layerx.co.jp/entry/2023/11/16/185944#%E5%AE%9F%E9%9A%9B%E3%81%AE%E9%81%8B%E7%94%A8%E6%96%B9%E9%87%9D</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        <hr>
+        
+
+  <h3>この記事と関連する記事を読んでみる</h3>
+  <ul>
+    
+      <li><a href="/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</a></li>
+    
+      <li><a href="/portfolio/post/build-continuous-machine-learning/">CML を使った ML モデルの CI/CD</a></li>
+    
+      <li><a href="/portfolio/post/async-ml-processing/">FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</a></li>
+    
+      <li><a href="/portfolio/post/customize-tf-callback/">Tensorflow の Callback 関数をカスタマイズ</a></li>
+    
+      <li><a href="/portfolio/post/cuda-error-device-side-assert-triggered/">RuntimeError: CUDA error: Device-side assert triggered の解決方法</a></li>
+    
+  </ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#パイプライン-処理単位で分けられたコンポーネントで構成">パイプライン: 処理単位で分けられたコンポーネントで構成</a></li>
+    <li><a href="#featuretraininginference-pipelines-とは">Feature/Training/Inference Pipelines とは？</a>
+      <ul>
+        <li><a href="#それぞれのパイプラインの役割はどうなっているか">それぞれのパイプラインの役割はどうなっているか</a></li>
+        <li><a href="#パイプライン間のインターフェース">パイプライン間のインターフェース</a></li>
+      </ul>
+    </li>
+    <li><a href="#fti-pipelines-で疑問や悩みは解消するのか">FTI Pipelines で疑問や悩みは解消するのか</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#パイプライン-処理単位で分けられたコンポーネントで構成">パイプライン: 処理単位で分けられたコンポーネントで構成</a></li>
+    <li><a href="#featuretraininginference-pipelines-とは">Feature/Training/Inference Pipelines とは？</a>
+      <ul>
+        <li><a href="#それぞれのパイプラインの役割はどうなっているか">それぞれのパイプラインの役割はどうなっているか</a></li>
+        <li><a href="#パイプライン間のインターフェース">パイプライン間のインターフェース</a></li>
+      </ul>
+    </li>
+    <li><a href="#fti-pipelines-で疑問や悩みは解消するのか">FTI Pipelines で疑問や悩みは解消するのか</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2023
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

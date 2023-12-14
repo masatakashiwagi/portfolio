@@ -5,7 +5,7 @@
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/</loc>
     
-    <lastmod>2023-10-02T15:58:26+09:00</lastmod>
+    <lastmod>2023-12-15T01:49:24+09:00</lastmod>
     
     <changefreq>weekly</changefreq>
     
@@ -18,21 +18,37 @@
   
   
   
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</loc>
-    
-    <lastmod>2023-10-02T15:58:26+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
   
   
   
   <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    
+    <lastmod>2023-12-15T01:49:24+09:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    
+    <priority>0.5</priority>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</loc>
+    
+    <lastmod>2023-12-15T01:49:24+09:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    
+    <priority>0.5</priority>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</loc>
     
     <lastmod>2023-10-02T15:58:26+09:00</lastmod>
     
@@ -76,9 +92,6 @@
     <priority>0.5</priority>
     
   </url>
-  
-  
-  
   
   
   

@@ -6,7 +6,16 @@
     <description>Recent content in ML on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 09 Aug 2023 15:56:37 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>機械学習パイプラインの作り方を改めて考えてみる</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</link>
+      <pubDate>Fri, 15 Dec 2023 01:49:24 +0900</pubDate>
+      
+      <guid>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</guid>
+      <description>はじめに もう今年もあと数週間ということで，1年があっという間に終わってしまいますね😅 この記事は MLOps Advent Calendar 2023 の15日目の記事になります！アドベントカレンダーの日付を選ぶ際についつい自分の好きな数字を選びがち</description>
+    </item>
+    
     <item>
       <title>ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
