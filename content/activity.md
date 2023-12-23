@@ -57,6 +57,7 @@ tags = []
 
 本業 or 副業先の会社で書いたテックブログ
 
+- [ニアリアルタイムで投稿レコメンドをユーザーに届ける](https://tech.commmune.jp/entry/2023/12/22/173000)
 - [コミュニティプラットフォームの投稿レコメンド機能を支える機械学習基盤](https://tech.commmune.jp/entry/2023/09/27/173000)
 - [Cloud Firestore を活用したバッチレコメンドシステムを開発した話](https://tech.high-link.co.jp/entry/Cloud-Firestore-batch-recommend-system)
 - [BigQuery のシャーディングされたテーブルを OpenSearch へ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
