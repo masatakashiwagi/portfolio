@@ -103,15 +103,6 @@ Develop recommendation system for customer communication platform. Responsible a
     </item>
     
     <item>
-      <title>2022年夏休みのテック備忘録日記</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</link>
-      <pubDate>Fri, 02 Sep 2022 02:15:12 +0900</pubDate>
-      
-      <guid>https://masatakashiwagi.github.io/portfolio/post/summer-tech-diary-2022/</guid>
-      <description>はじめに きっかけは@kaggle_araisanさんのこちらの Tweet を見かけて，面白そうな取り組みだなーと感じたので，この機会に僕もやってみようと思ったのが始まりです！ こういうのは，誰かと一緒にやったり，</description>
-    </item>
-    
-    <item>
       <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
