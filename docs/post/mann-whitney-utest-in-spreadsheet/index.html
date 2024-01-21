@@ -21,7 +21,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
 <meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar-small.png?raw=true">
-<meta name="generator" content="Hugo 0.111.3">
+<meta name="generator" content="Hugo 0.121.2">
 
 
 <meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
@@ -53,14 +53,13 @@
 <meta property="og:title" content="スプレッドシートで行う Mann-Whitney の U 検定" />
 <meta property="og:description" content="Mann-Whitney の U 検定をスプレッドシートを使って実施した話を書きました" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/><meta property="article:section" content="post" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-16T16:08:32+09:00" />
 <meta property="article:modified_time" content="2021-11-16T16:08:32+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png"/>
 
-<meta name="twitter:title" content="スプレッドシートで行う Mann-Whitney の U 検定"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta name="twitter:title" content="スプレッドシートで行う Mann-Whitney の U 検定"/>
 <meta name="twitter:description" content="Mann-Whitney の U 検定をスプレッドシートを使って実施した話を書きました"/>
 
 
@@ -146,7 +145,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/">スプレッドシートで行う Mann-Whitney の U 検定</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2173 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ds">DS</a>&nbsp;<a href="/tags/stats">STATS</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2189 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ds">DS</a>&nbsp;<a href="/tags/stats">STATS</a>&nbsp;</span>
 
     </div>
     
@@ -202,9 +201,9 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
 <p>サンプルデータとしてグループ AB の身長のデータを載せています．こちらのデータを検定したい2群のデータに適宜変更して頂くと，#検定を行う手順 で紹介した方法に則って p 値の計算がされます．</p>
 <p>サンプルサイズが n&lt;=20 の場合は，U値での評価になるので，その場合はリンクにあるマン・ホイットニーの U 検定表を用いて，該当する値から検定結果を見積って貰うと良いです．</p>
 <p>※ 補足:<br>
-サンプルデータのデータ順序は意識しないで問題ありません，順序並び替えで自動的に昇順で並び変わります．ただし，順位については，スプレッドシートのマウスオーバーでセルの右下に表示される黒い部分をデータが存在している部分まで下にズラして貰う必要があります．（スプレッドシートを完璧に使いこなしているわけではないので，特に順位をつけてる部分が自動化できていないです．もしご存知の方は，方法を教えて貰えると大変助かります🙏）</p>
+サンプルデータのデータ順序は意識しないで問題ありません，順序並び替えで自動的に昇順で並び変わります．ただし，順位については，スプレッドシートのマウスオーバーでセルの右下に表示される黒い部分をデータが存在している部分まで下にズラして貰う必要があります．（スプレッドシートを完璧に使いこなしているわけではないので，特に順位をつけてる部分が自動化できていないです．もしご存知の方は，方法を教えて貰えると大変助かります&#x1f64f;）</p>
 <h2 id="おわりに">おわりに</h2>
-<p>今回は，スプレッドシートを使って Mann-Whitney の U 検定を試してみた内容になります．Python を使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．AB テストを実施して検定するまでを誰でも簡単にできるようになれば良いなと思ってます．実装していて，スプレッドシートって意外と組み込みの関数が用意されていることを改めて知ることができました😄</p>
+<p>今回は，スプレッドシートを使って Mann-Whitney の U 検定を試してみた内容になります．Python を使っていない非エンジニアの方でも検定を行えるようにスプレッドシートに実装しました．AB テストを実施して検定するまでを誰でも簡単にできるようになれば良いなと思ってます．実装していて，スプレッドシートって意外と組み込みの関数が用意されていることを改めて知ることができました&#x1f604;</p>
 <p>また，普段ライブラリを何気なく使っていますが，内部の計算方法やどうゆう手続きで出力されるのか，またその値をちゃんと理解して使っていかないとなーということを改めて感じました．例えば，<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html" target="_blank">scipy.stats.mannwhitneyu</a> は p 値を出すだけであれば良いが，U 値を使いたい場合には少し使いづらいと感じました．</p>
 <p>P.S. t 検定についてもスプレッドシートで実施できるようにしているので，また紹介したいと思います．</p>
 <h2 id="参考">参考</h2>
@@ -297,6 +296,10 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
             
             <span>
                 <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
             </span>
             
             <span>
@@ -414,6 +417,10 @@ $$ z = \frac{U - \mu_u}{\sigma_u} $$</p>
             
             <span>
                 <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
             </span>
             
             <span>

@@ -6,60 +6,49 @@
     <description>Recent content in POEM on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 20 Dec 2022 00:01:02 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Dec 2022 00:01:02 +0900</lastBuildDate>
+    <atom:link href="https://masatakashiwagi.github.io/portfolio/tags/poem/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/</link>
       <pubDate>Tue, 20 Dec 2022 00:01:02 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/</guid>
       <description>はじめに 最近，スタバで期間限定で販売しているの冬の新作「バターキャラメルミルフィーユ ラテ」のミルクをアーモンドミルクに変更して飲んだら激ウマでハマってしまいました笑．皆さんも是非飲んでみて下さい！（ち</description>
     </item>
-    
     <item>
       <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
       <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
     </item>
-    
     <item>
       <title>teamaya という個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>
       <pubDate>Sun, 12 Dec 2021 16:55:14 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</guid>
       <description>はじめに 最近，データエンジニアリングと MLOps の領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジ</description>
     </item>
-    
     <item>
       <title>Buy Me a Coffee をブログに追加した話</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee-option/</link>
       <pubDate>Tue, 07 Dec 2021 12:55:55 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee-option/</guid>
       <description>はじめに Buy Me a Coffee というコーヒー1杯をクリエイター活動のサポートという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，@hurutoriy</description>
     </item>
-    
     <item>
       <title>Podcast による配信のキッカケとその方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</link>
       <pubDate>Sun, 13 Jun 2021 16:32:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</guid>
       <description>はじめに 6月から友人の@navitacionさんと一緒に Podcast の配信を開始しました．テック系の話題など自分たちが興味のある内容をあれこれと話すものになります． Anchor という無料で配信できるプラットフォームを使用</description>
     </item>
-    
     <item>
       <title>Kaggle を始めて半年経って個人的に得たもの</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</link>
       <pubDate>Fri, 20 Dec 2019 12:41:03 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</guid>
       <description>はじめに Kaggle を始めて半年ほど経ち，個人的にこの半年で得たものを整理するという意味で「kaggle その2 Advent Calendar 2019」の20日目を担当します． 簡単な自己紹介として，普段は都内のベンチャー企業で主に製造業の</description>
     </item>
-    
   </channel>
 </rss>

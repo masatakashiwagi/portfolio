@@ -6,51 +6,42 @@
     <description>Recent content in MLOPS on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/mlops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate>
+    <atom:link href="https://masatakashiwagi.github.io/portfolio/tags/mlops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>機械学習パイプラインの作り方を改めて考えてみる</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</link>
       <pubDate>Fri, 15 Dec 2023 01:49:24 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</guid>
       <description>はじめに もう今年もあと数週間ということで，1年があっという間に終わってしまいますね😅 この記事は MLOps Advent Calendar 2023 の15日目の記事になります！アドベントカレンダーの日付を選ぶ際についつい自分の好きな数字を選びがち</description>
     </item>
-    
     <item>
       <title>Netflix の事例から RecSysOps を学ぶ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</link>
       <pubDate>Mon, 02 Oct 2023 15:58:26 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</guid>
       <description>はじめに Netflix は RecSys のトップランナーの1社であり，そこで行われているオペレーションは非常に興味深く気になっていたので，2022年のテックブログで紹介された RecSysOps に関する取り組みからノウハウを学ぼうと思い，記事の</description>
     </item>
-    
     <item>
       <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</guid>
       <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
-    
     <item>
       <title>CML を使った ML モデルの CI/CD</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
       <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
       <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
     </item>
-    
     <item>
       <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
       <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
     </item>
-    
   </channel>
 </rss>

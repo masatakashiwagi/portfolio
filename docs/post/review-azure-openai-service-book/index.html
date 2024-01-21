@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T3W696WJ1K');
+</script>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar-small.png?raw=true">
+<meta name="generator" content="Hugo 0.121.2">
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を読んでの書評 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="献本頂いた書籍の書評ブログを書きました" />
+
+
+<meta name="keywords" content="BOOK" />
+
+<meta property="og:title" content="「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を読んでの書評" />
+<meta property="og:description" content="献本頂いた書籍の書評ブログを書きました" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/review-azure-openai-service-book/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-21T01:17:02+09:00" />
+<meta property="article:modified_time" content="2024-01-21T01:17:02+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta name="twitter:title" content="「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を読んでの書評"/>
+<meta name="twitter:description" content="献本頂いた書籍の書評ブログを書きました"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-T3W696WJ1K');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+
+
+<script>
+    window.ga_tid = 'G-T3W696WJ1K';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/review-azure-openai-service-book/">「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を読んでの書評</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2024-01-21</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3993 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/book">BOOK</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>2024年1月24日に発売される「<strong>Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門</strong>」を著者の一人である立脇さんから献本頂いたので，書評を書いていきます！</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://gihyo.jp/book/2024/978-4-297-13929-2" data-iframely-url="//cdn.iframe.ly/api/iframe?card=small&url=https%3A%2F%2Fgihyo.jp%2Fbook%2F2024%2F978-4-297-13929-2&key=1ac31cfb1f29f0cc6c5c03e9b56116df"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+</br>
+<p>改めて，出版おめでとうございます🎉</p>
+<blockquote class="twitter-tweet tw-align-center"><p lang="ja" dir="ltr">Azure OpenAI Serviceではじめる ChatGPT/LLMシステム構築入門（AOAIドーナツ本）を著者の立脇さんから献本頂きました🎉<br>Azure上でのChatGPTを用いたシステム構築の話はもちろんのこと、ガバナンスやResponsible AIにも言及していて興味深く読ませて頂いてます！後ほど書評ブログも書かせて頂きます。 <a href="https://t.co/oRqcYAV0gr">pic.twitter.com/oRqcYAV0gr</a></p>&mdash; asteriam (@asteriam_fp) <a href="https://twitter.com/asteriam_fp/status/1748572342912262254?ref_src=twsrc%5Etfw">January 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<h2 id="書籍の目次">書籍の目次</h2>
+<p>目次は以下のようになっていて，全体は4部構成（+付録）になっています．</p>
+<ul>
+<li>第1部: Microsoft Azure での ChatGPT 活用
+<ul>
+<li>第1章: 生成 AI と ChatGPT</li>
+<li>第2章: プロンプトエンジニアリング</li>
+<li>第3章: Azure OpenAI Service</li>
+</ul>
+</li>
+<li>第2部: RAG による社内文章検索の実装
+<ul>
+<li>第4章: RAG の概要と設計</li>
+<li>第5章: RAG の実装と評価</li>
+</ul>
+</li>
+<li>第3部: Copilot stack による LLM アプリケーションの実装
+<ul>
+<li>第6章: AI オーケストレーション</li>
+<li>第7章: 基盤モデルと AI インフラストラクチャ</li>
+<li>第8章: Copilot フロントエンド</li>
+</ul>
+</li>
+<li>第4部: ガバナンスと責任ある AI
+<ul>
+<li>第9章: ガバナンス</li>
+<li>第10章: 責任ある AI</li>
+</ul>
+</li>
+<li>付録
+<ul>
+<li>付録 A: サンプルコード実行環境の準備</li>
+<li>付録 B: ChatGPT の仕組み（詳細編）</li>
+</ul>
+</li>
+</ul>
+<h2 id="内容の紹介と感想">内容の紹介と感想</h2>
+<p>各章の概要について簡単に触れつつ，個人的に興味深かった点や印象に残った点を紹介したいと思います．</p>
+<p>本書は初めに読者の目的とレベル感に合わせてどの章から読めば良いかが示されていて，全体の見通しがクリアになるように設計されています．そのため，目的に合わせて必要な章を効率良く読めるでしょう．</p>
+<p>では，各章の概要についてかいつまんで紹介したいと思います！</p>
+<h3 id="第1部-microsoft-azure-での-chatgpt-活用">第1部: Microsoft Azure での ChatGPT 活用</h3>
+<p>第1部は，最初に生成 AI と ChatGPT 基礎的な概念と仕組みを紹介しています．ChatGPT がどういったタスクをこなすことができるかについてもまとめられていて，ユースケースの例もあるので，活用のイメージを膨らませることができます．</p>
+<p>また，生成 AI の出力に関係してくるプロンプトの基本的な書き方の紹介，気をつけるべき観点が整理されていて，プロンプトエンジニアリングを学ぶことができます．</p>
+<p>第1部の最後は，Azure OpenAI Service の使い方が書かれています．Open AI が開発した AI モデルをマネージドサービスとして使用することができ，Azure OpenAI の始め方が図を使って丁寧に解説されています．</p>
+<h3 id="第2部-rag-による社内文章検索の実装">第2部: RAG による社内文章検索の実装</h3>
+<p>第2部は，ChatGPT を使った社内文章検索システムを題材にして，RAG の説明から実際に Azure 上でどういったサービスを組み合わせてシステムを構築するかについても丁寧に説明されています．後半には，RAG の評価の仕方も記載されています．</p>
+<p>また，Azure Machine Learning プロンプトフローを使って効率良くプロンプトの検証・開発をする方法も紹介されています．</p>
+<h3 id="第3部-copilot-stack-による-llm-アプリケーションの実装">第3部: Copilot stack による LLM アプリケーションの実装</h3>
+<p>第3部は，ChatGPT などの LLM を組み込んだアプリである Copilot を開発するための話が，Copilot フロントエンド・AI オーケストレーション・基盤モデルの3段階で紹介されています．</p>
+<p>Copilot フロントエンドの説明では，UX 向上のためにストリーミング処理の実装や参考資料などが紹介されていて，ユーザビリティの重要性を教えてくれます．</p>
+<h3 id="第4部-ガバナンスと責任ある-ai">第4部: ガバナンスと責任ある AI</h3>
+<p>第4部は，生成 AI のサービスや機能を開発・運用していく上でのガバナンスの話や責任ある AI に対する Microsoft の取り組みなどが紹介されています．ガバナンスの話では，認証周りや課金，アクセス制限など組織で活用していく上で考慮すべき問題を取り上げています．</p>
+<h3 id="興味深かった点印象に残った点">興味深かった点/印象に残った点</h3>
+<p>ここからは個人的な感想を書いていこうと思います．</p>
+<p>まず全体的に注釈で細く補足がなされていたり，参考文献が挙げられていてとても親切です．タイトルにも含まれるように Azure を使った内容にはなっていますが，プロンプトエンジニアリングや RAG の設計・評価，基盤モデルの話など ChatGPT/LLM をサービスに活用する上で知っておくべき一般的な内容についてもしっかりと説明がされていて，まだまだキャッチアップ不足の僕にはとても参考になりました！</p>
+<p>後半ではガバナンスや責任ある AI (Responsible AI) を取り上げていますが，これらについて言及している書籍はまだまだ少ない状況なので，とても有益です．サービスとして機械学習を提供するのであれば，こういった内容についても理解を深め取り組んでいくべき（自戒を込めて）で，それを助ける参考文献が色々と記載されています．</p>
+<p>特に個人的な推しポイントは3つあります．</p>
+<h4 id="1-rag-を使った検索システムの設計と評価">1. RAG を使った検索システムの設計と評価</h4>
+<p>Retrieval-Augumented Generation (RAG) を使うメリットやアーキテクチャを最初に説明することで，これからどういったものを考えていくのかがわかりやすかったです．コンテキストが示されて体系的に説明がされるので，テックブログのように断片的なものよりは理解が進みやすいです．</p>
+<p>特に検索システムの説明が厚くてとても良かったです！Azure AI Search を題材にしていますが，インデックス作成・ドキュメント検索の流れを図を用いて丁寧に解説されています．インデックス作成の流れは別の検索システムを使うにしても参考となります．特に RAG を使った検索では，<strong>ドキュメントの文字数</strong>と<strong>文の意味に基づいた検索</strong>が重要であるという内容がしっかり書かれていて理解が深まりました．</p>
+<p>また，Azure AI Search では，フルテキスト検索とベクトル検索のハイブリッド検索を利用することができ，<strong>ハイブリッド検索とセマンティックランカーを行うことでより高精度な検索が実現可能</strong>とのことです（下図）．こういった柔軟な検索手法の組み合わせが，比較的簡単にマネージドサービスとして実装できるのは楽だなと感じます．</p>
+<p><img class="img-zoomable" src="../../img/review-aoai-book-img1.png" alt="ハイブリッド&#43;セマンティックランカー" />
+</p>
+<p>参考: <a href="https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/azure-ai-search-outperforming-vector-search-with-hybrid/ba-p/3929167" target="_blank">Azure AI Search: Outperforming vector search with hybrid retrieval and ranking capabilities</a></p>
+<p>RAG の評価についても書かれていて，RAG の評価では，<strong>検索精度の問題</strong>と<strong>生成精度の問題</strong>の２つが挙げられます．特に生成精度の評価はまだまだスタンダードな方法がなく難しいですが，その一例として，OSS で RAG 用の評価フレームワークである <a href="https://github.com/explodinggradients/ragas" target="_blank">Ragas</a> があるよと挙げられてます．単一のメトリクスで判断するのではなく，複数の組み合わせがおすすめされてて，<strong>関連性・一貫性・類似性の評価</strong>について解説もされています．評価方法どうすればいいかあまり理解していなかった自分にとっては良い示唆を貰えました！</p>
+<h4 id="2-オーケストレータ作成のための-azure-machine-learning-プロンプトフロー">2. オーケストレータ作成のための Azure Machine Learning プロンプトフロー</h4>
+<p>Azure Machine Learning プロンプトフローはローコードでオーケストレータを作成できるサービスで GUI/CLI で利用できるとのことです．</p>
+<ul>
+<li>実行フローの可視化</li>
+<li>チームでの共有やデバッグ</li>
+<li>複数のプロンプトを試せるプロンプトバリアント機能</li>
+<li>etc&hellip;</li>
+</ul>
+<p>特に興味を持ったのは，<strong>プロンプトバリアント機能</strong>でプロンプトは色々と試行錯誤して良さげなものを探すと思いますが，これらを一度に複数パターンを定義できて実行できるとのことで，実験速度がめっちゃくちゃ上がりそうだなと感じました！改善しやすい仕組みが自分で整備しなくても整えられているので，やりたいことに集中でき，開発者体験としてとても良さそうに感じられました！</p>
+<h4 id="3-責任ある-ai-responsible-ai-の取り組み">3. 責任ある AI (Responsible AI) の取り組み</h4>
+<p>Microsoft では，責任ある AI (Responsible AI) として，以下の6つの原則を掲げています．</p>
+<ul>
+<li><strong>公平性</strong>
+<ul>
+<li>AI システムはすべての人を公平に扱う必要があります</li>
+</ul>
+</li>
+<li><strong>信頼性と安全性</strong>
+<ul>
+<li>AI システムは信頼でき安全に実行する必要があります</li>
+</ul>
+</li>
+<li><strong>プライバシーとセキュリティ</strong>
+<ul>
+<li>AI システムは安全であり，プライバシーを尊重する必要があります</li>
+</ul>
+</li>
+<li><strong>包括性</strong>
+<ul>
+<li>AI システムはあらゆる人に力を与え，人々を結びつける必要があります</li>
+</ul>
+</li>
+<li><strong>透明性</strong>
+<ul>
+<li>AI システムは理解しやすい必要があります</li>
+</ul>
+</li>
+<li><strong>アカウンタビリティ</strong>
+<ul>
+<li>AI システムにはアカウンタビリティが必要です</li>
+</ul>
+</li>
+</ul>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai" target="_blank">責任ある信頼された AI - Cloud Adoption Framework</a></p>
+<p>詳細は上記参考ドキュメントを読むとわかりやすいです．これらを定義し，それをどのように実践するかといったことについてもきちんと公式ドキュメントとしてまとめられていて素晴らしいです．信頼性と安全性は MLOps とも関連性が高い項目ですね．</p>
+<p>本書では，取り組みの紹介として，コンテンツフィルタリングの例があります．生成 AI が不正利用されるとサービスに大きな影響が及びます．これに対して，Azure OpenAI では入出力にフィルタリング機能が実装されていて，適切でない内容対しては処理がストップされるようです．こういったことをマネージドサービスとして提供してくれるのかと感心したと同時に，サービスを使う側にとって安心で心強いと感じました．仮にこういったことを自前で実装するとなると，かなりしんどくて（どういった項目を扱うか，実装や運用はどうするかなど），素早くサービスを展開しづらくなります．</p>
+<h3 id="気になった点">気になった点</h3>
+<p>気になった点は特にないですが，強いて言うなら，LLM 開発する上で有用な Microsoft 製の OSS がいくつか紹介されていたので，それについて付録などでもう少し使い方や組み合わせ方があっても面白いかなと思いました．</p>
+<h2 id="おわりに">おわりに</h2>
+<p>今回献本頂いて書籍を読むまで Azure, Azure OpenAI Service のことはほぼ知りませんでした🙇‍♂️</p>
+<p>ただ本書を読んでいくことで，Azure OpenAI Service の使い勝手の良さや導入のしやすさなどはとても感じることができました！興味深かった点/印象に残った点でも書きましたが，Azure Machine Learning プロンプトフローを使った開発は非常に開発者体験が良さそうに感じるため，まだ時間が取れず，実際には触れていないのですが，これを機に是非触ってみたいと感じさせられるものでした💪</p>
+<p>他にも Microsoft の OSS が所々で紹介されていて知らないものも多かったので，参考になりました！</p>
+<ul>
+<li><a href="https://github.com/microsoft/DeepSpeed" target="_blank">DeepSpeed</a>
+<ul>
+<li>Deep Learning モデルの学習・推論を高速化するフレームワーク</li>
+</ul>
+</li>
+<li><a href="https://github.com/microsoft/semantic-kernel" target="_blank">Semantic Kernel</a>
+<ul>
+<li>LLM を自分のアプリに簡単に統合できる SDK</li>
+</ul>
+</li>
+</ul>
+<p>Azure を既に使ってる人はもちろんのこと，使ったことが無い人も本書を通して Azure OpenAI Service を使った ChatGPT/LLM のシステム開発に挑戦してみると楽しいと思います！</p>
+<p>もしこれらに興味がある人は是非手に取って見て下さい！！</p>
+
+        <hr>
+        
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#書籍の目次">書籍の目次</a></li>
+    <li><a href="#内容の紹介と感想">内容の紹介と感想</a>
+      <ul>
+        <li><a href="#第1部-microsoft-azure-での-chatgpt-活用">第1部: Microsoft Azure での ChatGPT 活用</a></li>
+        <li><a href="#第2部-rag-による社内文章検索の実装">第2部: RAG による社内文章検索の実装</a></li>
+        <li><a href="#第3部-copilot-stack-による-llm-アプリケーションの実装">第3部: Copilot stack による LLM アプリケーションの実装</a></li>
+        <li><a href="#第4部-ガバナンスと責任ある-ai">第4部: ガバナンスと責任ある AI</a></li>
+        <li><a href="#興味深かった点印象に残った点">興味深かった点/印象に残った点</a></li>
+        <li><a href="#気になった点">気になった点</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#書籍の目次">書籍の目次</a></li>
+    <li><a href="#内容の紹介と感想">内容の紹介と感想</a>
+      <ul>
+        <li><a href="#第1部-microsoft-azure-での-chatgpt-活用">第1部: Microsoft Azure での ChatGPT 活用</a></li>
+        <li><a href="#第2部-rag-による社内文章検索の実装">第2部: RAG による社内文章検索の実装</a></li>
+        <li><a href="#第3部-copilot-stack-による-llm-アプリケーションの実装">第3部: Copilot stack による LLM アプリケーションの実装</a></li>
+        <li><a href="#第4部-ガバナンスと責任ある-ai">第4部: ガバナンスと責任ある AI</a></li>
+        <li><a href="#興味深かった点印象に残った点">興味深かった点/印象に残った点</a></li>
+        <li><a href="#気になった点">気になった点</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2024
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

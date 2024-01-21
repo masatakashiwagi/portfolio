@@ -6,60 +6,49 @@
     <description>Recent content in ML on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate>
+    <atom:link href="https://masatakashiwagi.github.io/portfolio/tags/ml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>機械学習パイプラインの作り方を改めて考えてみる</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</link>
       <pubDate>Fri, 15 Dec 2023 01:49:24 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</guid>
       <description>はじめに もう今年もあと数週間ということで，1年があっという間に終わってしまいますね😅 この記事は MLOps Advent Calendar 2023 の15日目の記事になります！アドベントカレンダーの日付を選ぶ際についつい自分の好きな数字を選びがち</description>
     </item>
-    
     <item>
       <title>ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
       <pubDate>Wed, 09 Aug 2023 15:56:37 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</guid>
       <description>はじめに Annoy という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，Fatal Python error:</description>
     </item>
-    
     <item>
       <title>CML を使った ML モデルの CI/CD</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
       <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
       <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
     </item>
-    
     <item>
       <title>FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</link>
       <pubDate>Sun, 24 Apr 2022 02:10:25 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</guid>
       <description>はじめに 最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理を FastAPI と RabbitMQ を用いて検証したお話になりま</description>
     </item>
-    
     <item>
       <title>Tensorflow の Callback 関数をカスタマイズ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
       <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
       <description>はじめに AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator という SageMaker の interface があります． 一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に</description>
     </item>
-    
     <item>
       <title>RuntimeError: CUDA error: Device-side assert triggered の解決方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</link>
       <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</guid>
       <description>はじめに Pytorch でモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみると，原因と</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,281 +6,224 @@
     <description>Recent content on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 15 Dec 2023 01:49:24 +0900</lastBuildDate><atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jan 2024 01:17:02 +0900</lastBuildDate>
+    <atom:link href="https://masatakashiwagi.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を読んでの書評</title>
+      <link>https://masatakashiwagi.github.io/portfolio/post/review-azure-openai-service-book/</link>
+      <pubDate>Sun, 21 Jan 2024 01:17:02 +0900</pubDate>
+      <guid>https://masatakashiwagi.github.io/portfolio/post/review-azure-openai-service-book/</guid>
+      <description>はじめに 2024年1月24日に発売される「Azure OpenAI Service ではじめる ChatGPT/LLM システム構築入門」を著者の一人である立脇さんから献本頂いたので，書評を書いていきます！ 改めて，出版おめでとうございます🎉 Azure OpenAI Serv</description>
+    </item>
     <item>
       <title>機械学習パイプラインの作り方を改めて考えてみる</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</link>
       <pubDate>Fri, 15 Dec 2023 01:49:24 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/</guid>
       <description>はじめに もう今年もあと数週間ということで，1年があっという間に終わってしまいますね😅 この記事は MLOps Advent Calendar 2023 の15日目の記事になります！アドベントカレンダーの日付を選ぶ際についつい自分の好きな数字を選びがち</description>
     </item>
-    
     <item>
       <title>Netflix の事例から RecSysOps を学ぶ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</link>
       <pubDate>Mon, 02 Oct 2023 15:58:26 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/learning-recsysops-from-netflix-practices/</guid>
       <description>はじめに Netflix は RecSys のトップランナーの1社であり，そこで行われているオペレーションは非常に興味深く気になっていたので，2022年のテックブログで紹介された RecSysOps に関する取り組みからノウハウを学ぼうと思い，記事の</description>
     </item>
-    
     <item>
       <title>Vertex AI Pipelines のサービスアカウントで少しつまずいたので整理した</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/</link>
       <pubDate>Mon, 14 Aug 2023 13:00:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/service-account-for-vertex-ai-pipelines/</guid>
       <description>はじめに Vertex AI Pipelines のサービスアカウント周りが分かりづらかったのと，GCP の他のサービスへの権限付与（IAM ロールの付与）の方法について備忘録として残しておきます． Vertex AI Pipelines に関連する3つのサービスアカウント Vertex</description>
     </item>
-    
     <item>
       <title>ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
       <pubDate>Wed, 09 Aug 2023 15:56:37 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</guid>
       <description>はじめに Annoy という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，Fatal Python error:</description>
     </item>
-    
     <item>
       <title>データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</link>
       <pubDate>Mon, 31 Jul 2023 13:39:35 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</guid>
       <description>はじめに Python のデータフレームを使ってレコメンドリストを生成した場合に遭遇した内容で，備忘録がてら筆を取ってます．内容としては，リストを ndarray に変換して，それらの値が入ったデータフレームを csv ファイルとして保存</description>
     </item>
-    
     <item>
       <title>About me</title>
       <link>https://masatakashiwagi.github.io/portfolio/about/</link>
       <pubDate>Sun, 02 Apr 2023 17:00:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/about/</guid>
-      <description>I&amp;rsquo;m Masataka Kashiwagi , also known as asteriam.
-My specialty:
-MLOps (Operation and improvement of machine learning systems, various automations, and planning) Recommendation Systems Project Management I&amp;rsquo;m responsible for product growth using machine learning, and also working on improving the user experience through machine learning.
-I&amp;rsquo;m interested in multimodal learning and in consumer behavior model in life events.
-Work Experience [Apr. 2023 - Present] Machine Learning Engineer - Tech Lead, Commmune, Inc.
-Develop recommendation system for customer communication platform. Responsible as a machine learning tech lead for the stable operation of the machine learning infrastructure. [June. 2021 - Mar. 2023] Machine Learning Engineer, Connehito, Inc.</description>
+      <description>I&amp;rsquo;m Masataka Kashiwagi , also known as asteriam.&#xA;My specialty:&#xA;MLOps (Operation and improvement of machine learning systems, various automations, and planning) Recommendation Systems Project Management I&amp;rsquo;m responsible for product growth using machine learning, and also working on improving the user experience through machine learning.&#xA;I&amp;rsquo;m interested in multimodal learning and in consumer behavior model in life events.&#xA;Work Experience [Apr. 2023 - Present] Machine Learning Engineer - Tech Lead, Commmune, Inc.&#xA;Develop recommendation system for customer communication platform. Responsible as a machine learning tech lead for the stable operation of the machine learning infrastructure. [June. 2021 - Mar. 2023] Machine Learning Engineer, Connehito, Inc.</description>
     </item>
-    
     <item>
       <title>検索に対する感想 - 検索基盤から検索エンジンの改善を始めて半年経て</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/</link>
       <pubDate>Tue, 20 Dec 2022 00:01:02 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/my-thoughts-on-the-search-experienced-in-the-first-six-months/</guid>
       <description>はじめに 最近，スタバで期間限定で販売しているの冬の新作「バターキャラメルミルフィーユ ラテ」のミルクをアーモンドミルクに変更して飲んだら激ウマでハマってしまいました笑．皆さんも是非飲んでみて下さい！（ち</description>
     </item>
-    
     <item>
       <title>Step Functions から Glue のジョブパラメータを指定して実行する方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</link>
       <pubDate>Wed, 16 Nov 2022 18:00:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/glue-job-params-and-stepfunctions-execution/</guid>
       <description>はじめに Glue を使ってデータ連携する際に，例えばデータ連携したい期間を変えたり，環境情報を渡したり，などのパラメータを与えて実行したい場合の備忘録です．特に，Step Functions (SFn) 経由で Glue を実行する場合に，インプッ</description>
     </item>
-    
     <item>
       <title>Step Functions での Opensearch Package の更新は直列or並列？</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</link>
       <pubDate>Sat, 29 Oct 2022 10:38:31 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/series-or-parallel-pipeline-for-updating-opensearch-package/</guid>
       <description>はじめに OpenSearch の Package 更新，つまりユーザー辞書やシノニム辞書の更新を Step Functions で行う場合に，直列で行うのが良いか並列で行うのが良いかメモ程度の備忘録として残しておきます． 結論としては，OpenSearch の Package 更新は</description>
     </item>
-    
     <item>
       <title>Airbyte でスプレッドシートのデータを BigQuery に連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</link>
       <pubDate>Thu, 29 Sep 2022 15:37:53 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/data-integration-airbyte/</guid>
       <description>はじめに 以前から気になっていた OSS の Airbyte という EL に特化した Data Integration ツールを使ってみたかったので，今回はこれを使って以前 Embulk で実装していたスプレッドシートから BigQuery へのデータ同期処理と同じことができるか試してみた話に</description>
     </item>
-    
     <item>
       <title>Github Actions と CodePipeline を使って Step Functions を動かす CI/CD を構築</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</link>
       <pubDate>Mon, 18 Jul 2022 09:58:08 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-cicd-github-actions-codepipeline-for-stepfunctions/</guid>
       <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
-    
     <item>
       <title>CML を使った ML モデルの CI/CD</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
       <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
       <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
     </item>
-    
     <item>
       <title>FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</link>
       <pubDate>Sun, 24 Apr 2022 02:10:25 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</guid>
       <description>はじめに 最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理を FastAPI と RabbitMQ を用いて検証したお話になりま</description>
     </item>
-    
     <item>
       <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
       <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
     </item>
-    
     <item>
       <title>Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</link>
       <pubDate>Sun, 30 Jan 2022 13:16:43 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</guid>
       <description>はじめに Step Functions で SageMaker のリソースを特にカスタムコンテナイメージで使う場合，単純に InstanceType として &amp;ldquo;ml.g4dn.xlarge&amp;rdquo; などの GPU マシンを設定するだけでは GPU を使った学習はできなくて，使いたいDockerfile に少し手を加える必要がありま</description>
     </item>
-    
     <item>
       <title>ValueError: Must setup local AWS configuration の対処方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</link>
       <pubDate>Sun, 26 Dec 2021 17:16:07 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</guid>
       <description>はじめに Step Functions で SageMaker ProceesingJob を使ってカスタムコンテナを実行した際に，その実行スクリプト内で ExperimentAnalytics の API を使用していたところ，「ValueError: Must setup local AWS configuration with a region supported by SageMaker.」というエラーが発生したので</description>
     </item>
-    
     <item>
       <title>スプレッドシートから BigQuery へ Digdag を使ったデータ連携</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</link>
       <pubDate>Wed, 22 Dec 2021 18:00:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/integrate-spreadsheets-to-bigquery-with-digdag/</guid>
       <description>はじめに 今回は，teamaya という個人プロジェクトで進めているデータ連携の話になります．コードは以下のリポジトリに置いてあるので，ご自由に使用下さい！ 具体的には，手元にあるスプレッドシートのデータを</description>
     </item>
-    
     <item>
       <title>teamaya という個人プロジェクトをはじめてみた</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</link>
       <pubDate>Sun, 12 Dec 2021 16:55:14 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/personal-project-teamaya/</guid>
       <description>はじめに 最近，データエンジニアリングと MLOps の領域への関心が個人的に高まっていて，何か個人プロジェクトで出来ないかと考えていたところ，普段スプレッドシートで記録している家計簿のデータを使って，データエンジ</description>
     </item>
-    
     <item>
       <title>Buy Me a Coffee をブログに追加した話</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee-option/</link>
       <pubDate>Tue, 07 Dec 2021 12:55:55 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/implement-buy-me-a-coffee-option/</guid>
       <description>はじめに Buy Me a Coffee というコーヒー1杯をクリエイター活動のサポートという形で寄付するサービスがあります．このサービスの存在は以前から他のエンジニアの個人ブログなどで知っていたのですが，@hurutoriy</description>
     </item>
-    
     <item>
       <title>スプレッドシートで行う Mann-Whitney の U 検定</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/</link>
       <pubDate>Tue, 16 Nov 2021 16:08:32 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/mann-whitney-utest-in-spreadsheet/</guid>
       <description>はじめに 普段は Python の SciPy というライブラリを用いて，AB テスト実施後の2群間における有意差を調べるために検定を行っていますが，Python を使っていない or このようなライブラリに触れたことがない人でも簡単に検</description>
     </item>
-    
     <item>
       <title>Tensorflow の Callback 関数をカスタマイズ</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</link>
       <pubDate>Wed, 10 Nov 2021 00:14:33 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/customize-tf-callback/</guid>
       <description>はじめに AWS の SageMaker 上で SageMaker Python SDK を使用して独自の機械学習モデルを作成することができますが，その際に学習や評価が行える Estimator という SageMaker の interface があります． 一方で，SageMaker Experiments で実験管理を行いたい場合には，この Estimator に</description>
     </item>
-    
     <item>
       <title>Podcast による配信のキッカケとその方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</link>
       <pubDate>Sun, 13 Jun 2021 16:32:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/podcast-broadcast-method/</guid>
       <description>はじめに 6月から友人の@navitacionさんと一緒に Podcast の配信を開始しました．テック系の話題など自分たちが興味のある内容をあれこれと話すものになります． Anchor という無料で配信できるプラットフォームを使用</description>
     </item>
-    
     <item>
       <title>Activity</title>
       <link>https://masatakashiwagi.github.io/portfolio/activity/</link>
       <pubDate>Tue, 01 Jun 2021 17:00:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/activity/</guid>
       <description>Data Competition Kaggle Mechanisms of Action (MoA) Prediction - 34th/4373 Silver medal (team) ASHRAE - Great Energy Predictor III - 69th/3594 Silver medal (solo) IEEE-CIS Fraud Detection - 288th/6381 Silver medal (solo) Shopee - Price Match Guarantee - 179th/2464 Bronze medal (solo) Projects MLOps Practices 各社の MLOps に関する事例を集めた Web サイト MLOps community JP 運営スタッフとして，イベントの企画とコミュニティーの運営をしています</description>
     </item>
-    
     <item>
       <title>Kaggle-Shopee コンペの振り返りとソリューション</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</link>
       <pubDate>Fri, 14 May 2021 15:44:00 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-shopee-solution/</guid>
       <description>Kaggle-Shopee コンペの振り返り 2021/03/09~2021/05/11まで開催していたShopee コンペの振り返りになります． 2週間程度しか手を動かせなかったですが，久しぶりに参加したので備忘録として記録を残し</description>
     </item>
-    
     <item>
       <title>VSCode と git を連携して push できるようにするまで</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/</link>
       <pubDate>Fri, 26 Mar 2021 22:18:34 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/</guid>
       <description>はじめに 今まで仕事では，開発環境として IntelliJ を使っていたのですが，最近は VSCode の人気が高く Extensions も便利なものが多くあるということで，個人的な作業をする時は VSCode を使ってみようと思って使っています． そんな中で，タイトル</description>
     </item>
-    
     <item>
       <title>RuntimeError: CUDA error: Device-side assert triggered の解決方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</link>
       <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</guid>
       <description>はじめに Pytorch でモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみると，原因と</description>
     </item>
-    
     <item>
       <title>Kaggle-MoA の振り返り</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/</link>
       <pubDate>Fri, 11 Dec 2020 23:13:30 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-moa/</guid>
       <description>Kaggle-MoA コンペに Team 90&amp;rsquo;s で初参加 このブログは2020/9/4~12/1まで開催していた MoA コンペでの取り組みを紹介する内容です． （コンペの詳細な内容については割愛します） 今回のコンペでは，同世代のメンバーでチーム</description>
     </item>
-    
     <item>
-      <title>Hugoを使ったポートフォリオ作成</title>
+      <title>Hugo を使ったポートフォリオ作成</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/hugo-portfolio/</guid>
       <description>ポートフォリオ作成 こちらの Qiita の記事で Hugo を使って簡単にポートフォリオを作成できるというのを見かけたので，以前まで使っていた personal page を移植しました． 移植した際に少し詰まった部分があるので，Tips としてこの記</description>
     </item>
-    
     <item>
       <title>Kaggle を始めて半年経って個人的に得たもの</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</link>
       <pubDate>Fri, 20 Dec 2019 12:41:03 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/kaggle-get-something/</guid>
       <description>はじめに Kaggle を始めて半年ほど経ち，個人的にこの半年で得たものを整理するという意味で「kaggle その2 Advent Calendar 2019」の20日目を担当します． 簡単な自己紹介として，普段は都内のベンチャー企業で主に製造業の</description>
     </item>
-    
     <item>
       <title>Excel Binary Workbook を Python で処理</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</link>
       <pubDate>Sat, 05 Oct 2019 15:16:44 +0900</pubDate>
-      
       <guid>https://masatakashiwagi.github.io/portfolio/post/excel-processing-using-python/</guid>
       <description>はじめに 今回は，先日初めて見たファイル形式の Excel Binary Workbook (xlsb) に関して，python で csv にパースする話です． .xlsx はよくある Excel ファイルの形式ですが，それのバイナリー形式である .xlsb に関しての話です．（今まで見たことなか</description>
     </item>
-    
   </channel>
 </rss>
