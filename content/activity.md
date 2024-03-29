@@ -31,6 +31,10 @@ tags = []
 
 ## **Presentations**
 
+[28th Mar. 2024] **<u>[ML Career Night #1｜生成AI時代の機械学習エンジニアのキャリア戦略](https://tech-track.connpass.com/event/304056/)</u>**
+
+- [これまでのキャリアとこれからMLエンジニアとしてどう動くか](https://speakerdeck.com/masatakashiwagi/koremadenokiyariatokorekaramlenziniatositedoudong-kuka)
+
 [31th Oct. 2023] **<u>[第35回 MLOps 勉強会](https://mlops.connpass.com/event/297976/)</u>**
 
 - [コミュニティプラットフォームのバッチレコメンドを支える機械学習基盤](https://speakerdeck.com/masatakashiwagi/di-35hui-mlops-mian-qiang-hui-komiyuniteipuratutohuomunobatutirekomendowozhi-eruji-jie-xue-xi-ji-pan)
@@ -47,7 +51,7 @@ tags = []
 
 - [AWS のマネージドサービスで実現するニアリアルタイムな検索基盤](https://speakerdeck.com/masatakashiwagi/jaws-days-2022-awsnomanezidosabisudeshi-xian-suruniariarutaimunajian-suo-ji-pan)
 
-[4th Apr. 2022] **<u>[第18回 MLOps 勉強会 (Online)](https://mlops.connpass.com/event/242652/)</u>**
+[4th Apr. 2022] **<u>[第18回 MLOps 勉強会](https://mlops.connpass.com/event/242652/)</u>**
 
 - [MLOps に関する事例を集めた MLOps Practices を公開した話](https://speakerdeck.com/masatakashiwagi/di-18hui-mlops-mian-qiang-hui-mlops-practicesfalseshao-jie)
 
