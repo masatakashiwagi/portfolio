@@ -57,6 +57,10 @@ tags = []
 
 [Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかった IT 業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
 
+## **Articles**
+
+- [「ML Career Night #1｜生成AI時代の機械学習エンジニアのキャリア戦略」 イベントレポート](https://techhire.trackrecords.co.jp/media/ML-Career-Night1)
+
 ## **Company's Tech Blog**
 
 本業 or 副業先の会社で書いたテックブログ
