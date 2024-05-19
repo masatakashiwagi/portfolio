@@ -1,7 +1,7 @@
 +++
 title = "About me"
 description = "This is personal information about me."
-date = 2023-04-02T17:00:00+09:00
+date = 2024-05-19T00:00:00+09:00
 showLicense = false
 showToc = false
 share = false
