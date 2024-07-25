@@ -24,7 +24,7 @@ I'm interested in multimodal learning and in consumer behavior model in life eve
 
 ## **Work Experience**
 
-**[Apr. 2023 - Present] Machine Learning Engineer - ML Team Lead, [Commune, Inc.](https://commune.co.jp/)**
+**[Apr. 2023 - Present] Machine Learning Engineer & Tech Lead Manager for ML/DS Team, [Commune, Inc.](https://commune.co.jp/)**
 
 - Develop Recommendation, Search, Generative AI system for community success platform.
 - Responsible as a machine learning team lead for the stable operation of the machine learning infrastructure.
