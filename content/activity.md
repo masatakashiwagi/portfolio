@@ -57,6 +57,13 @@ tags = []
 
 [Closed Event. 2021] **<u>[こんなに違う大手とベンチャー！ 就活前に知りたかった IT 業界の舞台裏](https://www.goodfind.jp/2021/seminar/5265)</u>**
 
+## **Books**
+
+- [事例でわかるMLOps 機械学習の成果をスケールさせる処方箋 (KS情報科学専門書)](https://amzn.asia/d/5OYHUf5)
+  - 第2部 MLOpsの実践事例と処方箋 - 10章 ML Test Score を用いた機械学習システムの定量的なアセスメント
+
+  ![事例でわかるMLOps](../img/cover_mlops_obiari.jpg "事例でわかるMLOps")
+
 ## **Articles**
 
 - [機械学習基盤のアーキテクチャ特集 〜8社の設計意図と今後の展望〜](https://findy-tools.io/articles/ml/17)
