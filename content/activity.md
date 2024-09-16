@@ -31,6 +31,10 @@ tags = []
 
 ## **Presentations**
 
+[2nd Oct. 2024] **<u>[第45回 『事例でわかるMLOps 機械学習の成果をスケールさせる処方箋』出版記念MLOps勉強会](https://mlops.connpass.com/event/328296/)</u>**
+
+- [TBA]()
+
 [28th Mar. 2024] **<u>[ML Career Night #1｜生成AI時代の機械学習エンジニアのキャリア戦略](https://tech-track.connpass.com/event/304056/)</u>**
 
 - [これまでのキャリアとこれからMLエンジニアとしてどう動くか](https://speakerdeck.com/masatakashiwagi/koremadenokiyariatokorekaramlenziniatositedoudong-kuka)
