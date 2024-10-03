@@ -31,7 +31,7 @@ tags = []
 
 ## **Presentations**
 
-[2nd Oct. 2024] **<u>[第45回 『事例でわかるMLOps 機械学習の成果をスケールさせる処方箋』出版記念MLOps勉強会](https://mlops.connpass.com/event/328296/)</u>**
+[2nd Oct. 2024] **<u>[第45回 『事例でわかるMLOps 機械学習の成果をスケールさせる処方箋』 出版記念 MLOps勉強会](https://mlops.connpass.com/event/328296/)</u>**
 
 - [ML Test Score を用いた機械学習システムの定量的なアセスメント](https://speakerdeck.com/masatakashiwagi/di-45hui-mlops-mian-qiang-hui-ml-test-score-woyong-ita-ji-jie-xue-xi-sisutemunoding-liang-de-naasesumento-374bf166-6062-49f0-9599-c898c7899cfa)
 
