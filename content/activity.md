@@ -63,7 +63,7 @@ tags = []
 
 ## **Books**
 
-- [事例でわかるMLOps 機械学習の成果をスケールさせる処方箋 (KS情報科学専門書)](https://amzn.asia/d/5OYHUf5)
+- [事例でわかるMLOps 機械学習の成果をスケールさせる処方箋 (KS情報科学専門書)](https://www.kspub.co.jp/book/detail/5369562.html)
   - 第2部 MLOpsの実践事例と処方箋 - 10章 ML Test Score を用いた機械学習システムの定量的なアセスメント
 
   ![事例でわかるMLOps](../img/cover_mlops_obiari.jpg "事例でわかるMLOps")
