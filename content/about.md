@@ -12,6 +12,8 @@ tags = []
 
 I'm **_Masataka Kashiwagi_** , also known as **_asteriam_**.
 
+This is my career summary in Japanese → [About me](https://mkashiwagi-about-me.super.site/)
+
 My specialty:
 
 - MLOps (Operation and improvement of machine learning systems, various automations, and planning)
@@ -21,8 +23,6 @@ My specialty:
 I'm responsible for product growth using machine learning, and also working on improving the user experience through machine learning.
 
 I'm interested in multimodal learning and in consumer behavior model in life events.
-
-This is my career summary in Japanese: [About me](https://mkashiwagi-about-me.super.site/)
 
 ## **Work Experience**
 
