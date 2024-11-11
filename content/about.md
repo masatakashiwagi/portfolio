@@ -22,6 +22,8 @@ I'm responsible for product growth using machine learning, and also working on i
 
 I'm interested in multimodal learning and in consumer behavior model in life events.
 
+This is my career summary in Japanese: [About me](https://mkashiwagi-about-me.super.site/)
+
 ## **Work Experience**
 
 **[Apr. 2023 - Present] Machine Learning Tech Lead Manager for ML/DS Team, [Commune, Inc.](https://commune.co.jp/)**
