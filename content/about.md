@@ -12,8 +12,6 @@ tags = []
 
 I'm **_Masataka Kashiwagi_** , also known as **_asteriam_**.
 
-This is my career summary in Japanese → [About me](https://mkashiwagi-about-me.super.site/)
-
 My specialty:
 
 - MLOps (Operation and improvement of machine learning systems, various automations, and planning)
