@@ -78,6 +78,7 @@ tags = []
 
 本業 or 副業先の会社で書いたテックブログ
 
+- [サービス×環境毎に用意していた GitHub Actions をサービス毎で1つに整理しました](https://tech.commune.co.jp/entry/2024/12/12/170000)
 - [Vertex AI Pipelines で利用している Kubeflow Pipelines を v2 へ移行しました](https://tech.commune.co.jp/entry/2024/06/24/180000)
 - [ニアリアルタイムで投稿レコメンドをユーザーに届ける](https://tech.commmune.jp/entry/2023/12/22/173000)
 - [コミュニティプラットフォームの投稿レコメンド機能を支える機械学習基盤](https://tech.commmune.jp/entry/2023/09/27/173000)
