@@ -70,6 +70,7 @@ tags = []
 
 ## **Articles**
 
+- [データの力でプロダクトに革新を！データチームの今と未来](https://note.com/communeinc/n/n75db9daa87e0)
 - [機械学習基盤のアーキテクチャ特集 〜8社の設計意図と今後の展望〜](https://findy-tools.io/articles/ml/17)
 - [コミューンが考える 技術発信の意義と今後の展望](https://note.com/communeinc/n/n4d0104c5d483)
 - [「ML Career Night #1｜生成AI時代の機械学習エンジニアのキャリア戦略」 イベントレポート](https://techhire.trackrecords.co.jp/media/ML-Career-Night1)
