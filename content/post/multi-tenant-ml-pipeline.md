@@ -2,7 +2,7 @@
 author = "Masataka Kashiwagi"
 title = "マルチテナント環境における機械学習適用について考える"
 description = "マルチテナント環境における機械学習適用について書きました"
-date = 2024-12-22T00:55:55+09:00
+date = 2024-12-24T00:55:55+09:00
 draft = false
 share = true
 showLicense = false

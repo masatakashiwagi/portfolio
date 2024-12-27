@@ -6,12 +6,12 @@
     <description>Recent content in Posts on Fractal Prologue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 22 Dec 2024 00:55:55 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Dec 2024 00:55:55 +0900</lastBuildDate>
     <atom:link href="https://masatakashiwagi.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>マルチテナント環境における機械学習適用について考える</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/</link>
-      <pubDate>Sun, 22 Dec 2024 00:55:55 +0900</pubDate>
+      <pubDate>Tue, 24 Dec 2024 00:55:55 +0900</pubDate>
       <guid>https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/</guid>
       <description>はじめに もう今年もあと数えるほどで終わってしまいますね😅（去年も同じこと書いている笑） 遅くなりましたが，この記事は MLOps Advent Calendar 2024 の24日目の記事になります！ 去年は「機械学習パイプラインの作り方を改めて考えて</description>
     </item>
