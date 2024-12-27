@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T3W696WJ1K');
+</script>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar-small.png?raw=true">
+<meta name="generator" content="Hugo 0.124.1">
+
+
+<meta name="google-site-verification" content="8AFoblWp77w-X0y6tUFrOqd4miPkLbiFNBz7acmmMho" />
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://masatakashiwagi.github.io/portfolio/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png" />
+<link rel="manifest" href="https://masatakashiwagi.github.io/portfolio/favicon/site.webmanifest" />
+<link rel="mask-icon" href="https://masatakashiwagi.github.io/portfolio/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon.ico" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+<title>マルチテナント環境における機械学習適用 - Fractal Prologue</title>
+
+
+<meta name="author" content="Masataka Kashiwagi" />
+
+
+<meta name="description" content="マルチテナント環境における機械学習適用について書きました" />
+
+
+<meta name="keywords" content="ML, MLOps" />
+
+<meta property="og:title" content="マルチテナント環境における機械学習適用" />
+<meta property="og:description" content="マルチテナント環境における機械学習適用について書きました" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/" /><meta property="og:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-12-22T00:55:55+09:00" />
+<meta property="article:modified_time" content="2024-12-22T00:55:55+09:00" /><meta property="og:site_name" content="Fractal Prologue" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://masatakashiwagi.github.io/portfolio/img/avatar.png" /><meta name="twitter:title" content="マルチテナント環境における機械学習適用"/>
+<meta name="twitter:description" content="マルチテナント環境における機械学習適用について書きました"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://masatakashiwagi.github.io/portfolio/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-T3W696WJ1K');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T3W696WJ1K"></script>
+
+
+<script>
+    window.ga_tid = 'G-T3W696WJ1K';
+    window.ga_api = 'https:\/\/masatakashiwagi.github.io\/portfolio\/';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+<link rel="stylesheet" href="/portfolio/css/custom.css">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-32x32.png">
+<link rel="shortcut icon" href="https://masatakashiwagi.github.io/portfolio/favicon/favicon-16x16.png">
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://masatakashiwagi.github.io/portfolio/">Fractal Prologue</a>
+            
+            <span class="title-sub">徒然なるままに...データと遊ぶ</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/">マルチテナント環境における機械学習適用</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2024-12-22</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;5832 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ml">ML</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <h2 id="はじめに">はじめに</h2>
+<p>もう今年もあと数えるほどで終わってしまいますね😅（去年も同じこと書いている笑）</p>
+<!-- 最近は個人ブログをあまり書けていないのがよろしくないので，来年は定期的に書いて行きます（宣言！） -->
+<p>遅くなりましたが，この記事は <a href="https://qiita.com/advent-calendar/2024/mlops" target="_blank">MLOps Advent Calendar 2024</a> の24日目の記事になります！</p>
+<p>去年は「<a href="https://masatakashiwagi.github.io/portfolio/post/how-to-recreate-ml-pipeline/" target="_blank">機械学習パイプラインの作り方を改めて考えてみる</a>」というポストをしましたが，今年は「マルチテナント環境における機械学習適用」について考えていることや悩みを紹介したいと思います．</p>
+<p>この内容を書こうと思ったモチベーションについて最初に説明すると，昨今 SaaS でのプロダクトやサービス提供が増えていて，ソフトウェアなどを複数のクライアント企業で共有するモデルである<strong>マルチテナント</strong>方式が取られていますが，プロダクトの機能として機械学習（ML）サービスをこのようなマルチテナント環境で提供する際の考え方や悩みどころに関する記事はあまり世の中で見かけない気がします．（以前からこのような方式で機械学習を提供している会社はたくさんありそうに思うのですが&hellip;）そこで，参考になる記事が1つでもあればと思い，このブログを書くことにしました．</p>
+<p>本ブログの構成としては，最初にマルチテナント環境での機械学習の話題が触れられている AWS の記事「<a href="https://aws.amazon.com/jp/blogs/apn/implementing-a-multi-tenant-mlaas-build-environment-with-amazon-sagemaker-pipelines/" target="_blank">Implementing a Multi-Tenant MLaaS Build Environment with Amazon SageMaker Pipelines</a>」と Azure の記事「<a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/ai-ml" target="_blank">Architectural approaches for AI and ML in multitenant solutions</a>」を参考にマルチテナント環境での ML の考慮事項について紹介します．後半では，僕が経験してきた SaaS 提供での ML サービスの話題なども例として紹介したいと思います．</p>
+<h2 id="マルチテナント環境での-ml-適用のための考慮事項">マルチテナント環境での ML 適用のための考慮事項</h2>
+<p>ML 適用を考える際には，モデルの学習と推論という2つの大きなフェーズがあります．これらのフェーズには，モデルとデータ，そしてそれらを支えるインフラシステムが密接に関連しています．</p>
+<p>マルチテナント（複数の顧客が同一のシステムを共有する）環境では<strong>テナントの分離</strong>が重要な関心事になります．AWS のアーキテクチャガイドラインでは，これを Silo（完全分離）・Pool（共有）・Bridge（ハイブリッド）の3つのモデルとして紹介（<a href="https://docs.aws.amazon.com/wellarchitected/latest/saas-lens/silo-pool-and-bridge-models.html" target="_blank">Silo, Pool, and Bridge Models</a>）しています．</p>
+<p>ML の文脈では，データとモデルのセキュリティが特に重要です．具体的には，テナントが他のテナントのデータやモデルへ未承認または不正にアクセスできないようにする必要があります．例えば，投稿監視システムでは，テナント固有の監視ルールがある一方で，暴力的な投稿の検出など，すべてのテナントに共通する要件も存在します．このような共通要件に対しては，すべてのテナントのデータを統合して学習することで，より大規模なデータセットを活用でき，効果的なモデルを構築できる可能性があります．ただ，このようなデータ統合については，セキュリティ上問題ないか，契約的に大丈夫かといった制約を確認する必要があります．</p>
+<h3 id="テナントの分離パターン">テナントの分離パターン</h3>
+<p>ここで話をテナントの分離に戻すと，マルチテナント環境における ML モデル・パイプラインの実装方式として，データとモデルの観点から主に以下の2つのアプローチがあります．</p>
+<ul>
+<li>
+<p><strong>テナント専用のモデル</strong></p>
+<ul>
+<li>各テナントに専用リソースが提供されるモデルで，テナント固有のデータのみで学習を行い，テナントごとに独立したモデルが作成される</li>
+<li>ML パイプラインの定義は複数のテナントで共有されることも多い</li>
+<li>参考：AWS の MLaaS（Machine Learning as a Service）実装ガイドラインではテナント専用 ML モデルの具体的な構築例が載せられている</li>
+</ul>
+<p>テナント専用のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，載せておきます．
+<img class="img-zoomable" src="../../img/multi-tenant-tenant-specific-models.png" alt="Pipeline" />
+</p>
+</li>
+<li>
+<p><strong>テナント共有のモデル</strong></p>
+<ul>
+<li>複数のテナントでリソースを共有しているモデルで，すべてのテナントのデータを用いて学習が行われ，単一の共有モデルが作成される</li>
+<li>テナント共有のモデルの例としては，事前学習済みの共通モデルを全テナントで利用するケースがある</li>
+</ul>
+<p>こちらもテナント共有のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，載せておきます．
+<img class="img-zoomable" src="../../img/multi-tenant-shared-tenant-trained-models.png" alt="Pipeline" />
+
+<img class="img-zoomable" src="../../img/multi-tenant-shared-pretrained-models.png" alt="Pipeline" />
+</p>
+</li>
+</ul>
+<p>さらに，これらのハイブリッドアプローチとして，共有の事前学習済みモデルをベースにテナント固有のデータでファインチューニングを行う方式があります．この方式は，一般的な特徴を共有モデルで捉えつつ，テナント固有の要件に対応できる利点があります．</p>
+<h3 id="スケーラビリティは要注意">スケーラビリティは要注意</h3>
+<p>スケーラビリティは特に大事な要素だと感じます．サービスが拡大していくとテナントの数が増えていき，それに伴いテナントが保有するデータ量（ユーザー数，ログデータ）も増えていきます．</p>
+<ul>
+<li>
+<p>テナント専用のモデル</p>
+<p>必要なモデル数はテナント数に比例します．使用するデータについてはテナント毎でデータ量の差はあるものの，基本的には増加の一途を辿ることになるので，モデル学習時にどれだけのデータを使用するかの調整と，コンピューティングリソースの適切な割り当て（CPU, メモリ）が必要になります．これはコストにも関わってきます．また，テナント数に比例したモデル数になるので，マネージドサービスを使う場合は Quotas and limits が存在するため，システム設計をきちんと行う必要があります．</p>
+</li>
+<li>
+<p>テナント共有のモデル</p>
+<p>すべてのテナントデータを用いて学習を行うため，学習用のリソースがテナント数の増加と同じ速度でスケーリングされる可能性が低くなりますが，その分データ量が専用モデルと比較して多くなり，モデルの学習時間も長くなる傾向にあります．これは学習頻度にも影響してきます．</p>
+</li>
+</ul>
+<p>次に推論についても考えてみると，テナント専用のモデルを用意する場合が特に厄介です．方針は大きく2つあると思います．</p>
+<ol>
+<li>テナント毎に独立したサービングコンテナを用意する（単一モデルエンドポイント）
+<ul>
+<li>Pros:
+<ul>
+<li>テナント毎のカスタマイズが容易で，リソースもテナント毎に適した配分をすることが可能になる</li>
+</ul>
+</li>
+<li>Cons:
+<ul>
+<li>テナント毎にサービングコンテナを用意する必要があるため，インフラコストが増加しがちで，デプロイメント作業やシステムの管理が複雑になる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>複数のテナントモデルをホストできる共有サービングコンテナを用意する（マルチモデルエンドポイント）
+<ul>
+<li>Pros:
+<ul>
+<li>インフラコストは効率的になる．アクセス頻度の高いモデルと低いモデルが混在している場合は，トラフィックが効率的に処理可能になる</li>
+</ul>
+</li>
+<li>Cons:
+<ul>
+<li>テナント間の分離レベルが低下するため，障害が発生した場合に影響範囲が全体に波及する．また <a href="https://docs.aws.amazon.com/wellarchitected/latest/saas-lens/noisy-neighbor.html" target="_blank">Noisy Neighbors</a>（うるさい隣人）に注意が必要で，リソースをテナント間で共有している場合は，1つの大きなテナントによりリソースを過度に占有され，システム全体のパフォーマンスが低下する可能性がある</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>AWS の <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html" target="_blank">Multi-model endpoints</a> というドキュメントから下図をお借りしました．マルチエンドポイントと単一モデルエンドポイント（Dedicated Endpoint）の違いがわかりやすいと思います．</p>
+<p><img class="img-zoomable" src="../../img/multi-tenant-multi-model-endpoints-diagram.png" alt="Multi-Endpoint" />
+</p>
+<p>どちらを選択しても一長一短あるので，自分たちのユースケースに応じた選択になると思います．マネージドサービスを利用している場合は，オートスケールする設定にすることが多いと思いますが，気づいたら複数インスタンスが立ち上がってコストが爆発するケースもあるので，推論システムを用意する場合は慎重に進める必要があると感じています．</p>
+<p>推論システムの話は，「事例でわかる MLOps - 6.3.5 推論システム -デプロイと推論システム-」の章で解説されているので，参考になると思います！</p>
+<h3 id="その他の要素">その他の要素</h3>
+<p>他には，パフォーマンスや実装の複雑さ，コストの話など考えることが多くあります．またマルチテナントでは公平性についても議論されていて，<a href="https://aws.amazon.com/jp/builders-library/fairness-in-multi-tenant-systems/" target="_blank">Fairness in multi-tenant systems</a> という AWS のアーキテクチャガイドラインが記された記事もあります．</p>
+<h2 id="saas-プロダクトでの-ml-サービスを考えてみる">SaaS プロダクトでの ML サービスを考えてみる</h2>
+<p>題材として推薦システムを取り上げ、以下の2つのユースケースについて検討してみます：</p>
+<ul>
+<li>コンテンツ間の関連性に基づくレコメンド</li>
+<li>ユーザーに応じたコンテンツのレコメンド（パーソナライズレコメンド）</li>
+</ul>
+<h3 id="1-共有モデルを用いた関連コンテンツの推薦システム">1. 共有モデルを用いた関連コンテンツの推薦システム</h3>
+<p>関連コンテンツをどのような方法で実現するかは様々なアプローチがありますが，今回は一例としてコンテンツのタイトルや本文のテキスト情報の類似性を使った推薦を考えます．テキストの類似性を見るのであれば，学習済みの埋め込みモデルを用いて埋め込みベクトルを計算し，コサイン類似度で関連性の定量化を行うことができます．この場合は，テナント共有のモデルの章で紹介した共通の学習済みモデルから推論を行うパターンが考えられそうです．</p>
+<p>提供する形態は，バッチ推薦として1日1回コンテンツに紐づいた推薦リストを用意してテナント毎にレコメンドを行います．</p>
+<p>前処理や埋め込みベクトルの計算，レコメンド結果の保存といった一連の処理を毎日行う必要があるため，学習パイプラインを用意して処理をコンポーネント単位に分割して実行できると良さそうです．これをテナント毎にパイプラインを用意するか，それとも1つのパイプラインですべてのテナントのデータを処理するか悩ましいです．</p>
+<p>悩ましい点としては，エラーハンドリングやリトライ処理の設計があります．エラーが発生した場合にどの時点から処理を再実行すべきなのか，すべての処理が完了しないとすべてのテナントに展開できないのかなど考えておくべきことがあります．</p>
+<p>また，データ量にも注意が必要になります．テナントによってコンテンツ量が違うため，あるテナントでは数千件，別のテナントでは数万件など考えられます．1つのパイプラインで全てを処理しようとしたら，推論時間も気にしないといけないです．</p>
+<p><img class="img-zoomable" src="../../img/multi-tenant-all-tenant-shared-ml-pipelines.png" alt="Shared-ML-Pipelines" />
+</p>
+<ol>
+<li>1つのパイプラインですべてのテナントのデータを処理
+<ul>
+<li>特定のテナントの処理でエラーが発生した際に，後続のテナントの処理に影響が出る</li>
+<li>リトライ処理をどの位置から実行するか，それを容易に可能とする仕組みが必要になる</li>
+<li>データ量がテナント毎で異なるため，マシンスペックなど適切なリソース設定が難しくテナント毎のコスト計算がしづらい</li>
+</ul>
+</li>
+<li>テナント毎のパイプラインでデータを処理
+<ul>
+<li>スケールする仕組みを用意しないと容易に破綻する．例えば，パイプラインを起動するスケジューラーをテナント毎に用意して起動させると考えた場合，テナント数だけ管理が必要で現実的ではない．またマネージドサービスを利用する場合は Quotas and limits が存在する</li>
+</ul>
+</li>
+</ol>
+<p>このため，モデルの定義やパイプラインの構成などは同一でもパイプライン自体をテナント毎に用意する選択肢が考えられます．これはテナントのデータ量に応じて適切なリソースを割り当てることができたり，エラーによる影響を最小限に留めるといったメリットがあります．</p>
+<p>テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図が，AWS の記事で紹介されていて参考になりそうです（下図）．</p>
+<p><img class="img-zoomable" src="../../img/multi-tenant-mlaas-aws.png" alt="MLaaS-AWS" />
+</p>
+<p>このアーキテクチャでは，同時実行数を制御するために，Amazon SQS を活用して，Lambda によって実行状況を確認しながら，Amazon SageMaker Pipelines を起動する役割を担っています．</p>
+<p>AWS ではなく，Google Cloud の Vertex AI Pipelines を活用する場合は，同時実行数の上限は300ですが，上限を超えた場合は自動的にキューに入れてくれる設計になっています（参考：<a href="https://cloud.google.com/vertex-ai/docs/quotas#vertex-ai-pipelines" target="_blank">Vertex AI quotas and limits - Vertex AI Pipelines</a>）．そのため，Cloud Scheduler と Cloud Functions を用いて起動するタイミングを制御すれば良さそうです．</p>
+<p>共有モデルを用いた場合は，モデルに関しては1つに定まるためそこに関しては考える要素が減ってきます．では，テナント専用のモデルを用いる場合はどうでしょうか？</p>
+<h3 id="2-専用モデルを用いたパーソナライズ推薦システム">2. 専用モデルを用いたパーソナライズ推薦システム</h3>
+<p>専用モデルといった場合，データは1つのテナントのみを使用し，モデルアーキテクチャはすべてのテナント共通であるケースと，モデルアーキテクチャもテナント毎で異なるケースが考えられます．</p>
+<p>機械学習を用いた推薦アルゴリズム特にディープラーニングを活用した場合は，精度にデータ量の問題が関わってきます．データ量が少ないと期待した精度が出ないため，テナントの属性データをクラスタリングしクラスター（大小の規模）に応じてより適切なアルゴリズムを選択したくなります．</p>
+<ul>
+<li>テナント毎のデータ量
+<ul>
+<li>多い場合：ディープラーニングによる複雑ではあるが効果的な手法</li>
+<li>少ない場合：協調フィルタリングなどのオーソドックスな手法</li>
+</ul>
+</li>
+</ul>
+<p>このようなケースでは，設定ファイルやパラメータを渡せるようにしたり，テナント毎にメタデータを付与して動的にアルゴリズムを切り替えて管理する仕組みが必要とされるかもしれません．専用モデルを用意するということは共通モデルと比べてモデルに関する要素が加わるため，より一層複雑性が増します．</p>
+<p>専用モデルをオンライン推論したい場合は，「スケーラビリティは要注意」の章でも触れましたが，とにかく難易度が上がるので，可能ならなるべく避けたいところです．</p>
+<h2 id="おわりに">おわりに</h2>
+<p>マルチテナント環境での ML 適用を考えた場合の懸案事項について，主にデータとモデルの観点から考えてみました．テナント専用モデルと共有モデルそれぞれのアプローチには一長一短があり，サービスの要件や運用条件に応じて適切な選択が必要だと思います．</p>
+<p>スケーラビリティだけなく，今回はあまり触れていないですが，セキュリティ・コストも重要な考慮すべき点として挙げられます．また推薦システムの例のように，実際のシステム設計では，要件に合わせたパイプラインの構成やエラーハンドリング・リソース管理など，様々な技術的な課題に直面しますが，クラウドサービスを組み合わせた適切なアーキテクチャ設計を行うことで対応できると思っています．なので，もっと色々なユースケースが世の中に紹介されると嬉しいと個人的に感じます（toB 系のサービスの話は中々世に出せないケースもあると思いますが）．</p>
+<p>マルチテナント環境は，1つの toC サービスで開発する場合とは考えることが変わってくるので，また違う難しさがあります．スケールアウト（マルチテナント）とスケールアップ（シングルサービス）のような感覚が個人的にあります😅</p>
+<p>まだまだ綺麗に整理しきれていないと思えますが，また定期的にユースケースを整理したいと思います👋</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://aws.amazon.com/jp/blogs/apn/implementing-a-multi-tenant-mlaas-build-environment-with-amazon-sagemaker-pipelines/" target="_blank">Implementing a Multi-Tenant MLaaS Build Environment with Amazon SageMaker Pipelines</a></li>
+<li><a href="https://aws.amazon.com/jp/blogs/apn/implementing-saas-tenant-isolation-using-amazon-sagemaker-endpoints-and-iam/" target="_blank">Implementing SaaS Tenant Isolation Using Amazon SageMaker Endpoints and IAM</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/ai-ml" target="_blank">Architectural approaches for AI and ML in multitenant solutions</a></li>
+<li><a href="https://www.kspub.co.jp/book/detail/5369562.html" target="_blank">事例でわかる MLOps - 6章 顧客ごとに複数機械学習モデルを出し分ける学習と推論のアーキテクチャ</a></li>
+</ul>
+
+        <hr>
+        
+
+  <h3>この記事と関連する記事を読んでみる</h3>
+  <ul>
+    
+      <li><a href="/portfolio/post/how-to-recreate-ml-pipeline/">機械学習パイプラインの作り方を改めて考えてみる</a></li>
+    
+      <li><a href="/portfolio/post/annoy-lib-illegal-instruction-error/">ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</a></li>
+    
+      <li><a href="/portfolio/post/build-continuous-machine-learning/">CML を使った ML モデルの CI/CD</a></li>
+    
+      <li><a href="/portfolio/post/async-ml-processing/">FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</a></li>
+    
+      <li><a href="/portfolio/post/customize-tf-callback/">Tensorflow の Callback 関数をカスタマイズ</a></li>
+    
+  </ul>
+
+        <div id="share-buttons">
+            
+
+<style>
+    #share-buttons {display: inline-block; vertical-align: middle; }
+    #share-buttons > div {
+        position: relative;
+        text-align: left;
+         
+        float: left;
+        margin-top: 10.25mm
+    }
+</style>
+
+
+<div id="share-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h2>Support</h2>
+        <p>ブログ記事を読んで頂き，ありがとうございます！もしこの記事が良かったり参考になったら，下記ボタンから&#x2615;一杯をサポートして頂けるとモチベーションが上がります！どうぞよろしくお願いします&#x1f929;</p>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="asteriam" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+    </div>
+    
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#マルチテナント環境での-ml-適用のための考慮事項">マルチテナント環境での ML 適用のための考慮事項</a>
+      <ul>
+        <li><a href="#テナントの分離パターン">テナントの分離パターン</a></li>
+        <li><a href="#スケーラビリティは要注意">スケーラビリティは要注意</a></li>
+        <li><a href="#その他の要素">その他の要素</a></li>
+      </ul>
+    </li>
+    <li><a href="#saas-プロダクトでの-ml-サービスを考えてみる">SaaS プロダクトでの ML サービスを考えてみる</a>
+      <ul>
+        <li><a href="#1-共有モデルを用いた関連コンテンツの推薦システム">1. 共有モデルを用いた関連コンテンツの推薦システム</a></li>
+        <li><a href="#2-専用モデルを用いたパーソナライズ推薦システム">2. 専用モデルを用いたパーソナライズ推薦システム</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/portfolio/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/activity/">Activity</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/archives/">Posts</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/portfolio/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/portfolio/tags/aws/">AWS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/book/">BOOK</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/data/">DATA</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/dev/">DEV</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ds/">DS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/gcp/">GCP</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/kaggle/">KAGGLE</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/ml/">ML</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/mlops/">MLOPS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/poem/">POEM</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/recsys/">RECSYS</a>
+            </span>
+            
+            <span>
+                <a href="/portfolio/tags/stats/">STATS</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>TOC</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#マルチテナント環境での-ml-適用のための考慮事項">マルチテナント環境での ML 適用のための考慮事項</a>
+      <ul>
+        <li><a href="#テナントの分離パターン">テナントの分離パターン</a></li>
+        <li><a href="#スケーラビリティは要注意">スケーラビリティは要注意</a></li>
+        <li><a href="#その他の要素">その他の要素</a></li>
+      </ul>
+    </li>
+    <li><a href="#saas-プロダクトでの-ml-サービスを考えてみる">SaaS プロダクトでの ML サービスを考えてみる</a>
+      <ul>
+        <li><a href="#1-共有モデルを用いた関連コンテンツの推薦システム">1. 共有モデルを用いた関連コンテンツの推薦システム</a></li>
+        <li><a href="#2-専用モデルを用いたパーソナライズ推薦システム">2. 専用モデルを用いたパーソナライズ推薦システム</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2019-2024
+                <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
+                 | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
+                | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/portfolio/assets/js/fuji.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"
+></script>
+
+
+
+</body>
+
+</html>

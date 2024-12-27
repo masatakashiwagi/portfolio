@@ -3,9 +3,28 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/activity/</loc>
+    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
     
-    <lastmod>2024-12-13T00:00:00+09:00</lastmod>
+    <lastmod>2024-12-22T00:55:55+09:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    
+    <priority>0.5</priority>
+    
+  </url>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
+    
+    <lastmod>2024-12-22T00:55:55+09:00</lastmod>
     
     <changefreq>weekly</changefreq>
     
@@ -16,7 +35,20 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/</loc>
+    <loc>https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/</loc>
+    
+    <lastmod>2024-12-22T00:55:55+09:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    
+    <priority>0.5</priority>
+    
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://masatakashiwagi.github.io/portfolio/activity/</loc>
     
     <lastmod>2024-12-13T00:00:00+09:00</lastmod>
     
@@ -51,25 +83,6 @@
     <priority>0.5</priority>
     
   </url>
-  
-  
-  
-  
-  
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/</loc>
-    
-    <lastmod>2024-01-21T01:17:02+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
   
   
   
