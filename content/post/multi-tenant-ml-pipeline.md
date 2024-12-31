@@ -42,7 +42,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
   ![Pipeline](../../img/multi-tenant-tenant-specific-models.png "Pipeline")
 
-  [pic: テナント専用のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
+  [img: テナント専用のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
 
 - **テナント共有のモデル**
   - 複数のテナントでリソースを共有しているモデルで，すべてのテナントのデータを用いて学習が行われ，単一の共有モデルが作成される
@@ -51,7 +51,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
   ![Pipeline](../../img/multi-tenant-shared-tenant-trained-models.png "Pipeline")
   ![Pipeline](../../img/multi-tenant-shared-pretrained-models.png "Pipeline")
 
-  [pic: テナント共有のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
+  [img: テナント共有のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
 
 さらに，これらのハイブリッドアプローチとして，共有の事前学習済みモデルをベースにテナント固有のデータでファインチューニングを行う方式があります．この方式は，一般的な特徴を共有モデルで捉えつつ，テナント固有の要件に対応できる利点があります．
 
@@ -84,7 +84,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 ![Multi-Endpoint](../../img/multi-tenant-multi-model-endpoints-diagram.png "Multi-Endpoint")
 
-[pic: AWS の [Multi-model endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html) というドキュメントから図を拝借しています]
+[img: AWS の [Multi-model endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html) というドキュメントから図を拝借しています]
 
 どちらを選択しても一長一短あるので，自分たちのユースケースに応じた選択になると思います．マネージドサービスを利用している場合は，オートスケールする設定にすることが多いと思いますが，気づいたら複数インスタンスが立ち上がってコストが爆発するケースもあるので，推論システムを用意する場合は慎重に進める必要があると感じています．
 
@@ -115,7 +115,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 ![Shared-ML-Pipelines](../../img/multi-tenant-all-tenant-shared-ml-pipelines.png "Shared-ML-Pipelines")
 
-[pic: すべてのテナントのデータを一括で処理する vs. テナント毎にデータを処理する]
+[img: すべてのテナントのデータを一括で処理する vs. テナント毎にデータを処理する]
 
 1. 1つのパイプラインですべてのテナントのデータを処理
     - 特定のテナントの処理でエラーが発生した際に，後続のテナントの処理に影響が出る
@@ -128,7 +128,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 ![MLaaS-AWS](../../img/multi-tenant-mlaas-aws.png "MLaaS-AWS")
 
-[pic: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図が，AWS の記事で紹介されているので拝借しています]
+[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図が，AWS の記事で紹介されているので拝借しています]
 
 このアーキテクチャでは，同時実行数を制御するために，Amazon SQS を活用して，Lambda によって実行状況を確認しながら，Amazon SageMaker Pipelines を起動する役割を担っています．
 
