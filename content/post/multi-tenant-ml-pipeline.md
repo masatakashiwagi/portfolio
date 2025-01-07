@@ -46,9 +46,11 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 - **テナント共有のモデル**
   - 複数のテナントでリソースを共有しているモデルで，すべてのテナントのデータを用いて学習が行われ，単一の共有モデルが作成される
-  - テナント共有のモデルの例としては，事前学習済みの共通モデルを全テナントで利用するケースがある
 
   ![Pipeline](../../img/multi-tenant-shared-tenant-trained-models.png "Pipeline")
+
+  - テナント共有のモデルの例としては，事前学習済みの共通モデルを全テナントで利用するケースがある
+
   ![Pipeline](../../img/multi-tenant-shared-pretrained-models.png "Pipeline")
 
   [img: テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）]
