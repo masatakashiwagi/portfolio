@@ -42,7 +42,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
   ![Pipeline](../../img/multi-tenant-tenant-specific-models.png "Pipeline")
 
-  [img: テナント専用のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
+  [img: テナント専用のモデルのパイプラインイメージ（ref. Azure の記事）]
 
 - **テナント共有のモデル**
   - 複数のテナントでリソースを共有しているモデルで，すべてのテナントのデータを用いて学習が行われ，単一の共有モデルが作成される
@@ -51,7 +51,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
   ![Pipeline](../../img/multi-tenant-shared-tenant-trained-models.png "Pipeline")
   ![Pipeline](../../img/multi-tenant-shared-pretrained-models.png "Pipeline")
 
-  [img: テナント共有のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]
+  [img: テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）]
 
 さらに，これらのハイブリッドアプローチとして，共有の事前学習済みモデルをベースにテナント固有のデータでファインチューニングを行う方式があります．この方式は，一般的な特徴を共有モデルで捉えつつ，テナント固有の要件に対応できる利点があります．
 
@@ -84,7 +84,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 ![Multi-Endpoint](../../img/multi-tenant-multi-model-endpoints-diagram.png "Multi-Endpoint")
 
-[img: AWS の [Multi-model endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html) というドキュメントから図を拝借しています]
+[img: ref. [Multi-model endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html)]
 
 どちらを選択しても一長一短あるので，自分たちのユースケースに応じた選択になると思います．マネージドサービスを利用している場合は，オートスケールする設定にすることが多いと思いますが，気づいたら複数インスタンスが立ち上がってコストが爆発するケースもあるので，推論システムを用意する場合は慎重に進める必要があると感じています．
 
@@ -128,7 +128,7 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 ![MLaaS-AWS](../../img/multi-tenant-mlaas-aws.png "MLaaS-AWS")
 
-[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図が，AWS の記事で紹介されているので拝借しています]
+[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図（ref. AWS の記事）]
 
 このアーキテクチャでは，同時実行数を制御するために，Amazon SQS を活用して，Lambda によって実行状況を確認しながら，Amazon SageMaker Pipelines を起動する役割を担っています．
 

@@ -144,7 +144,7 @@
         <a href="https://masatakashiwagi.github.io/portfolio/post/multi-tenant-ml-pipeline/">マルチテナント環境における機械学習適用について考える</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2024-12-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;5872 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ml">ML</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2024-12-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;5789 words</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/ml">ML</a>&nbsp;<a href="/tags/mlops">MLOps</a>&nbsp;</span>
 
     </div>
     
@@ -173,7 +173,7 @@
 </ul>
 <p><img class="img-zoomable" src="../../img/multi-tenant-tenant-specific-models.png" alt="Pipeline" />
 </p>
-<p>[img: テナント専用のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]</p>
+<p>[img: テナント専用のモデルのパイプラインイメージ（ref. Azure の記事）]</p>
 </li>
 <li>
 <p><strong>テナント共有のモデル</strong></p>
@@ -185,7 +185,7 @@
 
 <img class="img-zoomable" src="../../img/multi-tenant-shared-pretrained-models.png" alt="Pipeline" />
 </p>
-<p>[img: テナント共有のモデルのパイプラインイメージは Azure の記事にある図が分かりやすいと思うので，そちらか拝借しています]</p>
+<p>[img: テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）]</p>
 </li>
 </ul>
 <p>さらに，これらのハイブリッドアプローチとして，共有の事前学習済みモデルをベースにテナント固有のデータでファインチューニングを行う方式があります．この方式は，一般的な特徴を共有モデルで捉えつつ，テナント固有の要件に対応できる利点があります．</p>
@@ -235,7 +235,7 @@
 <p>マルチエンドポイントと単一モデルエンドポイント（Dedicated Endpoint）の違いがわかりやすいと思います．</p>
 <p><img class="img-zoomable" src="../../img/multi-tenant-multi-model-endpoints-diagram.png" alt="Multi-Endpoint" />
 </p>
-<p>[img: AWS の <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html" target="_blank">Multi-model endpoints</a> というドキュメントから図を拝借しています]</p>
+<p>[img: ref. <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html" target="_blank">Multi-model endpoints</a>]</p>
 <p>どちらを選択しても一長一短あるので，自分たちのユースケースに応じた選択になると思います．マネージドサービスを利用している場合は，オートスケールする設定にすることが多いと思いますが，気づいたら複数インスタンスが立ち上がってコストが爆発するケースもあるので，推論システムを用意する場合は慎重に進める必要があると感じています．</p>
 <p>推論システムの話は，「事例でわかる MLOps - 6.3.5 推論システム -デプロイと推論システム-」の章で解説されているので，参考になると思います！</p>
 <h3 id="その他の要素">その他の要素</h3>
@@ -272,7 +272,7 @@
 <p>このため，モデルの定義やパイプラインの構成などは同一でもパイプライン自体をテナント毎に用意する選択肢が考えられます．これはテナントのデータ量に応じて適切なリソースを割り当てることができたり，エラーによる影響を最小限に留めるといったメリットがあります．</p>
 <p><img class="img-zoomable" src="../../img/multi-tenant-mlaas-aws.png" alt="MLaaS-AWS" />
 </p>
-<p>[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図が，AWS の記事で紹介されているので拝借しています]</p>
+<p>[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図（ref. AWS の記事）]</p>
 <p>このアーキテクチャでは，同時実行数を制御するために，Amazon SQS を活用して，Lambda によって実行状況を確認しながら，Amazon SageMaker Pipelines を起動する役割を担っています．</p>
 <p>AWS ではなく，Google Cloud の Vertex AI Pipelines を活用する場合は，同時実行数の上限は300ですが，上限を超えた場合は自動的にキューに入れてくれる設計になっています（参考：<a href="https://cloud.google.com/vertex-ai/docs/quotas#vertex-ai-pipelines" target="_blank">Vertex AI quotas and limits - Vertex AI Pipelines</a>）．そのため，Cloud Scheduler と Cloud Functions を用いて起動するタイミングを制御すれば良さそうです．</p>
 <p>共有モデルを用いた場合は，モデルに関しては1つに定まるためそこに関しては考える要素が減ってきます．では，テナント専用のモデルを用いる場合はどうでしょうか？</p>
@@ -613,7 +613,7 @@
     <div class="container-lg clearfix">
         <div class="col-12 footer">
             
-            <span>&copy; 2019-2024
+            <span>&copy; 2019-2025
                 <a href="https://masatakashiwagi.github.io/portfolio/">Masataka Kashiwagi</a>
                  | <a href="https://github.com/masatakashiwagi/portfolio/">Source code</a> 
                 | Powered by <a href="https://github.com/amzrk2/hugo-theme-fuji/"
