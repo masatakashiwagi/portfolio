@@ -40,20 +40,25 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
   - ML パイプラインの定義は複数のテナントで共有されることも多い
   - 参考：AWS の MLaaS（Machine Learning as a Service）実装ガイドラインではテナント専用 ML モデルの具体的な構築例が載せられている
 
-  ![Pipeline](../../img/multi-tenant-tenant-specific-models.png "Pipeline")
-
-  [img: テナント専用のモデルのパイプラインイメージ（ref. Azure の記事）]
+  <br>
+  <center><img src="../../img/multi-tenant-tenant-specific-models.png" alt="属性"></center>
+  <center>テナント専用のモデルのパイプラインイメージ（ref. Azure の記事）</center>
+  <br>
 
 - **テナント共有のモデル**
   - 複数のテナントでリソースを共有しているモデルで，すべてのテナントのデータを用いて学習が行われ，単一の共有モデルが作成される
 
-  ![Pipeline](../../img/multi-tenant-shared-tenant-trained-models.png "Pipeline")
+  <br>
+  <center><img src="../../img/multi-tenant-shared-tenant-trained-models.png" alt="属性"></center>
+  <center>テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）</center>
+  <br>
 
   - テナント共有のモデルの例としては，事前学習済みの共通モデルを全テナントで利用するケースがある
 
-  ![Pipeline](../../img/multi-tenant-shared-pretrained-models.png "Pipeline")
-
-  [img: テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）]
+  <br>
+  <center><img src="../../img/multi-tenant-shared-pretrained-models.png" alt="属性"></center>
+  <center>テナント共有のモデルのパイプラインイメージ（ref. Azure の記事）</center>
+  <br>
 
 さらに，これらのハイブリッドアプローチとして，共有の事前学習済みモデルをベースにテナント固有のデータでファインチューニングを行う方式があります．この方式は，一般的な特徴を共有モデルで捉えつつ，テナント固有の要件に対応できる利点があります．
 
@@ -84,9 +89,9 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 マルチエンドポイントと単一モデルエンドポイント（Dedicated Endpoint）の違いがわかりやすいと思います．
 
-![Multi-Endpoint](../../img/multi-tenant-multi-model-endpoints-diagram.png "Multi-Endpoint")
-
-[img: ref. [Multi-model endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html)]
+<center><img src="../../img/multi-tenant-multi-model-endpoints-diagram.png" alt="属性"></center>
+<center><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html">Multi-model endpoints</a></center>
+<br>
 
 どちらを選択しても一長一短あるので，自分たちのユースケースに応じた選択になると思います．マネージドサービスを利用している場合は，オートスケールする設定にすることが多いと思いますが，気づいたら複数インスタンスが立ち上がってコストが爆発するケースもあるので，推論システムを用意する場合は慎重に進める必要があると感じています．
 
@@ -115,9 +120,10 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 また，データ量にも注意が必要になります．テナントによってコンテンツ量が違うため，あるテナントでは数千件，別のテナントでは数万件など考えられます．1つのパイプラインで全てを処理しようとしたら，推論時間も気にしないといけないです．
 
-![Shared-ML-Pipelines](../../img/multi-tenant-all-tenant-shared-ml-pipelines.png "Shared-ML-Pipelines")
-
-[img: すべてのテナントのデータを一括で処理する vs. テナント毎にデータを処理する]
+<br>
+<center><img src="../../img/multi-tenant-all-tenant-shared-ml-pipelines.png" alt="Shared-ML-Pipelines"></center>
+<center>すべてのテナントのデータを一括で処理する vs. テナント毎にデータを処理する</center>
+<br>
 
 1. 1つのパイプラインですべてのテナントのデータを処理
     - 特定のテナントの処理でエラーが発生した際に，後続のテナントの処理に影響が出る
@@ -128,9 +134,10 @@ ML の文脈では，データとモデルのセキュリティが特に重要�
 
 このため，モデルの定義やパイプラインの構成などは同一でもパイプライン自体をテナント毎に用意する選択肢が考えられます．これはテナントのデータ量に応じて適切なリソースを割り当てることができたり，エラーによる影響を最小限に留めるといったメリットがあります．
 
-![MLaaS-AWS](../../img/multi-tenant-mlaas-aws.png "MLaaS-AWS")
-
-[img: テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図（ref. AWS の記事）]
+<br>
+<center><img src="../../img/multi-tenant-mlaas-aws.png" alt="MLaaS-AWS"></center>
+<center>テナント毎のパイプラインでデータ処理を行うスケールするアーキテクチャ図（ref. AWS の記事）</center>
+<br>
 
 このアーキテクチャでは，同時実行数を制御するために，Amazon SQS を活用して，Lambda によって実行状況を確認しながら，Amazon SageMaker Pipelines を起動する役割を担っています．
 
