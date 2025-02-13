@@ -70,7 +70,12 @@ tags = []
 
 ## **Articles**
 
+### 2025
+
 - [ML/DS Sectionと未来のコミュニティ](https://note.com/communeinc/n/n8d0e7177d546)
+
+### 2024
+
 - [データの力でプロダクトに革新を！データチームの今と未来](https://note.com/communeinc/n/n75db9daa87e0)
 - [機械学習基盤のアーキテクチャ特集 〜8社の設計意図と今後の展望〜](https://findy-tools.io/articles/ml/17)
 - [コミューンが考える 技術発信の意義と今後の展望](https://note.com/communeinc/n/n4d0104c5d483)
@@ -80,19 +85,33 @@ tags = []
 
 本業 or 副業先の会社で書いたテックブログ
 
+### 2024
+
 - [サービス×環境毎に用意していた GitHub Actions をサービス毎で1つに整理しました](https://tech.commune.co.jp/entry/2024/12/12/170000)
 - [Vertex AI Pipelines で利用している Kubeflow Pipelines を v2 へ移行しました](https://tech.commune.co.jp/entry/2024/06/24/180000)
+
+### 2023
+
 - [ニアリアルタイムで投稿レコメンドをユーザーに届ける](https://tech.commmune.jp/entry/2023/12/22/173000)
 - [コミュニティプラットフォームの投稿レコメンド機能を支える機械学習基盤](https://tech.commmune.jp/entry/2023/09/27/173000)
 - [Cloud Firestore を活用したバッチレコメンドシステムを開発した話](https://tech.high-link.co.jp/entry/Cloud-Firestore-batch-recommend-system)
+
+### 2022
+
 - [BigQuery のシャーディングされたテーブルを OpenSearch へ連携する方法](https://tech.connehito.com/entry/2022/11/25/171208)
 - [Character filter を用いたアルファベットの大文字小文字対応によるゼロ件ヒット改善](https://tech.connehito.com/entry/2022/11/15/180104)
 - [ニアリアルタイムで同期される検索基盤 ~ パイプライン構築編 ~](https://tech.connehito.com/entry/2022/09/16/165655)
 - [ニアリアルタイムで同期される検索基盤を構築 ~ AWS Glue によるデータ同期編 ~](https://tech.connehito.com/entry/2022/08/24/184911)
 - [SageMaker と Step Functions を用いた機械学習パイプラインで構築した検閲システム（後編）](https://tech.connehito.com/entry/2022/03/28/190436)
 - [SageMaker と Step Functions を用いた機械学習パイプラインで構築した検閲システム（前編）](https://tech.connehito.com/entry/2022/03/24/173719)
+
+### 2021
+
 - [SageMaker Experiments を使った機械学習モデルの実験管理](https://tech.connehito.com/entry/2021/12/15/181332)
 - [ML Test Score を使って現状の機械学習システムをスコアリングしました](https://tech.connehito.com/entry/2021/09/30/181145)
+
+### 2020
+
 - [Python の機械学習ライブラリ tslearn を使った時系列データのクラスタリング](https://blog.brains-tech.co.jp/tslearn-time-series-clustering)
 
 ## **Podcast**
