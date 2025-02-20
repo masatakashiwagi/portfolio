@@ -72,6 +72,7 @@ tags = []
 
 ### 2025
 
+- [Vertex AI Pipelinesを活用した機械学習パイプラインの構築](https://findy-tools.io/products/vertexai/396/398)
 - [ML/DS Sectionと未来のコミュニティ](https://note.com/communeinc/n/n8d0e7177d546)
 
 ### 2024
