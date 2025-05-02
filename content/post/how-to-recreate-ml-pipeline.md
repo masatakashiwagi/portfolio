@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["ML", "MLOps"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/how-to-recreate-ml-pipeline/"
+_build = { list = false }
 +++
 
 ## はじめに

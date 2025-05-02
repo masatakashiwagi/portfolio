@@ -9,6 +9,9 @@ showLicense = false
 support = true
 math = true
 tags = ["DS", "STATS"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/mann-whitney-utest-in-spreadsheet/"
+_build = { list = false }
 +++
 
 ## はじめに

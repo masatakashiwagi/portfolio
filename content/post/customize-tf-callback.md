@@ -7,6 +7,9 @@ draft = false
 share = true
 showLicense = false
 tags = ["DEV", "ML"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/customize-tensorflow-callback/"
+_build = { list = false }
 +++
 
 ## はじめに

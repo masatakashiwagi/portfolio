@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "POEM"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/personal-project-teamaya/"
+_build = { list = false }
 +++
 
 ## はじめに

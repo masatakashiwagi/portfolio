@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["POEM", "MLOPS"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/start-mlops-practices-project/"
+_build = { list = false }
 +++
 
 ## はじめに

@@ -9,6 +9,9 @@ share = true
 showLicense = false
 support = true
 tags = ["POEM"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/implement-buy-me-a-coffee-option/"
+_build = { list = false }
 +++
 
 ## はじめに

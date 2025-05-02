@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["BOOK"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/review-azure-openai-service-book/"
+_build = { list = false }
 +++
 
 ## はじめに

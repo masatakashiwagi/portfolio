@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "AWS"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/value-error-local-aws-configuration/"
+_build = { list = false }
 +++
 
 ## はじめに

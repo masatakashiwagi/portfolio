@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["KAGGLE"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/kaggle-shopee-solution/"
+_build = { list = false }
 +++
 
 ## Kaggle-Shopee コンペの振り返り

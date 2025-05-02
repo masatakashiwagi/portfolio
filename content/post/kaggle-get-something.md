@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["POEM", "KAGGLE"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/kaggle-get-something/"
+_build = { list = false }
 +++
 
 ## はじめに

@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["POEM"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/podcast-broadcast-method/"
+_build = { list = false }
 +++
 
 ## はじめに

@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "DATA"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/airbyte-for-data-integration/"
+_build = { list = false }
 +++
 
 ## はじめに

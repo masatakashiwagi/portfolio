@@ -8,8 +8,10 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV"]
-aliases = ["/post/excel_processing_using_python/"]
-url = "/post/excel-processing-using-python/"
+# aliases = ["/post/excel_processing_using_python/"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/excel-processing-using-python/"
+_build = { list = false }
 +++
 
 ## はじめに

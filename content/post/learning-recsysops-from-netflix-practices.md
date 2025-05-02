@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["MLOPS", "RECSYS"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/learning-recsysops-from-netflix-practices/"
+_build = { list = false }
 +++
 
 ## はじめに

@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/hugo-portfolio/"
+_build = { list = false }
 +++
 
 ## ポートフォリオ作成

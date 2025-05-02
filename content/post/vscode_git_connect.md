@@ -8,8 +8,10 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV"]
-aliases = ["/post/vscode_git_connect/"]
-url = "/post/vscode-git-connect/"
+# aliases = ["/post/vscode_git_connect/"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/vscode-git-connect/"
+_build = { list = false }
 +++
 
 ## はじめに

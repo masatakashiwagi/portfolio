@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "DATA"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/save-array-list-in-dataframe/"
+_build = { list = false }
 +++
 
 ## はじめに

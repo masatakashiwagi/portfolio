@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["AWS", "DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/glue-job-params-and-stepfunctions-execution/"
+_build = { list = false }
 +++
 
 ## はじめに

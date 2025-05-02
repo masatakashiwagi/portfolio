@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["KAGGLE"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/kaggle-moa/"
+_build = { list = false }
 +++
 
 ## Kaggle-MoA コンペに Team 90's で初参加

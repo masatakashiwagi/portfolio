@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/python-update-nested-list-object/"
+_build = { list = false }
 +++
 
 ## 初期化したリストの更新処理でハマってしまった

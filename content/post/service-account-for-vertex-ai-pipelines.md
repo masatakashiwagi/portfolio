@@ -9,6 +9,9 @@ share = true
 showLicense = false
 support = true
 tags = ["GCP", "DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/service-account-for-vertex-ai-pipelines/"
+_build = { list = false }
 +++
 
 ## はじめに

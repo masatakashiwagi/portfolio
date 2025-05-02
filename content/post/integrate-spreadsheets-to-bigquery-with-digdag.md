@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "DATA"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/integrate-spreadsheets-to-bigquery-with-digdag/"
+_build = { list = false }
 +++
 
 ## はじめに

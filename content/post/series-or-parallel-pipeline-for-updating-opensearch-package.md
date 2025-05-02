@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["AWS", "DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/series-or-parallel-pipeline-for-updating-opensearch-package/"
+_build = { list = false }
 +++
 
 ## はじめに

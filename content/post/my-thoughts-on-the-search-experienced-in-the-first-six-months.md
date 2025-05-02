@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["POEM"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/search-experienced-in-the-first-six-months/"
+_build = { list = false }
 +++
 
 ## はじめに

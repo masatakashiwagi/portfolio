@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "AWS", "MLOPS"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/implement-cicd-github-actions-codepipeline-for-stepfunctions/"
+_build = { list = false }
 +++
 
 ## はじめに
