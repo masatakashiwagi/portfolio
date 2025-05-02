@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Redirecting...</title>
+        {{ if .Params.redirectTo }}
+        <meta http-equiv="refresh" content="0; url={{ .Params.redirectTo }}">
+        <link rel="canonical" href="{{ .Params.redirectTo }}">
+        <script>window.location.href = "{{ .Params.redirectTo }}";</script>
+        {{ end }}
+    </head>
+    <body>
+        If you are not redirected automatically, please <a href="{{ .Params.redirectTo }}">click here</a>.
+    </body>
+</html>
