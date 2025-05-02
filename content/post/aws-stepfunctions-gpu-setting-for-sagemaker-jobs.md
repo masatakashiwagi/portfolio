@@ -7,6 +7,9 @@ draft = false
 share = true
 showLicense = false
 tags = ["AWS", "DEV"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/"
+_build = { list = false }
 +++
 
 ## はじめに

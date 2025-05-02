@@ -58,13 +58,6 @@
       <description>はじめに Vertex AI Pipelines のサービスアカウント周りが分かりづらかったのと，GCP の他のサービスへの権限付与（IAM ロールの付与）の方法について備忘録として残しておきます． Vertex AI Pipelines に関連する3つのサービスアカウント Vertex</description>
     </item>
     <item>
-      <title>ANN ライブラリの Annoy で build index する時に Illegal Instruction Error が発生した</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</link>
-      <pubDate>Wed, 09 Aug 2023 15:56:37 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</guid>
-      <description>はじめに Annoy という Spotify が開発している Python 製の ANN (Approximate Nearest Neighbors) のライブラリがあり，それを使ってレコメンドアイテムの類似度を計算する機会があったのですが，コンテナ化したものを Vertex AI Pipelines 上で動かしていたところ，Fatal Python error:</description>
-    </item>
-    <item>
       <title>データフレームでリストを ndarray にした値を csv ファイルで保存する場合の注意</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/note-on-saving-array-list-in-dataframe/</link>
       <pubDate>Mon, 31 Jul 2023 13:39:35 +0900</pubDate>
@@ -107,32 +100,11 @@
       <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     <item>
-      <title>CML を使った ML モデルの CI/CD</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
-      <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
-      <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
-    </item>
-    <item>
-      <title>FastAPI と RabbitMQ を用いた機械学習タスクの非同期処理</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</link>
-      <pubDate>Sun, 24 Apr 2022 02:10:25 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</guid>
-      <description>はじめに 最近，機械学習を使ったアプリケーションのバックエンドでどういった処理を行ってモデル作成などを行っているか気になったので，モデル作成時によく行われる非同期処理を FastAPI と RabbitMQ を用いて検証したお話になりま</description>
-    </item>
-    <item>
       <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
       <guid>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</guid>
       <description>はじめに 最近個人的に MLOps という領域に高い関心があって，日々情報収集をしたりしているのですが，各社が実務で取り組んでいる事例や MLOps の各領域で使用されている技術やツールなど個別の Tips が点在していて見つけるのが大</description>
-    </item>
-    <item>
-      <title>Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</link>
-      <pubDate>Sun, 30 Jan 2022 13:16:43 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</guid>
-      <description>はじめに Step Functions で SageMaker のリソースを特にカスタムコンテナイメージで使う場合，単純に InstanceType として &amp;ldquo;ml.g4dn.xlarge&amp;rdquo; などの GPU マシンを設定するだけでは GPU を使った学習はできなくて，使いたいDockerfile に少し手を加える必要がありま</description>
     </item>
     <item>
       <title>ValueError: Must setup local AWS configuration の対処方法</title>
@@ -196,13 +168,6 @@
       <pubDate>Fri, 26 Mar 2021 22:18:34 +0900</pubDate>
       <guid>https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/</guid>
       <description>はじめに 今まで仕事では，開発環境として IntelliJ を使っていたのですが，最近は VSCode の人気が高く Extensions も便利なものが多くあるということで，個人的な作業をする時は VSCode を使ってみようと思って使っています． そんな中で，タイトル</description>
-    </item>
-    <item>
-      <title>RuntimeError: CUDA error: Device-side assert triggered の解決方法</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</link>
-      <pubDate>Mon, 01 Feb 2021 16:14:09 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</guid>
-      <description>はじめに Pytorch でモデルを作成していた際に，「RuntimeError: CUDA error: device-side assert triggered」が発生し，原因がよくわからなかったので，調べたことをメモしておきます． エラー発生の原因 調べてみると，原因と</description>
     </item>
     <item>
       <title>Kaggle-MoA の振り返り</title>

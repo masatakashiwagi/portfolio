@@ -30,13 +30,6 @@
       <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     <item>
-      <title>Step Functions で自作 Dockerfile を使って SageMaker の GPU マシンを動かす方法</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</link>
-      <pubDate>Sun, 30 Jan 2022 13:16:43 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</guid>
-      <description>はじめに Step Functions で SageMaker のリソースを特にカスタムコンテナイメージで使う場合，単純に InstanceType として &amp;ldquo;ml.g4dn.xlarge&amp;rdquo; などの GPU マシンを設定するだけでは GPU を使った学習はできなくて，使いたいDockerfile に少し手を加える必要がありま</description>
-    </item>
-    <item>
       <title>ValueError: Must setup local AWS configuration の対処方法</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/value-error-local-aws-configuration/</link>
       <pubDate>Sun, 26 Dec 2021 17:16:07 +0900</pubDate>

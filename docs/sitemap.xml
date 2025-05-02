@@ -137,19 +137,6 @@
   
   
   
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/annoy-lib-illegal-instruction-error/</loc>
-    
-    <lastmod>2023-08-09T15:56:37+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
   
   
   
@@ -238,48 +225,9 @@
   
   
   <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</loc>
-    
-    <lastmod>2022-05-01T01:28:05+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/async-ml-processing/</loc>
-    
-    <lastmod>2022-04-24T02:10:25+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
-  <url>
     <loc>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</loc>
     
     <lastmod>2022-02-05T16:08:29+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/aws-stepfunctions-gpu-setting-for-sagemaker-jobs/</loc>
-    
-    <lastmod>2022-01-30T13:16:43+09:00</lastmod>
     
     <changefreq>weekly</changefreq>
     
@@ -406,19 +354,6 @@
     <loc>https://masatakashiwagi.github.io/portfolio/post/vscode-git-connect/</loc>
     
     <lastmod>2021-03-26T22:18:34+09:00</lastmod>
-    
-    <changefreq>weekly</changefreq>
-    
-    <priority>0.5</priority>
-    
-  </url>
-  
-  
-  
-  <url>
-    <loc>https://masatakashiwagi.github.io/portfolio/post/cuda-error-device-side-assert-triggered/</loc>
-    
-    <lastmod>2023-08-30T14:28:59+09:00</lastmod>
     
     <changefreq>weekly</changefreq>
     

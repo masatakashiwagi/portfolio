@@ -8,6 +8,9 @@ share = true
 showLicense = false
 support = true
 tags = ["DEV", "ML"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/annoy-lib-illegal-instruction-error/"
+_build = { list = false }
 +++
 
 ## はじめに

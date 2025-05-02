@@ -7,6 +7,9 @@ draft = false
 share = true
 showLicense = false
 tags = ["DEV", "ML"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/async-ml-processing-fastapi-rabbitmq/"
+_build = { list = false }
 +++
 
 ## はじめに

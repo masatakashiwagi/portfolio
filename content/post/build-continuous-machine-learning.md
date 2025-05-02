@@ -7,6 +7,9 @@ draft = false
 share = true
 showLicense = false
 tags = ["MLOPS", "ML"]
+layout = "redirect"
+redirectTo = "https://masatakashiwagi.com/blog/build-continuous-machine-learning/"
+_build = { list = false }
 +++
 
 ## はじめに

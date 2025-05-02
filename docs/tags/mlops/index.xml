@@ -37,13 +37,6 @@
       <description>はじめに 2ヶ月以上ご無沙汰になってしまいましたが，久しぶりのテックブログになります．今回はタイトルにもあるように，Github Actions と CodePipeline を使ってマージトリガーで Step Functions のパイプラインを動かす CI/CD を構築したお話に</description>
     </item>
     <item>
-      <title>CML を使った ML モデルの CI/CD</title>
-      <link>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</link>
-      <pubDate>Sun, 01 May 2022 01:28:05 +0900</pubDate>
-      <guid>https://masatakashiwagi.github.io/portfolio/post/build-continuous-machine-learning/</guid>
-      <description>はじめに Continuous Machine Learning (CML) という機械学習モデルの CI ツールを個人プロジェクトで導入したので，その紹介をしようと思います． 機械学習プロジェクトでテストを考える時に，大きく3つあると思っています． ソフトウェアのテスト</description>
-    </item>
-    <item>
       <title>各社の MLOps 事例を集めた MLOps Practices という Website を公開しました</title>
       <link>https://masatakashiwagi.github.io/portfolio/post/start-mlops-practices-project/</link>
       <pubDate>Sat, 05 Feb 2022 16:08:29 +0900</pubDate>
