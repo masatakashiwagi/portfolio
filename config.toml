@@ -17,9 +17,11 @@ languageCode = "en"  # For RSS, view https://www.rssboard.org/rss-language-codes
 defaultContentLanguage = "en"  # For HTML page, now support: en, zh-hans, zh-hant, ja, nl
 
 summaryLength = 100 # Custom summary length, add <!--more--> in post file to custom split point
-paginate = 10
 
-googleAnalytics = "G-T3W696WJ1K" # Set your Google Analytics UA here. old: UA-199882807-1
+[pagination]
+  pagerSize = 10
+
+# googleAnalytics = "G-T3W696WJ1K" # Deprecated - now handled directly in head.html
 
 [outputFormats]
   [outputFormats.SearchIndex]
@@ -32,7 +34,7 @@ googleAnalytics = "G-T3W696WJ1K" # Set your Google Analytics UA here. old: UA-19
   home = ["HTML", "RSS", "SearchIndex"]
 
 [permalinks]
-  post = "/:section/:filename/" # Custom post links, e.g. "/:year/:month/:title/"
+  post = "/:section/:contentbasename/" # Custom post links, e.g. "/:year/:month/:title/"
 
 [related]
   includeNewer = true

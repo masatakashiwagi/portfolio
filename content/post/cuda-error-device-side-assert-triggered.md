@@ -7,12 +7,10 @@ description = "RuntimeError: CUDA error: Device-side assert triggered の解決�
 tags = ["DEV", "ML"]
 showLicense = false
 share = true
-aliases = ["/post/cuda-error-device-side-assert-triggered/"]
 layout = "redirect"
 redirectTo = "https://masatakashiwagi.com/blog/cuda-error-device-side-assert-triggered/"
 _build = { list = false }
 +++
-<!-- aliases = ["/post/cuda_error_device-side_assert_triggered/"] -->
 ## はじめに
 
 Pytorch でモデルを作成していた際に，「**RuntimeError: CUDA error: device-side assert triggered**」が発生し，原因がよくわからなかったので，調べたことをメモしておきます．
